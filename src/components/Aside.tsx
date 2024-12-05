@@ -100,8 +100,8 @@ const Aside: React.FC<AsideProps> = ({ toggleAside, isAsideOpen }) => {
       </div>
 
       <div id="asideBottom" className="flex  hover:bg-black w-full  cursor-pointer">
-        <div className="flex  hover:bg-black w-full px-3 py-4  items-center  cursor-pointer transition-colors duration-300">
-          <div className="flex justify-center items-center gap-4 px-4">
+        <div className="flex   w-full   items-center  transition-colors duration-300">
+          <div className="flex justify-center items-center gap-4  cursor-pointer   hover:bg-black w-full px-3 py-4">
             <FaPersonCircleQuestion className="text-xl" />
             <p>Help & Support</p>
           </div>
