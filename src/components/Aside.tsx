@@ -6,7 +6,18 @@ import { useTheme } from "../context/ThemeContext";
 import Image from "next/image";
 import Link from "next/link";
 
-import { GiHamburgerMenu } from "react-icons/gi";
+import { FaPersonCircleQuestion } from "react-icons/fa6";
+
+import { FaClipboardList } from "react-icons/fa";
+import { FaFolder } from "react-icons/fa6";
+import { FaRegCalendarDays } from "react-icons/fa6";
+import { IoMdNotifications } from "react-icons/io";
+import { FaEnvelope } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { IoSettingsSharp } from "react-icons/io5";
+
+
+
 import { FaUser, FaUsers, FaCalendarAlt, FaPowerOff } from "react-icons/fa";
 import { SiCashapp } from "react-icons/si";
 
@@ -22,10 +33,13 @@ interface Option {
 }
 
 const asideOptions: Option[] = [
-  { name: "PROFILE", path: "/dashboard/profile", icon: <FaUser className="text-2xl" /> },
-  { name: "CLIENTS", path: "/dashboard/clients", icon: <FaUsers className="text-2xl" /> },
-  { name: "CALENDAR", path: "/dashboard/calendar", icon: <FaCalendarAlt className="text-2xl" /> },
-  { name: "PAYMENTS", path: "/dashboard/payments", icon: <SiCashapp className="text-2xl" /> },
+  { name: "Projects", path: "/projects", icon: < FaClipboardList className="text-xl" /> },
+  { name: "Projects History", path: "/projects-history", icon: <FaFolder className="text-xl" /> },
+  { name: "Work Calendar", path: "/work-calendar", icon: <FaRegCalendarDays className="text-xl" /> },
+  { name: "Notification", path: "/notifications", icon: <IoMdNotifications className="text-xl" /> },
+  { name: "Message", path: "/message", icon: <FaEnvelope className="text-xl" /> },
+  { name: "My Profile", path: "/my-profile", icon: <FaUserCircle className="text-xl" /> },
+  { name: "Settings", path: "/settings", icon: <IoSettingsSharp className="text-xl" /> },
 ];
 
 const Aside: React.FC<AsideProps> = ({ toggleAside, isAsideOpen }) => {
@@ -54,84 +68,46 @@ const Aside: React.FC<AsideProps> = ({ toggleAside, isAsideOpen }) => {
 
   return (
     <aside
-      className={`${
-        isAsideOpen ? "visible" : "hidden"
-      } select-none h-full z-[2000] absolute w-[80%] max-w-[400px]  items-center bggreen-300 flex flex-col  border-r border-[--color-border] bg-[--color-background] justify-between py-4 `}
+      className={` select-none  bg-black/50 w-[210px] z-[2000]  h-[520px]  flex flex-col   rounded-r-3xl justify-between  py-6  text-[#8e7842]`}
     >
-      <div
-        id="asideHead"
-        className="flex select-none bgpurple-400 w-full justify-between items-center px-3 py-3"
-      >
-        <div className="flex bgred-300 justify-start px-4 items-center w-[70%] py-3">
-          <Image
-            height={50}
-            width={70}
-            className={`w-full max-w-[100px] h-full drop-shadowanimate ${
-              theme === "light"
-                ? "dropshadow-[1px_1px_1px_black]"
-                : "dropshadow-[1px_1px_1px_white]"
-            }`}
-            src={`https://github.com/BPM94/TTMD/raw/main/timeitLogoBlue.png`}
-            alt=""
-          />
-        </div>
-        <div className="flex bggreen-300 justify-center items-center w-[30%] py-3">
-          <GiHamburgerMenu
-            className="text-2xl cursor-pointer transition-colors duration-300 hover:text-[--color-text-hover]"
-            onClick={(e) => {
-              e.preventDefault();
-              toggleAside();
-            }}
-          />
-        </div>
-      </div>
+      
 
-      <div id="asideTop" className="flex flex-col gap-4 p-3 w-full h-full bgrose-300">
+      <div id="asideTop" className="flex flex-col   w-full h-full bgrose-300 ">
         {asideOptions.map((option) => (
-          <Link
-            className={` flex px-4 py-3 gap-3 ${
+          <Link className={` flex  hover:bg-black w-full px-3 py-4 ${
               asideSelectedOption === option.name
-                ? "bg-[--color-button-hover] text-[--color-button-text-hover]"
+                ? ""
                 : ""
-            } w-full items-center hover:bg-[--color-button-hover] cursor-pointer hover:text-[--color-button-text-hover] transition-colors duration-300 rounded-full`}
+            } w-full items-center  cursor-pointer transition-colors duration-300 `}
             key={option.name}
             id={`link-${option.name}`}
             href={option.path}
             onClick={() => setAsideSelectedOption(option.name)}
           >
-            <div className="flex justify-center items-center">{option.icon}</div>
-            <label
-              className="cursor-pointer text-sm font-bold"
-              htmlFor={`link-${option.name}`}
-            >
-              {option.name}
-            </label>
+            <div className="flex justify-center items-center gap-4 px-4">
+              <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
+                {option.icon}
+              </p>
+              <label
+                className="cursor-pointer text-sm font-medium drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
+                htmlFor={`link-${option.name}`}
+              >
+                {option.name}
+              </label>
+            </div>
           </Link>
         ))}
       </div>
 
-      <div
-        id="asideBottom"
-        className="flex flex-col px-6 text-[--color-text]"
-        onClick={(e) => {
-          e.preventDefault();
-          window.location.href = "/";
-        }}
-      >
-        <div
-          id="logout"
-          className="flex items-center bgred-300 justify-center p-4 gap-3 hover:text-[--color-text-hover] cursor-pointer"
-        >
-          <FaPowerOff className="text-xl cursor-pointer" />
-          <label className="text-sm cursor-pointer font-bold">LOGOUT</label>
+      <div id="asideBottom" className="flex  hover:bg-black w-full  cursor-pointer">
+        <div className="flex  hover:bg-black w-full px-3 py-4  items-center  cursor-pointer transition-colors duration-300">
+          <div className="flex justify-center items-center gap-4 px-4">
+            <FaPersonCircleQuestion className="text-xl" />
+            <p>Help & Support</p>
+          </div>
         </div>
       </div>
-      <div
-        id="copyright"
-        className="flex w-full pb-4 bgrose-400 justify-center items-center"
-      >
-        <p className="text-sm text-center">Titan Tech, Copyright 2024.</p>
-      </div>
+
     </aside>
   );
 };

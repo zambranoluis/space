@@ -33,7 +33,7 @@ export default function Home() {
           <source src="https://github.com/BPM94/SCCTMD/raw/main/videoLogin.mp4" type="video/webm" />
         </video>
       </div>
-      <div className="w-full max-w-[400px] md:bg-white h-full flex flex-col py-8 px-16 gap4 max-md:h-[500px] max-md:bg[white]/100 bgwhite  z-[2] justify-center items-center rounded-md">
+      <div className="w-full max-w-[400px] md:bg-black h-full flex flex-col py-8 px-16 gap4 max-md:h-[500px] max-md:bg[white]/100 bgwhite  z-[2] justify-center items-center rounded-md">
         <div className=" flex justify-center items-center bg-white/100 px-2 rounded-lg bgred-200 w-full">
           <Image className="w-[250px] drop-shadow[0_1.8px_1.8px_rgba(0,0,0,0.8)]  "
             width={786}
@@ -43,9 +43,9 @@ export default function Home() {
           />
         </div>
         <div className="max-w-[400px]  bgred-300 flex justify-center items-center mt-6">
-          <form className=" flex flex-col justify-center items-center p-2 gap4 text-white md:text-black w-full">
+          <form className=" flex flex-col justify-center items-center p-2 gap4 text-white md:text-white w-full">
             <div className="w-full  bggreen-300 flex justify-center items-center ">
-              <h1 className="text-lg font-black text-black text-center drop-shadow-[0_3px_3px_rgba(255,255,255,1)]">Sign in to continue.</h1>
+              <h1 className="text-lg font-black text-white text-center drop-shadow-[0_0px_0px_rgba(255,255,255,1)]">Sign in to continue.</h1>
             </div>
             <div className="mt-4 flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px] ">
               <label

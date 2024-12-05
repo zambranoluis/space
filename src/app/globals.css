@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 
-
+input::placeholder {
+  color: black; /* Replace with your desired color */
+  opacity: 1;  /* Ensure the placeholder is fully visible */
+}
 
 /* html[data-theme="dark"] {
   --color-background: #000020;
