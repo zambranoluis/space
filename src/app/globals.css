@@ -33,12 +33,12 @@
 
 
 
-html[data-theme="light"] {
+/* html[data-theme="light"] {
   --color-background: #FFFFFF;
   --color-text: #003366;
 
 
-/* 
+
   --color-background-selected: #4DA8DA;
   --color-border:#005EB8;
   --color-text-secondary: #333333;
@@ -53,11 +53,11 @@ html[data-theme="light"] {
   --color-navbars: #FFFFFF;
   --color-navbars-text: #333333;
   --color-navbars-border: #333333;
-  --color-shadow: black; */
-}
+  --color-shadow: black;
+} */
 
 body {
-  background-color: var(--color-background);
+  /* background-color: var(--color-background);
   color: var(--color-text);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif; */
 }
