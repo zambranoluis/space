@@ -31,6 +31,8 @@ html[data-theme="dark"] {
   --color-shadow: #4DA8DA; */
 }
 
+
+
 html[data-theme="light"] {
   --color-background: #FFFFFF;
   --color-text: #003366;
