@@ -22,16 +22,18 @@ export default function Home() {
 
   return (
     <ThemeProvider>
-      <section className="w-full h-full  text-[--color-text] flex max-lg:flex-col justify-center items-center max-lg:relative">
-      <video className="max-lg:w-full w-[60%] h-full object-cover background-center max-lg:absolute z-[1]"
-        autoPlay
-        loop
-        muted
-      >
-        
-        <source src="https://github.com/BPM94/SCCTMD/raw/main/videoLogin.mp4" type="video/webm" />
-      </video>
-      <div className=" lg:w-full lg:bg-white h-full flex flex-col py-8 px-16 gap4 max-lg:h-[500px] max-lg:bg[white]/100 bgwhite  z-[2] justify-center items-center rounded-md">
+      <section className="w-full h-full  text-[--color-text] flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
+      <div className="max-md:absolute h-full">
+        <video className="  h-full w-full object-cover   z-[1]"
+          autoPlay
+          loop
+          muted
+        >
+          
+          <source src="https://github.com/BPM94/SCCTMD/raw/main/videoLogin.mp4" type="video/webm" />
+        </video>
+      </div>
+      <div className="w-full max-w-[400px] md:bg-white h-full flex flex-col py-8 px-16 gap4 max-md:h-[500px] max-md:bg[white]/100 bgwhite  z-[2] justify-center items-center rounded-md">
         <div className=" flex justify-center items-center bg-white/100 px-2 rounded-lg bgred-200 w-full">
           <Image className="w-[250px] drop-shadow[0_1.8px_1.8px_rgba(0,0,0,0.8)]  "
             width={786}
@@ -40,19 +42,19 @@ export default function Home() {
             alt=""
           />
         </div>
-        {/* <div className="w-full  bggreen-300 flex justify-center items-center ">
-          <h1 className="text-4xl font-black text-white text-center drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">Log In</h1>
-        </div> */}
-        <div className="w-full  bgred-300 flex justify-center items-center ">
-          <form className=" flex flex-col justify-center items-center p-2 gap-4 text-white lg:text-black w-full">
-            <div className="flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px] ">
+        <div className="max-w-[400px]  bgred-300 flex justify-center items-center mt-6">
+          <form className=" flex flex-col justify-center items-center p-2 gap4 text-white md:text-black w-full">
+            <div className="w-full  bggreen-300 flex justify-center items-center ">
+              <h1 className="text-lg font-black text-black text-center drop-shadow-[0_3px_3px_rgba(255,255,255,1)]">Sign in to continue.</h1>
+            </div>
+            <div className="mt-4 flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px] ">
               <label
                 className="font-medium  "
                 htmlFor="email"
                 
               >Email:</label>
               <input
-                className="p-2 outline-none w-full  text-black bg-white rounded-md border lg:border-black "
+                className="p-2 outline-none w-full  text-black bg-white rounded-2xl border md:border-black "
                 id="email"
                 type="text"
                 placeholder="Email"
@@ -67,7 +69,7 @@ export default function Home() {
               >Password:</label>
               <div className="flex relative ">
                 <input 
-                  className="p-2 outline-none w-full  text-black bg-white  rounded-md border lg:border-black" 
+                  className="p-2 outline-none w-full  text-black bg-white  rounded-2xl border md:border-black" 
                   id="password" 
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
@@ -86,8 +88,8 @@ export default function Home() {
                 )}
               </div>
             </div>
-            <div className="flex justify-center items-center">
-              <button className="px-12 py-2 bg-green-600 hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl" onClick={() => {handleLogin()}}>
+            <div className="mt-4 flex justify-center items-center">
+              <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl" onClick={() => {handleLogin()}}>
                 Log In
               </button>
             </div>
