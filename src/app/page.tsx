@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <ThemeProvider>
-      <section className="w-full h-full bg-white text-[--color-text] flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
+      <section className="w-full h-full  text-[--color-text] flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
       <div className="max-md:absolute h-full">
         <video className="  h-full w-full object-cover   z-[1]"
           autoPlay
@@ -32,9 +32,9 @@ export default function Home() {
           <source src="https://github.com/BPM94/SCCTMD/raw/main/videoLogin.mp4" type="video/webm" />
         </video>
       </div>
-      <div className="w-full max-w-[400px] bg-white h-full flex flex-col py-8 px-16 gap4 max-md:h-[500px]  z-[2] justify-center items-center rounded-md">
+      <div className="w-full max-w-[400px] md:bg-white h-full flex flex-col py-8 px-16 gap4 max-md:h-[500px]  z-[2] justify-center items-center rounded-md">
         <div className=" flex justify-center items-center  px-2 rounded-lg bgred-200 w-full">
-          <Image className="w-[250px] drop-shadow[0_1.8px_1.8px_rgba(0,0,0,0.8)]  "
+          <Image className="w-[250px] max-md:drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,1)]  "
             width={786}
             height={318}
             src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
@@ -42,9 +42,9 @@ export default function Home() {
           />
         </div>
         <div className="max-w-[400px]  bgred-300 flex justify-center items-center mt-6">
-          <form className=" flex flex-col justify-center items-center p-2 gap4 text-white md:text-white w-full">
+          <form className=" flex flex-col justify-center items-center p-2 gap4 text-white md:text-black  w-full">
             <div className="w-full  bggreen-300 flex justify-center items-center ">
-              <h1 className="text-lg font-black text-white text-center drop-shadow-[0_0px_0px_rgba(255,255,255,1)]">Sign in to continue.</h1>
+              <h1 className="text-lg font-black   text-center drop-shadow-[0_0px_0px_rgba(255,255,255,1)]">Sign in to continue.</h1>
             </div>
             <div className="mt-4 flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px] ">
               <label

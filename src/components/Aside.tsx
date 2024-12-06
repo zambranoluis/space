@@ -65,7 +65,7 @@ const Aside: React.FC<AsideProps> = ({ toggleAside, isAsideOpen }) => {
 
   return (
     <aside
-      className={` select-none noScrollBar  bg-black/50 w-[210px] z-[2000] max-[900px]:h-[300px] overflow-auto  min-[900px]:h-[520px]  flex flex-col   rounded-r-3xl justify-between  py-6  text-[#8e7842]`}
+      className={` select-none noScrollBar  bg-black/50 w-[210px] z-[2000] max-[900px]:h-[310px] overflow-auto    flex flex-col   rounded-r-3xl justify-between gap-12 py-6  text-[#8e7842]`}
     >
       
 
