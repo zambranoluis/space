@@ -22,19 +22,18 @@ export default function Home() {
 
   return (
     <ThemeProvider>
-      <section className="w-full h-full  text-[--color-text] flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
+      <section className="w-full h-full bg-white text-[--color-text] flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
       <div className="max-md:absolute h-full">
         <video className="  h-full w-full object-cover   z-[1]"
           autoPlay
           loop
           muted
         >
-          
           <source src="https://github.com/BPM94/SCCTMD/raw/main/videoLogin.mp4" type="video/webm" />
         </video>
       </div>
-      <div className="w-full max-w-[400px] md:bg-black h-full flex flex-col py-8 px-16 gap4 max-md:h-[500px] max-md:bg[white]/100 bgwhite  z-[2] justify-center items-center rounded-md">
-        <div className=" flex justify-center items-center bg-white/100 px-2 rounded-lg bgred-200 w-full">
+      <div className="w-full max-w-[400px] bg-white h-full flex flex-col py-8 px-16 gap4 max-md:h-[500px]  z-[2] justify-center items-center rounded-md">
+        <div className=" flex justify-center items-center  px-2 rounded-lg bgred-200 w-full">
           <Image className="w-[250px] drop-shadow[0_1.8px_1.8px_rgba(0,0,0,0.8)]  "
             width={786}
             height={318}
