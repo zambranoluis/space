@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="relative w-full h-full">
           <div className="absolute w-full h-full gap-8 flex flex-col">
             <Navbar toggleAside={toggleAside} />
-            {/* <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} /> */}
+            <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
           </div>
           <div className=" w-full h-full ">
             <section className="w-full h-full">{children}</section>
