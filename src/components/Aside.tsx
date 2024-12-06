@@ -65,11 +65,11 @@ const Aside: React.FC<AsideProps> = ({ toggleAside, isAsideOpen }) => {
 
   return (
     <aside
-      className={` select-none  bg-black/50 w-[210px] z-[2000]  h-[520px]  flex flex-col   rounded-r-3xl justify-between  py-6  text-[#8e7842]`}
+      className={` select-none noScrollBar  bg-black/50 w-[210px] z-[2000] max-[900px]:h-[300px] overflow-auto  min-[900px]:h-[520px]  flex flex-col   rounded-r-3xl justify-between  py-6  text-[#8e7842]`}
     >
       
 
-      <div id="asideTop" className="flex flex-col   w-full h-full bgrose-300 ">
+      <div id="asideTop" className="flex flex-col   w-full  bgrose-300 ">
         {asideOptions.map((option) => (
           <Link className={` flex  hover:bg-black w-full px-3 py-4 ${
               asideSelectedOption === option.name

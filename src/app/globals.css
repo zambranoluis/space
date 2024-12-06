@@ -64,3 +64,30 @@ body {
   color: var(--color-text);
   font-family: 'Roboto', sans-serif; */
 }
+
+*::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background-color: #737879;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--color-text);
+}
+
+.noScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.noScrollBar::-webkit-scrollbar-track {
+  display: none;
+}
+
+.noScrollBar::-webkit-scrollbar-thumb {
+  display: none;
+}
