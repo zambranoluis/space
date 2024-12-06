@@ -99,7 +99,7 @@ export default function Home() {
         </div>
         <div id="links" className="flex flex-col justify-center items-center h-[120px] md:bg-[#353535] w-full">
           <Link className=" text-center font-base text-[#ababab]" href="/forgot-password">Forgot Password?</Link>
-          <p className=" text-white">Don't have an account? <Link className="text-[#] text-center font-bold" href="/register">Sign Up.</Link></p>
+          <p className=" text-white">Don&apos;t have an account? <Link className="text-[#] text-center font-bold" href="/register">Sign Up.</Link></p>
         </div>
       </div>
     </section>
