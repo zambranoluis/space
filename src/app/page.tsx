@@ -18,14 +18,14 @@ export default function Home() {
     setShowPassword(!showPassword);
   };
   const handleLogin = () => {
-    router.push('/welcome'); 
+    router.push('/home'); 
   };
 
   return (
     <ThemeProvider>
       <section className="w-full h-full   flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
-      <div id="video" className="max-md:absolute h-full">
-        <video className="  h-full w-full object-cover   z-[1]"
+      <div id="video" className="max-md:absolute h-full md:w-[60dvw]">
+        <video className=" h-full w-full  object-cover   z-[1]"
           autoPlay
           loop
           muted
@@ -33,7 +33,7 @@ export default function Home() {
           <source src="https://github.com/BPM94/SCCTMD/raw/main/videoLogin.mp4" type="video/webm" />
         </video>
       </div>
-      <div className="w-full max-w-[400px] md:bg-white h-full flex flex-col max-md:py-8 max-md:px-16 gap4 max-md:h-[500px] max-md:text-white text-[#828282] z-[2] justify-between items-center rounded-md">
+      <div className="w-full md:w-[40dvw] md:bg-white h-full flex flex-col max-md:py-8 max-md:px-16 gap4 max-md:h-[500px] max-md:text-white text-[#828282] z-[2] justify-between items-center rounded-md">
         <div className="flex flex-col bgred-300 md:w-full md:h-full justify-center items-center md:gap-8">
           <div id="logo" className=" flex justify-center items-center  px-2 rounded-lg bgred-200 w-full">
             <Image className="w-[250px] max-md:drop-shadow-[0_1.3px_1.3px_rgba(0,0,0,1)]  "
@@ -90,7 +90,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-4 flex justify-center items-center">
-                <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl" onClick={() => {handleLogin()}}>
+                <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" onClick={() => {handleLogin()}}>
                   Log In
                 </button>
               </div> 
@@ -98,8 +98,8 @@ export default function Home() {
           </div>
         </div>
         <div id="links" className="flex flex-col justify-center items-center h-[120px] md:bg-[#353535] w-full">
-          <Link className=" text-center font-base text-[#9b9b9b] md:text-[#ababab]" href="/forgot-password">Forgot Password?</Link>
-          <p className=" text-white">Don&apos;t have an account? <Link className="text-[#] text-center font-bold" href="/register">Sign Up.</Link></p>
+          <Link className=" text-center font-base text-[#9b9b9b] md:text-[#ababab] max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" href="/forgot-password">Forgot Password?</Link>
+          <p className=" text-white max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">Don&apos;t have an account? <Link className="text-[#] text-center font-bold" href="/register">Sign Up.</Link></p>
         </div>
       </div>
     </section>

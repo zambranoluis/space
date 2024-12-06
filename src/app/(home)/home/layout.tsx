@@ -3,7 +3,7 @@
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useState, ReactNode } from "react";
-// import { Image } from "@nextui-org/image";
+import { Image } from "@nextui-org/image";
 
 import Navbar from "@/components/Navbar";
 
@@ -25,21 +25,19 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     setIsAsideOpen((prev) => !prev);
   };
 
-
+{/* <div className=" w-full h-full ">
+            <section className="w-full h-full">{children}</section>
+          </div> */}
 
   return (
     <DataProvider>
       <ThemeProvider>
-        <div className="relative w-full h-full">
-          <div className="absolute w-full h-full gap-8 flex flex-col">
-            <Navbar toggleAside={toggleAside} />
-            {/* <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} /> */}
+        <section className="flex flex-col bgpurple-500 p2 w-full">
+          <Navbar toggleAside={toggleAside} />
+          <div className="w-full flex mt-[180px] lg:mt-[100px]">
+            {children}
           </div>
-          <div className=" w-full h-full ">
-            <section className="w-full h-full">{children}</section>
-          </div>
-        </div>
-        <footer></footer>
+        </section>
       </ThemeProvider>
     </DataProvider>
   );

@@ -18,7 +18,7 @@ export default function RootLayout({
       <head>
         <title>Space Creation - v1.0.1</title>
         <meta name='description' content='' />
-        <link rel='icon' href='https://github.com/BPM94/SCCTMD/raw/main/faviconSC.png' />
+        <link rel='icon' href='https://github.com/BPM94/SCCTMD/raw/main/faviconSC2.png' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </head>
       <body

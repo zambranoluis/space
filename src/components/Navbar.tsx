@@ -57,23 +57,23 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
     <>
 
 
-      <nav id="navbarLarge" className=" flex ">
-        <div id="logoNavbar" className="flex justify-center items-center ">
-          <Image className="h-full w-full max-w-[250px] drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
-            width={200}
-            height={70}
-            src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
+      <nav id="navbar" className=" absolute max-lg:flex-col  z-[100] h-[180px] lg:h-[100px] flex w-[55dvw] bgred-300 max-lg:w-full maxlg:bg-white lg:gap-8  ">
+        <div id="logoNavbar" className="flex justify-start  w-full   items-center bgblue-300">
+          <Image className=" p-4 w-[300px] dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
+            src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
             alt=""
           />
         </div>
-        <div className="flex">
-          {
-            navOptionsGeneral.map((option) => (
-              <div className="flex justify-center items-center" key={option.id}>
-                <Link className="text-white" href={option.path}>{option.name}</Link>   
-              </div>
-            ))
-          }
+        <div className="flex bggreen-300 text-sm gap-6 px-2 bggreen-300 w-full max-lg:h-full ">
+          <div className="w-full flex justify-around">
+            {
+              navOptionsGeneral.map((option) => (
+                <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
+                  <Link className=" whitespace-nowrap" href={option.path}>{option.name}</Link>   
+                </div>
+              ))
+            }
+          </div>
         </div>
       </nav>
     </>
