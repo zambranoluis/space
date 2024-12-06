@@ -36,7 +36,7 @@ export default function Home() {
       <div className="w-full max-w-[400px] md:bg-white h-full flex flex-col max-md:py-8 max-md:px-16 gap4 max-md:h-[500px] max-md:text-white text-[#828282] z-[2] justify-between items-center rounded-md">
         <div className="flex flex-col bgred-300 md:w-full md:h-full justify-center items-center md:gap-8">
           <div id="logo" className=" flex justify-center items-center  px-2 rounded-lg bgred-200 w-full">
-            <Image className="w-[250px] max-md:drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,1)]  "
+            <Image className="w-[250px] max-md:drop-shadow-[0_1.3px_1.3px_rgba(0,0,0,1)]  "
               width={786}
               height={318}
               src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
@@ -45,18 +45,18 @@ export default function Home() {
           </div>
           <div id="fields" className="md:max-w-[400px]  md:w-full  bggreen-300 flex flex-col justify-center items-center  ">
             <div id="title" className="w-full  bggreen-300 flex flex-col justify-center items-center ">
-              <h1 className="text-4xl font-black  text-center drop-shadow-[0_0px_0px_rgba(255,255,255,1)]">Login</h1>
-              <h2 className="text-lg font-medium  text-center drop-shadow-[0_0px_0px_rgba(255,255,255,1)]">Sign in to continue.</h2>
+              <h1 className="text-4xl font-black  text-center max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">Login</h1>
+              <h2 className="text-lg font-medium  text-center max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">Sign in to continue.</h2>
             </div>
             <form id="formLogin" className=" flex flex-col justify-center items-center p-2 gap4   w-full">
               
               <div className=" flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px] ">
                 <label
-                  className="font-medium  "
+                  className="font-medium  max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                   htmlFor="email"
                 >Email:</label>
                 <input
-                  className="p-2 outline-none w-full h-[60px]   bg-white rounded-2xl border md:border-[#828282] "
+                  className="p-2 outline-none w-full h-[60px]   bg-white text-black rounded-2xl border md:border-[#828282] max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                   id="email"
                   type="text"
                   placeholder="Email..."
@@ -65,12 +65,12 @@ export default function Home() {
               </div>
               <div className="flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px]">
                 <label
-                  className="font-medium  "
+                  className="font-medium max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] "
                   htmlFor="password"
                 >Password:</label>
-                <div className="flex relative ">
+                <div className="flex relative text-black">
                   <input 
-                    className="p-2 outline-none  w-full h-[60px]   bg-white  rounded-2xl border md:border-[#828282]" 
+                    className="p-2 outline-none  w-full h-[60px]   bg-white   rounded-2xl border md:border-[#828282] max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" 
                     id="password" 
                     type={showPassword ? "text" : "password"}
                     placeholder="Password..."
@@ -98,7 +98,7 @@ export default function Home() {
           </div>
         </div>
         <div id="links" className="flex flex-col justify-center items-center h-[120px] md:bg-[#353535] w-full">
-          <Link className=" text-center font-base text-[#ababab]" href="/forgot-password">Forgot Password?</Link>
+          <Link className=" text-center font-base text-[#9b9b9b] md:text-[#ababab]" href="/forgot-password">Forgot Password?</Link>
           <p className=" text-white">Don&apos;t have an account? <Link className="text-[#] text-center font-bold" href="/register">Sign Up.</Link></p>
         </div>
       </div>
