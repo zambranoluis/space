@@ -18,9 +18,6 @@ import { IoSettingsSharp } from "react-icons/io5";
 
 
 
-import { FaUser, FaUsers, FaCalendarAlt, FaPowerOff } from "react-icons/fa";
-import { SiCashapp } from "react-icons/si";
-
 interface AsideProps {
   toggleAside: () => void;
   isAsideOpen: boolean;
