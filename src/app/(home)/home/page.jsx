@@ -44,9 +44,9 @@ function HomePage() {
 
 
   return (
-    <main className='w-full  bgrose-400 text-black'  >
-      <section className="flex h-[60dvh] lg:h-[85dvh] max-sm:flex-col w-full">
-        <div className="flex w-full flex-col max-sm:h-[50vh] justify-center gap-8 py-12 px-6 items-center sm:w-[40dvw] lg:w-[50dvw] bgred-300 h-full">
+    <main className='w-full  bgrose-400 text-black '  >
+      <section className="flex bgpurple-400  sm:h-[70dvh] lg:h-[85dvh] max-sm:flex-col w-full">
+        <div className="flex w-full  flex-col max-sm:h-[50vh] justify-center gap-8   items-center sm:w-[40dvw] lg:w-[45dvw] bgred-300 h-full sm:px-4 lg:px-0">
           <button className="bgred-200 w-full max-w-[300px]  border-2 border-gray-500 py-6">
             EXPLORE DESIGN PACKAGES
           </button>
@@ -54,7 +54,7 @@ function HomePage() {
             VISIT OUR PORTFOLIO
           </button>
         </div>
-        <div className="flex flex-col gap-2 w-full bgred-300   sm:w-[60dvw] lg:w-[50dvw]">
+        <div className="flex flex-col gap-2 w-full bgred-600   sm:w-[60dvw] lg:w-[55dvw]">
           <div className="flex  w-full h-full bgpurple-300 no-border-radius">
             {/* <div className="w-full h-full max-sm:h-[35dvh] sm:h-full" style={{ backgroundImage: `url(${pictures[currentPicture].image})`, backgroundSize: "cover", backgroundPosition: "center" }}></div> */}
 
@@ -78,8 +78,12 @@ function HomePage() {
       </section>
 
 
-      <section>
-        
+      <section className="flex mt[200px]">
+        <div className="w-full bg-[#848d5c] h-[300px]">
+          <p></p>
+          <p></p>
+          <div></div>
+        </div>
       </section>
     </main>
   )

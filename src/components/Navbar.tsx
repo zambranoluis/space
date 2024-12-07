@@ -57,15 +57,15 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
     <>
 
 
-      <nav id="navbar" className=" absolute max-md:flex-col  z-[100] h-[140px] md:h-[100px] bggreen-200 flex w-[50dvw]  max-lg:w-full maxlg:bg-white   ">
-        <div id="logoNavbar" className="flex bgred-200 p-4 justify-start lg:justify-center  lg:w-[400px]   items-center bgblue-300">
-          <Image className="  w-[250px] dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
+      <nav id="navbar" className=" absolute max-md:flex-col  z-[100] h-[130px] md:h-[100px] bggreen-200 flex   max-lg:w-full lg:w-[45dvw] maxlg:bg-white   ">
+        <div id="logoNavbar" className="flex bgred-200 max-md:h-[100px]  justify-start md:justify-center lg:w-[200px]    items-center bgblue-300">
+          <Image className=" max-md:max-w-[250px] md:w-full dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
             src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
             alt=""
           />
         </div>
-        <div className="flex  text-sm  bgred-300 w-full max-md:h-[30px] bgred-300 max-md:py2 ">
-          <div className="w-full flex max-md:justify-around md:justify-start md:gap-12 md:pl-6 lg:gap-0 lg:pl-0 lg:justify-around">
+        <div className="flex   text-sm  bgred-300 w-full max-md:h-[30px] bggreen-600 max-md:py2  ">
+          <div className="w-full flex max-md:justify-around md:justify-start md:gap-12  lg:gap-0  lg:justify-around items-center">
             {
               navOptionsGeneral.map((option) => (
                 <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
