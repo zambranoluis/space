@@ -60,6 +60,7 @@ input::placeholder {
 } */
 
 body {
+  background-color: white;
   /* background-color: var(--color-background);
   color: var(--color-text);
   font-family: 'Roboto', sans-serif; */
@@ -90,4 +91,12 @@ body {
 
 .noScrollBar::-webkit-scrollbar-thumb {
   display: none;
+}
+
+
+.no-border-radius img {
+  border-radius: 0 !important; /* Quitar redondeado de la imagen */
+}
+.no-border-radius .nextui-image-placeholder {
+  border-radius: 0 !important; /* Quitar redondeado del placeholder */
 }
