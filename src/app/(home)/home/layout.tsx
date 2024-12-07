@@ -34,7 +34,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <ThemeProvider>
         <section className="flex flex-col bgpurple-500 p2 w-full">
           <Navbar toggleAside={toggleAside} />
-          <div className="w-full flex mt-[180px] lg:mt-[100px]">
+          <div className="w-full flex max-md:mt-[139px] md:mt-[100px] lg:mt-[0px] ">
             {children}
           </div>
         </section>

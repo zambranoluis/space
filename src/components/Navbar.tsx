@@ -22,13 +22,13 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
   const navOptionsGeneral = [
     {
       id: 1,
-      name: "Home",
-      path: "/home",
+      name: "The Process",
+      path: "/the-process",
     },
     {
       id: 2,
-      name: "The Process",
-      path: "/the-process",
+      name: "Pricing",
+      path: "/pricing",
     }
     ,
     {
@@ -38,13 +38,13 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
     },
     {
       id: 4,
-      name: "Pricing",
-      path: "/pricing",
+      name: "Reviews",
+      path: "/reviews",
     },
     {
       id: 5,
-      name: "Reviews",
-      path: "/reviews",
+      name: "Login",
+      path: "/login",
     }
   ];
 
@@ -57,15 +57,15 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
     <>
 
 
-      <nav id="navbar" className=" absolute max-lg:flex-col  z-[100] h-[180px] lg:h-[100px] flex w-[55dvw] bgred-300 max-lg:w-full maxlg:bg-white lg:gap-8  ">
-        <div id="logoNavbar" className="flex justify-start  w-full   items-center bgblue-300">
-          <Image className=" p-4 w-[300px] dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
+      <nav id="navbar" className=" absolute max-md:flex-col  z-[100] h-[140px] md:h-[100px] bggreen-200 flex w-[55dvw]  max-lg:w-full maxlg:bg-white   ">
+        <div id="logoNavbar" className="flex bgred-200 p-4 justify-start lg:justify-center  lg:w-[400px]   items-center bgblue-300">
+          <Image className="  w-[250px] dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
             src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
             alt=""
           />
         </div>
-        <div className="flex bggreen-300 text-sm gap-6 px-2 bggreen-300 w-full max-lg:h-full ">
-          <div className="w-full flex justify-around">
+        <div className="flex  text-sm  bgred-300 w-full max-md:h-[30px] bgred-300 max-md:py2 ">
+          <div className="w-full flex max-md:justify-around md:justify-start md:gap-12 md:pl-6 lg:gap-0 lg:pl-0 lg:justify-around">
             {
               navOptionsGeneral.map((option) => (
                 <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
