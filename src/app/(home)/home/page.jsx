@@ -71,7 +71,7 @@ function HomePage() {
       </section>
 
 
-      <section className="flex mt[200px]">
+      <section className="flex mt-[20px]  ">
         <div className="w-full bg-[#848d5c] h-[300px]">
           <p></p>
           <p></p>

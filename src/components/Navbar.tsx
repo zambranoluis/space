@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
 
 
       <nav id="navbar" className=" absolute max-md:flex-col  z-[100] h-[130px] md:h-[100px] bggreen-200 flex   max-lg:w-full lg:w-[45dvw] maxlg:bg-white   ">
-        <div id="logoNavbar" className="flex bgred-200 max-md:h-[100px]  justify-start md:justify-center lg:w-[200px]    items-center bgblue-300">
+        <div id="logoNavbar" className="flex bgred-200 pl-4 max-md:h-[100px]  justify-start md:justify-center lg:w-[200px]    items-center bgblue-300">
           <Image className=" max-md:max-w-[250px] md:w-full dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
             src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
             alt=""

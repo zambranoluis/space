@@ -20,6 +20,9 @@ export default function Home() {
   const handleLogin = () => {
     router.push('/home'); 
   };
+  const handleVerPanel = () => {
+    router.push('/panel'); 
+  };
 
   return (
     <ThemeProvider>
@@ -89,9 +92,12 @@ export default function Home() {
                   )}
                 </div>
               </div>
-              <div className="mt-4 flex justify-center items-center">
+              <div className="mt-4 flex gap-2 flex-col justify-center items-center">
                 <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" onClick={() => {handleLogin()}}>
                   Log In
+                </button>
+                <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" onClick={() => {handleVerPanel()}}>
+                  Ver Panel
                 </button>
               </div> 
             </form>
