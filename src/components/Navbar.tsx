@@ -64,8 +64,8 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
             alt=""
           />
         </div>
-        <div className="flex   text-sm  bgred-300 w-full max-md:h-[30px] bggreen-600 max-md:py2  ">
-          <div className="w-full flex max-md:justify-around md:justify-start md:gap-12  lg:gap-0  lg:justify-around items-center">
+        <div className="flex   text-sm  bgred-300 w-full max-md:h-[30px] bggreen-600 max-md:py2  md:pl-4 lg:pl-0 ">
+          <div className="w-full flex max-md:justify-around md:justify-start md:gap-12   lg:gap-0  lg:justify-around items-center">
             {
               navOptionsGeneral.map((option) => (
                 <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
