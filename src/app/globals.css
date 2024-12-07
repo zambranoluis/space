@@ -59,8 +59,12 @@ input::placeholder {
   --color-shadow: black;
 } */
 
-body {
+:root {
   background-color: white;
+}
+
+body {
+  /* background-color: white; */
   /* background-color: var(--color-background);
   color: var(--color-text);
   font-family: 'Roboto', sans-serif; */

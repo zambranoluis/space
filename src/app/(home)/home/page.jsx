@@ -47,14 +47,14 @@ function HomePage() {
     <main className='w-full  bgrose-400 text-black'  >
       <section className="flex h-[60dvh] lg:h-[85dvh] max-sm:flex-col w-full">
         <div className="flex w-full flex-col max-sm:h-[50vh] justify-center gap-8 py-12 px-6 items-center sm:w-[40dvw] lg:w-[50dvw] bgred-300 h-full">
-          <button className="bgred-200 w-full max-w-[300px] h-[65px] border-2 border-gray-500">
+          <button className="bgred-200 w-full max-w-[300px]  border-2 border-gray-500 py-6">
             EXPLORE DESIGN PACKAGES
           </button>
-          <button className="bgred-200 w-full max-w-[300px] h-[65px] bg-gray-200">
-            PORTFOLIO
+          <button className="bgred-200 w-full max-w-[300px]  bg-gray-200 py-6">
+            VISIT OUR PORTFOLIO
           </button>
         </div>
-        <div className="flex flex-col gap-2 w-full bgred-300 max-sm:h-[50dvh]  sm:w-[60dvw] lg:w-[50dvw]">
+        <div className="flex flex-col gap-2 w-full bgred-300   sm:w-[60dvw] lg:w-[50dvw]">
           <div className="flex  w-full h-full bgpurple-300 no-border-radius">
             {/* <div className="w-full h-full max-sm:h-[35dvh] sm:h-full" style={{ backgroundImage: `url(${pictures[currentPicture].image})`, backgroundSize: "cover", backgroundPosition: "center" }}></div> */}
 
