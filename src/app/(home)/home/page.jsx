@@ -46,7 +46,7 @@ function HomePage() {
   return (
     <main className='w-full  bgrose-400 text-black '  >
       <section className="flex bgpurple-400  sm:h-[70dvh] lg:h-[85dvh] max-sm:flex-col w-full">
-        <div className="flex w-full  flex-col max-sm:h-[50vh] justify-center gap-8   items-center sm:w-[40dvw] lg:w-[45dvw] bgred-300 h-full sm:px-4 lg:px-0">
+        <div className="flex w-full  flex-col max-sm:h-[35vh] justify-center max-[350px]:gap-4 gap-8   items-center sm:w-[40dvw] lg:w-[45dvw] bgred-300 h-full sm:px-4 lg:px-0">
           <button className="bgred-200 w-full max-w-[300px]  border-2 border-gray-500 py-6">
             EXPLORE DESIGN PACKAGES
           </button>
@@ -54,10 +54,8 @@ function HomePage() {
             VISIT OUR PORTFOLIO
           </button>
         </div>
-        <div className="flex flex-col gap-2 w-full bgred-600   sm:w-[60dvw] lg:w-[55dvw]">
+        <div className="flex flex-col  w-full bgred-600   sm:w-[60dvw] lg:w-[55dvw]">
           <div className="flex  w-full h-full bgpurple-300 no-border-radius">
-            {/* <div className="w-full h-full max-sm:h-[35dvh] sm:h-full" style={{ backgroundImage: `url(${pictures[currentPicture].image})`, backgroundSize: "cover", backgroundPosition: "center" }}></div> */}
-
             <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={pictures[currentPicture].image}
             loading="lazy"
             alt="" />
@@ -68,11 +66,6 @@ function HomePage() {
                 <div onClick={() => handleCurrentPicture(index)} className={` ${currentPicture === index ? "bg-[#6b776d]" : "bg-gray-400"} h-[20px] w-[20px] rounded-full cursor-pointer`} key={index}></div>
               ))
             }
-            {/* <div className="bg-[#6b776d] h-[20px] w-[20px] rounded-full cursor-pointer"></div>
-            <div className="bg-gray-400 h-[20px] w-[20px] rounded-full cursor-pointer"></div>
-            <div className="bg-gray-400 h-[20px] w-[20px] rounded-full cursor-pointer"></div>
-            <div className="bg-gray-400 h-[20px] w-[20px] rounded-full cursor-pointer"></div>
-            <div className="bg-gray-400 h-[20px] w-[20px] rounded-full cursor-pointer"></div> */}
           </div>
         </div>
       </section>
