@@ -71,11 +71,16 @@ function HomePage() {
       </section>
 
 
-      <section className="flex mt-[20px]  ">
-        <div className="w-full bg-[#848d5c] h-[300px]">
+      <section className="flex mt-[20px] flex-col ">
+        <div id="banner" className="w-full bg-[#848d5c] h-[200px] relative">
           <p></p>
           <p></p>
-          <div></div>
+          <div className="h-[100px] w-[100px] bg-[#848d5c] absolute bottom-[-50px] left-[10%] rotate-45"></div>
+        </div>
+        <div id="stepsContainer" className="w-full">
+          <div className=" h-[50dvh] bgblue-400 w-full" >
+
+          </div>
         </div>
       </section>
     </main>
