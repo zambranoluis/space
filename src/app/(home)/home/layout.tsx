@@ -8,6 +8,7 @@ import { Image } from "@nextui-org/image";
 import Navbar from "@/components/Navbar";
 
 import Aside from "@/components/Aside";
+import Footer from "@/components/Footer";
 
 interface DashboardLayoutProps {
   children: ReactNode; // Define el tipo para las props de children
@@ -37,6 +38,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="w-full flex max-md:mt-[130px] md:mt-[100px] lg:mt-[0px] ">
             {children}
           </div>
+          <Footer />
         </section>
       </ThemeProvider>
     </DataProvider>
