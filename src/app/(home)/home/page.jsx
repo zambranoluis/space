@@ -132,6 +132,24 @@ function HomePage() {
           }
         </div>
       </section>
+
+      <section className="h-[80vh] w-full bgblue-300 flex justify-center items-center bgpink-400 mt-12">
+        <div className="w-[65%] h-[70%] max-md:h-full bgred-300  flex max-md:flex-col max-md:w-full bgred-300 shadow-[5px_5px_20px_rgba(0,0,0,0.5)]">
+          <div className="w-[50%] max-md:w-full max-md:h-[50vh] h-full bggreen-300 bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/subsCard.jpg')" }}>
+          </div>
+          <div className="w-[50%] max-md:w-full max-md:h-[50vh] h-full bgpurple-300 flex flex-col justify-center items-center  ">
+            <div className="w-[75%] h-[80%] flex flex-col gap-4 bgred-300 justify-center items-start text-[#6b776d]">
+              <p className="text-3xl"> Beautify your inbox!</p>
+              <div className="w-[85%]">
+                <p className="text-lg"> Landscape design and gardening advice delivered to your inbox. We&apos;ll send you deals, tips and style tips.</p>
+              </div>
+              <button className="bg-[#848d5c] text-white px-4 py-2 rounded-xl">
+                Formulario de subscripcion
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }
