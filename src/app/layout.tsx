@@ -22,7 +22,7 @@ export default function RootLayout({
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </head>
       <body
-        className={`antialiased h-[100dvh] w-[100dvw]`}
+        className={`antialiased   noScrollBar w-[100dvw]`}
       >
         {children}
       </body>

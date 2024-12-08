@@ -93,7 +93,7 @@ function HomePage() {
 
 
       <section className="flex mt-[20px] flex-col  justify-center items-center bgred-300">
-        <div id="banner" className="w-full bg-[#848d5c] text-white  relative h-[200px] md:pl-16">
+        <div id="banner" className="w-full bg-[#848d5c] text-white  relative py-6 md:pl-16">
           <div className="bgblue-200 max-w-[750px]  z-[100] flex flex-col px-6 gap-2">
             <p className="text-5xl font-black ">
               Bring your vision to life in three simple steps
@@ -104,13 +104,13 @@ function HomePage() {
           </div>
           <div className="h-[100px] w-[100px] bg-[#848d5c] z-[-1] absolute bottom-[-50px] left-[10%] rotate-45"></div>
         </div>
-        <div id="stepsContainer" className="w-full  bgrose-400">
+        <div id="stepsContainer" className="w-full   bgrose-400">
           {
             steps.map((step, index) => (
-              <div id={"step" + step.id} className={`${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} max-md:flex-col flex w-full bgblue-300 md:h-[50dvh] `} key={index}>
-                <div id="stepTitle" className={`${index % 2 === 0 ? "text-[#6b776d]" : "bg-[#848d5c] text-white"} flex max-md:h-[50dvh]   md:w-[50dvw] flex-col justify-center items-center bgblue-300`}>
-                  <div id="title" className="w-[60%] flex flex-col gap-4">
-                    <div id="titleTop" className="text-4xl">
+              <div id={"step" + step.id} className={`p-2 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} max-lg:flex-col flex bgred-300 w-full `} key={index}>
+                <div id="stepTitle" className={`max-lg:h-[50dvh] ${index % 2 === 0 ? "text-[#6b776d]" : "bg-[#848d5c] text-white"} flex flex-col justify-center items-center bgblue-300 lg:w-[50%]`}>
+                  <div id="title" className=" flex w-[70%] flex-col gap-4 ">
+                    <div id="titleTop" className="text-4xl  bgpurple-400">
                       <h1>{step.title}</h1>
                     </div>
                     <div id="titleBottom" className="text-base">
@@ -122,8 +122,8 @@ function HomePage() {
                     </div>
                   </div>
                 </div>
-                <div id="stepImage" className="flex max-md:h-[50dvh]  bgyellow-300 md:w-[50dvw] justify-center items-center">
-                  <Image className="rounded-none w- h-[50dvh] md:w-[50dvw] " src={step.image} alt="" />
+                <div id="stepImage" className=" flex  justify-center items-center lg:w-[50%]">
+                  <Image className="rounded-none object-cover   " src={step.image} alt="" />
                 </div>
               </div>
 
