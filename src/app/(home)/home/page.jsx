@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import {Image} from "@nextui-org/image";
 
+import Link from "next/link";
+
 const pictures = [
   {
     id: 1,
@@ -66,14 +68,22 @@ function HomePage() {
 
   return (
     <main className='w-full  bgrose-400 text-black '  >
-      <section className="flex bgpurple-400  sm:h-[70vh] lg:h-[85vh] max-sm:flex-col w-full">
-        <div className="flex w-full  flex-col max-sm:h-[35vh] justify-center max-[350px]:gap-4 gap-8   items-center sm:w-[40vw] lg:w-[45vw] bgred-300 h-full sm:px-4 lg:px-0">
-          <button className="bgred-200 w-full max-w-[300px]  border-2 border-gray-500 py-6">
-            EXPLORE DESIGN PACKAGES
-          </button>
-          <button className="bgred-200 w-full max-w-[300px]  bg-gray-200 py-6">
-            VISIT OUR PORTFOLIO
-          </button>
+      <section id="CTA" className="flex bgpurple-400  sm:h-[70vh] lg:h-[85vh] max-sm:flex-col w-full">
+        <div className="flex w-full text-[#6b776d] flex-col max-sm:h-[45vh] justify-center max-[350px]:gap-4 gap-10   items-center sm:w-[40vw] lg:w-[45vw] bgred-300 h-full sm:px-4 lg:px-0">
+          <div className="flex flex-col justify-center items-center gap-4 w-full ">
+            <button className="bgred-200 w-full max-w-[300px]  border-2 border-[#6b776d] py-6">
+              EXPLORE DESIGN PACKAGES
+            </button>
+            <button className="bgred-200 w-full max-w-[300px]  bg-gray-200 py-6">
+              VISIT OUR PORTFOLIO
+            </button>
+          </div>
+          <div className="w-full flex flex-col justify-center items-center ">
+            <p>
+              Dream with us ● Design with us
+            </p>
+            <p>Create your Account <Link className="text-[#6b776d] underline" href="/create-account" target="_blank">here.</Link></p>
+          </div>
         </div>
         <div className="flex flex-col  w-full bgred-600   sm:w-[60vw] lg:w-[55vw]">
           <div className="flex  w-full h-full bgpurple-300 no-border-radius">
@@ -92,7 +102,7 @@ function HomePage() {
       </section>
 
 
-      <section className="flex mt-[20px] flex-col  justify-center items-center bgred-300">
+      <section id="steps" className="flex mt-[20px] flex-col  justify-center items-center bgred-300">
         <div id="banner" className="w-full bg-[#848d5c] text-white  relative py-12 md:pl-16">
           <div className="bgblue-200 max-w-[750px]  z-[100] flex flex-col px-6 gap-2">
             <p className="text-5xl font-black ">
@@ -133,7 +143,12 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="h-[80vh] w-full bgblue-300 flex justify-center items-center bgpink-400 mt-12">
+
+      <section id="packages">
+
+      </section>
+
+      <section id="subsForm" className="h-[80vh] w-full bgblue-300 flex justify-center items-center bgpink-400 mt-12">
         <div className="w-[65%] h-[70%] max-md:h-full bgred-300  flex max-md:flex-col max-md:w-full bgred-300 shadow-[5px_5px_20px_rgba(0,0,0,0.5)]">
           <div className="w-[50%] max-md:w-full max-md:h-[50vh] h-full bggreen-300 bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/subsCard.jpg')" }}>
           </div>
