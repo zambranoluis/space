@@ -6,6 +6,10 @@ import {Image} from "@nextui-org/image";
 
 import Link from "next/link";
 
+import { FaCheck } from "react-icons/fa";
+import { div } from "framer-motion/client";
+
+
 const pictures = [
   {
     id: 1,
@@ -54,6 +58,240 @@ const steps = [
   }
 ]
 
+const packagesDetails = [
+  {
+    id: 1,
+    text: "WHAT'S INCLUDED",
+  },
+  {
+    id: 2,
+    text: "Work with a professional designer"
+  },
+  {
+    id: 3,
+    text: "Video/phone call with a project manager"
+  },
+  {
+    id: 4,
+    text: "Revisions"
+  },
+  {
+    id: 5,
+    text: "Estimated delivery time"
+  },
+  {
+    id: 6,
+    text: "Plant selection specific for your property"
+  },
+  {
+    id: 7,
+    text: "List of materials selected for your project"
+  },
+  {
+    id: 8,
+    text: "360° virtual tour of design"
+  },
+  {
+    id: 9,
+    text: "Lighting plan"
+  },
+  {
+    id: 10,
+    text: "Irrigation Plan"
+  },
+  {
+    id: 11,
+    text: "Prices"
+  }
+]
+
+const packagesProducts = [
+  [
+    {
+      id: 1,
+      text: "1 Area Basic",
+    },
+    {
+      id: 2,
+      text: <FaCheck />
+    },
+    {
+      id: 3,
+      text: "30 min"
+    },
+    {
+      id: 4,
+      text: "1 round of revisions"
+    },
+    {
+      id: 5,
+      text: <FaCheck />
+    },
+    {
+      id: 6,
+      text: <FaCheck />
+    },
+    {
+      id: 7,
+      text: <FaCheck />
+    },
+    {
+      id: 8,
+      text: ""
+    },
+    {
+      id: 9,
+      text: ""
+    },
+    {
+      id: 10,
+      text: ""
+    },
+    {
+      id: 11,
+      text: "$175"
+    }
+  ],
+  [
+    {
+      id: 1,
+      text: "1 Area Pro",
+    },
+    {
+      id: 2,
+      text: <FaCheck />
+    },
+    {
+      id: 3,
+      text: "45 min"
+    },
+    {
+      id: 4,
+      text: "Unlimited rounds of revisions for 30 days"
+    },
+    {
+      id: 5,
+      text: "1-2 week to design delivery"
+    },
+    {
+      id: 6,
+      text: <FaCheck />
+    },
+    {
+      id: 7,
+      text: <FaCheck />
+    },
+    {
+      id: 8,
+      text: <FaCheck />
+    },
+    {
+      id: 9,
+      text: <FaCheck />
+    },
+    {
+      id: 10,
+      text: ""
+    },
+    {
+      id: 11,
+      text: "$265"
+    }
+  ],
+  [
+    {
+      id: 1,
+      text: "Both",
+    },
+    {
+      id: 2,
+      text: <FaCheck />
+    },
+    {
+      id: 3,
+      text: "1 hr"
+    },
+    {
+      id: 4,
+      text: "2 rounds of revisions"
+    },
+    {
+      id: 5,
+      text: <FaCheck />
+    },
+    {
+      id: 6,
+      text: <FaCheck />
+    },
+    {
+      id: 7,
+      text: <FaCheck />
+    },
+    {
+      id: 8,
+      text: ""
+    },
+    {
+      id: 9,
+      text: ""
+    },
+    {
+      id: 10,
+      text: ""
+    },
+    {
+      id: 11,
+      text: "$195"
+    }
+  ],
+  [
+    {
+      id: 1,
+      text: "Both Pro",
+    },
+    {
+      id: 2,
+      text: <FaCheck />
+    },
+    {
+      id: 3,
+      text: "1 hr"
+    },
+    {
+      id: 4,
+      text: "Unlimited rounds of revisions for 30 days"
+    },
+    {
+      id: 5,
+      text: "1-2 week to design delivery"
+    },
+    {
+      id: 6,
+      text: <FaCheck />
+    },
+    {
+      id: 7,
+      text: <FaCheck />
+    },
+    {
+      id: 8,
+      text: <FaCheck />
+    },
+    {
+      id: 9,
+      text: <FaCheck />
+    },
+    {
+      id: 10,
+      text: <FaCheck />
+    },
+    {
+      id: 11,
+      text: "$395"
+    }
+  ],
+]
+
 
 function HomePage() {
 
@@ -68,6 +306,7 @@ function HomePage() {
 
   return (
     <main className='w-full  bgrose-400 text-black '  >
+
       <section id="CTA" className="flex bgpurple-400  sm:h-[70vh] lg:h-[85vh] max-sm:flex-col w-full">
         <div className="flex w-full text-[#6b776d] flex-col max-sm:h-[45vh] justify-center max-[350px]:gap-4 gap-10   items-center sm:w-[40vw] lg:w-[45vw] bgred-300 h-full sm:px-4 lg:px-0">
           <div className="flex flex-col justify-center items-center gap-4 w-full ">
@@ -100,7 +339,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-
 
       <section id="steps" className="flex mt-[20px] flex-col  justify-center items-center bgred-300">
         <div id="banner" className="w-full bg-[#848d5c] text-white  relative py-12 md:pl-16">
@@ -144,11 +382,38 @@ function HomePage() {
       </section>
 
 
-      <section id="packages">
-
+      <section id="packages" className="bg-[#f0f0ef] flex flex-col justify-center items-center py-24 w-full">
+        <h1 className="text-5xl text-[#6b776d] mb-16"> Landscape Design Packages</h1>
+        
+        <div className="flex w-[70%] ">
+          <div id="packagesDetails" className=" flex flex-col max-md:w-[50%] md:w-[40%] lg:w-[25%]  bgpurple-300 ">
+            {
+              packagesDetails.map((pack, index) => (
+                <div className={`flex w-full  h-[100px] bggreen-300 px-6 justify-center items-center ${index < packagesDetails.length - 1 ? "border-b-2 border-black" : "border-transparent"} font-bold`} key={index}>
+                  <h1 className="text-center">{pack.text}</h1>
+                </div>
+              ))
+            }
+          </div>
+          <div id="packagesContainer" className="flex max-md:max-w-[50%] md:max-w-[60%] lg:max-w-[75%] overflow-x-auto text-sm  ">
+            {
+              packagesProducts.map((pack, index) => (
+                <div className={`${index === 1 ? "bg-[#6b776d] text-white rounded-xl font-bold" : ""} ${index === 3 ? "bg-[#848d5a] text-white rounded-xl font-bold" : ""}  bgrose-300 max-lg:w-full lg:w-[25%]`} key={index}>
+                  {
+                    pack.map((prod, index) => (
+                      <div className={`flex w-full  px-6 h-[100px]  justify-center items-center  ${index < pack.length - 1 ? "border-b-2 border-black" : "border-transparent"} ${index === pack.length - 1 ? "font-bold" : ""} `} key={index} >
+                        <h1 className="text-center">{prod.text}</h1>
+                      </div>
+                    ))
+                  }
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </section>
 
-      <section id="subsForm" className="h-[80vh] w-full bgblue-300 flex justify-center items-center bgpink-400 mt-12">
+      <section id="subsForm" className="h-[80vh] bg-[#f0f0ef] w-full bgblue-300 flex justify-center items-center bgpink-400 ">
         <div className="w-[65%] h-[70%] max-md:h-full bgred-300  flex max-md:flex-col max-md:w-full bgred-300 shadow-[5px_5px_20px_rgba(0,0,0,0.5)]">
           <div className="w-[50%] max-md:w-full max-md:h-[50vh] h-full bggreen-300 bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/subsCard.jpg')" }}>
           </div>
