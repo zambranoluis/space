@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <ThemeProvider>
-      <section className="w-full h-full   flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
+      <section className="w-full h-[100dvh]   flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative">
       <div id="video" className="max-md:absolute h-full md:w-[60dvw]">
         <video className=" h-full w-full  object-cover   z-[1]"
           autoPlay

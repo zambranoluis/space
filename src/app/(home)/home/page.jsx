@@ -66,8 +66,8 @@ function HomePage() {
 
   return (
     <main className='w-full  bgrose-400 text-black '  >
-      <section className="flex bgpurple-400  sm:h-[70dvh] lg:h-[85dvh] max-sm:flex-col w-full">
-        <div className="flex w-full  flex-col max-sm:h-[35vh] justify-center max-[350px]:gap-4 gap-8   items-center sm:w-[40dvw] lg:w-[45dvw] bgred-300 h-full sm:px-4 lg:px-0">
+      <section className="flex bgpurple-400  sm:h-[70vh] lg:h-[85vh] max-sm:flex-col w-full">
+        <div className="flex w-full  flex-col max-sm:h-[35vh] justify-center max-[350px]:gap-4 gap-8   items-center sm:w-[40vw] lg:w-[45vw] bgred-300 h-full sm:px-4 lg:px-0">
           <button className="bgred-200 w-full max-w-[300px]  border-2 border-gray-500 py-6">
             EXPLORE DESIGN PACKAGES
           </button>
@@ -75,7 +75,7 @@ function HomePage() {
             VISIT OUR PORTFOLIO
           </button>
         </div>
-        <div className="flex flex-col  w-full bgred-600   sm:w-[60dvw] lg:w-[55dvw]">
+        <div className="flex flex-col  w-full bgred-600   sm:w-[60vw] lg:w-[55vw]">
           <div className="flex  w-full h-full bgpurple-300 no-border-radius">
             <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={pictures[currentPicture].image}
             loading="lazy"
@@ -93,7 +93,7 @@ function HomePage() {
 
 
       <section className="flex mt-[20px] flex-col  justify-center items-center bgred-300">
-        <div id="banner" className="w-full bg-[#848d5c] text-white  relative py-6 md:pl-16">
+        <div id="banner" className="w-full bg-[#848d5c] text-white  relative py-12 md:pl-16">
           <div className="bgblue-200 max-w-[750px]  z-[100] flex flex-col px-6 gap-2">
             <p className="text-5xl font-black ">
               Bring your vision to life in three simple steps
@@ -102,13 +102,13 @@ function HomePage() {
               Professional landscape design, always for a low flat fee
             </p>
           </div>
-          <div className="h-[100px] w-[100px] bg-[#848d5c] z-[-1] absolute bottom-[-50px] left-[10%] rotate-45"></div>
+          <div className="max-[400px]:h-[60px] h-[100px] max-[400px]:w-[60px] w-[100px] bg-[#848d5c] z-[-1] absolute max-[400px]:bottom-[-25px] bottom-[-50px] left-[10%] rotate-45"></div>
         </div>
         <div id="stepsContainer" className="w-full   bgrose-400">
           {
             steps.map((step, index) => (
-              <div id={"step" + step.id} className={`p-2 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} max-lg:flex-col flex bgred-300 w-full `} key={index}>
-                <div id="stepTitle" className={`max-lg:h-[50dvh] ${index % 2 === 0 ? "text-[#6b776d]" : "bg-[#848d5c] text-white"} flex flex-col justify-center items-center bgblue-300 lg:w-[50%]`}>
+              <div id={"step" + step.id} className={`lg:p-2 ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} max-lg:flex-col flex bgred-300 w-full `} key={index}>
+                <div id="stepTitle" className={`max-lg:h-[50vh] ${index % 2 === 0 ? "text-[#6b776d]" : "bg-[#848d5c] text-white"} flex flex-col justify-center items-center bgblue-300 lg:w-[50%]`}>
                   <div id="title" className=" flex w-[70%] flex-col gap-4 ">
                     <div id="titleTop" className="text-4xl  bgpurple-400">
                       <h1>{step.title}</h1>
