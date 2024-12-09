@@ -1,6 +1,6 @@
 function HomePage() {
   return (
-    <main className='w-full h-full bg-cover bg-no-repeat' style={{ backgroundImage: "url('/spacePanelBackground.webp')"}} >
+    <main className='w-full min-h-[100dvh] bg-cover bg-no-repeat ' style={{ backgroundImage: "url('/spacePanelBackground.webp')"}} >
     </main>
   )
 }
