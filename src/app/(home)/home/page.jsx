@@ -383,25 +383,25 @@ function HomePage() {
 
 
       <section id="packages" className="bg-[#f0f0ef] flex flex-col justify-center items-center py-24 w-full">
-        <h1 className="text-5xl text-[#6b776d] mb-16"> Landscape Design Packages</h1>
+        <h1 className="text-5xl text-[#6b776d] mb-16 max-md:text-center">Landscape Design Packages</h1>
         
         <div className="flex w-[70%] ">
-          <div id="packagesDetails" className=" flex flex-col max-md:w-[50%] md:w-[40%] lg:w-[25%]  bgpurple-300 ">
+          <div id="packagesDetails" className=" flex flex-col max-md:w-[40%] md:w-[40%] lg:w-[25%]  bgpurple-300 ">
             {
               packagesDetails.map((pack, index) => (
-                <div className={`flex w-full  h-[100px] bggreen-300 px-6 justify-center items-center ${index < packagesDetails.length - 1 ? "border-b-2 border-black" : "border-transparent"} font-bold`} key={index}>
+                <div className={`flex w-full  max-md:h-[150px] h-[100px] bggreen-300 px-6 justify-center items-center ${index < packagesDetails.length - 1 ? "border-b-2 border-black" : "border-transparent"} font-bold`} key={index}>
                   <h1 className="text-center">{pack.text}</h1>
                 </div>
               ))
             }
           </div>
-          <div id="packagesContainer" className="flex max-md:max-w-[50%] md:max-w-[60%] lg:max-w-[75%] overflow-x-auto text-sm  ">
+          <div id="packagesContainer" className="flex max-md:max-w-[60%] md:max-w-[60%] lg:max-w-[75%] overflow-x-auto text-sm  ">
             {
               packagesProducts.map((pack, index) => (
                 <div className={`${index === 1 ? "bg-[#6b776d] text-white rounded-xl font-bold" : ""} ${index === 3 ? "bg-[#848d5a] text-white rounded-xl font-bold" : ""}  bgrose-300 max-lg:w-full lg:w-[25%]`} key={index}>
                   {
                     pack.map((prod, index) => (
-                      <div className={`flex w-full  px-6 h-[100px]  justify-center items-center  ${index < pack.length - 1 ? "border-b-2 border-black" : "border-transparent"} ${index === pack.length - 1 ? "font-bold" : ""} `} key={index} >
+                      <div className={`flex w-full  px-6 max-md:h-[150px] h-[100px]  justify-center items-center  ${index < pack.length - 1 ? "border-b-2 border-black" : "border-transparent"} ${index === pack.length - 1 ? "font-bold" : ""} `} key={index} >
                         <h1 className="text-center">{prod.text}</h1>
                       </div>
                     ))
