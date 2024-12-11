@@ -97,10 +97,3 @@ body {
   display: none;
 }
 
-
-.no-border-radius img {
-  border-radius: 0 !important; /* Quitar redondeado de la imagen */
-}
-.no-border-radius .nextui-image-placeholder {
-  border-radius: 0 !important; /* Quitar redondeado del placeholder */
-}

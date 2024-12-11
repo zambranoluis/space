@@ -23,6 +23,9 @@ export default function Home() {
   const handleVerPanel = () => {
     router.push('/panel'); 
   };
+  const handleVerProductos = () => {
+    router.push('/products')
+  }
 
   return (
     <ThemeProvider>
@@ -98,6 +101,9 @@ export default function Home() {
                 </button>
                 <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" onClick={() => {handleVerPanel()}}>
                   Ver Panel
+                </button>
+                <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" onClick={() => {handleVerProductos()}}>
+                  Ver Productos
                 </button>
               </div> 
             </form>
