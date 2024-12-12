@@ -101,14 +101,17 @@ function HomePage() {
         </div>
         <div className="flex w-full bgred-500 p2">
           <div className="w-full h-[600px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/carrito1.jpg')" }}>
-            <div className="bg-white/50 sm:w-[50%] absolute bottom-0  flex justify-center items-center py-8">
-              <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base">
-                <h2 className="font-black">Includes:</h2>
-                <p>● 30-minute phone call with a project manager</p>
-                <p>● One round of design revisions</p>
-                <p>● 2-3 week to design delivery</p>
-                <p>● Plant selection specific for your property</p>
-                <p>● List of materials selected for your project</p>
+            <div className="flex w-full justify-center items-center sm:justify-start absolute bottom-0">
+              <div className="bg-white/50 w-[80%]  sm:w-[50%] flex justify-center items-center py-4 min-[400px]:py-8">
+                  <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base">
+                    <h2 className="font-black">Includes:</h2>
+                    <p>● 30-minute phone call with a project manager</p>
+                    <p>● One round of design revisions</p>
+                    <p>● 2-3 week to design delivery</p>
+                    <p>● Plant selection specific for your property</p>
+                    <p>● List of materials selected for your project</p>
+                  </div>
+                
               </div>
             </div>
             <div className="w-[90%] sm:w-[50%] bgblue-400 absolute max-sm:left-[5%] sm:right-0 h-full  flex flex-col sm:justify-center sm:px-[50px] sm:ml-[50px] ">
@@ -141,17 +144,16 @@ function HomePage() {
       </section>
 
 
-      {/* <section className=" w-full  bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/carrito2.jpg')" }}>
-        <div className="bg-red-500 p-2 w-[75%] max-w-[420px]    flex relative ">
-          <div id="extrasCircle" className="bg-[#302626] rounded-full w-[70px] h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute bottom-[40px] left-[-40px] md:bottom-[80px] md:left-[-60px] text-sm md:text-lg">EXTRAS</div>
-          <div className="bg-pink-400 w-full ">
-            <div id="productCardTitle" className="h[15%] bg-[#848d5a] w-full  items-center flex px-6" >
-              <p className="text-3xl text-white">1 Area Basic</p>
+      <section className=" w-full  bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/carrito2.jpg')" }}>
+        <div className="bgred-500 py-8 w-[90%] max-w-[450px]    flex ">
+          <div id="extrasCard" className="bgpink-400 w-full bg-white">
+            <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
+              <p className="text-2xl sm:text-3xl py-4 text-white max-sm:text-center">1 Area Basic</p>
             </div>
-            <div id="productCardBody" className="h[60%] bg-white bgpurple-600 place-self-center w-[90%] max-w-[280px] " >
-              <div id="bodyIncludes" className="">
+            <div id="productCardBody" className="  bgpurple-600 place-self-center py-8  " >
+              <div id="bodyIncludes" className="flex flex-col ">
                 <h2 className="font-black text-sm">Includes:</h2>
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-1 py-4">
                   <p className="text-xs">● 30-minute phone call with a project manager</p>
                   <p className="text-xs">● One round of design revisions</p>
                   <p className="text-xs">● 2-3 week to design delivery</p>
@@ -159,39 +161,42 @@ function HomePage() {
                   <p className="text-xs">● List of materials selected for your project</p>
                 </div>
               </div>
-              <div id="bodyOptions" className="flex flex-col">
-                <div className="w-[90%] gap-4 flex place-self-center">
-                  <button className="w-full bg-rose-500 text-sm ">Frontyard</button>
-                  <button className="w-full bg-rose-700 text-sm border border-gray-500">Backyard</button>
+              <div id="bodyOptions" className="flex flex-col bg-[#f0f0ef] p-4">
+                <div className="w-full gap-4 flex place-self-center">
+                  <button className="w-full bg-[#848d5a] text-sm text-white ">Frontyard</button>
+                  <button className="w-full  text-sm border border-gray-500">Backyard</button>
                 </div>
-                <div>
-                  <div className="flex" ><p className="text-xs">Extras</p></div>
-                  <div className="flex flex-col">
+                <div className="bggreen-700 p-6">
+                  <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>
+                  <div className="flex flex-col bggray-600 justify-center items-center p-2 gap-2">
                     {
                       extras.map((extra) => (
-                        <div className="flex" key={extra.id}>
-                          <div className="text-xs"><p>{extra.title}</p></div>
-                          <div><Switch className=" rounded-full" id={`extra-${extra.id}`} size="sm" /></div>
+                        <div className="flex bgpink-300 justify-center w-full gap-2" key={extra.id}>
+                          <div className="text-xs w-[50%] bgyellow-300 text-[#9a9989]"><p>{extra.title}</p></div>
+                          <div className=" bgblue-300"><Switch className=" rounded-full" id={`extra-${extra.id}`} size="sm" /></div>
                         </div>
                       ))
                     }
                   </div>
-                  <div className="flex justify-center">
-                    <button className="w-[50%] bg-rose-500 text-sm ">
-                      Pay For
+                  <div className="flex justify-center bgpurple-400 relative">
+                    <button className="w-[70%] bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 ">
+                      PAY FOR
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-            <div id="productCardFooter" className="h[25%] bgpurple-800 w-full bg-[#dcd6c8] text-black" >
-              <div>
+            <div id="productCardFooter" className="px-12 py-6 bgpurple-800 w-full bg-[#dcd6c8] text-black relative" >
+            <div id="extrasCircle" className="bg-[#302626] rounded-full w-[70px] h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute top-[50%] left-[-40px] md:bottom-[80px] md:left-[-60px] text-sm md:text-lg">
+            <p>EXTRAS</p>
+          </div>
+              <div className="flex flex-col">
                 {
-                  extrasDetails.map((detail) => (
-                    <div key={detail.id}>
+                  extrasDetails.map((detail, index) => (
+                    <div className={`py-4 gap-2 flex flex-col ${(index !== extrasDetails.length - 1 ? "border-b border-black" : "")}`} key={detail.id}>
                       <h3 className="text-sm  font-bold">{detail.title}</h3>
-                      <p className="  text-xs">{detail.description}</p>
-                      <div className="flex text-xs">
+                      {(detail.description) && <p className="  text-xs">{detail.description}</p>}
+                      <div className="flex text-xs max-sm:flex-col sm:gap-2">
                         {
                           detail.items.map((item, index) => (
                             <div key={`item-${index}`} >
@@ -207,7 +212,7 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
     </main>
   );
 }
