@@ -1,4 +1,6 @@
 "use client";
+
+import { useState, useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
@@ -48,11 +50,24 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
     }
   ];
 
+    const [currentPath, setCurrentPath] = useState("");
+    const [isMounted, setIsMounted] = useState(false);
+  
+    useEffect(() => {
+      setIsMounted(true); // Marcar como montado en el cliente
+  
+      if (!isMounted) return;
+  
+      setCurrentPath(window.location.pathname.toLowerCase())
+  
+  
+    }, [isMounted]);
+
 
   const { theme, toggleTheme } = useTheme();
-  const currentPath = window.location.pathname.toLowerCase();
-  const currentPathProducts = (window.location.pathname.toLowerCase().includes("products")) ? true : false;
 
+
+  const currentPathProducts = (currentPath.includes("/products")? true : false);
 
   
   return (
