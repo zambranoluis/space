@@ -26,16 +26,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     setIsAsideOpen((prev) => !prev);
   };
 
-{/* <div className=" w-full h-full ">
-            <section className="w-full h-full">{children}</section>
-          </div> */}
 
   return (
     <DataProvider>
       <ThemeProvider>
-        <section className="flex flex-col bgpurple-500 p2 w-full">
+        <section className="flex flex-col bgpurple-500 p2 w-full relative">
           <Navbar toggleAside={toggleAside} />
-          <div className="w-full flex max-md:mt-[130px] md:mt-[100px]  ">
+          <div className="w-full flex max-md:mt[130px] md:mt[100px] bgred-400  ">
             {children}
           </div>
           <Footer />

@@ -310,9 +310,9 @@ function HomePage() {
       <section id="CTA" className="flex bgpurple-400  sm:h-[70vh] lg:h-[85vh] max-sm:flex-col w-full">
         <div className="flex w-full text-[#6b776d] flex-col max-sm:h-[45vh] justify-center max-[350px]:gap-4 gap-10   items-center sm:w-[40vw] lg:w-[45vw] bgred-300 h-full sm:px-4 lg:px-0">
           <div className="flex flex-col justify-center items-center gap-4 w-full ">
-            <button className="bgred-200 w-full max-w-[300px]  border-2 border-[#6b776d] py-6">
+            <Link className="bgred-200 w-full max-w-[300px] justify-center items-center flex border-2 border-[#6b776d] py-6" href="/products">
               EXPLORE DESIGN PACKAGES
-            </button>
+            </Link>
             <button className="bgred-200 w-full max-w-[300px]  bg-gray-200 py-6">
               VISIT OUR PORTFOLIO
             </button>
