@@ -100,9 +100,9 @@ function HomePage() {
           </div>
         </div>
         <div className="flex w-full bgred-500 p2">
-          <div className="w-full h-[90vh] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/carrito1.jpg')" }}>
+          <div className="w-full h-[600px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/carrito1.jpg')" }}>
             <div className="bg-white/50 sm:w-[50%] absolute bottom-0  flex justify-center items-center py-8">
-              <div className="sm:w-[50%] text-xs px-2">
+              <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base">
                 <h2 className="font-black">Includes:</h2>
                 <p>● 30-minute phone call with a project manager</p>
                 <p>● One round of design revisions</p>

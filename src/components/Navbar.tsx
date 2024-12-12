@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
     <>
 
 
-      <nav id="navbar" className={`  max-md:flex-col  z-[100] h-[130px] md:h-[100px] bggreen-200 flex   max-lg:w-full  maxlg:bg-white bg-green-300 ${(currentPathProducts) ? "md:w-full md:px-16 md:gap-8 sticky top-0 bg-white" : "lg:w-[45dvw] absolute"} `}>
+      <nav id="navbar" className={`  max-md:flex-col  z-[100] h-[130px] md:h-[100px] bggreen-200 flex   max-lg:w-full  maxlg:bg-white bggreen-300 ${(currentPathProducts) ? "md:w-full md:px-16 md:gap-8 sticky top-0 bg-white" : "lg:w-[45dvw] absolute"} `}>
         <div id="logoNavbar" className={`flex bgred-200 max-md:pl-4 max-md:h-[100px]  justify-start md:justify-center  items-center  `}>
           <Image className={`max-md:w-[80%] dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]`}
             src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
