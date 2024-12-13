@@ -49,7 +49,7 @@ const extras =[
   {
     id: 4,
     title: "Side Yard",
-  }
+  },
 ]
 
 const extrasDetails = [
@@ -178,6 +178,16 @@ function HomePage() {
                       ))
                     }
                   </div>
+                  <div className="flex bgred-300 justify-center gap-2">
+                    <div className="flex">
+                    <p>
+                      Final Price: 
+                    </p>
+                    </div>
+                    <div className="flex border border-black rounded-sm px-4">
+                      <p className="font-semibold">100$</p>
+                    </div>
+                  </div>
                   <div className="flex justify-center bgpurple-400 relative">
                     <button className="w-[70%] bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 ">
                       PAY FOR
@@ -187,7 +197,7 @@ function HomePage() {
               </div>
             </div>
             <div id="productCardFooter" className="px-12 py-6 bgpurple-800 w-full bg-[#dcd6c8] text-black relative" >
-            <div id="extrasCircle" className="bg-[#302626] rounded-full w-[70px] h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute top-[50%] left-[-40px] md:bottom-[80px] md:left-[-60px] text-sm md:text-lg">
+            <div id="extrasCircle" className="bg-[#302626] rounded-full w-[50px] h-[50px] min-[500px]:w-[70px] min-[500px]:h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute top-0 min-[320px]:top-[40%] sm:top-[40%] left-[0px] min-[320px]:left-[-20px] min-[500px]:left-[-30px]  md:left-[-60px] text-xs sm:text-sm md:text-lg">
             <p>EXTRAS</p>
           </div>
               <div className="flex flex-col">
