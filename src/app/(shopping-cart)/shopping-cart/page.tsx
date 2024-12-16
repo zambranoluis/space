@@ -15,28 +15,85 @@ const packages = [
     title: "1 Area Basic",
     price: "100",
     image: "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito2.webp",
-    includes: ["● 30-minute phone call with a project manager", "● One round of design revisions", "● 2-3 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project"]
+    includes: ["● 30-minute phone call with a project manager", "● One round of design revisions", "● 2-3 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project"],
+    extrasOptions: [
+      {
+        id: 1,
+        title: "Irrigation Plan",
+      },
+      {
+        id: 2,
+        title: "360° Virtual Tour of Design",
+      },
+      {
+        id: 3,
+        title: "Lighting Plan",
+      },
+      {
+        id: 4,
+        title: "Side Yard",
+      },
+    ]
+    
   },
   {
     id: 2,
     title: "1 Area Pro",
     price: "100",
     image: "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito3.webp",
-    includes: ["● 45-minute phone call with a project manager", "● Unlimited rounds of revisions for 30 days", "● 1-2 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project", "● 360° virtual tour of design", "● Lighting Plan"]
+    includes: ["● 45-minute phone call with a project manager", "● Unlimited rounds of revisions for 30 days", "● 1-2 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project", "● 360° virtual tour of design", "● Lighting Plan"],
+    extrasOptions: [
+      {
+        id: 1,
+        title: "Irrigation Plan",
+      },
+      {
+        id: 4,
+        title: "Side Yard",
+      },
+    ]
   },
   {
     id: 3,
     title: "2 Areas Basic",
     price: "100",
     image: "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito4.webp",
-    includes: ["● 1 Hour phone call with a project manager", "● Two rounds of revision", "● 2-3 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project"]
+    includes: ["● 1 Hour phone call with a project manager", "● Two rounds of revision", "● 2-3 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project"],
+    extrasOptions: [
+      {
+        id: 1,
+        title: "Irrigation Plan",
+      },
+      {
+        id: 2,
+        title: "360° Virtual Tour of Design",
+      },
+      {
+        id: 3,
+        title: "Lighting Plan",
+      },
+      {
+        id: 4,
+        title: "Side Yard",
+      },
+    ]
   },
   {
     id: 4,
     title: "2 Areas PRO",
     price: "100",
     image: "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito5.webp",
-    includes: ["● 1 Hour phone call with a project manager", "● Unlimited rounds of revisions for 30 days", "● 1-2 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project", "● 360° virtual tour of design", "● Lighting Plan"]
+    includes: ["● 1 Hour phone call with a project manager", "● Unlimited rounds of revisions for 30 days", "● 1-2 week to design delivery", "● Plant selection specific for your property", "● List of materials selected for your project", "● 360° virtual tour of design", "● Lighting Plan"],
+    extrasOptions: [
+      {
+        id: 1,
+        title: "Irrigation Plan",
+      },
+      {
+        id: 4,
+        title: "Side Yard",
+      },
+    ]
   }
 ]
 
@@ -196,21 +253,23 @@ function ShoppingCart() {
       </section>
 
 
-      <section id="selectedPackageContainer" className=" select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito2.webp')" }}>
+      <section id="selectedPackageContainer" className={` select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex `} style={{ backgroundImage: `url(${packages[selectedPackage].image})` }} >
         <div className="bgred-500 py-8 w-[90%] max-w-[450px]    flex ">
           <div id="extrasCard" className="bgpink-400 w-full bg-white">
             <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
-              <p className="text-2xl sm:text-3xl py-4 text-white max-sm:text-center">1 Area Basic</p>
+              <p className="text-2xl sm:text-3xl py-4 text-white max-sm:text-center">{packages[selectedPackage].title}</p>
             </div>
             <div id="productCardBody" className="  bgpurple-600 place-self-center py-8 w-[65%]  " >
               <div id="bodyIncludes" className="flex flex-col ">
                 <h2 className="font-black text-sm">Includes:</h2>
                 <div className="flex flex-col gap-1 py-4">
-                  <p className="text-xs">● 30-minute phone call with a project manager</p>
-                  <p className="text-xs">● One round of design revisions</p>
-                  <p className="text-xs">● 2-3 week to design delivery</p>
-                  <p className="text-xs">● Plant selection specific for your property</p>
-                  <p className="text-xs">● List of materials selected for your project</p>
+                  {
+                    packages[selectedPackage].includes.map((item, index) => (
+                      <div key={index}>
+                        <p>{item}</p>
+                      </div>
+                    ))
+                  }
                 </div>
               </div>
               <div id="bodyOptions" className="flex flex-col bg-[#f0f0ef] p-4">
@@ -222,11 +281,16 @@ function ShoppingCart() {
                   <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>
                   <div className="flex flex-col bggray-600 justify-center items-center p-2 gap-2">
                     {
-                      extras.map((extra, index) => (
-                        <div className="flex bgpink-300 justify-center w-full gap-2" key={extra.id}>
-                          <div className="text-xs w-[50%] bgyellow-300 text-[#9a9989]"><p>{extra.title}</p></div>
-                          <div className=" bgblue-300"><Switch className=" rounded-full" id={`extra-${extra.id}`} size="sm" /></div>
+                      packages[selectedPackage].extrasOptions.map((item, index) => (
+                        <div className="flex bgpink-300 justify-center w-full gap-2" key={item.id}>
+                          <div className="text-xs w-[50%] bgyellow-300 text-[#9a9989]">
+                            <p>{item.title}</p>
+                          </div>
+                        <div className=" bgblue-300">
+                          <Switch className=" rounded-full" id={`extra-${item.id}`} size="sm" />
                         </div>
+                        </div>
+                        
                       ))
                     }
                   </div>
@@ -359,11 +423,11 @@ function ShoppingCart() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
 
 
-      <section id="2AreaBasic" className=" w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito4.webp')" }}>
+      {/* <section id="2AreaBasic" className=" w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito4.webp')" }}>
         <div className="bgred-500 py-8 w-[90%] max-w-[450px]  flex ">
           <div id="extrasCard" className="bgpink-400 w-full bg-white">
             <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
@@ -443,9 +507,9 @@ function ShoppingCart() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section id="2AreaPro" className=" w-nter  bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito5.webp')" }}>
+      {/* <section id="2AreaPro" className=" w-nter  bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito5.webp')" }}>
         <div className="bgred-500 py-8 w-[90%] max-w-[450px]  flex ">
           <div id="extrasCard" className="bgpink-400 w-full bg-white">
             <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
