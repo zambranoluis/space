@@ -97,7 +97,7 @@ function HomePage() {
 
   const handleSelectedPackage = (index: number, direction: "next" | "prev") => {
 
-    const container = scrollContainerRef.current;
+    const container: any = scrollContainerRef.current;
 
     switch (direction) {
       case "next":
