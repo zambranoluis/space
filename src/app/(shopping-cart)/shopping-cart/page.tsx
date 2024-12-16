@@ -91,11 +91,11 @@ function HomePage() {
 
   const [selectedPackage, setSelectedPackage] = useState(0);
 
-  const handleCurrentPicture = (index) => {
+  const handleCurrentPicture = (index: number) => {
     setCurrentPicture(index);
   };
 
-  const handleSelectedPackage = (index, direction) => {
+  const handleSelectedPackage = (index: number, direction: "next" | "prev") => {
 
     const container = scrollContainerRef.current;
 
