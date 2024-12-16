@@ -83,7 +83,7 @@ const extrasDetails = [
 
 
 
-function HomePage() {
+function ShoppingCart() {
 
   const scrollContainerRef = useRef(null);
 
@@ -196,7 +196,7 @@ function HomePage() {
       </section>
 
 
-      <section id="1AreaBasic" className=" w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito2.webp')" }}>
+      <section id="selectedPackageContainer" className=" select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex " style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito2.webp')" }}>
         <div className="bgred-500 py-8 w-[90%] max-w-[450px]    flex ">
           <div id="extrasCard" className="bgpink-400 w-full bg-white">
             <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
@@ -535,4 +535,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default ShoppingCart;
