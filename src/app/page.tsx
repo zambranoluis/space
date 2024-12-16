@@ -315,13 +315,14 @@ function HomePage() {
     setIsAsideOpen((prev) => !prev);
   };
 
+  //  ruta raiz (home)
 
   return (
     <ThemeProvider>
       <DataProvider>
-        <div>
+        <div className="flex flex-col relative ">
           <Navbar toggleAside={toggleAside} />
-          <main className='w-full bgrose-400 text-black' >
+          <main className='w-full bgrose-400 text-black max-md:mt-[130px] md:mt-[100px] lg:mt-0 ' >
             <section id="CTA" className="flex bgpurple-400  sm:h-[70vh] lg:h-[85vh] max-sm:flex-col w-full">
               <div className="flex w-full text-[#6b776d] flex-col max-sm:h-[45vh] justify-center max-[350px]:gap-4 gap-10   items-center sm:w-[40vw] lg:w-[45vw] bgred-300 h-full sm:px-4 lg:px-0">
                 <div className="flex flex-col justify-center items-center gap-4 w-full ">
