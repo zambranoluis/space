@@ -67,7 +67,7 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
   const { theme, toggleTheme } = useTheme();
 
 
-  const currentPathProducts = (currentPath.includes("/products")? true : false);
+  const currentPathProducts = (currentPath.includes("/shopping-cart")? true : false);
 
   
   return (
