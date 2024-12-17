@@ -34,7 +34,7 @@ export default function Home() {
           loop
           muted
         >
-          <source src="https://github.com/BPM94/SCCTMD/raw/main/videoLogin.mp4" type="video/webm" />
+          <source src="https://github.com/BPM94/SCCTMD/raw/main/opt/videoLogin.webm" type="video/webm" />
         </video>
       </div>
       <div className="w-full md:w-[40dvw] md:bg-white h-full flex flex-col max-md:py-8 max-md:px-16 gap4 max-md:h-[500px] max-md:text-white text-[#828282] z-[2] justify-between items-center rounded-md">
