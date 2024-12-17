@@ -170,9 +170,9 @@ function ShoppingCart() {
                           </div>
                         <div className=" bgblue-300">
                           {
-                            (packages[selectedPackage].title.toLowerCase().includes("Pro") && (index === 1 || index === 2))
-                            ? <Switch   className=" rounded-full" id={`extra-${item.id}`} size="sm" />
-                            : <Switch   className=" rounded-full" id={`extra-${item.id}`} size="sm" />
+                            (packages[selectedPackage].title.toLowerCase().includes("pro") && (index === 1 || index === 2))
+                            ? <Switch isSelected isDisabled   className=" rounded-full" id={`extra-${item.id}`} size="sm" />
+                            : <Switch    className=" rounded-full" id={`extra-${item.id}`} size="sm" />
                           }
                           
                         </div>
