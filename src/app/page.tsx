@@ -75,7 +75,7 @@ function HomePage() {
                         
                       // </div>
 
-                      <div className="bg-purple-400 flex-shrink-0 h-full w-full flex" key={index} id={`${index}`} >
+                      <div className="bgpurple-400 flex-shrink-0 h-full w-full flex" key={index} id={`${index}`} >
                         <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={picture.image}
                         loading="lazy"
                         alt="" />
