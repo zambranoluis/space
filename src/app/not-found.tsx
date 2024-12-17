@@ -36,7 +36,7 @@ export default function NotFound() {
           </p>
           <Link
             className='flex place-self-center justify-center items-center px-4 py-2  text-center  text-4xl text-[#ca0000]  cursor-pointer gap-2 '
-            href='/home'>
+            href='/'>
             <RiArrowGoBackFill className='font-black place-self-center ' />
             <p className='   '>Go Back to Home</p>
           </Link>
