@@ -39,16 +39,16 @@ const socials = [
 const Footer = () => {
   return (
     <footer className="flex flex-col justify-center md:justify-between h-[55vh] bg-[#848d5a] md:py-16 md:px-24 max-md:gap-8">
-      <div id="top" className="flex  justify-center md:justify-start items-center">
+      <Link id="top" className="flex  justify-center md:justify-start items-center" href="/">
         <Image className="w-full max-w-[300px]" src="https://github.com/BPM94/SCCTMD/raw/main/logoWhite.png" alt="logo"  />
-      </div>
+      </Link>
       <div id="bottom" className="flex max-md:flex-col max-md:text-center md:justify-between items-center max-md:gap-8 ">
         <div id="ctaLogin" className="text-white">
           <p>
             Click here to continue with the design process.
           </p>
-          <Link className="" href={"#www.spacecreations.net"} target="_blank">
-          https://www.spacecreations.net
+          <Link className="" href={"/"} >
+            https://www.spacecreations.net
           </Link>
         </div>
         <div id="socials" className="flex gap-3 max-sm:px-2">
