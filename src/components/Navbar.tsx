@@ -19,6 +19,16 @@ interface NavbarProps {
   toggleAside: () => void; // Una función que no recibe argumentos y no retorna nada
 }
 
+const handleScrollToSection = (sectionId: string) => {
+  const targetSection = document.getElementById(sectionId);
+
+  if (targetSection) {
+    targetSection.scrollIntoView({
+      behavior: "smooth", // Hace que el scroll sea suave
+      block: "start", // Alinea el elemento al inicio de la pantalla
+    });
+  }
+};
 const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
 
   const navOptionsGeneral = [
@@ -26,11 +36,13 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
       id: 1,
       name: "The Process",
       path: "/the-process",
+      onClick: () => handleScrollToSection("steps"),
     },
     {
       id: 2,
       name: "Pricing",
       path: "/pricing",
+      onClick: () => handleScrollToSection("packages"),
     }
     ,
     {
@@ -70,6 +82,8 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
   const currentPathProducts = (currentPath.includes("/shopping-cart")? true : false);
 
   
+
+  
   return (
 
     <>
@@ -86,9 +100,13 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
           <div className={` w-full flex max-md:justify-around md:justify-start md:gap-8      items-center ${(currentPathProducts) ? "text-lg ": "lg:justify-around lg:px-2 "} `}>
             {
               navOptionsGeneral.map((option) => (
-                <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
-                  <Link className=" whitespace-nowrap text-xs" href={option.path}>{option.name}</Link>   
-                </div>
+                ((option.name.toLowerCase().includes("process")) || (option.name.toLowerCase().includes("pricing"))) 
+                ? <button className="flex justify-center items-center text-[#6b776d] whitespace-nowrap text-xs" key={option.id} onClick={option.onClick} >
+                  {option.name}
+                </button>
+                : <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
+                <Link className=" whitespace-nowrap text-xs" href={option.path} >{option.name}</Link>   
+              </div>
               ))
             }
           </div>

@@ -20,7 +20,7 @@ function ShoppingCart() {
 
   const scrollContainerRef = useRef(null);
 
-  const [selectedYard, setSelectedYard] = useState("");
+  const [selectedYard, setSelectedYard] = useState("frontyard");
 
   const [currentPicture, setCurrentPicture] = useState(0);
 
