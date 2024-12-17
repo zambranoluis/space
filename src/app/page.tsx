@@ -3,7 +3,7 @@
 
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { useState, ReactNode } from "react";
+import { useEffect, useState, useRef, use } from "react";
 
 
 
@@ -25,16 +25,36 @@ import{
 
 
 
+
 function HomePage() {
+  const scrollContainerRef = useRef(null);
 
 
-  const [currentPicture, setCurrentPicture] = useState(0);
+  const [currentPictureButton, setCurrentPictureButton] = useState(0);
+
+  const [currentPictureInterval, setCurrentPictureInterval] = useState(null);
 
   const [isAsideOpen, setIsAsideOpen] = useState(false);
 
-  const handleCurrentPicture = (index: number) => {
-    setCurrentPicture(index);
+  
+
+
+  const handleCurrentPictureButton = (sectionId: number) => {
+    const targetSection = document.getElementById(`${sectionId}`);
+    setCurrentPictureButton(sectionId);
+
+    if (targetSection) {
+      targetSection.scrollIntoView({
+        behavior: "smooth", // Hace que el scroll sea suave
+        block: "start", // Alinea el elemento al inicio de la pantalla
+      });
+    }
   };
+
+  setTimeout(() => {
+    
+  }, 4000);
+
 
   const toggleAside = () => {
     setIsAsideOpen((prev) => !prev);
@@ -68,12 +88,9 @@ function HomePage() {
 
 
               <div className="flex flex-col  w-full max-sm:h-[50vh]   sm:w-[60vw] lg:w-[55vw] bgblue-400 ">
-                <div className="flex w-full bgred-400 h-full overflow-x-auto noScrollBar">
+                <div className="flex w-full bgred-400 h-full overflow-x-auto noScrollBar" ref={scrollContainerRef}>
                   {
                     pictures.map((picture, index) => (
-                      // <div className={` w-full h-full bg-cover bg-center bg-no-repeat`} key={index} style={{backgroundImage: `url(${picture.image})`}}>
-                        
-                      // </div>
 
                       <div className="bgpurple-400 flex-shrink-0 h-full w-full flex" key={index} id={`${index}`} >
                         <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={picture.image}
@@ -95,7 +112,9 @@ function HomePage() {
                 <div className="flex bgblue-300 w-full justify-center items-center gap-2 py-4">
                   {
                     pictures.map((picture, index) => (
-                      <div onClick={() => handleCurrentPicture(index)} className={` ${currentPicture === index ? "bg-[#6b776d]" : "bg-gray-400"} h-[20px] w-[20px] rounded-full cursor-pointer`} key={index}></div>
+                      // <div onClick={() => handleCurrentPicture(index)} className={` ${currentPicture === index ? "bg-[#6b776d]" : "bg-gray-400"} h-[20px] w-[20px] rounded-full cursor-pointer`} key={index}></div>
+                      <div className={` ${currentPictureButton === index ? "bg-[#6b776d]" : "bg-gray-400"}  h-[20px] w-[20px] rounded-full cursor-pointer`} key={index} id={`${index}`} onClick={() => {handleCurrentPictureButton(index);}}>
+                      </div>
                     ))
                   }
                 </div>
