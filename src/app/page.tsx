@@ -67,12 +67,31 @@ function HomePage() {
               </div>
 
 
-              <div className="flex flex-col  w-full bgred-600   sm:w-[60vw] lg:w-[55vw]">
-                <div className="flex  w-full h-full bgpurple-300 no-border-radius">
+              <div className="flex flex-col  w-full max-sm:h-[50vh]   sm:w-[60vw] lg:w-[55vw] bgblue-400 ">
+                <div className="flex w-full bgred-400 h-full overflow-x-auto noScrollBar">
+                  {
+                    pictures.map((picture, index) => (
+                      // <div className={` w-full h-full bg-cover bg-center bg-no-repeat`} key={index} style={{backgroundImage: `url(${picture.image})`}}>
+                        
+                      // </div>
+
+                      <div className="bg-purple-400 flex-shrink-0 h-full w-full flex" key={index} id={`${index}`} >
+                        <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={picture.image}
+                        loading="lazy"
+                        alt="" />
+                      </div>
+                    ))
+                  }
+
+                </div>
+
+
+
+                {/* <div className="flex  w-full h-full bgpurple-300 no-border-radius">
                   <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={pictures[currentPicture].image}
                   loading="lazy"
                   alt="" />
-                </div>
+                </div> */}
                 <div className="flex bgblue-300 w-full justify-center items-center gap-2 py-4">
                   {
                     pictures.map((picture, index) => (
@@ -83,8 +102,6 @@ function HomePage() {
               </div>
 
             </section>
-
-
             
 
             <section id="steps" className="flex mt-[20px] flex-col  justify-center items-center bgred-300">
@@ -178,6 +195,7 @@ function HomePage() {
               </div>
             </section>
           </main>
+          <Footer />
         </div>
       </DataProvider>
     </ThemeProvider>
