@@ -205,9 +205,9 @@ function ShoppingCart() {
           </div>
         </div>
         <div className="flex w-full bgred-500 p2">
-          <div className="w-full h-[600px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito1.webp')" }}>
-            <div className="flex w-full justify-center items-center sm:justify-start absolute bottom-0">
-              <div className="bg-white/50 w-[80%]  sm:w-[50%] flex justify-center items-center py-4 min-[400px]:py-8">
+          <div className="w-full h-[650px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito1.webp')" }}>
+            <div className="flex w-full justify-center items-center sm:justify-start absolute bottom-0 bgred-400 h-[30%] sm:h-[50%]">
+              <div className="bg-white/50 w-[80%]  sm:w-[50%] flex justify-center items-center py-4 min-[400px]:py-8 h-full ">
                   <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base">
                     <h2 className="font-black">Includes:</h2>
                     <div className="flex flex-col">
@@ -281,13 +281,18 @@ function ShoppingCart() {
                   <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>
                   <div className="flex flex-col bggray-600 justify-center items-center p-2 gap-2">
                     {
-                      packages[selectedPackage].extrasOptions.map((item, index) => (
+                      extras.map((item, index) => (
                         <div className="flex bgpink-300 justify-center w-full gap-2" key={item.id}>
                           <div className="text-xs w-[50%] bgyellow-300 text-[#9a9989]">
                             <p>{item.title}</p>
                           </div>
                         <div className=" bgblue-300">
-                          <Switch className=" rounded-full" id={`extra-${item.id}`} size="sm" />
+                          {
+                            (packages[selectedPackage].title.toLowerCase().includes("Pro") && (index === 1 || index === 2))
+                            ? <Switch   className=" rounded-full" id={`extra-${item.id}`} size="sm" />
+                            : <Switch   className=" rounded-full" id={`extra-${item.id}`} size="sm" />
+                          }
+                          
                         </div>
                         </div>
                         
