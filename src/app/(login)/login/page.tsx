@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from "next/image";
+import {Image} from "@nextui-org/image";
 import Link from "next/link";
 
 import { FaEye } from "react-icons/fa";
@@ -40,9 +40,7 @@ export default function Home() {
       <div className="w-full md:w-[40dvw] md:bg-white h-full flex flex-col max-md:py-8 max-md:px-16 gap4 max-md:h-[500px] max-md:text-white text-[#828282] z-[2] justify-between items-center rounded-md">
         <div className="flex flex-col bgred-300 md:w-full md:h-full justify-center items-center md:gap-8">
           <Link id="logo" className=" flex justify-center items-center  px-2 rounded-lg bgred-200 w-full" href="/">
-            <Image className="w-[250px] max-md:drop-shadow-[0_1.3px_1.3px_rgba(0,0,0,1)]  "
-              width={786}
-              height={318}
+            <Image className="w-[250px] max-md:drop-shadow-[0_1.3px_1.3px_rgba(0,0,0,1)]"
               src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
               alt=""
             />
@@ -106,7 +104,7 @@ export default function Home() {
         </div>
         <div id="links" className="flex flex-col justify-center items-center h-[120px] md:bg-[#353535] w-full">
           <Link className=" text-center font-base text-[#9b9b9b] md:text-[#ababab] max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" href="/forgot-password">Forgot Password?</Link>
-          <p className=" text-white max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">Don&apos;t have an account? <Link className="text-[#] text-center font-bold" href="/register">Sign Up.</Link></p>
+          <p className=" text-white max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">Don&apos;t have an account? <Link className="text-[#] text-center font-bold" href="/create-account">Sign Up.</Link></p>
         </div>
       </div>
     </section>

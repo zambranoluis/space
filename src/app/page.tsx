@@ -51,9 +51,9 @@ function HomePage() {
     }
   };
 
-  setTimeout(() => {
+  // setTimeout(() => {
     
-  }, 4000);
+  // }, 4000);
 
 
   const toggleAside = () => {
@@ -82,7 +82,7 @@ function HomePage() {
                   <p>
                     Dream with us ● Design with us
                   </p>
-                  <p>Create your Account <Link className="text-[#6b776d] underline" href="/create-account" target="_blank">here.</Link></p>
+                  <p>Create your Account <Link className="text-[#6b776d] underline" href="/create-account" >here.</Link></p>
                 </div>
               </div>
 
