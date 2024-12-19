@@ -8,6 +8,8 @@ input::placeholder {
   opacity: 1;  /* Ensure the placeholder is fully visible */
 }
 
+
+
 /* html[data-theme="dark"] {
   --color-background: #000020;
   --color-text: #37b2f9;
@@ -64,7 +66,7 @@ input::placeholder {
 }
 
 body {
-  /* background-color: white; */
+  background-color: white;
   /* background-color: var(--color-background);
   color: var(--color-text);
   font-family: 'Roboto', sans-serif; */

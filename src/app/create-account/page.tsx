@@ -20,11 +20,13 @@ const CreateAccount = () => {
           <div className="flex flex-col h-full w-full">
             <div className="flex flex-col h-full lg:bg-white">
               <div className="w-full h-[15%] flex justify-center items-center bgred-500">
-                <Image
-                  src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
-                  alt="logo"
-                  className="h-full"
-                />
+                <Link href="/">
+                  <Image
+                    src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
+                    alt="logo"
+                    className="h-full"
+                  />
+                </Link>
               </div>
               <div className="flex h-[85%] max-h-[85%] overflow-y-auto bgred-400">
                 <form
@@ -34,9 +36,7 @@ const CreateAccount = () => {
                     window.location.href = "#";
                   }}
                 >
-                  <div
-                    id="fields"
-                    className="flex flex-col w-[80%] h-[90%] place-self-center"
+                  <div id="fields" className="flex flex-col w-[80%]  place-self-center"
                   >
                     <div id="name-lastname" className="flex w-full bgblue-500">
                       <div id="name" className="flex w-full p-2 bgrose-400">
@@ -78,7 +78,7 @@ const CreateAccount = () => {
                       </div>
                     </div>
                     <div id="phone" className="flex w-full p-2 gap-2">
-                      <div className="flex items-center justify-center w-[150px] gap-1 p-1 border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
+                      <div className="flex items-center justify-center w-[150px] gap-1 p-1 text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
                         <p>+1</p>
                         <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
                         <IoMdArrowDropdown className="text-xl" />
@@ -122,7 +122,7 @@ const CreateAccount = () => {
                   </div>
                   <div
                     id="submit"
-                    className="flex items-center justify-center w-full h-[10%] p-2 bgrose-400"
+                    className="flex items-center justify-center w-full mt-2 p-2 bgrose-400"
                   >
                     <button className="px-12 py-2 font-bold text-white bg-[#5ea789] rounded-bl-2xl rounded-tr-2xl hover:bg-green-800 max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
                       Create Account
