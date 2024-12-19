@@ -28,7 +28,7 @@ const CreateAccount = () => {
                   />
                 </Link>
               </div>
-              <div className="flex h-[85%] max-h-[85%] overflow-y-auto bgred-400">
+              <div className="flex  overflow-y-auto bgred-400">
                 <form
                   className="flex flex-col w-full h-full bgorange-300"
                   onSubmit={(e) => {
@@ -36,7 +36,7 @@ const CreateAccount = () => {
                     window.location.href = "#";
                   }}
                 >
-                  <div id="fields" className="flex flex-col w-[80%]  place-self-center"
+                  <div id="fields" className="flex flex-col w-[80%] h-full  place-self-center"
                   >
                     <div id="name-lastname" className="flex w-full bgblue-500">
                       <div id="name" className="flex w-full p-2 bgrose-400">
@@ -131,7 +131,7 @@ const CreateAccount = () => {
                 </form>
               </div>
             </div>
-            <div className="flex items-center justify-center w-full h-[10%] lg:bg-[#353535]">
+            <div className="flex items-center justify-center w-full bg-red-300 lg:h-[10%] lg:bg-[#353535]">
               <p className="text-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
                 Already Registered?{" "}
                 <Link href="/login" className="font-bold">
