@@ -88,9 +88,9 @@ function ShoppingCart() {
         </div>
         <div className="flex w-full bgred-500 p2">
           <div className="w-full h-[650px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito1.webp')" }}>
-            <div className="flex w-full justify-center items-center sm:justify-start absolute bottom-0 bgred-400 h-[30%] sm:h-[50%] lg:h-[40%]">
-              <div className="bg-white/50 w-[80%]  sm:w-[50%] flex justify-center items-center py-4 min-[400px]:py-8 h-full ">
-                  <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base">
+            <div className="flex w-full justify-center items-center sm:justify-start absolute bottom-0 bgred-400 h-[30%] sm:h-[60%] min-[950px]:h-[40%]">
+              <div className="bg-white/50 w-[80%]  sm:w-[50%] flex justify-center items-center py4 min-[400px]:py8 h-full ">
+                  <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base text-black flex flex-col bgred-300 h-full gap-4 py-4">
                     <h2 className="font-black">Includes:</h2>
                     <div className="flex flex-col">
                       {
@@ -110,8 +110,8 @@ function ShoppingCart() {
                 {
                   packages.map((pack, index) => (
                     <div className="relative cursor-pointer " key={pack.id} onClick={() => setSelectedPackage(index)}>
-                      <Card className={`h-[350px] w-[190px] sm:w-[220px] flex-shrink-0 snap-center flex flex-col  ${index === selectedPackage ? "shadow-white shadow-md" : ""}`} >
-                        <CardHeader className="flex justify-center items-start h-[30%] flex-col gap-1 sm:px-8 bgred-400">
+                      <Card className={`h-[350px] w-[190px] sm:w-[220px] bg-white flex-shrink-0 snap-center flex flex-col  ${index === selectedPackage ? "shadow-white shadow-md" : ""}`} >
+                        <CardHeader className="flex justify-center  items-start h-[30%] flex-col gap-1 sm:px-8 bgred-400">
                           <h1 className="text-[#6b776d] text-2xl sm:text-3xl text-center whitespace-nowrap">{pack.title}</h1>
                           <h3 className="text-[#6b776d] bg-[#f0f0ef] px-2 py-1">from {pack.price}$</h3>
                         </CardHeader>
@@ -142,7 +142,7 @@ function ShoppingCart() {
               <p className="text-2xl sm:text-3xl py-4 text-white max-sm:text-center">{packages[selectedPackage].title}</p>
             </div>
             <div id="productCardBody" className="  bgpurple-600 place-self-center py-8 w-[65%]  " >
-              <div id="bodyIncludes" className="flex flex-col ">
+              <div id="bodyIncludes" className="flex flex-col text-black">
                 <h2 className="font-black text-sm">Includes:</h2>
                 <div className="flex flex-col gap-1 py-4">
                   {
@@ -156,8 +156,8 @@ function ShoppingCart() {
               </div>
               <div id="bodyOptions" className="flex flex-col bg-[#f0f0ef] p-4">
                 <div className="w-full gap-4 flex place-self-center">
-                  <button className={`w-full ${(selectedYard === "frontyard") ? "bg-[#848d5a] text-white" : ""} text-sm border border-gray-500  `} onClick={() => {setSelectedYard("frontyard")}}>Frontyard</button>
-                  <button className={`w-full ${(selectedYard === "backyard") ? "bg-[#848d5a] text-black" : ""}  text-sm border border-gray-500`} onClick={() => {setSelectedYard("backyard")}}>Backyard</button>
+                  <button className={`w-full ${(selectedYard === "frontyard") ? "bg-[#848d5a] text-white" : "text-black"} text-sm border border-gray-500  `} onClick={() => {setSelectedYard("frontyard")}}>Frontyard</button>
+                  <button className={`w-full ${(selectedYard === "backyard") ? "bg-[#848d5a] text-white" : "text-black"}  text-sm border border-gray-500`} onClick={() => {setSelectedYard("backyard")}}>Backyard</button>
                 </div>
                 <div className="bggreen-700 p-6">
                   <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>
@@ -181,7 +181,7 @@ function ShoppingCart() {
                       ))
                     }
                   </div>
-                  <div className="flex bgred-300 justify-center gap-2">
+                  <div className="flex bgred-300 justify-center gap-2 text-black">
                     <div className="flex">
                     <p>
                       Final Price: 
