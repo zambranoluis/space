@@ -15,10 +15,11 @@ const CreateAccount = () => {
         <div
           className="w-[40%] max-lg:w-full max-lg:absolute h-full bgblue-400 bg-center bg-no-repeat bg-cover"
           style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/createAccountBG.webp')" }}
-        ></div>
+        >
+        </div>
         <div className="w-[60%] h-full bggreen-400 max-lg:w-full z-[100]">
           <div className="flex flex-col h-full w-full">
-            <div className="flex flex-col h-full lg:bg-white">
+            <div className="flex flex-col lg:h-full lg:bg-white">
               <div className="w-full h-[15%] flex justify-center items-center bgred-500">
                 <Link href="/">
                   <Image
@@ -131,7 +132,7 @@ const CreateAccount = () => {
                 </form>
               </div>
             </div>
-            <div className="flex items-center justify-center w-full bg-red-300 lg:h-[10%] lg:bg-[#353535]">
+            <div className="flex items-center justify-center w-full bgred-300 lg:h-[10%] lg:bg-[#353535]">
               <p className="text-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
                 Already Registered?{" "}
                 <Link href="/login" className="font-bold">
