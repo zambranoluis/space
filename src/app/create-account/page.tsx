@@ -3,6 +3,9 @@
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
+import { IoMdArrowDropdown } from "react-icons/io";
+
+
 import { DatePicker } from "@nextui-org/date-picker";
 
 import { DateInput } from "@nextui-org/date-input";
@@ -45,8 +48,14 @@ const CreateAccount = () => {
                         <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Confirm Password" />
                       </div>
                     </div>
-                    <div id="phone" className="flex w-[80%] p-2 ">
+                    <div id="phone" className="flex w-full p-2 gap-2  ">
+                      <div className="border border-[#828282] w-[150px] flex justify-center items-center p-1 gap-1 max-lg:bg-white rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] cursor-pointer">
+                        <p>+999</p>
+                        <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                        <IoMdArrowDropdown className="text-xl" />
+                      </div>
                       <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Phone" />
+
                     </div>
                     <div id="address" className="flex w-full p-2 ">
                       <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Address" />
