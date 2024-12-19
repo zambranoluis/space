@@ -50,7 +50,7 @@ const CreateAccount = () => {
                     <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Address" />
                   </div>
                   <div id="birthdate" className="flex w-[60%] p-2 max-w-[300px] ">
-                    <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="date" placeholder="Birthdate" />
+                    <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="date" />
                   </div>
 
                   </div>
