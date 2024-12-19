@@ -50,7 +50,7 @@ const CreateAccount = () => {
                     </div>
                     <div id="phone" className="flex w-full p-2 gap-2  ">
                       <div className="border border-[#828282] w-[150px] flex justify-center items-center p-1 gap-1 max-lg:bg-white rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] cursor-pointer">
-                        <p>+999</p>
+                        <p>+1</p>
                         <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
                         <IoMdArrowDropdown className="text-xl" />
                       </div>
