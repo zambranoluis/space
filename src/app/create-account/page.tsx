@@ -3,6 +3,7 @@
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
+import {DatePicker} from "@nextui-org/date-picker";
 
 const CreateAccount = () => {
   return (
@@ -22,39 +23,39 @@ const CreateAccount = () => {
               </div>
               <div className="flex h-[80%]">
                 <form className="w-full h-full bgorange-300 flex flex-col bggreen-400" onSubmit={(e) => {e.preventDefault(); window.location.href = '#'; }}>
-                  <div id="fields" className="flex flex-col h-[80%]">
+                  <div id="fields" className="flex flex-col h-[80%] w-[80%] place-self-center">
                   <div id="name-lastname" className="flex bgblue-500 w-full">
                     <div id="name" className="p-2 w-full bgrose-400 flex">
-                      <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="First Name" />
+                      <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="First Name" />
                     </div>
                     <div id="lastname" className="p-2 w-full bgpurple-500 flex">
-                      <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Last Name" />
+                      <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Last Name" />
                     </div>
                   </div>
                   <div id="email" className="p-2 w-full flex">
-                    <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Email" />
+                    <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Email" />
                   </div>
                   <div id="password" className="flex w-full flex-col ">
                     <div id="createPassword" className="p-2 flex w-full">
-                      <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Create Password" />
+                      <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Create Password" />
                     </div>
                     <div id="confirmPassword" className="p-2 flex w-full">
-                      <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Confirm Password" />
+                      <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Confirm Password" />
                     </div>
                   </div>
                   <div id="phone" className="flex w-[80%] p-2 ">
-                    <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Phone" />
+                    <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Phone" />
                   </div>
                   <div id="address" className="flex w-full p-2 ">
-                    <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Address" />
+                    <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Address" />
                   </div>
-                  <div id="birthdate" className="flex w-[60%] p-2 ">
-                    <input className="border border-[#828282] text-[#828282] rounded-full p-3  w-full" type="text" placeholder="Birthdate" />
+                  <div id="birthdate" className="flex w-[60%] p-2 max-w-[300px] ">
+                    <input className="border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] text-[#828282] rounded-full p-3  w-full" type="date" placeholder="Birthdate" />
                   </div>
 
                   </div>
                   <div id="submit" className="p-2 h-[20%] bgrose-400 flex w-full justify-center items-center">
-                  <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" >
+                  <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" >
                   Create Account
                 </button>
                   </div>
@@ -62,7 +63,7 @@ const CreateAccount = () => {
               </div>
             </div>
             <div className="h-[10%] w-full flex lg:bg-[#353535] justify-center items-center">
-              <p className="text-white">Already Registered? <Link href="/login" className="font-bold">Login here.</Link></p>
+              <p className="text-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">Already Registered? <Link href="/login" className="font-bold">Login here.</Link></p>
             </div>
           </div>
         </div>
