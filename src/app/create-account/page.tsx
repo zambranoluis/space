@@ -97,7 +97,7 @@ const CreateAccount = () => {
                           <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
                           <IoMdArrowDropdown className="text-xl" />
                         </div>
-                        <div id="list" className="flex flex-col  absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll ">
+                        <div id="list" className="flex hidden flex-col  absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll ">
                           <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
                             <p>+1</p>
                             <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
