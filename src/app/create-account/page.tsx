@@ -8,7 +8,19 @@ import { GrSkype } from "react-icons/gr";
 
 import { DatePicker } from "@nextui-org/date-picker";
 
+
+
 const CreateAccount = () => {
+
+  const handleShowCodesList = () => {
+    const codesList = document.getElementById("list");
+
+    if (codesList) {
+      codesList.classList.toggle("hidden");
+    }
+  }
+
+
   return (
     <main className="flex w-full min-h-screen bgred-500">
       <div className="flex w-full max-lg:relative">
@@ -79,10 +91,39 @@ const CreateAccount = () => {
                       </div>
                     </div>
                     <div id="phone" className="flex w-full p-2 gap-2">
-                      <div className="flex items-center justify-center w-[150px] gap-1 p-1 text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
-                        <p>+1</p>
-                        <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
-                        <IoMdArrowDropdown className="text-xl" />
+                      <div id="areaCode" className="flex  w-[150px] items-center justify-center text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]">
+                        <div tabIndex={0} id="selected" className="flex gap-1 p-1 items-center justify-center" onClick={handleShowCodesList} onBlur={handleShowCodesList}>
+                          <p>+1</p>
+                          <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                          <IoMdArrowDropdown className="text-xl" />
+                        </div>
+                        <div id="list" className="flex flex-col  absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll ">
+                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
+                            <p>+1</p>
+                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                          </div>
+                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
+                            <p>+1</p>
+                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                          </div>
+                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
+                            <p>+1</p>
+                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                          </div>
+                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
+                            <p>+1</p>
+                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                          </div>
+                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
+                            <p>+1</p>
+                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                          </div>
+                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
+                            <p>+1</p>
+                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                          </div>
+                        </div>
+
                       </div>
                       <input
                         className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
