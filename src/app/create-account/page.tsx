@@ -305,7 +305,7 @@ const CreateAccount = () => {
                     </div>
                     <div id="phone" className="flex w-full p-2 gap-2">
                       <div tabIndex={0} id="areaCode" className="flex bgred-400 w-[150px] items-center justify-center text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]" onClick={handleShowCodesList} onBlur={handleShowCodesList} >
-                        <div  id="selected" className="flex gap-1 p-1 items-center justify-center" >
+                        <div  id="selected" className="flex gap-1 p-1 items-center justify-center w-[140px]" >
                           <p>{areaCodes[selectedCode].code}</p>
                           <Image className="w-[35px] rounded-md" src={areaCodes[selectedCode].flag} alt="" />
                           <IoMdArrowDropdown className="text-xl" />
