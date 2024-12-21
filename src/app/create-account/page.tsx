@@ -310,7 +310,7 @@ const CreateAccount = () => {
                           <Image className="w-[35px] rounded-md" src={areaCodes[selectedCode].flag} alt="" />
                           <IoMdArrowDropdown className="text-xl" />
                         </div>
-                        <div id="list" className={`flex hidden flex-col  absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll `}>
+                        <div id="list" className={`flex hidden flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll `}>
                           {areaCodes.map((country) => (
                             <div  key={country.id} className="flex gap-1 border-b border-[#828282] items-center  w-full hover:bg-primary hover:text-white justify-between p-2" onClick={() => {setSelectedCode(country.id-1);}}>
                               <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
