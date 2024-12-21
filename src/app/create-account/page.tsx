@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from "react";
+
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
@@ -7,10 +9,221 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { GrSkype } from "react-icons/gr";
 
 import { DatePicker } from "@nextui-org/date-picker";
+import { code } from "@nextui-org/react";
+
+const areaCodes = [
+  {
+    id: 1,
+    name: "Argentina",
+    code: "+54",
+    abreviation: "AR",
+    flag: "/flags/argentina.png",
+  },
+  {
+    id: 2,
+    name: "Aruba",
+    code: "+297",
+    abreviation: "AW",
+    flag: "/flags/aruba.png",
+  },
+  {
+    id: 3,
+    name: "Australia",
+    code: "+61",
+    abreviation: "AU",
+    flag: "/flags/australia.png",
+  },
+  {
+    id: 4,
+    name: "Bahamas",
+    code: "+1242",
+    abreviation: "BS",
+    flag: "/flags/bahamas.png",
+  },
+  {
+    id: 5,
+    name: "Barbados",
+    code: "+1246",
+    abreviation: "BB",
+    flag: "/flags/barbados.png",
+  },
+  {
+    id: 6,
+    name: "Bolivia",
+    code: "+591",
+    abreviation: "BO",
+    flag: "/flags/bolivia.png",
+  },
+  {
+    id: 7,
+    name: "Brazil",
+    code: "+55",
+    abreviation: "BR",
+    flag: "/flags/brazil.png",
+  },
+  {
+    id: 8,
+    name: "Canada",
+    code: "+1",
+    abreviation: "CA",
+    flag: "/flags/canada.png",
+  },
+  {
+    id: 9,
+    name: "Chile",
+    code: "+56",
+    abreviation: "CL",
+    flag: "/flags/chile.png",
+  },
+  {
+    id: 10,
+    name: "Colombia",
+    code: "+57",
+    abreviation: "CO",
+    flag: "/flags/colombia.png",
+  },
+  {
+    id: 11,
+    name: "Costa Rica",
+    code: "+506",
+    abreviation: "CR",
+    flag: "/flags/costa-rica.png",
+  },
+  {
+    id: 12,
+    name: "Cuba",
+    code: "+53",
+    abreviation: "CU",
+    flag: "/flags/cuba.png",
+  },
+  {
+    id: 13,
+    name: "Ecuador",
+    code: "+593",
+    abreviation: "EC",
+    flag: "/flags/ecuador.png",
+  },
+  {
+    id: 14,
+    name: "El Salvador",
+    code: "+503",
+    abreviation: "SV",
+    flag: "/flags/el-salvador.png",
+  },
+  {
+    id: 15,
+    name: "Guatemala",
+    code: "+502",
+    abreviation: "GT",
+    flag: "/flags/guatemala.png",
+  },
+  {
+    id: 16,
+    name: "Haiti",
+    code: "+509",
+    abreviation: "HT",
+    flag: "/flags/haiti.png",
+  },
+  {
+    id: 17,
+    name: "Honduras",
+    code: "+504",
+    abreviation: "HN",
+    flag: "/flags/honduras.png",
+  },
+  {
+    id: 18,
+    name: "Jamaica",
+    code: "+1876",
+    abreviation: "JM",
+    flag: "/flags/jamaica.png",
+  },
+  {
+    id: 19,
+    name: "Mexico",
+    code: "+52",
+    abreviation: "MX",
+    flag: "/flags/mexico.png",
+  },
+  {
+    id: 20,
+    name: "Nicaragua",
+    code: "+505",
+    abreviation: "NI",
+    flag: "/flags/nicaragua.png",
+  },
+  {
+    id: 21,
+    name: "Panama",
+    code: "+507",
+    abreviation: "PA",
+    flag: "/flags/panama.png",
+  },
+  {
+    id: 22,
+    name: "Paraguay",
+    code: "+595",
+    abreviation: "PY",
+    flag: "/flags/paraguay.png",
+  },
+  {
+    id: 23,
+    name: "Peru",
+    code: "+51",
+    abreviation: "PE",
+    flag: "/flags/peru.png",
+  },
+  {
+    id: 24,
+    name: "Puerto Rico",
+    code: "+1939",
+    abreviation: "PR",
+    flag: "/flags/puerto-rico.png",
+  },
+  {
+    id: 25,
+    name: "Suriname",
+    code: "+597",
+    abreviation: "SR",
+    flag: "/flags/suriname.png",
+  },
+  {
+    id: 26,
+    name: "Trinidad and Tobago",
+    code: "+1868",
+    abreviation: "TT",
+    flag: "/flags/trinidad-and-tobago.png",
+  },
+  {
+    id: 27,
+    name: "United States",
+    code: "+1",
+    abreviation: "US",
+    flag: "/flags/united-states.png",
+  },
+  {
+    id: 28,
+    name: "Uruguay",
+    code: "+598",
+    abreviation: "UY",
+    flag: "/flags/uruguay.png",
+  },
+  {
+    id: 29,
+    name: "Venezuela",
+    code: "+58",
+    abreviation: "VE",
+    flag: "/flags/venezuela.png",
+  }
+
+
+]
 
 
 
 const CreateAccount = () => {
+
+  const [selectedCode, setSelectedCode] = useState<number>(26);
 
   const handleShowCodesList = () => {
     const codesList = document.getElementById("list");
@@ -91,37 +304,19 @@ const CreateAccount = () => {
                       </div>
                     </div>
                     <div id="phone" className="flex w-full p-2 gap-2">
-                      <div id="areaCode" className="flex  w-[150px] items-center justify-center text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]">
-                        <div tabIndex={0} id="selected" className="flex gap-1 p-1 items-center justify-center" onClick={handleShowCodesList} onBlur={handleShowCodesList}>
-                          <p>+1</p>
-                          <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
+                      <div tabIndex={0} id="areaCode" className="flex bgred-400 w-[150px] items-center justify-center text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]" onClick={handleShowCodesList} onBlur={handleShowCodesList} >
+                        <div  id="selected" className="flex gap-1 p-1 items-center justify-center" >
+                          <p>{areaCodes[selectedCode].code}</p>
+                          <Image className="w-[35px] rounded-md" src={areaCodes[selectedCode].flag} alt="" />
                           <IoMdArrowDropdown className="text-xl" />
                         </div>
-                        <div id="list" className="flex hidden flex-col  absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll ">
-                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
-                            <p>+1</p>
-                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
-                          </div>
-                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
-                            <p>+1</p>
-                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
-                          </div>
-                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
-                            <p>+1</p>
-                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
-                          </div>
-                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
-                            <p>+1</p>
-                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
-                          </div>
-                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
-                            <p>+1</p>
-                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
-                          </div>
-                          <div id="" className="flex gap-1 p-2 hover:bg-black hover:text-white items-center justify-center border-b border-black">
-                            <p>+1</p>
-                            <Image className="w-[35px] rounded-md" src="/us.png" alt="" />
-                          </div>
+                        <div id="list" className={`flex hidden flex-col  absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll `}>
+                          {areaCodes.map((country) => (
+                            <div  key={country.id} className="flex gap-1 border-b border-[#828282] items-center  w-full hover:bg-primary hover:text-white justify-between p-2" onClick={() => {setSelectedCode(country.id-1);}}>
+                              <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
+                              <p>{country.code}</p>
+                            </div>
+                          ))}
                         </div>
 
                       </div>
