@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
             {
               navOptionsGeneral.map((option) => (
                 ((option.name.toLowerCase().includes("process")) || (option.name.toLowerCase().includes("pricing"))) 
-                ? <button className="flex justify-center items-center text-[#6b776d] whitespace-nowrap text-xs" key={option.id} onClick={option.onClick} >
+                ? <button className={`${(currentPath.toLowerCase().includes("shopping-cart")) ? "hidden" : ""} flex justify-center items-center text-[#6b776d] whitespace-nowrap text-xs`} key={option.id} onClick={option.onClick} >
                   {option.name}
                 </button>
                 : <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
