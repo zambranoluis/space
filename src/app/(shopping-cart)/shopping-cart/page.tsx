@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { TiArrowSortedDown } from "react-icons/ti";
+
 import {Switch} from "@nextui-org/switch";
 
 
@@ -135,14 +136,22 @@ function ShoppingCart() {
       </section>
 
 
-      <section id="selectedPackageContainer" className={` select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex `} style={{ backgroundImage: `url(${packages[selectedPackage].image})` }} >
+      <section id="selectedPackageContainer" className={`relative select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex `} style={{ backgroundImage: `url(${packages[selectedPackage].image})` }} >
+        <div className="flex absolute bggreen-400 left-[5%] flex-col gap-4">
+          <div className="p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full rotate-90 cursor-pointer"  onClick={() => {handleSelectedPackage(selectedPackage, "prev")}} >
+            <TiArrowSortedDown className="text-4xl" />
+          </div>
+          <div className="p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full -rotate-90 cursor-pointer" onClick={() => {handleSelectedPackage(selectedPackage, "next")}} >
+            <TiArrowSortedDown className="text-4xl " />
+          </div>
+        </div>
         <div className="bgred-500 py-8 w-[90%] max-w-[450px]    flex ">
           <div id="extrasCard" className="bgpink-400 w-full bg-white">
             <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
               <p className="text-2xl sm:text-3xl py-4 text-white max-sm:text-center">{packages[selectedPackage].title}</p>
             </div>
             <div id="productCardBody" className="  bgpurple-600 place-self-center py-8 w-[65%]  " >
-              <div id="bodyIncludes" className="flex flex-col text-black">
+              <div id="bodyIncludes" className="flex flex-col text-black bgred-400 h-[350px]">
                 <h2 className="font-black text-sm">Includes:</h2>
                 <div className="flex flex-col gap-1 py-4">
                   {
