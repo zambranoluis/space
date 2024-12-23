@@ -137,11 +137,11 @@ function ShoppingCart() {
 
 
       <section id="selectedPackageContainer" className={`relative select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex `} style={{ backgroundImage: `url(${packages[selectedPackage].image})` }} >
-        <div className="flex absolute bggreen-400 left-[5%] flex-col gap-4">
-          <div className="p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full rotate-90 cursor-pointer"  onClick={() => {handleSelectedPackage(selectedPackage, "prev")}} >
+        <div className="flex absolute bggreen-400 md:left-[5%] max-md:top-[0.5%] max-md:left-[3%] md:flex-col gap-4">
+          <div className={`${selectedPackage === 0 ? "hidden" : ""} p-2 md:p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full rotate-90 cursor-pointer`}  onClick={() => {handleSelectedPackage(selectedPackage, "prev")}} >
             <TiArrowSortedDown className="text-4xl" />
           </div>
-          <div className="p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full -rotate-90 cursor-pointer" onClick={() => {handleSelectedPackage(selectedPackage, "next")}} >
+          <div className={`${selectedPackage === packages.length - 1 ? "hidden" : ""} p-2 md:p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full -rotate-90 cursor-pointer`} onClick={() => {handleSelectedPackage(selectedPackage, "next")}} >
             <TiArrowSortedDown className="text-4xl " />
           </div>
         </div>
