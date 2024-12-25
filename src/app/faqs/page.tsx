@@ -119,7 +119,7 @@ const CreateAccount = () => {
           </div>
         </div>
         <div className=" w-[50%] flex sm:w-[40%] h-full bg-cover 2xl:bg-contain bg-no-repeat bg-center bgorange-400" >
-          <Image className="h-full w-full object-cover " src="/mainAvatar.png" alt="" />
+          <Image className="h-full w-full object-cover " src="https://github.com/BPM94/SCCTMD/raw/main/opt/mainAvatar.png" alt="" />
         </div>
       </section>
 
@@ -143,7 +143,7 @@ const CreateAccount = () => {
         </div>
       </section>
 
-      <section className="flex w-full mt-8 h-[600px] bggreen-500 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('/footerFaq1.jpg')" }}>
+      <section className="flex w-full mt-8 h-[600px] bggreen-500 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/footerFaq1.jpg')" }}>
       </section>
     </main>
   );
