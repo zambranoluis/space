@@ -96,13 +96,11 @@ const CreateAccount = () => {
     const arrow = document.getElementById(`arrow${id}`);
 
     if (answer?.classList.contains("hidden")) {
-      container?.classList.remove("h-[0px]")
       answer?.classList.remove("hidden");
-      arrow?.classList.remove("-rotate-90");
+      arrow?.classList.add("rotate-180");
     } else {
       answer?.classList.add("hidden");
-      container?.classList.add("h-[0px]")
-      arrow?.classList.add("-rotate-90");
+      arrow?.classList.remove("rotate-180");
     }
 }
 
@@ -135,7 +133,7 @@ const CreateAccount = () => {
                   </div>
                 </div>
                 <div id={`answerContainer${faq.id}`} className="flex duration-1000 bgred-400">
-                  <p id={`answer${faq.id}`} className="bggreen-400 md:text-lg text-justify px-2 sm:px-6 duration-300">{faq.answer}</p>
+                  <p id={`answer${faq.id}`} className="bggreen-400 hidden md:text-lg text-justify px-2 sm:px-6 duration-300">{faq.answer}</p>
                 </div>
               </div>
             ))
