@@ -55,8 +55,9 @@ const CreateAccount = () => {
   return (
     
     <main className="flex w-full bgpurple-500 p2 flex-col">
+
       <section className="bg-[#dcd6c8] sm:h-[300px] w-full flex p2 justify-center items-center flex-col sm:flex-row ">
-        <div className="  flex   bggreen-300 w-[50%] sm:w-[40%] ">
+        <div className="  flex   bggreen-300 w-[50%] sm:w-[40%] max-sm:pt-12 ">
           <div className="bgpink-500  h-full flex flex-col text-center sm:text-end">
             <h2 className="text-lg md:text-2xl lg:text-3xl">We are here to answer your</h2>
             <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">frequently asked questions</h1>
@@ -88,12 +89,12 @@ const CreateAccount = () => {
       </section>
         
       <section className="flex w-full justify-center items-center">
-        <div className="flex w-[60%] min-h-[300px]">
+        <div className="max-md:flex-col  flex w-[60%] min-h-[300px]">
           <div className="flex w-full max-w-[1000px]">
-            <Image className="w-full h-full rounded-r-none object-cover object-center" src="/mailFaq.jpg" alt="" />
+            <Image className="w-full h-full max-md:rounded-b-none md:rounded-r-none object-cover object-center" src="/mailFaq.jpg" alt="" />
           </div>
 
-          <div className="bg-[#6b776d] rounded-r-xl text-white max-w-[400px]">
+          <div className="bg-[#6b776d] max-md:rounded-b-xl md:rounded-r-xl text-white md:w-[200px]  lg:w-[600px]">
             <div className="flex w-full p-6" >
               <FaqsContactUsEmail />
               {/* <FaqsContactUsSkype /> */}

@@ -26,7 +26,7 @@ const FaqsContactUsEmail = () => {
     <div>
       <div className="flex flex-col">
               <div className="flex">
-                <p className="">Let us know any particular questions you may have before or after you pay for any of our services and we will get back to you as soon as possible.</p>
+                <p className="text-sm md:text-xs md:hidden lg:block">Let us know any particular questions you may have before or after you pay for any of our services and we will get back to you as soon as possible.</p>
               </div>
               <div className="flex w-full">
                 <button className="bgred-500 place-self-start"
