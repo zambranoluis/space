@@ -38,8 +38,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             {children}
           </div>
           <Footer />
-          <div className="bg-[#6b776d]/70 p-4 text-white w-[180px]  h-[180px] z-[100] sticky bottom-0 left-[100%] justifycenter itemscenter flex flex-col">
-            <div className="flex w-full" >
+          <div className="bg-[#6b776d]/70 px-4 py-2 text-white w-[180px]  z-[10] sticky bottom-0 left-[100%] justifycenter itemscenter flex ">
+            <div className="flex" >
               <FaqsContactUsEmail />
             </div>
           </div>

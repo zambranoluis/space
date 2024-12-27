@@ -26,13 +26,13 @@ const FaqsContactUsEmail = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div className="flex w-full">
-      <div className="flex flex-col bgred-300 w-full">
+    <div className="flex">
+      <div className="flex flex-col bgred-300 ">
               <MdOutlineEmail className="text-5xl bgblue-300" />
               <div className="flex text-left">
-                <p className="text-sm font-semibold md:text-xs ">For more information write to us.</p>
+                <p className="text-lg font-semibold leading-4 ">For more information write to us.</p>
               </div>
-              <div className="flex w-full">
+              <div className="flex ">
                 <button className=" bg-white text-[#6b776d] rounded-lg mt-2"
                 onClick={onOpen}
                 >
@@ -40,15 +40,15 @@ const FaqsContactUsEmail = () => {
                 </button>
                 <div className="bggreen-300 ">
                   <Modal
-                    className="bgred-300  absolute  top-[150px] sm:top-[80px] "
+                    className="bgred-300 absolute z-[5000]  top-[150px] sm:top-[80px] "
                     size="sm"
                     isOpen={isOpen}
                     onOpenChange={onOpenChange}
                   >
                     <ModalContent className=''>
                       {(onClose) => (
-                        <div className="flex flex-col w-full p-4">
-                          {/* <ModalHeader className="flex w-full bgred-400">
+                        <div className="flex flex-col p-4">
+                          {/* <ModalHeader className="flex  bgred-400">
                             <p className="text-sm font-medium text-left">
                             Write any particular question you may have directly to us by email before or after you pay for any of our services.</p>
                           </ModalHeader> */}
@@ -69,7 +69,7 @@ const FaqsContactUsEmail = () => {
                                 </div>
                               </div>
                               <div className="flex">
-                                <textarea className="w-full max-w-[500px] h-[250px] border-2 border-gray-300 rounded-md p-4" name="" id="" placeholder="Let us know your questions here..."></textarea>
+                                <textarea className=" max-w-[500px] h-[250px] border-2 border-gray-300 rounded-md p-4" name="" id="" placeholder="Let us know your questions here..."></textarea>
                               </div>
                               <div className="flex">
                                 <button className="bg-[#6b776d] text-white rounded-lg px-4 py-2 hover:bg-green-950">
@@ -102,7 +102,7 @@ const FaqsContactUsSkype = () => {
               <div className="flex">
                 <p className="">Get in touch with us by Skype.</p>
               </div>
-              <div className="flex w-full">
+              <div className="flex ">
                 <button
                 className="bg-blue-500"
                 onClick={onOpen}
@@ -147,7 +147,7 @@ const FaqsContactUsWhatsapp = () => {
               <div className="flex">
                 <p className="">Get in touch with us by Whatsapp.</p>
               </div>
-              <div className="flex w-full">
+              <div className="flex ">
                 <button
                 className="bg-green-400"
                 onClick={onOpen}
