@@ -17,64 +17,74 @@ import { MdEmail } from "react-icons/md";
 import { GrSkype } from "react-icons/gr";
 import { RiWhatsappFill } from "react-icons/ri";
 
+import { MdOutlineEmail } from "react-icons/md";
+
+
 
 const FaqsContactUsEmail = () => {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div>
-      <div className="flex flex-col">
-              <div className="flex">
-                <p className="text-sm md:text-xs md:hidden lg:block">Let us know any particular questions you may have before or after you pay for any of our services and we will get back to you as soon as possible.</p>
+    <div className="flex w-full">
+      <div className="flex flex-col bgred-300 w-full">
+              <MdOutlineEmail className="text-5xl bgblue-300" />
+              <div className="flex text-left">
+                <p className="text-sm font-semibold md:text-xs ">For more information write to us.</p>
               </div>
               <div className="flex w-full">
-                <button className="bgred-500 place-self-start"
+                <button className=" bg-white text-[#6b776d] rounded-lg mt-2"
                 onClick={onOpen}
                 >
-                  <MdEmail className="text-5xl" />
+                  <p className="text-xs px-3 py-2  ">Press here</p>
                 </button>
-                <Modal
-                
-                  size="xl"
-                  isOpen={isOpen}
-                  onOpenChange={onOpenChange}
-                >
-                  <ModalContent className=''>
-                    {(onClose) => (
-                      <div className="flex flex-col w-full p-10">
-                        <ModalHeader className="flex w-full bgred-400">
-                          <p className="text-sm font-medium text-left">
-                          Write any particular question you may have directly to us before or after you pay for any of our services and we will get back to you as soon as possible
-                          </p>
-                        </ModalHeader>
-                        <ModalBody>
-                          <form onSubmit={(e) => {e.preventDefault();}}>
-                            <div>
-                              <h2>Our Email: </h2>
-                              <p>space-creation@space-creation.net</p>
-                            </div>
-                            <div>
-                              <h2>Your Email: </h2>
-                              <input className="border-2 border-gray-300 rounded-md p-2" type="email" name="email" id="email" placeholder="Enter your email" required />
-                              
-                            </div>
-                            <div>
-                              <textarea className="w-full max-w-[500px] h-[250px] border-2 border-gray-300 rounded-md p-4" name="" id="" placeholder="Let us know your questions here..."></textarea>
-                            </div>
-                            <div>
-                              <button>
-                                send
-                              </button>
-                            </div>
-                          </form>
-                        </ModalBody>
-                        <ModalFooter>
-                        </ModalFooter>
-                      </div>
-                    )}
-                  </ModalContent>
-                </Modal>
+                <div className="bggreen-300 p2">
+                  <Modal
+                    className="bgred-300  absolute top-[150px] sm:top-[80px] "
+                    size="sm"
+                    isOpen={isOpen}
+                    onOpenChange={onOpenChange}
+                  >
+                    <ModalContent className=''>
+                      {(onClose) => (
+                        <div className="flex flex-col w-full p-4">
+                          {/* <ModalHeader className="flex w-full bgred-400">
+                            <p className="text-sm font-medium text-left">
+                            Write any particular question you may have directly to us by email before or after you pay for any of our services.</p>
+                          </ModalHeader> */}
+                          <ModalBody>
+                            <form className="flex flex-col gap-4" onSubmit={(e) => {e.preventDefault();}}>
+                              <div className="flex flex-col">
+                                <h2>Our Email: </h2>
+                                <p className="text-[#6b776d] font-black">space-creation@space-creation.net</p>
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                <div className="flex flex-col">
+                                  <h2>Your Name: </h2>
+                                  <input className="border-2 border-gray-300 rounded-md p-2" type="email" name="email" id="email" placeholder="John Doe" required />
+                                </div>
+                                <div className="flex flex-col">
+                                  <h2>Your Email: </h2>
+                                  <input className={`border-2  border-gray-300 rounded-md p-2`} type="email" name="email" id="email" placeholder="john.doe@email.com" required />
+                                </div>
+                              </div>
+                              <div className="flex">
+                                <textarea className="w-full max-w-[500px] h-[250px] border-2 border-gray-300 rounded-md p-4" name="" id="" placeholder="Let us know your questions here..."></textarea>
+                              </div>
+                              <div className="flex">
+                                <button className="bg-[#6b776d] text-white rounded-lg px-4 py-2 hover:bg-green-950">
+                                  send
+                                </button>
+                              </div>
+                            </form>
+                          </ModalBody>
+                          {/* <ModalFooter>
+                          </ModalFooter> */}
+                        </div>
+                      )}
+                    </ModalContent>
+                  </Modal>
+                </div>
               </div>
             </div>
     </div>

@@ -73,10 +73,10 @@ const CreateAccount = () => {
           {
             faqs.map((faq) => (
               <div className="flex flex-col w-full bgorange-300 gap-12 py-12  border-b border-black select-none" key={faq.id}>
-                <div className="flex w-full bgrose-500 justify-between">
+                <div className="flex w-full bgrose-500 justify-between cursor-pointer" onClick={() => {toggleAnswer(faq.id)}}>
                   <h1 className="text-2xl md:text-3xl font-bold bgblue-800 py-4 px-4 border-l-8 border-[#6b776d] text-[#6b776d]">{faq.question}</h1>
                   <div className="flex bgblue-600 items-end">
-                    <SlArrowDown id={`arrow${faq.id}`} className=" text-4xl font-light text-[#6b776d] cursor-pointer" onClick={() => {toggleAnswer(faq.id)}}/>
+                    <SlArrowDown id={`arrow${faq.id}`} className=" text-4xl font-light text-[#6b776d] cursor-pointer" />
                   </div>
                 </div>
                 <div id={`answerContainer${faq.id}`} className="flex duration-1000 bgred-400">
@@ -88,26 +88,7 @@ const CreateAccount = () => {
         </div>
       </section>
         
-      <section className="flex w-full justify-center items-center">
-        <div className="max-md:flex-col  flex w-[60%] min-h-[300px]">
-          <div className="flex w-full max-w-[1000px]">
-            <Image className="w-full h-full max-md:rounded-b-none md:rounded-r-none object-cover object-center" src="/mailFaq.jpg" alt="" />
-          </div>
 
-          <div className="bg-[#6b776d] max-md:rounded-b-xl md:rounded-r-xl text-white md:w-[200px]  lg:w-[600px]">
-            <div className="flex w-full p-6" >
-              <FaqsContactUsEmail />
-              {/* <FaqsContactUsSkype /> */}
-              {/* <FaqsContactUsWhatsapp /> */}
-            </div>
-            {/* <div className="flex w-full p-6" >
-              <FaqsContactUsEmail />
-              <FaqsContactUsSkype />
-              <FaqsContactUsWhatsapp />
-            </div> */}
-          </div>
-        </div>
-      </section>
 
       <section className="flex w-full mt-8 h-[600px] bggreen-500 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/footerFaq1.jpg')" }}>
       </section>
