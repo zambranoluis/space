@@ -69,7 +69,7 @@ const FaqsContactUsEmail = () => {
                                 </div>
                               </div>
                               <div className="flex">
-                                <textarea className=" max-w-[500px] h-[250px] border-2 border-gray-300 rounded-md p-4" name="" id="" placeholder="Let us know your questions here..."></textarea>
+                                <textarea className=" w-full h-[250px] border-2 border-gray-300 rounded-md p-4" name="" id="" placeholder="Let us know your questions here..."></textarea>
                               </div>
                               <div className="flex">
                                 <button className="bg-[#6b776d] text-white rounded-lg px-4 py-2 hover:bg-green-950">

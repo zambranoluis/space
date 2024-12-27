@@ -57,11 +57,17 @@ const CreateAccount = () => {
     <main className="flex w-full bgpurple-500 p2 flex-col">
 
       <section className="bg-[#dcd6c8] sm:h-[300px] w-full flex p2 justify-center items-center flex-col sm:flex-row ">
-        <div className="  flex   bggreen-300 w-[50%] sm:w-[40%] max-sm:pt-12 ">
+        <div className="  flex   bggreen-300 w-[60%] sm:w-[40%] max-sm:py-6 relative">
+          {/* <div className="flex absolute h-[100px] top-0">
+            <Image className="h-full" src="/barLeft.png" alt="" />
+          </div> */}
           <div className="bgpink-500  h-full flex flex-col text-center sm:text-end">
             <h2 className="text-lg md:text-2xl lg:text-3xl">We are here to answer your</h2>
             <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">frequently asked questions</h1>
           </div>
+          {/* <div className="flex absolute right-0 top-0">
+            <Image src="/barRight.png" alt="" />
+          </div> */}
         </div>
         <div className=" w-[50%] flex sm:w-[40%] h-full bg-cover   2xl:bg-contain bg-no-repeat bg-center bgorange-400" >
           <Image className="h-full w-full object-cover" src="https://github.com/BPM94/SCCTMD/raw/main/opt/mainAvatar.png" alt="" />
