@@ -54,8 +54,21 @@ const CreateAccount = () => {
 
   return (
     
-    <main className="flex w-full min-h-screen bg-purple-500 p2 flex-col">
+    <main className="flex w-full h-[90vh] bg-white p2 flex-col">
+      
+      <section className="flex flex-col w-full h-[80vh]  bg-[#302626]">
+        <div className="bg-red-200 pl-16 py-8 w-full">
+          <h1 className="text-5xl font-bold">Reviews</h1>
+        </div>
+        <div className="flex bg-blue-300 h-full gap-8">
+          <div className="flex bg-pink-400 w-full h-full bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url("https://github.com/BPM94/SCCTMD/raw/main/opt/reviewBg1.png")`}}>
 
+          </div>
+          <div className="flex bg-purple-400 w-full h-full bg-cover bg-center bg-no-repeat" style={{backgroundImage: `url("https://github.com/BPM94/SCCTMD/raw/main/opt/reviewBg2.png")`}}>
+
+          </div>
+        </div>
+      </section>
       
     </main>
   );
