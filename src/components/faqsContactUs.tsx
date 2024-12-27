@@ -38,9 +38,9 @@ const FaqsContactUsEmail = () => {
                 >
                   <p className="text-xs px-3 py-2  ">Press here</p>
                 </button>
-                <div className="bggreen-300 p2">
+                <div className="bggreen-300 ">
                   <Modal
-                    className="bgred-300  absolute top-[150px] sm:top-[80px] "
+                    className="bgred-300  absolute  top-[150px] sm:top-[80px] "
                     size="sm"
                     isOpen={isOpen}
                     onOpenChange={onOpenChange}

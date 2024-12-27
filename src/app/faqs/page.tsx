@@ -63,8 +63,8 @@ const CreateAccount = () => {
             <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold">frequently asked questions</h1>
           </div>
         </div>
-        <div className=" w-[50%] flex sm:w-[40%] h-full bg-cover 2xl:bg-contain bg-no-repeat bg-center bgorange-400" >
-          <Image className="h-full w-full object-cover " src="https://github.com/BPM94/SCCTMD/raw/main/opt/mainAvatar.png" alt="" />
+        <div className=" w-[50%] flex sm:w-[40%] h-full bg-cover   2xl:bg-contain bg-no-repeat bg-center bgorange-400" >
+          <Image className="h-full w-full object-cover" src="https://github.com/BPM94/SCCTMD/raw/main/opt/mainAvatar.png" alt="" />
         </div>
       </section>
 
