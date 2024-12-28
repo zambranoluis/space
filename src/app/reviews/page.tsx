@@ -74,10 +74,10 @@ const CreateAccount = () => {
                 <div className="flex">
                   <p>
                   Incredible work! They completely 
-transformed my garden. It&quot;s now my 
+transformed my garden. It’s now my 
 favorite place to relax. Super 
 professional and creative. I highly 
-recommend them!"
+recommend them!&quot;
                   </p>
                 </div>
                 <div></div>
