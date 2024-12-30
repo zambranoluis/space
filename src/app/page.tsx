@@ -207,7 +207,7 @@ function HomePage() {
                       <p className="text-lg"> Landscape design and gardening advice delivered to your inbox. We&apos;ll send you deals, tips and style tips.</p>
                     </div>
                     <button className="bg-[#848d5c] text-white px-4 py-2 rounded-xl">
-                      Formulario de subscripcion
+                      Subscription form
                     </button>
                   </div>
                 </div>
