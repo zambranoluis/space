@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import { useRouter } from "next/navigation"; // Importar desde "next/navigation" en apps con appDir
 import { useTheme } from "../context/ThemeContext";
 import Image from "next/image";
@@ -26,7 +26,7 @@ interface AsideProps {
 interface Option {
   name: string;
   path: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
 }
 
 const asideOptions: Option[] = [
@@ -39,7 +39,7 @@ const asideOptions: Option[] = [
   { name: "Settings", path: "/settings", icon: <IoSettingsSharp className="text-xl" /> },
 ];
 
-const Aside: React.FC<AsideProps> = ({ toggleAside, isAsideOpen }) => {
+const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }) => {
   const [asideSelectedOption, setAsideSelectedOption] = useState<string | null>(null);
   const { theme } = useTheme();
   // const router = useRouter(); // Hook de Next.js para acceder al pathname
