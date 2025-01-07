@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
+import Link from "next/link";
 import { TiArrowSortedDown } from "react-icons/ti";
 
 import {Switch} from "@nextui-org/switch";
@@ -201,9 +202,9 @@ function ShoppingCart() {
                     </div>
                   </div>
                   <div className="flex justify-center bgpurple-400 relative">
-                    <button className="w-[70%] bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 ">
+                    <Link className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " href="/questionnaire">
                       PAY FOR
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
