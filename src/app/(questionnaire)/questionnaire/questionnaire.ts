@@ -94,7 +94,7 @@ const questionnaire = {
   backyard: [
     {
       id: "qb1",
-      title: " Do you prefer colo ul plants or simple, green and white ones?",
+      title: " Do you prefer colorful plants or simple, green and white ones?",
       buttonText: "Colorful / Green and white",
       note: true
     },

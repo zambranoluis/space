@@ -20,7 +20,7 @@ function ShoppingCart() {
   
 
   return (
-    <main className="w-full bgrose-400 flex flex-col gap-12 items-center">
+    <main className="w-full bgrose-400 flex flex-col gap-20 items-center">
       <section id="Landing" className="flex max-md:flex-col w-full md:h-[230px] lg:h-[280px] xl:h-[380px]">
         <div className="flex flex-col w-full md:w-[50%] bgred-200 p-2 justify-center gap-4 md:gap-8  py-12">
           <Link className="flex bggreen-300 p-2 min-lg:pl-12 justify-center items-center" href={"/shopping-cart"}>
@@ -114,7 +114,7 @@ function ShoppingCart() {
               </button>
             </div>
             <div className="bgred-300 h-full w-full absolute justify-end items-center flex pr-2 min-[450px]:pr-8 top-[-15px]">
-              <Image className="w-[120px] h-[120px] object-cover object-top aspect-square rounded-full" src={questionnaire["general"][3].img} alt="" />
+              <Image className="w-[120px]  object-cover object-top aspect-square rounded-full" src={questionnaire["general"][3].img} alt="" />
             </div>
           </div>
         </div>
@@ -129,23 +129,59 @@ function ShoppingCart() {
               </button>
             </div>
             <div className="bgred-300 h-full w-full absolute justify-end items-center flex pr-2 min-[450px]:pr-8 top-[-15px]">
-              <Image className="w-[120px] h-[120px] object-cover object-top aspect-square rounded-full" src={questionnaire["general"][4].img} alt="" />
+              <Image className="w-[120px] aspect-square object-cover object-top  rounded-full" src={questionnaire["general"][4].img} alt="" />
             </div>
           </div>
         </div>
       </section>
 
-      <section id="backyardQuestions" className="flex flex-col w-full">
-        <div className="flex max-sm:flex-col bgred-300 sm:h-[300px]">
+      <section id="backyardQuestions" className="flex flex-col w-full justify-center items-center gap-20">
+        <div className="flex max-sm:flex-col bgred-300 sm:h-[300px] w-full">
           <div className="flex sm:w-[40%] justify-center items-center max-sm:py-24">
             <h1 className="font-black text-3xl text-[#6c786e]">BACKYARD</h1>
           </div>
           <div className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('/questionnaire/questionnaireBgBackyard.webp"}}></div>
         </div>
+        <div className="flex flex-col w-[90%] gap-12">
+          <div id="gb1" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
+            <div className="flex bg-[#6c786e] pt-4 pl-6 pb-4 text-xl font-black rounded-t-3xl w-full">
+              <h1>{questionnaire["backyard"][0].title}</h1>
+            </div>
+            <div className="flex flex-col w-full justify-center items-center p-8 " >
+              <div className="flex  items-center  w-full relative py-12 px-8">
+                <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">Colorful/Green and White</button>
+                <div className="flex absolute right-0 top-[-50px]">
+                  <Image className="w-[120px] aspect-square object-cover" src="/questionnaire/nuevo-cuestionario-26.png " alt="" />
+                </div>
+              </div>
+              <div className="flex flex-col w-full p-2">
+                <p className="text-[#68664d]">Note:</p>
+                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+              </div>
+            </div>
+          </div>
+          <div id="gb2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
+            <div className="flex bg-[#6c786e] pt-4 pl-6 pb-4 text-xl font-black rounded-t-3xl w-full">
+              <h1>{questionnaire["backyard"][0].title}</h1>
+            </div>
+            <div className="flex flex-col w-full justify-center items-center p-8 " >
+              <div className="flex  items-center  w-full relative py-12 px-8">
+                <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">Colorful/Green and White</button>
+                <div className="flex absolute right-0 top-[-50px]">
+                  <Image className="w-[120px] aspect-square object-cover" src="/questionnaire/nuevo-cuestionario-26.png " alt="" />
+                </div>
+              </div>
+              <div className="flex flex-col w-full p-2">
+                <p className="text-[#68664d]">Note:</p>
+                <textarea className="bg-[#ebebeb] text-black outline-none h-[100px]"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="frontyardQuestions"></section>
-      
+
       <section id="customerUploads"></section>
     </main>
   );
