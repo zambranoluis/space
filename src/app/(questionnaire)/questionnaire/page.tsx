@@ -149,9 +149,9 @@ function ShoppingCart() {
             </div>
             <div className="flex flex-col w-full justify-center items-center p-8 " >
               <div className="flex  items-center  w-full relative py-12 px-8">
-                <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">Colorful/Green and White</button>
+                <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">{questionnaire["backyard"][0].buttonText}</button>
                 <div className="flex absolute right-0 top-[-50px]">
-                  <Image className="w-[120px] aspect-square object-cover" src="/questionnaire/nuevo-cuestionario-26.png " alt="" />
+                  <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][0].img} alt="" />
                 </div>
               </div>
               <div className="flex flex-col w-full p-2">
@@ -160,20 +160,97 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
+
           <div id="gb2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
-            <div className="flex bg-[#6c786e] pt-4 pl-6 pb-4 text-xl font-black rounded-t-3xl w-full">
-              <h1>{questionnaire["backyard"][0].title}</h1>
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][1].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][1].img} alt="" />
+              </div>
             </div>
             <div className="flex flex-col w-full justify-center items-center p-8 " >
-              <div className="flex  items-center  w-full relative py-12 px-8">
-                <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">Colorful/Green and White</button>
-                <div className="flex absolute right-0 top-[-50px]">
-                  <Image className="w-[120px] aspect-square object-cover" src="/questionnaire/nuevo-cuestionario-26.png " alt="" />
-                </div>
+              <div className="flex flex-cols-1 sm:flex-cols-2 md:flex-cols-4 gap-2 w-full py-16 bgred-300 justify-between">
+                {
+                  questionnaire["backyard"][1].options.map((option, index) => (
+                    <div key={index} className="flex justifycenter items-center gap-4 wfull">
+                      <div className="flex  text-black gap-2">
+                        <span className="text-xl text-[#68664d]">▪ </span>
+                        <div className="flex flex-col bgred-300">
+                          <p className=" gap-1 ">{option.name}</p>
+                          <p className="text-xs">{option.detail}</p>
+                        </div>
+                      </div>
+                      <input type="checkbox" className="" />
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+          <div id="gb3" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][2].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][2].img} alt="" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-center p-8 py-20" >
+              {
+                questionnaire["backyard"][2].options.map((option, index) => (
+                  <div className="flex flex-col w-full " key={index}>
+                    <p className="text-[#68664d]">{option.name}</p>
+                    <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]" />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div id="gb4" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][3].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][2].img} alt="" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">{questionnaire["backyard"][3].buttonText}</button>
+              <div className="flex flex-col w-full p-2">
+                <p className="text-[#68664d]">Note:</p>
+                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+              </div>
+            </div>
+          </div>
+          <div id="gb5" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][4].title}</h1>
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">{questionnaire["backyard"][4].buttonText}</button>
+              <div className="flex w-full">
+                {
+                  questionnaire["backyard"][4].options.map((option, index) => (
+                    <div className="flex flex-col gap-6 justify-center items-center text-black flex-cols-1 sm:flex-cols-2 md:flex-cols-4 w-full" key={index}>
+                      <Image src={option.img} alt="" />
+                      <div className="flex gap-6">
+                        <p className="text-xs sm:text-base flex justify-center items-center gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
+                        <input type="checkbox" />
+                      </div>
+                    </div>
+                  ))
+
+                }
               </div>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] text-black outline-none h-[100px]"></textarea>
+                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
             </div>
           </div>

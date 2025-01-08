@@ -95,52 +95,63 @@ const questionnaire = {
     {
       id: "qb1",
       title: " Do you prefer colorful plants or simple, green and white ones?",
+      img: "/questionnaire/nuevo-cuestionario-26.png",
       buttonText: "Colorful / Green and white",
-      note: true
+      options: [],
+      question: ""
     },
     {
       id: "qb2",
       title: "How many plants do you want in your space?",
+      img: "/questionnaire/nuevo-cuestionario-27.png",
       options: [
         {
           id: "qb2o1",
           name: "Minimum",
-          detail: "(25% Of your garden)"
+          detail: "(25% Of your garden)",
+          img:""
         },
         {
           id: "qb2o2",
           name: "In Between",
-          detail: "(40% Of your garden)"
+          detail: "(40% Of your garden)",
+          img:""
         },
         {
           id: "qb2o3",
           name: "Full",
-          detail: "(80% Of your garden)"
+          detail: "(80% Of your garden)",
+          img:""
         }
-      ]
+      ],
+      question: ""
     },
     {
       id: "qb3",
       title :"What are you looking to keep or remove in your yard?",
+      img: "/questionnaire/nuevo-cuestionario-28.png",
       options: [
         {
           id: "qb3o1",
           name: "Things to keep",
-          note: true
+          detail: "",
+          img: ""
         },
         {
           id: "qb3o2",
           name: "Things to remove",
-          note: true
+          detail: "",
+          img: ""
         }
-      ]
-
+      ],
+      question: ""
     },
     {
       id: "qb4",
       title: " Would you like to add some kind of hardscape?",
       buttonText: "Yes/No",
-      note: true
+      options: [],
+      question: ""
     },
     {
       id: "qb5",
@@ -150,47 +161,59 @@ const questionnaire = {
         {
           id: "qb5o1",
           name: "Water Fountain",
-          img: "/questionnaire/nuevo-cuestionario-26.png"
+          img: "/questionnaire/nuevo-cuestionario-30.png",
+          detail: ""
         },
         {
           id: "qb5o2",
           name: "Water Hot Tub",
-          img: "/questionnaire/placeholder.webp"
+          img: "/questionnaire/nuevo-cuestionario-31.png",
+          detail: ""
         },
         {
           id: "qb5o3",
           name: "Pool",
-          img: "/questionnaire/placeholder.webp"
+          img: "/questionnaire/nuevo-cuestionario-32.png",
+          detail: ""
         },
         {
           id: "qb5o4",
           name: "Bird Bath",
-          img: "/questionnaire/placeholder.webp"
+          img: "/questionnaire/nuevo-cuestionario-33.png",
+          detail: ""
         }
       ],
       question: "For how many people?",
-      note: true
     },
     {
       id: "qb6",
-      title: " Would you like an area with a fire feature?"
+      title: " Would you like an area with a fire feature?",
+      options: [],
+      question: ""
     },
     {
       id: "qb7",
-      title: "Would you like to have a covered patio or pergola?"
+      title: "Would you like to have a covered patio or pergola?",
+      options: [],
+      question: ""
     },
     {
       id: "qb8",
       title: "Would you like to have a grass area?",
-
+      options: [],
+      question: ""
     },
     {
       id: "qb9",
-      title: "Would you like to provide privacy to your space?"
+      title: "Would you like to provide privacy to your space?",
+      options: [],
+      question: ""
     },
     {
       id: "qb10",
-      title: "Would you like to add new trees to your yard?"
+      title: "Would you like to add new trees to your yard?",
+      options: [],
+      question: ""
     }
 
   ],
