@@ -72,19 +72,19 @@ const questionnaire = {
       id: "qg3",
       title: "Do you have kids & pets?",
       img: "/questionnaire/placeholder.webp",
-      options: ""
+      options: []
     },
     {
       id: "qg4",
       title: "Can toxic plants be used?",
       img: "/questionnaire/placeholder.webp",
-      options: ""
+      options: []
     },
     {
       id: "qg5",
       title: "Do you entertain a lot in your yard area?",
       img: "/questionnaire/placeholder.webp",
-      options: ""
+      options: []
     }
   ],
   backyard: [
