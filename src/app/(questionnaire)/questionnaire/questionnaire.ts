@@ -189,30 +189,52 @@ const questionnaire = {
     {
       id: "qb6",
       title: " Would you like an area with a fire feature?",
-      options: [],
+      buttonText: "Yes/No",
+      options: [
+        {
+          id: "qb6o1",
+          name: "Fire Pit",
+          img:"/questionnaire/nuevo-cuestionario-34.png",
+          detail:""
+        },
+        {
+          id: "qb6o2",
+          name: "Fire Place",
+          img:"/questionnaire/nuevo-cuestionario-35.png",
+          detail:""
+        }
+      ],
       question: ""
     },
     {
       id: "qb7",
       title: "Would you like to have a covered patio or pergola?",
+      img: "/questionnaire/nuevo-cuestionario-36.png",
+      buttonText: "Yes/No",
       options: [],
       question: ""
     },
     {
       id: "qb8",
       title: "Would you like to have a grass area?",
+      img: "/questionnaire/nuevo-cuestionario-37.png",
+      buttonText: "Yes/No",
       options: [],
       question: ""
     },
     {
       id: "qb9",
       title: "Would you like to provide privacy to your space?",
+      img: "/questionnaire/nuevo-cuestionario-38.png",
+      buttonText: "Yes/No",
       options: [],
       question: ""
     },
     {
       id: "qb10",
       title: "Would you like to add new trees to your yard?",
+      img: "/questionnaire/nuevo-cuestionario-39.png",
+      buttonText: "Yes/No",
       options: [],
       question: ""
     }
