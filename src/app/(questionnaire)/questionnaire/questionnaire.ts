@@ -6,19 +6,23 @@ const questionnaire = {
       options: [
         {
           id: "qg1o1",
-          name: "Backyard"
+          name: "Backyard",
+          img:""
         },
         {
           id: "qg1o2",
-          name: "Frontyard"
+          name: "Frontyard",
+          img:""
         },
         {
           id: "qg1o3",
-          name: "Both"
+          name: "Both",
+          img:""
         },
         {
           id: "qg1o4",
-          name: "Side Yard"
+          name: "Side Yard",
+          img:""
         }
       ]
     },

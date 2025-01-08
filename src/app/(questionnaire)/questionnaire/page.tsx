@@ -143,7 +143,9 @@ function ShoppingCart() {
           <div className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('/questionnaire/questionnaireBgBackyard.webp"}}></div>
         </div>
       </section>
+
       <section id="frontyardQuestions"></section>
+      
       <section id="customerUploads"></section>
     </main>
   );
