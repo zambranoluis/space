@@ -1,3 +1,5 @@
+import { i } from "framer-motion/client"
+
 const questionnaire = {
   general: [
     {
@@ -242,6 +244,33 @@ const questionnaire = {
   ],
   frontyard: [
 
+  ],
+  extra: [
+    {
+      id: "qe1",
+      title: "Is there anything else you would like to tell us to add to your design?",
+      img: "/questionnaire/nuevo-cuestionario-40.webp",
+      buttonText: "Yes/No",
+
+    },
+    {
+      id: "qe2",
+      title: "When do you plan to start renovating your patio?",
+      img: "/questionnaire/nuevo-cuestionario-41.webp",
+      buttonText: "Yes/No",
+    },
+    {
+      id: "qe3",
+      title: "Scope And Size Of Project",
+      img: "/questionnaire/nuevo-cuestionario-42.webp",
+      buttonText: "Yes/No",
+    },
+    {
+      id: "qe4",
+      title: "What is your budget for your yard renovation?",
+      img: "/questionnaire/nuevo-cuestionario-41.webp",
+      buttonText: "Yes/No",
+    }
   ]
 }
 
