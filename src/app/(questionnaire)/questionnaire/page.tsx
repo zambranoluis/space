@@ -215,7 +215,7 @@ function ShoppingCart() {
                 <h1 className="bgred-200">{questionnaire["backyard"][3].title}</h1>
               </div>
               <div className="flex absolute right-[20px] top-[55px]">
-                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][2].img} alt="" />
+                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][3].img} alt="" />
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >

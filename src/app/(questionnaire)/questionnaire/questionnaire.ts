@@ -149,6 +149,7 @@ const questionnaire = {
     {
       id: "qb4",
       title: " Would you like to add some kind of hardscape?",
+      img: "/questionnaire/nuevo-cuestionario-29.png",
       buttonText: "Yes/No",
       options: [],
       question: ""
