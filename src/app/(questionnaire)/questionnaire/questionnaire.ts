@@ -77,18 +77,21 @@ const questionnaire = {
     {
       id: "qg3",
       title: "Do you have kids & pets?",
+      buttonText: "Yes/No",
       img: "/questionnaire/nuevo-cuestionario-23.png",
       options: []
     },
     {
       id: "qg4",
       title: "Can toxic plants be used?",
+      buttonText: "Yes/No",
       img: "/questionnaire/nuevo-cuestionario-24.png",
       options: []
     },
     {
       id: "qg5",
       title: "Do you entertain a lot in your yard area?",
+      buttonText: "Yes/No",
       img: "/questionnaire/nuevo-cuestionario-25.png",
       options: []
     }

@@ -23,7 +23,7 @@ function ShoppingCart() {
   
 
   return (
-    <main className="w-full bgrose-400 flex flex-col gap-20 items-center">
+    <main className="w-full bgrose-400 flex flex-col gap-20 justify-center items-center">
       <section id="Landing" className="flex max-md:flex-col w-full md:h-[230px] lg:h-[280px] xl:h-[380px]">
         <div className="flex flex-col w-full md:w-[50%] bgred-200 p-2 justify-center gap-4 md:gap-8  py-12">
           <Link className="flex bggreen-300 p-2 min-lg:pl-12 justify-center items-center" href={"/shopping-cart"}>
@@ -50,14 +50,14 @@ function ShoppingCart() {
           <div className="flex bg-[#858e5b] pt-4 pl-6 pb-2 text-xl font-black rounded-t-3xl">
             <h1>{questionnaire["general"][0].title}</h1>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 py-12 gap-2 text-black">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 py-12 gap-2 text-black place-content-center w-full bgred-300">
             {
               questionnaire["general"][0].options.map((option, index) => (
-                <div className="flex bgblue-300 gap-2 w-full items-center justify-center " key={option.id}>
-                  <div className="w-[60%] bggreen-300 justify-end items-end flex">
+                <div className="flex bgblue-300 gap-2 w-full items-center max-sm:justify-between sm:justify-center " key={option.id}>
+                  <div className="w[70%] bggreen-300 justify-center items-center flex">
                     <p className="text-xs sm:text-base flex justify-center items-center gap-1"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
                   </div>
-                  <div className="w-[15%] bgyellow-200">
+                  <div className="w[30%] bgyellow-200 flex justify-center items-center">
                     <input  className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed " type="checkbox" />
                   </div>
                 </div>
@@ -69,8 +69,8 @@ function ShoppingCart() {
           <div className="flex bg-[#858e5b] pt-4 pl-6 pb-2 text-xl font-black rounded-t-3xl">
             <h1>What style are you looking for your space?</h1>
           </div>
-          <div className="w-full bgblue-300">
-            <div className="grid   gap-2 py-6 min-[400px]:grid-cols-2 md:grid-cols-4 bggreen-300">
+          <div className="w-full bgblue-300  flex flex-col">
+            <div className="grid   gap-2 py-12 min-[400px]:grid-cols-2 md:grid-cols-4 bggreen-300">
               {
                 questionnaire["general"][1].options.map((option, index) => (
                   <div className="bgred-300 flex flex-col justify-center items-center p-4" key={option.id}>
@@ -83,7 +83,7 @@ function ShoppingCart() {
                 ))
               }
             </div>
-            <div id="gqOther" className="flex gap-2 w-full bgred-200 px-16 py-12 text-black items-end">
+            <div id="gqOther" className="flex gap-2 place-self-center bgred-200 w-[90%] pb-12 text-black items-end">
               <p className="text-[#68664d]">Other: </p>
               <div className="border border-b-black border-b-2 w-full">
                 <input className="h-[40px] text-xl outline-none border-none bg-white w-full text-black  pl-2" placeholder="" type="text" />
@@ -91,49 +91,43 @@ function ShoppingCart() {
             </div>
           </div>
         </div>
-        <div id="gq3" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
-          <div className="flex bg-[#858e5b] pt-4 pl-6 pb-4 text-xl font-black rounded-t-3xl">
-            <h1>{questionnaire["general"][2].title}</h1>
+        <div id="gq3" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
+          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["general"][2].title}</h1>
+            </div>
+            <div className="flex absolute right-[20px] top-[55px]">
+              <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][2].img} alt="" />
+            </div>
           </div>
-          <div className="flex relative h-[120px]">
-            <div className="flex justify-center items-center bgred-200 pl-2 min-[450px]:pl-8">
-              <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                Yes/No
-              </button>
-            </div>
-            <div className="bgred-300 h-full w-full absolute justify-end items-center flex pr-2 min-[450px]:pr-8 top-[-15px]">
-              <Image className="w-[120px] object-cover object-center aspect-square rounded-full" src={questionnaire["general"][2].img} alt="" />
-            </div>
+          <div className="flex flex-col  w-full justify-center items-start p-8 " >
+            <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">{questionnaire["general"][2].buttonText}</button>
           </div>
         </div>
-        <div id="gq4" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
-          <div className="flex bg-[#858e5b] pt-4 pl-6 pb-4 text-xl font-black rounded-t-3xl">
-            <h1>{questionnaire["general"][3].title}</h1>
+        <div id="gq4" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
+          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["general"][3].title}</h1>
+            </div>
+            <div className="flex absolute right-[20px] top-[55px]">
+              <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][3].img} alt="" />
+            </div>
           </div>
-          <div className="flex relative h-[120px]">
-            <div className="flex justify-center items-center bgred-200 pl-2 min-[450px]:pl-8">
-              <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                Yes/No
-              </button>
-            </div>
-            <div className="bgred-300 h-full w-full absolute justify-end items-center flex pr-2 min-[450px]:pr-8 top-[-15px]">
-              <Image className="w-[120px]  object-cover object-top aspect-square rounded-full" src={questionnaire["general"][3].img} alt="" />
-            </div>
+          <div className="flex flex-col  w-full justify-center items-start p-8 " >
+            <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">{questionnaire["general"][3].buttonText}</button>
           </div>
         </div>
-        <div id="gq5" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
-          <div className="flex bg-[#858e5b] pt-4 pl-6 pb-4 text-xl font-black rounded-t-3xl">
-            <h1>{questionnaire["general"][4].title}</h1>
+        <div id="gq5" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
+          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["general"][4].title}</h1>
+            </div>
+            <div className="flex absolute right-[20px] top-[55px]">
+              <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][4].img} alt="" />
+            </div>
           </div>
-          <div className="flex relative h-[120px]">
-            <div className="flex justify-center items-center bgred-200 pl-2 min-[450px]:pl-8">
-              <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                Yes/No
-              </button>
-            </div>
-            <div className="bgred-300 h-full w-full absolute justify-end items-center flex pr-2 min-[450px]:pr-8 top-[-15px]">
-              <Image className="w-[120px] aspect-square object-cover object-top  rounded-full" src={questionnaire["general"][4].img} alt="" />
-            </div>
+          <div className="flex flex-col  w-full justify-center items-start p-8 " >
+            <button className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">{questionnaire["general"][4].buttonText}</button>
           </div>
         </div>
       </section>
