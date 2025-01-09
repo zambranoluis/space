@@ -49,7 +49,7 @@ function ShoppingCart() {
 
       <section id="generalQuestions" className="flex flex-col bgred-200 min-h-[500px] w-[90%] gap-12">
         <div id="gq1" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
-          <div className="flex bg-[#858e5b] pt-4 pl-6 pb-2 text-xl font-black rounded-t-3xl">
+          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
             <h1>{questionnaire["general"][0].title}</h1>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 py-12 gap-2 text-black place-content-center w-full bgred-300">
@@ -68,7 +68,7 @@ function ShoppingCart() {
           </div>
         </div>
         <div id="gq2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
-          <div className="flex bg-[#858e5b] pt-4 pl-6 pb-2 text-xl font-black rounded-t-3xl">
+          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
             <h1>What style are you looking for your space?</h1>
           </div>
           <div className="w-full bgblue-300  flex flex-col">
@@ -94,56 +94,56 @@ function ShoppingCart() {
           </div>
         </div>
         <div id="gq3" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
-          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
-            <div className="w-full bggreen-300 p-2 flex">
-              <h1 className="bgred-200">{questionnaire["general"][2].title}</h1>
+            <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["general"][2].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][2].img} alt="" />
+              </div>
             </div>
-            <div className="flex absolute right-[20px] top-[55px]">
-              <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][2].img} alt="" />
-            </div>
-          </div>
-          <div className="flex flex-col  w-full justify-center items-start p-8 " >
-            <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-              <option disabled selected hidden>No</option>
-              <option value="1">Yes</option>
-              <option value="2">No</option>
-            </select>
-          </div>
-        </div>
-        <div id="gq4" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
-          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
-            <div className="w-full bggreen-300 p-2 flex">
-              <h1 className="bgred-200">{questionnaire["general"][3].title}</h1>
-            </div>
-            <div className="flex absolute right-[20px] top-[55px]">
-              <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][3].img} alt="" />
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+                <option disabled selected hidden>No</option>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+              </select>
             </div>
           </div>
-          <div className="flex flex-col  w-full justify-center items-start p-8 " >
-            <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-              <option disabled selected hidden>No</option>
-              <option value="1">Yes</option>
-              <option value="2">No</option>
-            </select>
-          </div>
-        </div>
-        <div id="gq5" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
-          <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
-            <div className="w-full bggreen-300 p-2 flex">
-              <h1 className="bgred-200">{questionnaire["general"][4].title}</h1>
+          <div id="gq4" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
+            <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["general"][3].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][3].img} alt="" />
+              </div>
             </div>
-            <div className="flex absolute right-[20px] top-[55px]">
-              <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][4].img} alt="" />
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+                <option disabled selected hidden>No</option>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+              </select>
             </div>
           </div>
-          <div className="flex flex-col  w-full justify-center items-start p-8 " >
-            <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-              <option disabled selected hidden>No</option>
-              <option value="1">Yes</option>
-              <option value="2">No</option>
-            </select>
+          <div id="gq5" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center">
+            <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["general"][4].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["general"][4].img} alt="" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+                <option disabled selected hidden>No</option>
+                <option value="1">Yes</option>
+                <option value="2">No</option>
+              </select>
+            </div>
           </div>
-        </div>
       </section>
 
       <section id="backyardQuestions" className="flex flex-col w-full justify-center items-center gap-20">
@@ -359,7 +359,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="bq9" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -381,7 +380,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="bq10" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -435,7 +433,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="fq2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center">
             <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -537,7 +534,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="fq6" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center">
             <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -564,12 +560,17 @@ function ShoppingCart() {
                 }
               </div>
               <div className="flex flex-col w-full p-2">
-                <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <div className="flex gap-2">
+                  <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
+                  <input className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="text" />
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-[#68664d]">Note:</p>
+                  <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                </div>
               </div>
             </div>
           </div>
-
           <div id="fq7" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center">
             <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -591,7 +592,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="fq8" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center">
             <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -613,7 +613,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="fq9" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center">
             <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -635,7 +634,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="fq10" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center">
             <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
