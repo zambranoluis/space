@@ -206,7 +206,7 @@ const questionnaire = {
           detail:""
         }
       ],
-      question: ""
+      question: "For how many people?"
     },
     {
       id: "qb7",

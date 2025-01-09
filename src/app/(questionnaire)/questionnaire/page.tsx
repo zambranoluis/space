@@ -58,7 +58,7 @@ function ShoppingCart() {
                     <p className="text-xs sm:text-base flex justify-center items-center gap-1"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
                   </div>
                   <div className="w-[15%] bgyellow-200">
-                    <input className="text-[#ebebeb]" type="checkbox" />
+                    <input  className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed " type="checkbox" />
                   </div>
                 </div>
               ))
@@ -77,7 +77,7 @@ function ShoppingCart() {
                     <Image className="w-[110px] aspect-square object-cover object-center rounded-full" src={option.img} alt=""/>
                     <div className="flex justify-center items-center gap-2 p-2">
                       <p className="text-black flex justify-center items-center gap-1"><span className="text-xl text-[#68664d]">▪ </span>{option.name}</p>
-                      <input type="checkbox" />
+                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed" />
                     </div>
                   </div>
                 ))
@@ -185,7 +185,7 @@ function ShoppingCart() {
                           <p className="text-xs">{option.detail}</p>
                         </div>
                       </div>
-                      <input type="checkbox" className="" />
+                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed" />
                     </div>
                   ))
                 }
@@ -244,7 +244,7 @@ function ShoppingCart() {
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
                         <p className="text-xs sm:text-base flex justify-center items-center gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" />
+                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed"/>
                       </div>
                     </div>
                   ))
@@ -273,15 +273,21 @@ function ShoppingCart() {
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
                         <p className="text-xs sm:text-base flex gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" />
+                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed" />
                       </div>
                     </div>
                   ))
                 }
               </div>
               <div className="flex flex-col w-full p-2">
-                <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <div className="flex gap-2">
+                  <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
+                  <input className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="text" />
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-[#68664d]">Note:</p>
+                  <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                </div>
               </div>
             </div>
           </div>
@@ -407,7 +413,7 @@ function ShoppingCart() {
                           <p className="text-xs">{option.detail}</p>
                         </div>
                       </div>
-                      <input type="checkbox" className="" />
+                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed" />
                     </div>
                   ))
                 }
@@ -466,7 +472,7 @@ function ShoppingCart() {
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
                         <p className="text-xs sm:text-base flex justify-center items-center gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" />
+                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed" />
                       </div>
                     </div>
                   ))
@@ -495,7 +501,7 @@ function ShoppingCart() {
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
                         <p className="text-xs sm:text-base flex gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" />
+                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed" />
                       </div>
                     </div>
                   ))
@@ -673,8 +679,11 @@ function ShoppingCart() {
             </div>
             <div className="flex w-full justify-center items-center h-[250px]" >
               <div className="flex max-sm:w-[40%]  sm:w-[20%] bgblue-300  justify-center items-center">
-                <div className="flex bg-[#6c786e] p-3 rounded-full">
-                  <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                <div className="flex">
+                  <label htmlFor="files1" className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer">
+                    <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                  </label>
+                  <input id="files1" name="files1" className="hidden" type="file" />
                 </div>
               </div>
               <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2">
@@ -695,8 +704,11 @@ function ShoppingCart() {
             </div>
             <div className="flex w-full justify-center items-center h-[250px]" >
               <div className="flex max-sm:w-[40%]  sm:w-[20%] bgblue-300  justify-center items-center">
-                <div className="flex bg-[#6c786e] p-3 rounded-full">
-                  <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                <div className="flex">
+                  <label htmlFor="files2" className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer">
+                    <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                  </label>
+                  <input id="files2" name="files2" className="hidden" type="file" />
                 </div>
               </div>
               <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2">
@@ -716,8 +728,11 @@ function ShoppingCart() {
             </div>
             <div className="flex w-full justify-center items-center h-[250px]" >
               <div className="flex max-sm:w-[40%]  sm:w-[20%] bgblue-300  justify-center items-center">
-                <div className="flex bg-[#6c786e] p-3 rounded-full">
-                  <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                <div className="flex">
+                  <label htmlFor="files3" className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer">
+                    <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                  </label>
+                  <input id="files3" name="files3" className="hidden" type="file" />
                 </div>
               </div>
               <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2">
