@@ -256,7 +256,7 @@ function ShoppingCart() {
                 <option value="1">Yes</option>
                 <option value="2">No</option>
               </select>
-              <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full">
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full gap-12">
                 {
                   questionnaire["backyard"][4].options.map((option, index) => (
                     <div className="flex flex-col gap-6 justify-center items-center text-black w-full" key={index}>
@@ -510,7 +510,7 @@ function ShoppingCart() {
                 <option value="1">Yes</option>
                 <option value="2">No</option>
               </select>
-              <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full">
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full gap-12">
                 {
                   questionnaire["backyard"][4].options.map((option, index) => (
                     <div className="flex flex-col gap-6 justify-center items-center text-black w-full" key={index}>
