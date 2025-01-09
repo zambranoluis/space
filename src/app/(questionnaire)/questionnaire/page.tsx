@@ -552,7 +552,7 @@ function ShoppingCart() {
                     <div className="flex flex-col gap-4  text-black bqblue-300 " key={index}>
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
-                        <p className="text-xs sm:text-base flex gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
+                      <p className="text-xs sm:text-base flex justify-center items-center gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
                         <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" />
                       </div>
                     </div>
