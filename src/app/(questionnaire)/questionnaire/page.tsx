@@ -155,27 +155,26 @@ function ShoppingCart() {
         </div>
         <div className="flex flex-col w-[90%] gap-12">
           <div id="bq1" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
-            <div className="flex bg-[#6c786e] pt-4 pl-6 pb-4 text-xl font-black rounded-t-3xl w-full">
-              <h1>{questionnaire["backyard"][0].title}</h1>
-            </div>
-            <div className="flex flex-col w-full justify-center items-center p-8 " >
-              <div className="flex  items-center  w-full relative py-20 px-8">
-                <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                  <option disabled selected hidden>Green and White</option>
-                  <option value="1">Green and White</option>
-                  <option value="2">Colorful Plants</option>
-                </select>
-                <div className="flex absolute right-0 top-[-50px]">
-                  <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][0].img} alt="" />
-                </div>
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][0].title}</h1>
               </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["backyard"][0].img} alt="" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
+                <option disabled selected hidden>Green and Whites</option>
+                <option value="1">Colorful Plants</option>
+                <option value="2">Green and Whites</option>
+              </select>
               <div className="flex flex-col w-full p-2">
-                <p className="text-[#68664d]">Note:</p>
+                <p className="text-[#6c786e]">Note:</p>
                 <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
             </div>
           </div>
-
           <div id="bq2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -277,7 +276,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="bq6" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -315,7 +313,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="bq7" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -337,7 +334,6 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-
           <div id="bq8" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
