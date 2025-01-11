@@ -34,22 +34,22 @@ const questionnaire = {
       options: [
         {
           id: "qg2o1",
-          name: "Backyard",
+          name: "Traditional",
           img: "/questionnaire/nuevo-cuestionario-15.png"
         },
         {
           id: "qg2o2",
-          name: "Frontyard",
+          name: "Farmhouse",
           img: "/questionnaire/nuevo-cuestionario-16.png"
         },
         {
           id: "qg2o3",
-          name: "Both",
+          name: "Mediterranean",
           img: "/questionnaire/nuevo-cuestionario-17.png"
         },
         {
           id: "qg2o4",
-          name: "Side Yard",
+          name: "Modern",
           img: "/questionnaire/nuevo-cuestionario-18.png"
         },
         {

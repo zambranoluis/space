@@ -103,10 +103,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select  className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
             </div>
           </div>
@@ -120,10 +119,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
             </div>
           </div>
@@ -137,10 +135,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
             </div>
           </div>
@@ -164,10 +161,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
-                <option disabled selected hidden>Green and Whites</option>
-                <option value="1">Colorful Plants</option>
-                <option value="2">Green and Whites</option>
+              <select defaultValue="Green and Whites" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
+                <option value="1">Green and Whites</option>
+                <option value="2">Colorful Plants</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#6c786e]">Note:</p>
@@ -233,10 +229,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -251,10 +246,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full gap-12">
                 {
@@ -283,10 +277,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="grid sm:grid-cols-2 w-full place-items-center max-sm:gap-8 place-content-center bgred-300 max-w-[500px] place-self-center">
                 {
@@ -323,10 +316,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -344,10 +336,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -365,10 +356,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -386,10 +376,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -415,9 +404,8 @@ function ShoppingCart() {
             <div className="flex flex-col w-full justify-center items-center p-8 " >
               <div className="flex  items-center  w-full relative py-12 px-8">
                 <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                  <option disabled selected hidden>No</option>
-                  <option value="1">Yes</option>
-                  <option value="2">No</option>
+                  <option value="1">Green and Whites</option>
+                  <option value="2">Colorful Plants</option>
                 </select>
                 <div className="flex absolute right-0 top-[-50px]">
                   <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][0].img} alt="" />
@@ -487,10 +475,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -505,10 +492,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full gap-12">
                 {
@@ -537,10 +523,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="grid sm:grid-cols-2 w-full place-items-center max-sm:gap-8 place-content-center bgred-300 max-w-[500px] place-self-center">
                 {
@@ -577,10 +562,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -598,10 +582,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -619,10 +602,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -640,10 +622,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -666,10 +647,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -687,10 +667,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -708,10 +687,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
@@ -729,10 +707,9 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option disabled selected hidden>No</option>
-                <option value="1">Yes</option>
-                <option value="2">No</option>
+              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
