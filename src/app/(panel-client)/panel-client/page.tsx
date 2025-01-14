@@ -208,12 +208,12 @@ function PanelClient() {
         </div>
       </section>
 
-      <section className="flex">
-        <div className="flex flex-col">
+      <section className="flex w-full bg-red-300 justify-center items-center">
+        <div className="flex flex-col w-[90%]">
           <div className="flex bg-[#302626]">
             <h1 className="text-2xl font-semibold">Projects</h1>
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <div className="flex bg-[#f0f0ef] text-[#67664c]">
               <div>Proyecto 1 U2 - [ ID: 1 ]</div>
               <div className="flex">
@@ -221,8 +221,12 @@ function PanelClient() {
                 <button>Pending</button>
               </div>
             </div>
-            <div className="flex flex-col text-[#67664c]">
-            Project created successfully
+            <div className="flex bg-[#f0f0ef] text-[#67664c]">
+              <div>Proyecto 1 U3 - [ ID: 1 ]</div>
+              <div className="flex">
+                <button>Area Basic</button>
+                <button>Pending</button>
+              </div>
             </div>
           </div>
         </div>
