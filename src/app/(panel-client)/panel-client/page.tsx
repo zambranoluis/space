@@ -24,7 +24,6 @@ function PanelClient() {
     };
 
   return (
-
     <main className="flex flex-col w-full">
       <section className='w-full min-h-[100dvh] bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
       <div className="relative w-full h-full">
@@ -71,6 +70,104 @@ function PanelClient() {
                 <p>You currently have an active package to design both areas of your home (Front yard & BackYard).</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col  w-full   justify-center items-center  py-6">
+        <div className="flex flex-col bgred-200 .noScrollBar   w-[90%] overflowx-scroll">
+          <div className="flex bggreen-200 gap4  text-[#69664c] text-sm font-bold w-full">
+            <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
+            <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>
+            <div className="w-full w[170px] px-6 py-4 bgyellow-200 flex justify-center items-center text-center">Project Manager</div>
+          </div>
+          <div className="flex flex-col text-xs w-full bgslate-400 gap-2">
+            <div className="flex bg-[#848d5a] rounded-3xl  w-full h-[60px]">
+              <div className="w-full w[100px]  flex justify-center items-center">
+                12345678
+              </div>
+              <div className="flex w-full overflow-y-auto noScrollBar max-h-[57px] w[150px]  flex-col justifycenter items-center gap-1">
+                <p>1 Area Pro</p>
+                <p>BACKYARD</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+
+              </div>
+              <div className="flex w-full w[170px]  justify-center items-center">
+                Joao Da Silva
+              </div>
+            </div>
+            <div className="flex bg[#848d5a] text-black rounded-3xl  w-full h-[60px]">
+              <div className="w-full w[100px]  flex justify-center items-center">
+                12345678
+              </div>
+              <div className="flex w-full overflow-y-auto noScrollBar max-h-[57px] w[150px]  flex-col justifycenter items-center gap-1">
+                <p>1 Area Pro</p>
+                <p>BACKYARD</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+
+              </div>
+              <div className="flex w-full w[170px]  justify-center items-center">
+                Joao Da Silva
+              </div>
+            </div>
+
+            <div className="flex bg-[#6b776d] rounded-3xl  w-full h-[60px]">
+              <div className="w-full w[100px]  flex justify-center items-center">
+                12345678
+              </div>
+              <div className="flex w-full overflow-y-auto noScrollBar max-h-[57px] w[150px]  flex-col justifycenter items-center gap-1">
+                <p>1 Area Pro</p>
+                <p>BACKYARD</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+
+              </div>
+              <div className="flex w-full w[170px]  justify-center items-center">
+                Joao Da Silva
+              </div>
+            </div>
+
+            <div className="flex bg[#848d5a] text-black rounded-3xl  w-full h-[60px]">
+              <div className="w-full w[100px]  flex justify-center items-center">
+                12345678
+              </div>
+              <div className="flex w-full overflow-y-auto noScrollBar max-h-[57px] w[150px]  flex-col justifycenter items-center gap-1">
+                <p>1 Area Pro</p>
+                <p>BACKYARD</p>
+                <p>Lighting Plan</p>
+
+              </div>
+              <div className="flex w-full w[170px]  justify-center items-center">
+                Joao Da Silva
+              </div>
+            </div>
+
+            <div className="flex bg-[#302626] rounded-3xl  w-full h-[60px]">
+              <div className="w-full w[100px]  flex justify-center items-center">
+                12345678
+              </div>
+              <div className="flex w-full overflow-y-auto noScrollBar max-h-[57px] w[150px]  flex-col justifycenter items-center gap-1">
+                <p>1 Area Pro</p>
+                <p>BACKYARD</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+
+              </div>
+              <div className="flex w-full w[170px]  justify-center items-center">
+                Joao Da Silva
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
