@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
@@ -30,6 +30,7 @@ const handleScrollToSection = (sectionId: string) => {
   }
 };
 const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
+
 
   const navOptionsGeneral = [
     {

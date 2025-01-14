@@ -1,7 +1,7 @@
 "use client";
 import { useTheme } from "../context/ThemeContext";
 import { Image } from "@nextui-org/image";
-// import Link from "next/link";
+import Link from "next/link";
 
 import { FaCommentAlt } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
@@ -30,12 +30,12 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
     <>
       <nav id="navbarSmall" className="min-[900px]:hidden flex flex-col top-0 bg-black/50 w-full z-[1500] py-4 bgred-300 justify-between items-center  px-2 ">
         <div id="navTop" className="flex justify-between items-center w-full bggreen-300 gap-4">
-          <div id="logoNavbar" className="flex bgred-200">
+          <Link id="logoNavbar" className="flex bgred-200" href="/">
             <Image className="h-full max-w-[150px] min-[500px]:max-w-[250px] drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
               src="https://github.com/BPM94/SCCTMD/raw/main/logoWhite.png"
               alt=""
             />
-          </div>
+          </Link>
           <div id="profileNavbar" className="flex cursor-pointer justify-center items-center  gap-2 text-[#6b776d] h-full bgred-300">
             <IoMdArrowDropdown className="text-xl bgred-300 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]" />
             <div className="flex flex-col max-[350px]:hidden justify-center items-end bggreen-300 ">
@@ -63,14 +63,14 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
 
 
       <nav id="navbarLarge" className="max-[900px]:hidden flex top-0 bg-black/50 w-full z-[1500] h-[100px] bgred-300 justify-between items-center px-6  ">
-        <div id="logoNavbar" className="flex bgred-200">
+        <Link id="logoNavbar" className="flex bgred-200" href="/">
           <Image className="h-full w-full max-w-[250px] drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
             width={200}
             height={70}
             src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
             alt=""
           />
-        </div>
+        </Link>
         <div id="titleNavbar" className="flex select-none bggreen-300">
           <h1 className="text-[#6b776d] text-2xl font-bold drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">Projects</h1>
         </div>
