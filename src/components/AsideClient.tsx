@@ -64,7 +64,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
 
   return (
     <aside
-      className={` select-none noScrollBar  bg-black/50 w-[210px] z-[2000] max-[900px]:h-[310px] overflow-auto    flex flex-col   rounded-r-3xl justify-between gap-6 py-6  text-[#8e7842]`}
+      className={` select-none noScrollBar  bg-black/50 w-[210px] z-[2000] max-[900px]:h-[310px] overflow-auto    flex flex-col   rounded-r-3xl justify-between gap-6 py-6  text-[#6b776d]`}
     >
       <div id="asideTop" className="flex flex-col   w-full  bgrose-300 ">
         {asideOptions.map((option) => (
