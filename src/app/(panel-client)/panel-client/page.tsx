@@ -74,8 +74,8 @@ function PanelClient() {
         </div>
       </section>
 
-      <section className="flex flex-col w-[75%] place-self-center bgblue-300 justify-center items-center max-sm:py-12  sm:py-24">
-        <div className="flex flex-col bgred-200 w-full">
+      <section className="flex flex-col w-full bg-[#f0f0ef] place-self-center bgblue-300 justify-center items-center max-sm:py-12  sm:py-24">
+        <div className="flex flex-col bgred-200 w-[75%]">
           <div className="flex bggreen-200 gap4 text-[#69664c] text-sm sm:text-lg font-bold w-full">
             <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
             <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>
@@ -204,6 +204,26 @@ function PanelClient() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      <section className="flex">
+        <div className="flex flex-col">
+          <div className="flex bg-[#302626]">
+            <h1 className="text-2xl font-semibold">Projects</h1>
+          </div>
+          <div>
+            <div className="flex bg-[#f0f0ef] text-[#67664c]">
+              <div>Proyecto 1 U2 - [ ID: 1 ]</div>
+              <div className="flex">
+                <button>Area Basic</button>
+                <button>Pending</button>
+              </div>
+            </div>
+            <div className="flex flex-col text-[#67664c]">
+            Project created successfully
+            </div>
           </div>
         </div>
       </section>
