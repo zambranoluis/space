@@ -75,15 +75,15 @@ function ShoppingCart() {
       <section id="generalQuestions" className="flex flex-col bgred-200 min-h-[500px] w-[90%] gap-12">
         <div id="gq1" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
           <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
-            <h1>{questionnaire["general"][0].title}</h1>
+            <h1>{questionnaire["general"][2].title}</h1>
           </div>
           <div className="flex flex-col py-12 gap-6  text-black  w-full bgred-300 px-16">
-            <h1 className="text-3xl font-black">{packages[0].title}</h1>
+            <h1 className="text-3xl font-black">{packages[2].title}</h1>
             <div className="flex flex-col gap-2">
               <h2>Includes: </h2>
               <div className="flex flex-col bgred-300">
                 {
-                  packages[0].includes.map((include, index) => (
+                  packages[2].includes.map((include, index) => (
                     <p key={index}>{include}</p>
                   ))
                 }

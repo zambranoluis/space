@@ -168,8 +168,8 @@ function ShoppingCart() {
               </div>
               <div id="bodyOptions" className="flex flex-col bg-[#f0f0ef] p-4">
                 <div className="w-full gap-4 flex place-self-center">
-                  <button className={`w-full ${(packages[selectedPackage].title.toLowerCase().includes("pro") ) ? "bg-[#848d5a] text-white" : ""}  ${(selectedYard === "frontyard") ? "bg-[#848d5a] text-white" : "text-black"} text-sm border border-gray-500  `} onClick={() => {setSelectedYard("frontyard")}}>Frontyard</button>
-                  <button className={`w-full ${(packages[selectedPackage].title.toLowerCase().includes("pro") ) ? "bg-[#848d5a] text-white" : ""}  ${(selectedYard === "backyard") ? "bg-[#848d5a] text-white" : "text-black"}  text-sm border border-gray-500`} onClick={() => {setSelectedYard("backyard")}}>Backyard</button>
+                  <button className={`w-full ${(packages[selectedPackage].title.toLowerCase().includes("2") ) ? "bg-[#848d5a] text-white" : ""}  ${(selectedYard === "frontyard") ? "bg-[#848d5a] text-white" : "text-black"} text-sm border border-gray-500  `} onClick={() => {setSelectedYard("frontyard")}}>Frontyard</button>
+                  <button className={`w-full ${(packages[selectedPackage].title.toLowerCase().includes("2") ) ? "bg-[#848d5a] text-white" : ""}  ${(selectedYard === "backyard") ? "bg-[#848d5a] text-white" : "text-black"}  text-sm border border-gray-500`} onClick={() => {setSelectedYard("backyard")}}>Backyard</button>
                 </div>
                 <div className="bggreen-700 p-6">
                   <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>

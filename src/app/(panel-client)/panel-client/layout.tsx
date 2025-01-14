@@ -5,9 +5,9 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { useState, ReactNode } from "react";
 // import { Image } from "@nextui-org/image";
 
-import Navbar from "@/components/NavbarWorker";
+import Navbar from "@/components/NavbarClient";
 
-import Aside from "@/components/AsideWorker";
+import Aside from "@/components/AsideClient";
 
 import ChatModal from "@/components/ChatModal";
 
