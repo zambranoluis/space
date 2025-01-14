@@ -39,7 +39,7 @@ export default function DashboardLayout({ children }: WorkerPanelLayout) {
           </div>
           <div className=" w-full h-full relative">
             <section className="w-full h-full">{children}</section>
-            <div className="flex absolute bottom-[10px] right-[10px]">
+            <div className="flex absolute bottom-[10px] right-[10px] z-[2000]">
               <ChatModal />
             </div>
           </div>

@@ -39,7 +39,7 @@ const ChatModal = () => {
           <IoCloseOutline className="text-2xl text-[#ebebeb]" />
         </div>
       </div>
-      <div className="w-[90%] bg-[#f3f3f3] h-[70%] place-self-center rounded-3xl p-4 overflow-y-scroll">
+      <div className="w-[90%] bg-[#f3f3f3] h-[70%] flex flex-col gap-4 place-self-center rounded-3xl p-4 overflow-y-scroll">
         <div className="text-xs text-[#c3c3c3] gap-2 h[30%] bggreen-300">
           <p> Office Hours (Monday - Friday) (8AM to 5PM PST).</p>
           <p>One of our project managers will get back to you. Thank you for your patience.</p>
