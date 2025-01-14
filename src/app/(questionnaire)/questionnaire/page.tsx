@@ -13,15 +13,40 @@ import {Switch} from "@nextui-org/switch";
 
 
 import {
-  questionnaire
+  questionnaire,
+  packages
 } from "./questionnaire";
 
 
 
 function ShoppingCart() {
+  const containerId: string = "containerFrontyard";
 
-  
-  const [colorPlants, setColorPlants] = useState(false);
+
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+
+  const [selectedFq2, setSelectedFq2] = useState<number | null>(null);
+
+
+  const handleCheckboxChange = (index: number) => {
+    setSelectedOption(index === selectedOption ? null : index); // Permitir deseleccionar.
+  };
+
+  const handleFq2Change = (index: number) => {
+    setSelectedFq2(index === selectedFq2 ? null : index); // Permitir deseleccionar.
+  };
+
+  const [selectedOptions2, setSelectedOptions2] = useState<number[]>([]);
+
+  const handleCheckboxChange2 = (index: number) => {
+    if (selectedOptions2.includes(index)) {
+      // Si el índice ya está seleccionado, lo eliminamos
+      setSelectedOptions2(selectedOptions2.filter((option) => option !== index));
+    } else if (selectedOptions2.length < 2) {
+      // Si aún no hay dos seleccionados, agregamos el índice
+      setSelectedOptions2([...selectedOptions2, index]);
+    }
+  };
   
 
   return (
@@ -52,19 +77,19 @@ function ShoppingCart() {
           <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
             <h1>{questionnaire["general"][0].title}</h1>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 py-12 gap-2 text-black place-content-center w-full bgred-300">
-            {
-              questionnaire["general"][0].options.map((option, index) => (
-                <div className="flex bgblue-300 gap-2 w-full items-center max-sm:justify-between sm:justify-center " key={option.id}>
-                  <div className="w[70%] bggreen-300 justify-center items-center flex">
-                    <p className="text-xs sm:text-base flex justify-center items-center gap-1"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                  </div>
-                  <div className="w[30%] bgyellow-200 flex justify-center items-center">
-                    <input  className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer " type="checkbox" />
-                  </div>
-                </div>
-              ))
-            }
+          <div className="flex flex-col py-12 gap-6  text-black  w-full bgred-300 px-16">
+            <h1 className="text-3xl font-black">{packages[0].title}</h1>
+            <div className="flex flex-col gap-2">
+              <h2>Includes: </h2>
+              <div className="flex flex-col bgred-300">
+                {
+                  packages[0].includes.map((include, index) => (
+                    <p key={index}>{include}</p>
+                  ))
+                }
+              </div>
+            </div>
+
           </div>
         </div>
         <div id="gq2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
@@ -79,7 +104,12 @@ function ShoppingCart() {
                     <Image className="w-[110px] aspect-square object-cover object-center rounded-full" src={option.img} alt=""/>
                     <div className="flex justify-center items-center gap-2 p-2">
                       <p className="text-black flex justify-center items-center gap-1"><span className="text-xl text-[#68664d]">▪ </span>{option.name}</p>
-                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" />
+                      <input
+                      className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" 
+                      type="checkbox"
+                      checked={selectedOptions2.includes(index)}
+                      onChange={() => handleCheckboxChange2(index)}
+                      />
                     </div>
                   </div>
                 ))
@@ -192,7 +222,12 @@ function ShoppingCart() {
                           <p className="text-xs">{option.detail}</p>
                         </div>
                       </div>
-                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" />
+                      <input
+                        className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
+                        type="checkbox"
+                        checked={selectedOption === index}
+                        onChange={() => handleCheckboxChange(index)}
+                      />
                     </div>
                   ))
                 }
@@ -405,7 +440,7 @@ function ShoppingCart() {
               <div className="flex  items-center  w-full relative py-12 px-8">
                 <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                   <option value="1">Green and Whites</option>
-                  <option value="2">Colorful Plants</option>
+                  <option value="2">Colorfulx  Plants</option>
                 </select>
                 <div className="flex absolute right-0 top-[-50px]">
                   <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][0].img} alt="" />
@@ -438,7 +473,12 @@ function ShoppingCart() {
                           <p className="text-xs">{option.detail}</p>
                         </div>
                       </div>
-                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" />
+                      <input 
+                      type="checkbox"
+                      className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
+                      checked={selectedFq2 === index}
+                      onChange={() => handleFq2Change(index)}
+                      />
                     </div>
                   ))
                 }
@@ -496,14 +536,16 @@ function ShoppingCart() {
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
-              <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full gap-12">
+              <div className={` grid sm:grid-cols-2 md:grid-cols-3 w-full gap12 place-content-center place-items-center bgred-300 ali`}>
                 {
                   questionnaire["backyard"][4].options.map((option, index) => (
-                    <div className="flex flex-col gap-6 justify-center items-center text-black w-full" key={index}>
+                    <div id="questionnaireBackyard" className={`${index === 2 ? "hidden" : ""}  flex flex-col gap-6 justify-center items-center text-black w-full bgblue-300`} key={index}>
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
                         <p className="text-xs sm:text-base flex justify-center items-center gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" />
+                        <input
+                        type="checkbox" 
+                        className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" />
                       </div>
                     </div>
                   ))
@@ -647,10 +689,6 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option value="1">No</option>
-                <option value="2">Yes</option>
-              </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
                 <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
@@ -667,10 +705,6 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option value="1">No</option>
-                <option value="2">Yes</option>
-              </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
                 <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
@@ -687,10 +721,6 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option value="1">No</option>
-                <option value="2">Yes</option>
-              </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
                 <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
@@ -707,10 +737,6 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option value="1">No</option>
-                <option value="2">Yes</option>
-              </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
                 <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>

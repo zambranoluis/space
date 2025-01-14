@@ -18,10 +18,10 @@ export default function Home() {
     setShowPassword(!showPassword);
   };
   const handleLogin = () => {
-    router.push('/shopping-cart'); 
+    router.push('/panel-client'); 
   };
   const handleVerPanel = () => {
-    router.push('/panel'); 
+    router.push('/panel-worker'); 
   };
 
 
@@ -93,10 +93,10 @@ export default function Home() {
               </div>
               <div className="mt-4 flex gap-2 flex-col justify-center items-center">
                 <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" onClick={() => {handleLogin()}}>
-                  Log In
+                  Log In Client
                 </button>
                 <button className="px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl max-md:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]" onClick={() => {handleVerPanel()}}>
-                  Ver Panel
+                  Log in Worker
                 </button>
               </div> 
             </form>

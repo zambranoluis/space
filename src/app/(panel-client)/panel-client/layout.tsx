@@ -9,11 +9,13 @@ import Navbar from "@/components/NavbarWorker";
 
 import Aside from "@/components/AsideWorker";
 
-interface DashboardLayoutProps {
+import ChatModal from "@/components/ChatModal";
+
+interface WorkerPanelLayout {
   children: ReactNode; // Define el tipo para las props de children
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout({ children }: WorkerPanelLayout) {
   
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
 
@@ -35,8 +37,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <Navbar toggleAside={toggleAside} />
             <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
           </div>
-          <div className=" w-full h-full ">
+          <div className=" w-full h-full relative">
             <section className="w-full h-full">{children}</section>
+            <div className="flex absolute bottom-[10px] right-[10px]">
+              <ChatModal />
+            </div>
           </div>
         </div>
         <footer></footer>
