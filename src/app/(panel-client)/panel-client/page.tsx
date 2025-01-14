@@ -74,14 +74,14 @@ function PanelClient() {
         </div>
       </section>
 
-      <section className="flex flex-col  w-[80%] place-self-center  justify-center items-center  py-6">
-        <div className="flex flex-col bgred-200 .noScrollBar   w-[90%] overflowx-scroll">
-          <div className="flex bggreen-200 gap4  text-[#69664c] text-sm font-bold w-full">
+      <section className="flex flex-col w-[75%] place-self-center bgblue-300 justify-center items-center max-sm:py-12  sm:py-24">
+        <div className="flex flex-col bgred-200 w-full">
+          <div className="flex bggreen-200 gap4 text-[#69664c] text-sm sm:text-lg font-bold w-full">
             <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
             <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>
             <div className="w-full w[170px] px-6 py-4 bgyellow-200 flex justify-center items-center text-center">Project Manager</div>
           </div>
-          <div className="flex flex-col text-xs sm:text-sm md:text-base w-full bgslate-400 gap-2">
+          <div className="flex flex-col text-xs overflow-y-auto .noScrollBar max-h-[600px] sm:text-sm md:text-base w-full bgslate-400 gap-2 bgred-300 py-8 ">
             <div className="flex bg-[#848d5a] rounded-3xl  w-full h-[90px]">
               <div className="w-full w[100px]  flex justify-center items-center">
                 12345678
@@ -151,6 +151,42 @@ function PanelClient() {
             </div>
 
             <div className="flex bg-[#302626] rounded-3xl  w-full h-[90px]">
+              <div className="w-full w[100px]  flex justify-center items-center">
+                12345678
+              </div>
+              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+                <p>1 Area Pro</p>
+                <p>BACKYARD</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+
+              </div>
+              <div className="flex w-full w[170px]  justify-center items-center">
+                Joao Da Silva
+              </div>
+            </div>
+
+            <div className="flex bg[#302626] text-black rounded-3xl  w-full h-[90px]">
+              <div className="w-full w[100px]  flex justify-center items-center">
+                12345678
+              </div>
+              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+                <p>1 Area Pro</p>
+                <p>BACKYARD</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+                <p>Lighting Plan</p>
+
+              </div>
+              <div className="flex w-full w[170px]  justify-center items-center">
+                Joao Da Silva
+              </div>
+            </div>
+
+            <div className="flex bg-[#3b543e]  rounded-3xl  w-full h-[90px]">
               <div className="w-full w[100px]  flex justify-center items-center">
                 12345678
               </div>
