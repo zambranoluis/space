@@ -15,9 +15,7 @@ interface WorkerPanelLayout {
   children: ReactNode; // Define el tipo para las props de children
 }
 
-export default function PanelClientLayout({ children }: WorkerPanelLayout) {
-  
-  
+export default function PanelClientLayout({ children }: WorkerPanelLayout) {  
 
 
 

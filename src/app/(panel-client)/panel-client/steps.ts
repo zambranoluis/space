@@ -91,7 +91,19 @@ const projects = [
   }
 ]
 
+const backgrounds = [
+  {
+    name: "myprofile",
+    path: "/spaceMyProfileBg.webp"
+  },
+  {
+    name: "projects",
+    path: "/panel-clientBg.jpg"
+  },
+]
+
 export {
   projects,
-  steps
+  steps,
+  backgrounds
 }

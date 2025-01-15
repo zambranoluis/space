@@ -18,7 +18,44 @@ const Projects = () => {
   };
 
   return (
-    <section className="flex w-full py-12 bgred-300 justify-center items-center">
+    <>
+      <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
+        <div className="flex flex-col justify-center items-center text-[#6b776d]">
+          <h1 className="font-black text-center">Hello, Claudia Alves!</h1>
+          <p className="text-center text-sm">Welcome to your Space Creations account, here you can share photos
+            of yourspace, your inspiration and the measurements of your home.</p>
+        </div>
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex p-4">
+            <h1 className="font-bold text-[#6b776d] text-center">Let's start designing together!</h1>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center">
+            <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to schedule a call</button>
+            <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to complete the questionnaire</button>
+          </div>
+          <div className="flex flex-col py-6 gap-8 text-[#6c6c6c]">
+            <div className="flex flex-col">
+              <div className="flex p-2 font-bold bggreen-300 border-b border-b-[#6c6c6c] min-[350px]:w-[80%]">
+                <h1>CONSULTATION CALL</h1>
+              </div>
+              <div className="flex bgblue-300 p-2 text-smin-[350px]sm:text-base">
+                <p>You have a call on <span className="font-bold">December 15, 2023</span> at <span className="font-bold">10:30am</span> pst time with one of our project managers.</p>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <div className="flex p-2 font-bold bggreen-300 border-b border-b-[#6c6c6c] min-[350px]:w-[80%]">
+                <h1>DESIGN PACKAGE</h1>
+              </div>
+              <div className="flex bgblue-300 p-2 text-sm sm:text-base">
+                <p>You currently have an active package to design both areas of your home (Front yard & BackYard).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    <section className="flex w-full bg-red-300 justify-center items-center">
       <div className="flex flex-col w-[90%] ">
         <div className="flex pl-6 bg-[#302626]">
           <h1 className="text-2xl font-semibold">Projects</h1>
@@ -87,6 +124,7 @@ const Projects = () => {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

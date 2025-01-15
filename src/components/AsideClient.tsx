@@ -16,6 +16,8 @@ import { FaFolder } from "react-icons/fa6";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { IoMdNotifications } from "react-icons/io";
 import { FaEnvelope } from "react-icons/fa";
+import { TiShoppingCart } from "react-icons/ti";
+
 import { FaUserCircle } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 
@@ -39,9 +41,9 @@ interface Option {
 }
 
 const asideOptions: Option[] = [
-  { name: "My Profile", tag: "myprofile", path: "/my-profile", icon: < FaClipboardList className="text-xl" /> },
+  { name: "My Profile", tag: "myprofile", path: "/my-profile", icon: < FaUserCircle className="text-xl" /> },
   { name: "Projects", tag: "projects", path: "/projects", icon: <FaFolder className="text-xl" /> },
-  { name: "Cart", tag: "cart", path: "/shopping-cart", icon: <FaRegCalendarDays className="text-xl" />, },  
+  { name: "Cart", tag: "cart", path: "/shopping-cart", icon: <TiShoppingCart className="text-xl" />, },  
 ];
 
 const Aside: React.FunctionComponent<AsideProps> = ({
@@ -56,53 +58,55 @@ const Aside: React.FunctionComponent<AsideProps> = ({
 
   return (
     <aside
-      className={` ${isAsideOpen ? "w-[200px]" : "w-[70px]"} transition-all duration-300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
+      className={` ${isAsideOpen ? "w-[170px]" : "w-[70px]"} transition-all duration-300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
     >
-      <div id="asideOptions" className="flex flex-col   w-full  bgrose-300 ">
-        {asideOptions.map((option) => (
+      <div id="asideOptions" className="flex flex-col gap-3  w-full  bgrose-300 ">
+        <div className="flex flex-col">
+          {asideOptions.map((option) => (
+            <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
+                asideSelectedOption === option.name
+                  ? ""
+                  : ""
+              } w-full items-center  cursor-pointer transition-colors duration-300 `}
+              key={option.name}
+              id={`link-${option.name}`}
+              // href={option.path}
+              onClick={() => {handleSelectedOption(option.tag); if (!isSiteContainerOpen) toggleSiteContainer();}}
+            >
+              <div className={`flex justify-center items-center gap-3 px-2`}>
+                <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
+                  {option.icon}
+                </p>
+                <label
+                  className={`${isAsideOpen ? "" : "hidden "} bgblue-300 cursor-pointer text-sm bgblue-200 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] text-nowrap`}
+                  htmlFor={`link-${option.name}`}
+                >
+                  {option.name}
+                </label>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex">
           <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
-              asideSelectedOption === option.name
+              asideSelectedOption === "logout"
                 ? ""
                 : ""
-            } w-full items-center  cursor-pointer transition-colors duration-300 `}
-            key={option.name}
-            id={`link-${option.name}`}
-            // href={option.path}
-            onClick={() => {handleSelectedOption(option.tag); if (!isSiteContainerOpen) toggleSiteContainer();}}
+            } w-full items-center  cursor-pointer transition-colors duration-300  `}
+            id={`link-logout`}
+            onClick={() => {window.location.href = "/";}}
           >
-            <div className={`flex justify-center items-center gap-3 px-2`}>
+            <div className={`flex justify-center items-center gap-3 px-2 `}>
               <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
-                {option.icon}
+                <PiPowerFill className="text-xl" />
               </p>
               <label
-                className={`${isAsideOpen ? "" : "hidden "} bgblue-300 cursor-pointer text-sm bgblue-200 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] text-nowrap`}
-                htmlFor={`link-${option.name}`}
+                className={` ${isAsideOpen ? "" : "hidden "} bgblue-300 cursor-pointer text-sm  bgblue-200 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]  text-nowrap`}
+                htmlFor={`link-logout`}
               >
-                {option.name}
+                Log Out
               </label>
             </div>
-          </div>
-        ))}
-
-
-        <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
-            asideSelectedOption === "logout"
-              ? ""
-              : ""
-          } w-full items-center  cursor-pointer transition-colors duration-300 `}
-          
-          id={`link-logout`}
-        >
-          <div className={`flex justify-center items-center gap-3 px-2`}>
-            <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
-              <PiPowerFill className="text-xl" />
-            </p>
-            <label
-              className={` ${isAsideOpen ? "" : "hidden "} bgblue-300 cursor-pointer text-sm  bgblue-200 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]  text-nowrap`}
-              htmlFor={`link-logout`}
-            >
-              Log Out
-            </label>
           </div>
         </div>
       </div>

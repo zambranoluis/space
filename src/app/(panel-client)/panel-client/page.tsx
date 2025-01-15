@@ -9,6 +9,7 @@ import { Image } from "@nextui-org/image";
 
 import { IoCloseOutline } from "react-icons/io5";
 
+import {backgrounds } from "./steps"
 
 
 
@@ -19,6 +20,7 @@ import AsideClient from "@/components/AsideClient";
 import ChatModal from "@/components/ChatModal";
 
 import Projects from "@/components/Projects/Projects"
+import MyProfile from "@/components/MyProfile/MyProfile";
 
 // import { projects } from "./steps"
 
@@ -27,6 +29,10 @@ function PanelClient() {
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
   const [isSiteContainerOpen, setIsSiteContainerOpen] = useState<boolean>(false);
+
+  const [selectedBackground, setSelectedBackground] = useState<number>(0);
+
+  
   
   
   
@@ -41,17 +47,23 @@ function PanelClient() {
 
     const handleSelectedOption = (option: string) => {
       setAsideSelectedOption(option);
+      if (asideSelectedOption === "myprofile") {
+        setSelectedBackground(0);
+      } else if (asideSelectedOption === "projects") {
+        setSelectedBackground(1);
+      }
     };
 
     
 
 
-    
+    console.log("selectedBackground", selectedBackground)
+    console.log("background:", backgrounds[selectedBackground])
 
   return (
     <main className="flex flex-col h-full w-full">
-
-      <section className='w-full h-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
+      
+      <section className='w-full h-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: `url('${backgrounds[selectedBackground].path}')`}} >
       
       <div className="relative w-full h-full">
         <div className="absolute w-full h-full gap-8 flex flex-col">
@@ -68,47 +80,17 @@ function PanelClient() {
             <div className="w-[60%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">
               <div className="flex flex-col w-full rounded-t-3xl">
                 <div className="w-full  flex justify-end items-center rounded-t-3xl bgred-300 p-2">
-                  <div  className="bgrose-400" >
-                    <IoCloseOutline className="text-xl bgblue-300" onClick={() => {toggleSiteContainer()}}/>
+                  <div  className="bgrose-400 cursor-pointer " onClick={() => {toggleSiteContainer()}} >
+                    <IoCloseOutline className="text-xl bgblue-300" />
                   </div>
                 </div>
-                <div  className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
-                {/* <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
-                  <div className="flex flex-col justify-center items-center text-[#6b776d]">
-                    <h1 className="font-black text-center">Hello, Claudia Alves!</h1>
-                    <p className="text-center text-sm">Welcome to your Space Creations account, here you can share photos 
-                    of yourspace, your inspiration and the measurements of your home.</p>
-                  </div>
-                  <div className="flex flex-col justify-center items-center">
-                    <div className="flex p-4">
-                      <h1 className="font-bold text-[#6b776d] text-center">Let's start designing together!</h1>
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center">
-                      <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to schedule a call</button>
-                      <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to complete the questionnaire</button>
-                    </div>
-                    <div className="flex flex-col py-6 gap-8 text-[#6c6c6c]">
-                      <div className="flex flex-col">
-                        <div className="flex p-2 font-bold bggreen-300 border-b border-b-[#6c6c6c] min-[350px]:w-[80%]">
-                          <h1>CONSULTATION CALL</h1>
-                        </div>
-                        <div className="flex bgblue-300 p-2 text-smin-[350px]sm:text-base">
-                          <p>You have a call on <span className="font-bold">December 15, 2023</span> at <span className="font-bold">10:30am</span> pst time with one of our project managers.</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <div className="flex p-2 font-bold bggreen-300 border-b border-b-[#6c6c6c] min-[350px]:w-[80%]">
-                          <h1>DESIGN PACKAGE</h1>
-                        </div>
-                        <div className="flex bgblue-300 p-2 text-sm sm:text-base">
-                          <p>You currently have an active package to design both areas of your home (Front yard & BackYard).</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section> */}
+                <div id="site" className={` h-full py-8 w-full bg-green-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
+                
                 {
                   (asideSelectedOption === "projects") && <Projects />
+                }
+                {
+                  (asideSelectedOption === "myprofile") && <MyProfile />
                 }
                 </div>
               </div>
