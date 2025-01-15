@@ -267,14 +267,14 @@ const CreateAccount = () => {
                     <div id="name-lastname" className="flex w-full bgblue-500">
                       <div id="name" className="flex w-full p-2 bgrose-400">
                         <input
-                          className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="First Name"
                         />
                       </div>
                       <div id="lastname" className="flex w-full p-2 bgpurple-500">
                         <input
-                          className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="Last Name"
                         />
@@ -282,7 +282,7 @@ const CreateAccount = () => {
                     </div>
                     <div id="email" className="flex w-full p-2">
                       <input
-                        className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                        className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                         type="text"
                         placeholder="Email"
                       />
@@ -290,14 +290,14 @@ const CreateAccount = () => {
                     <div id="password" className="flex flex-col w-full">
                       <div id="createPassword" className="flex w-full p-2">
                         <input
-                          className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="Create Password"
                         />
                       </div>
                       <div id="confirmPassword" className="flex w-full p-2">
                         <input
-                          className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="Confirm Password"
                         />
@@ -321,7 +321,7 @@ const CreateAccount = () => {
 
                       </div>
                       <input
-                        className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                        className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                         type="text"
                         placeholder="Phone"
                       />
@@ -333,7 +333,7 @@ const CreateAccount = () => {
                         </div>
                         <div className="flex w-full">
                           <input
-                            className="w-full h-full outline-none"
+                            className="bg-white text-[#828282] w-full h-full outline-none"
                             type="text"
                             placeholder="Skype"
                           />
@@ -342,7 +342,7 @@ const CreateAccount = () => {
                     </div>
                     <div id="address" className="flex w-full p-2">
                       <input
-                        className="w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                        className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                         type="text"
                         placeholder="Address"
                       />

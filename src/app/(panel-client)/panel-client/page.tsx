@@ -45,16 +45,16 @@ function PanelClient() {
     <main className="flex flex-col w-full">
       <section className='w-full min-h-[100vh] bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
       <div className="relative w-full h-full">
-          <div className="absolute w-full h-full gap-8 flex flex-col">
-            <Navbar toggleAside={toggleAside} />
-            <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
-          </div>
-          <div className=" w-full h-full relative">
-            <div className="flex absolute bottom-[10px] right-[10px] z-[2000]">
-              <ChatModal />
-            </div>
+        <div className="absolute w-full h-full gap-8 flex flex-col">
+          <Navbar toggleAside={toggleAside} />
+          <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
+        </div>
+        <div className=" w-full h-full relative">
+          <div className="flex absolute bottom-[10px] right-[10px] z-[2000]">
+            <ChatModal />
           </div>
         </div>
+      </div>
       </section>
 
       <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
