@@ -30,7 +30,7 @@ function PanelClient() {
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
   const [isSiteContainerOpen, setIsSiteContainerOpen] = useState<boolean>(false);
 
-  const [selectedBackground, setSelectedBackground] = useState<number>(0);
+  const [selectedBackground, setSelectedBackground] = useState<number>(1);
 
   
   
@@ -47,9 +47,9 @@ function PanelClient() {
 
     const handleSelectedOption = (option: string) => {
       setAsideSelectedOption(option);
-      if (asideSelectedOption === "myprofile") {
+      if (option === "myprofile") {
         setSelectedBackground(0);
-      } else if (asideSelectedOption === "projects") {
+      } else if (option === "projects") {
         setSelectedBackground(1);
       }
     };
@@ -84,7 +84,7 @@ function PanelClient() {
                     <IoCloseOutline className="text-xl bgblue-300" />
                   </div>
                 </div>
-                <div id="site" className={` h-full py-8 w-full bg-green-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
+                <div id="site" className={` h-full py-8 w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
                 
                 {
                   (asideSelectedOption === "projects") && <Projects />

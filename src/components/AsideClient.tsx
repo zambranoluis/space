@@ -70,8 +70,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
               } w-full items-center  cursor-pointer transition-colors duration-300 `}
               key={option.name}
               id={`link-${option.name}`}
-              // href={option.path}
-              onClick={() => {handleSelectedOption(option.tag); if (!isSiteContainerOpen) toggleSiteContainer();}}
+              onClick={() => { (option.tag === "cart") ? window.location.href = "/shopping-cart" : handleSelectedOption(option.tag); if (!isSiteContainerOpen && option.tag !== "cart") toggleSiteContainer();}}
             >
               <div className={`flex justify-center items-center gap-3 px-2`}>
                 <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
