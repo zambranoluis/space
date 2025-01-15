@@ -2,7 +2,7 @@
 
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { useState, ReactNode } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import { Image } from "@nextui-org/image";
 
 
@@ -21,18 +21,27 @@ import ChatModal from "@/components/ChatModal";
 
 import Projects from "@/components/Projects/Projects"
 import MyProfile from "@/components/MyProfile/MyProfile";
+import { aside } from "framer-motion/client";
 
 // import { projects } from "./steps"
 
 function PanelClient() {
 
-  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
-  const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
-  const [isSiteContainerOpen, setIsSiteContainerOpen] = useState<boolean>(false);
-
-  const [selectedBackground, setSelectedBackground] = useState<number>(1);
-
   
+  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
+  const [asideSelectedOption, setAsideSelectedOption] = useState<string>("projects");
+  const [isSiteContainerOpen, setIsSiteContainerOpen] = useState<boolean>(true);
+  
+  const [selectedBackground, setSelectedBackground] = useState<number>(1);
+  
+  
+  useEffect(() => {
+    if (asideSelectedOption === "myprofile") {
+      setSelectedBackground(0);
+    } else if (asideSelectedOption === "projects") {
+      setSelectedBackground(1);
+    }
+  }, [asideSelectedOption]);
   
   
   
@@ -41,24 +50,27 @@ function PanelClient() {
       setIsAsideOpen((prev) => !prev);
     };
 
-    const toggleSiteContainer = () => {
+    const toggleSiteContainer = (tag: string) => {
       setIsSiteContainerOpen((prev) => !prev);
+      setTimeout(() => {
+        handleSelectedOption(tag);
+      }, 200)
+      setTimeout(() => {
+        setIsSiteContainerOpen((prev) => !prev);
+      }, 300);
+      
+    };
+
+    const closeSiteContainer = () => {
+      setIsSiteContainerOpen(false);
     };
 
     const handleSelectedOption = (option: string) => {
       setAsideSelectedOption(option);
-      if (option === "myprofile") {
-        setSelectedBackground(0);
-      } else if (option === "projects") {
-        setSelectedBackground(1);
-      }
     };
 
     
 
-
-    console.log("selectedBackground", selectedBackground)
-    console.log("background:", backgrounds[selectedBackground])
 
   return (
     <main className="flex flex-col h-full w-full">
@@ -76,11 +88,11 @@ function PanelClient() {
             asideSelectedOption={asideSelectedOption}
             handleSelectedOption={handleSelectedOption}
           />
-          <div id="siteContainer" className={` ${isSiteContainerOpen ? "" : "translate-x-[-50%] translate-y-[-30%] scale-x-0 scale-y-0 opacity-0"} transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
+          <div id="siteContainer" className={` ${isSiteContainerOpen ? "" : "togglePanel"} transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
             <div className="w-[60%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">
               <div className="flex flex-col w-full rounded-t-3xl">
                 <div className="w-full  flex justify-end items-center rounded-t-3xl bgred-300 p-2">
-                  <div  className="bgrose-400 cursor-pointer " onClick={() => {toggleSiteContainer()}} >
+                  <div  className="bgrose-400 cursor-pointer " onClick={() => {closeSiteContainer()}} >
                     <IoCloseOutline className="text-xl bgblue-300" />
                   </div>
                 </div>

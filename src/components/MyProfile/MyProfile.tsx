@@ -26,11 +26,11 @@ const MyProfile = () => {
         <div className="flex w-full" id="email">
           <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Email" />
         </div>
-        <div className="flex w-full gap-2" id="phone">
-          <div id="areaCode" className="bgred-300 rounded-full border border-[#6d786f] w-[150px] h-[50px]">
+        <div className="flex max-md:flex-col w-full gap-2" id="phone">
+          <div id="areaCode" className="bgred-300 rounded-full border border-[#6d786f] w-[100px] h-[50px]">
             
           </div>
-          <div id="number" className="w-full flex">
+          <div id="number" className="w-full md:w-[calc(100%-100px)] flex">
             <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Phone Number" />
           </div>
         </div>

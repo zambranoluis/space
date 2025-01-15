@@ -27,7 +27,7 @@ import { TiArrowSortedDown } from "react-icons/ti";
 interface AsideProps {
   toggleAside: () => void;
   isAsideOpen: boolean;
-  toggleSiteContainer: () => void;
+  toggleSiteContainer: (tag: string) => void;
   isSiteContainerOpen: boolean;
   asideSelectedOption: string;
   handleSelectedOption: (option: string) => void;
@@ -58,7 +58,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
 
   return (
     <aside
-      className={` ${isAsideOpen ? "w-[170px]" : "w-[70px]"} transition-all duration-300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
+      className={` ${isAsideOpen ? "w-[170px]" : "w-[70px]"} transitionall duration300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
     >
       <div id="asideOptions" className="flex flex-col gap-3  w-full  bgrose-300 ">
         <div className="flex flex-col">
@@ -70,7 +70,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
               } w-full items-center  cursor-pointer transition-colors duration-300 `}
               key={option.name}
               id={`link-${option.name}`}
-              onClick={() => { (option.tag === "cart") ? window.location.href = "/shopping-cart" : handleSelectedOption(option.tag); if (!isSiteContainerOpen && option.tag !== "cart") toggleSiteContainer();}}
+              onClick={() => { if ( option.tag !== "cart") { toggleSiteContainer(option.tag); } if (option.tag === "cart") window.location.href = "/shopping-cart" ; }}
             >
               <div className={`flex justify-center items-center gap-3 px-2`}>
                 <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
