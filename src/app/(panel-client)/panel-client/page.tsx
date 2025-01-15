@@ -18,7 +18,7 @@ import { projects } from "./steps"
 
 function PanelClient() {
 
-  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
+  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
   
   
   

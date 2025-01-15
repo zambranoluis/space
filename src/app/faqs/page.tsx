@@ -27,7 +27,7 @@ import { RiWhatsappFill } from "react-icons/ri";
 
 import { faqs } from "./faqs"
 
-import { FaqsContactUsEmail, FaqsContactUsSkype, FaqsContactUsWhatsapp } from "@/components/faqsContactUs";
+import { FaqsContactUsEmail } from "@/components/faqsContactUs";
 
 
 
@@ -94,8 +94,6 @@ const CreateAccount = () => {
         </div>
       </section>
         
-
-
       <section className="flex w-full mt-8 h-[600px] bggreen-500 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/footerFaq1.jpg')" }}>
       </section>
     </main>
