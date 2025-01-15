@@ -56,7 +56,7 @@ function PanelClient() {
         <div className="absolute w-full h-full gap-8 flex flex-col">
           <NavbarClient toggleAside={toggleAside} />
           <AsideClient toggleAside={toggleAside} isAsideOpen={isAsideOpen} toggleSiteContainer={toggleSiteContainer} isSiteContainerOpen={isSiteContainerOpen} />
-          <div id="siteContainer" className={`${isSiteContainerOpen ? "" : "max-h-0"} transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
+          <div id="siteContainer" className={` ${isSiteContainerOpen ? "" : "translate-x-[-50%] translate-y-[-30%] scale-x-0 scale-y-0 opacity-0"} transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
             <div className="w-[60%] h-[70%] flex bg-blue-300 rounded-3xl shadow-md shadow-black">
               <div className="flex flex-col w-full rounded-t-3xl">
                 <div className="w-full  flex justify-end items-center rounded-t-3xl bg-red-300 p-2">
