@@ -37,7 +37,7 @@ import { FaStarHalfAlt } from "react-icons/fa";
 
 
 
-import { FaqsContactUsEmail, FaqsContactUsSkype, FaqsContactUsWhatsapp } from "@/components/faqsContactUs";
+import { FaqsContactUsEmail } from "@/components/faqsContactUs";
 import { b } from "framer-motion/client";
 
 const reviews = [

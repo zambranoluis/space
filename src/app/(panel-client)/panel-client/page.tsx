@@ -295,8 +295,6 @@ function PanelClient() {
           </div>
         </div>
       </section>
-
-      
     </main>
 
     
