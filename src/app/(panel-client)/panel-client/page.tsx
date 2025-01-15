@@ -3,13 +3,18 @@
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useState, ReactNode } from "react";
-// import { Image } from "@nextui-org/image";
+import { Image } from "@nextui-org/image";
+
+import { TiArrowSortedDown } from "react-icons/ti";
+
 
 import Navbar from "@/components/NavbarClient";
 
 import Aside from "@/components/AsideClient";
 
 import ChatModal from "@/components/ChatModal";
+
+import { steps } from "./steps"
 
 function PanelClient() {
 
@@ -81,7 +86,7 @@ function PanelClient() {
             <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>
             <div className="w-full w[170px] px-6 py-4 bgyellow-200 flex justify-center items-center text-center">Project Manager</div>
           </div>
-          <div className="flex flex-col text-xs overflow-y-auto .noScrollBar max-h-[600px] sm:text-sm md:text-base w-full bgslate-400 gap-2 bgred-300 py-8 ">
+          <div className="flex flex-col text-xs overflow-y-auto noScrollBar max-h-[600px] sm:text-sm md:text-base w-full bgslate-400 gap-2 bgred-300 py-8 ">
             <div className="flex bg-[#848d5a] rounded-3xl  w-full h-[90px]">
               <div className="w-full w[100px]  flex justify-center items-center">
                 12345678
@@ -208,21 +213,62 @@ function PanelClient() {
         </div>
       </section>
 
-      <section className="flex w-full bg-red-300 justify-center items-center">
-        <div className="flex flex-col w-[90%]">
-          <div className="flex bg-[#302626]">
+      <section className="flex w-full py-12 bgred-300 justify-center items-center">
+        <div className="flex flex-col w-[90%] ">
+          <div className="flex pl-6 bg-[#302626]">
             <h1 className="text-2xl font-semibold">Projects</h1>
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex bg-[#f0f0ef] text-[#67664c]">
-              <div>Proyecto 1 U2 - [ ID: 1 ]</div>
-              <div className="flex">
-                <button>Area Basic</button>
-                <button>Pending</button>
+          <div className="flex flex-col gap-2 px-6">
+            <div className="flex flex-col   bgred-200">
+              <div className="flex bg-[#f0f0ef] text-[#67664c]">
+                <div className="flex p-3">Proyecto 1 U3 - [ ID: 1 ]</div>
+                <div className="flex">
+                  <button>Area Basic</button>
+                  <button>Pending</button>
+                </div>
+              </div>
+              <div className="flex flex-col bgrose-500">
+                {
+                  steps.map((step) => (
+                    <div className="p-4 border border-[#e4e0d5] text-[#6b6950] border-t-0" key={step.id}>
+                      <div className="flex bgred-300 items-center p2 gap-2 font-bold">
+                        <TiArrowSortedDown />
+                        <h3>{step.title}</h3>
+                      </div>
+                      <div className="flex flex-col px-6">
+                        {step.areaType && (
+                            <div>
+                              <p>Area Type: <span>{step.areaType}</span></p>
+                            </div>
+                          )
+                        }
+                        {
+                          step.questions && (
+                            step.questions.map((question) => (
+                              <div className="flex gap-6 justifycenter items-center text-sm" key={question.id}>
+                                <p>{question.title}</p>
+                                {
+                                  (question.filled === true) && (
+                                    <Image className="w-[20px] rounded-none bgred-200" src="/spaceStepCheck.png" alt="fliiedChecked" />
+                                  )
+                                }
+                              </div>
+                            ))
+                          )
+                        }
+                        <div className="text-xs mt-6 flex justify-between items-center">
+                          <p>Status: {step.status}</p>
+                          <p>{step.date}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
               </div>
             </div>
+        
             <div className="flex bg-[#f0f0ef] text-[#67664c]">
-              <div>Proyecto 1 U3 - [ ID: 1 ]</div>
+              <div>Proyecto 1 U2 - [ ID: 1 ]</div>
               <div className="flex">
                 <button>Area Basic</button>
                 <button>Pending</button>
