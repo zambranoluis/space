@@ -85,7 +85,7 @@ const CreateAccount = () => {
                     <SlArrowDown id={`arrow${faq.id}`} className=" text-4xl font-light text-[#6b776d] cursor-pointer" />
                   </div>
                 </div>
-                <div id={`answerContainer${faq.id}`} className="flex duration-1000 bgred-400">
+                <div id={`answerContainer${faq.id}`} className="flex duration-1000 bgred-400 text-black">
                   <p id={`answer${faq.id}`} className="bggreen-400 hidden md:text-lg text-justify px-2 sm:px-6 duration-300">{faq.answer}</p>
                 </div>
               </div>
