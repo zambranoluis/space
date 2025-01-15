@@ -57,7 +57,7 @@ function PanelClient() {
         </div>
       </section>
 
-      <section className='w-[90%] py-12 flex flex-col min-h-[60vh] bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
+      <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
         <div className="flex flex-col justify-center items-center text-[#6b776d]">
           <h1 className="font-black text-center">Hello, Claudia Alves!</h1>
           <p className="text-center text-sm">Welcome to your Space Creations account, here you can share photos 
