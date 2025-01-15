@@ -21,13 +21,17 @@ import { projects } from "./steps"
 function PanelClient() {
 
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
-  
+  const [isSiteContainerOpen, setIsSiteContainerOpen] = useState<boolean>(false);
   
   
   
   
     const toggleAside = () => {
       setIsAsideOpen((prev) => !prev);
+    };
+
+    const toggleSiteContainer = () => {
+      setIsSiteContainerOpen((prev) => !prev);
     };
 
     const toggleProject = (id: number) => {
@@ -51,21 +55,24 @@ function PanelClient() {
       <div className="relative w-full h-full">
         <div className="absolute w-full h-full gap-8 flex flex-col">
           <NavbarClient toggleAside={toggleAside} />
-          <AsideClient toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
-          <div className=" absolute w-full h-full bgred-300 flex justify-center items-center">
+          <AsideClient toggleAside={toggleAside} isAsideOpen={isAsideOpen} toggleSiteContainer={toggleSiteContainer} isSiteContainerOpen={isSiteContainerOpen} />
+          <div id="siteContainer" className={`${isSiteContainerOpen ? "" : "max-h-0"} transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
             <div className="w-[60%] h-[70%] flex bg-blue-300 rounded-3xl shadow-md shadow-black">
               <div className="flex flex-col w-full rounded-t-3xl">
-                <div className="w-full  flex justify-end items-center rounded-t-3xl bgred-300 p-2">
-                  <IoCloseOutline className="text-xl" />
+                <div className="w-full  flex justify-end items-center rounded-t-3xl bg-red-300 p-2">
+                  <div  className="bg-rose-400" >
+                    <IoCloseOutline className="text-xl bg-blue-300" onClick={() => {toggleSiteContainer()}}/>
+                  </div>
+                </div>
+                <div  className={` h-full w-full bg-green-300 rounded-b-3xl`}>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className=" w-full h-full bgblue-300 relative">
-          <div className="flex bgred-200 absolute bottom-[10px] items-end h-full right-[10px] z-[2000]">
-            <ChatModal />
-          </div>
+        <div className="flex bgred-200 absolute bottom-[10px] items-end  right-[10px] z-[3000]">
+          <ChatModal />
         </div>
       </div>
       

@@ -25,6 +25,8 @@ import { TiArrowSortedDown } from "react-icons/ti";
 interface AsideProps {
   toggleAside: () => void;
   isAsideOpen: boolean;
+  toggleSiteContainer: () => void;
+  isSiteContainerOpen: boolean;
 }
 
 interface Option {
@@ -39,7 +41,7 @@ const asideOptions: Option[] = [
   { name: "Cart", path: "/shopping-cart", icon: <FaRegCalendarDays className="text-xl" /> },  
 ];
 
-const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }) => {
+const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen, toggleSiteContainer, isSiteContainerOpen }) => {
   const [asideSelectedOption, setAsideSelectedOption] = useState<string | null>(null);
   const { theme } = useTheme();
 
@@ -49,15 +51,15 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
     >
       <div id="asideOptions" className="flex flex-col   w-full  bgrose-300 ">
         {asideOptions.map((option) => (
-          <Link className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
+          <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
               asideSelectedOption === option.name
                 ? ""
                 : ""
             } w-full items-center  cursor-pointer transition-colors duration-300 `}
             key={option.name}
             id={`link-${option.name}`}
-            href={option.path}
-            onClick={() => setAsideSelectedOption(option.name)}
+            // href={option.path}
+            onClick={() => {setAsideSelectedOption(option.name); toggleSiteContainer();}}
           >
             <div className={`flex justify-center items-center gap-3 px-2`}>
               <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
@@ -70,18 +72,17 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
                 {option.name}
               </label>
             </div>
-          </Link>
+          </div>
         ))}
 
 
-        <Link className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
+        <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
             asideSelectedOption === "settings"
               ? ""
               : ""
           } w-full items-center  cursor-pointer transition-colors duration-300 `}
           
           id={`link-settings`}
-          href={"/settings"}
           onClick={() => setAsideSelectedOption("settings")}
         >
           <div className={`flex justify-center items-center gap-3 px-2`}>
@@ -95,7 +96,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
               Log Out
             </label>
           </div>
-        </Link>
+        </div>
       </div>
       <div className="bgred-300 flex justify-center items-center">
         <div className="bgblue-300 border-l border-l-white py-2 cursor-pointer"
