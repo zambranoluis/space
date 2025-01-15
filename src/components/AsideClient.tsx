@@ -45,11 +45,11 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
 
   return (
     <aside
-      className={` ${isAsideOpen ? "w-[200px]" : "w-[110px]"} transition-all duration-300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
+      className={` ${isAsideOpen ? "w-[200px]" : "w-[70px]"} transition-all duration-300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
     >
       <div id="asideOptions" className="flex flex-col   w-full  bgrose-300 ">
         {asideOptions.map((option) => (
-          <Link className={` flex  hover:bg-white/20 w-full px-3 pt-3 pb-4 ${
+          <Link className={` flex  hover:bg-white/20 w-full ${isAsideOpen ? "px-3" : "px-0"} pt-3 pb-4 ${
               asideSelectedOption === option.name
                 ? ""
                 : ""
@@ -59,7 +59,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
             href={option.path}
             onClick={() => setAsideSelectedOption(option.name)}
           >
-            <div className="flex justify-center items-center gap-3 px-4">
+            <div className={`flex justify-center items-center gap-3 px-2`}>
               <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
                 {option.icon}
               </p>
@@ -74,7 +74,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
         ))}
 
 
-        <Link className={` flex  hover:bg-white/20 w-full px-3 pt-3 pb-4 ${
+        <Link className={` flex  hover:bg-white/20 w-full ${isAsideOpen ? "px-3" : "px-0"} pt-3 pb-4 ${
             asideSelectedOption === "settings"
               ? ""
               : ""
@@ -84,7 +84,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
           href={"/settings"}
           onClick={() => setAsideSelectedOption("settings")}
         >
-          <div className="flex justify-center items-center gap-3 px-4">
+          <div className={`flex justify-center items-center gap-3 px-2`}>
             <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
               <PiPowerFill className="text-xl" />
             </p>

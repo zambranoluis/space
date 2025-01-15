@@ -26,10 +26,10 @@ const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
 
   
   return (
-    <nav id="navbarSmall" className=" flex  top-0 bg-black/50 w-full z-[1500] py-4 bgred-300 justify-between items-center  px-2 ">
+    <nav  className=" flex  top-0 bg-black/50 w-full z-[1500] py-4 bgred-300 justify-between items-center  px-4 ">
       <Link id="logoNavbar" className="flex bgred-200" href="/">
-        <Image className="h-full max-w-[150px] min-[500px]:max-w-[250px] drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
-          src="https://github.com/BPM94/SCCTMD/raw/main/logoWhite.png"
+        <Image className="h-full max-w-[150px]  drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
+          src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
           alt=""
         />
       </Link>

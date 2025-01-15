@@ -29,7 +29,7 @@ const ChatModal = () => {
 
   return (
   <div className="flex flex-col gap-2">
-    <div id="chatContainer" className="h[450px] w-[250px] maxh-0 overflow-hidden transition-all duration-300 ease-in-out bg-white bgred-300 rounded-3xl shadow-md shadow-black flex flex-col gap-2">
+    <div id="chatContainer" className="h[450px] w-[250px] max-h-0 overflow-hidden transition-all duration-300 bg-white bgred-300 rounded-3xl shadow-md shadow-black flex flex-col gap-2">
       <div className="flex justify-between px-8 py-2">
         <div className="flex justify-center items-center gap-2">
           <Image className="w-[30px] aspect-square rounded-none" src="/logoGreenShort.png" alt="" />
@@ -64,7 +64,7 @@ const ChatModal = () => {
         </div>
       </div>
     </div>
-    <div id="chatButton" className="bg-[#6c786e] p-4 rounded-full cursor-pointer flex place-self-end" onClick={() => {handleShowChat()}}>
+    <div id="chatButton" className="bg-[#6c786e] select-none p-4 rounded-full cursor-pointer flex place-self-end" onClick={() => {handleShowChat()}}>
       <Image className="w-[50px] aspect-square" src="/logoChat.png" alt="" />
     </div>
   </div>

@@ -43,7 +43,7 @@ function PanelClient() {
 
   return (
     <main className="flex flex-col w-full">
-      <section className='w-full min-h-[100vh] bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
+      <section className='w-full h-[100vh] bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
       <div className="relative w-full h-full">
         <div className="absolute w-full h-full gap-8 flex flex-col">
           <Navbar toggleAside={toggleAside} />
@@ -57,7 +57,7 @@ function PanelClient() {
       </div>
       </section>
 
-      <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
+      {/* <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
         <div className="flex flex-col justify-center items-center text-[#6b776d]">
           <h1 className="font-black text-center">Hello, Claudia Alves!</h1>
           <p className="text-center text-sm">Welcome to your Space Creations account, here you can share photos 
@@ -294,7 +294,7 @@ function PanelClient() {
               }
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
 
     
