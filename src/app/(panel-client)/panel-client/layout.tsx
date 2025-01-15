@@ -24,7 +24,7 @@ export default function PanelClientLayout({ children }: WorkerPanelLayout) {
   return (
     <DataProvider>
       <ThemeProvider>
-        <section className="flex w-full">
+        <section className="flex w-full bg-red-300  h-screen">
           {children}
         </section>
       </ThemeProvider>

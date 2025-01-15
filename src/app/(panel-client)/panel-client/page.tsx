@@ -8,9 +8,9 @@ import { Image } from "@nextui-org/image";
 import { TiArrowSortedDown } from "react-icons/ti";
 
 
-import Navbar from "@/components/NavbarClient";
+import NavbarClient from "@/components/NavbarClient";
 
-import Aside from "@/components/AsideClient";
+import AsideClient from "@/components/AsideClient";
 
 import ChatModal from "@/components/ChatModal";
 
@@ -43,14 +43,14 @@ function PanelClient() {
 
   return (
     <main className="flex flex-col w-full">
-      
-      <section className='w-full h-[100vh] bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
-      <div className="relative w-full h-full">
-        <div className="absolute w-full h-full gap-8 flex flex-col">
-          <Navbar toggleAside={toggleAside} />
-          <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
+
+      <section className='w-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
+      <div className="relative w-full ">
+        <div className="absolute w-full  gap-8 flex flex-col">
+          <NavbarClient toggleAside={toggleAside} />
+          <AsideClient toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
         </div>
-        <div className=" w-full h-full relative">
+        <div className=" w-full  relative">
           <div className="flex absolute bottom-[10px] right-[10px] z-[2000]">
             <ChatModal />
           </div>
