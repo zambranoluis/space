@@ -49,7 +49,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
     >
       <div id="asideOptions" className="flex flex-col   w-full  bgrose-300 ">
         {asideOptions.map((option) => (
-          <Link className={` flex  hover:bg-white/20 w-full ${isAsideOpen ? "px-3" : "px-0"} pt-3 pb-4 ${
+          <Link className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
               asideSelectedOption === option.name
                 ? ""
                 : ""
@@ -74,7 +74,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }
         ))}
 
 
-        <Link className={` flex  hover:bg-white/20 w-full ${isAsideOpen ? "px-3" : "px-0"} pt-3 pb-4 ${
+        <Link className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
             asideSelectedOption === "settings"
               ? ""
               : ""

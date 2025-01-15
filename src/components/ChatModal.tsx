@@ -49,11 +49,11 @@ const ChatModal = () => {
         </div>
       </div>
       <div className="flex bgred-300 w-[90%] place-self-center ">
-        <div className="flex relative w[80%] bggreen-300 w-full">
+        <div className="flex relative w[80%] bggreen-300 w-full p-1">
           <div className="flex w-full">
             <input className="bg-white w-full  text-black text-sm outline-none border-black border px-2 py-6 rounded-xl" type="text" />
           </div>
-          <div className="flex absolute right-[10px] bottom-[5px] gap-1">
+          <div className="flex absolute right-[10px] bottom-[8px] gap-1">
             <SlPicture className="text-[#c3c3c3] text-xl cursor-pointer" />
             <CiFolderOn className="text-[#c3c3c3] text-xl cursor-pointer" />
             <CiFaceSmile className="text-[#c3c3c3] text-xl cursor-pointer" />
