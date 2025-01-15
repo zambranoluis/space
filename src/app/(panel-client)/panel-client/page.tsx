@@ -5,9 +5,11 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { useState, ReactNode } from "react";
 import { Image } from "@nextui-org/image";
 
-import { TiArrowSortedDown } from "react-icons/ti";
+
 
 import { IoCloseOutline } from "react-icons/io5";
+
+
 
 
 import NavbarClient from "@/components/NavbarClient";
@@ -16,11 +18,14 @@ import AsideClient from "@/components/AsideClient";
 
 import ChatModal from "@/components/ChatModal";
 
-import { projects } from "./steps"
+import Projects from "@/components/Projects/Projects"
+
+// import { projects } from "./steps"
 
 function PanelClient() {
 
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
+  const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
   const [isSiteContainerOpen, setIsSiteContainerOpen] = useState<boolean>(false);
   
   
@@ -34,18 +39,14 @@ function PanelClient() {
       setIsSiteContainerOpen((prev) => !prev);
     };
 
-    const toggleProject = (id: number) => {
-      const project = document.getElementById(`project${id}Container`);
-      project?.classList.toggle("max-h-0");
+    const handleSelectedOption = (option: string) => {
+      setAsideSelectedOption(option);
     };
 
+    
 
-    const toggleStep = ( projectId: number, stepId: number) => {
-      const step = document.getElementById(`project${projectId}Step${stepId}Container`);
-      const arrow = document.getElementById(`project${projectId}Arrow${stepId}`);
-      arrow?.classList.toggle("rotate-180");
-      step?.classList.toggle("max-h-0");
-    };
+
+    
 
   return (
     <main className="flex flex-col h-full w-full">
@@ -55,17 +56,60 @@ function PanelClient() {
       <div className="relative w-full h-full">
         <div className="absolute w-full h-full gap-8 flex flex-col">
           <NavbarClient toggleAside={toggleAside} />
-          <AsideClient toggleAside={toggleAside} isAsideOpen={isAsideOpen} toggleSiteContainer={toggleSiteContainer} isSiteContainerOpen={isSiteContainerOpen} />
+          <AsideClient
+            toggleAside={toggleAside}
+            isAsideOpen={isAsideOpen}
+            toggleSiteContainer={toggleSiteContainer}
+            isSiteContainerOpen={isSiteContainerOpen}
+            asideSelectedOption={asideSelectedOption}
+            handleSelectedOption={handleSelectedOption}
+          />
           <div id="siteContainer" className={` ${isSiteContainerOpen ? "" : "translate-x-[-50%] translate-y-[-30%] scale-x-0 scale-y-0 opacity-0"} transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
-            <div className="w-[60%] h-[70%] flex bg-blue-300 rounded-3xl shadow-md shadow-black">
+            <div className="w-[60%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">
               <div className="flex flex-col w-full rounded-t-3xl">
-                <div className="w-full  flex justify-end items-center rounded-t-3xl bg-red-300 p-2">
-                  <div  className="bg-rose-400" >
-                    <IoCloseOutline className="text-xl bg-blue-300" onClick={() => {toggleSiteContainer()}}/>
+                <div className="w-full  flex justify-end items-center rounded-t-3xl bgred-300 p-2">
+                  <div  className="bgrose-400" >
+                    <IoCloseOutline className="text-xl bgblue-300" onClick={() => {toggleSiteContainer()}}/>
                   </div>
                 </div>
-                <div  className={` h-full w-full bg-green-300 rounded-b-3xl`}>
-
+                <div  className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
+                {/* <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
+                  <div className="flex flex-col justify-center items-center text-[#6b776d]">
+                    <h1 className="font-black text-center">Hello, Claudia Alves!</h1>
+                    <p className="text-center text-sm">Welcome to your Space Creations account, here you can share photos 
+                    of yourspace, your inspiration and the measurements of your home.</p>
+                  </div>
+                  <div className="flex flex-col justify-center items-center">
+                    <div className="flex p-4">
+                      <h1 className="font-bold text-[#6b776d] text-center">Let's start designing together!</h1>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center">
+                      <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to schedule a call</button>
+                      <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to complete the questionnaire</button>
+                    </div>
+                    <div className="flex flex-col py-6 gap-8 text-[#6c6c6c]">
+                      <div className="flex flex-col">
+                        <div className="flex p-2 font-bold bggreen-300 border-b border-b-[#6c6c6c] min-[350px]:w-[80%]">
+                          <h1>CONSULTATION CALL</h1>
+                        </div>
+                        <div className="flex bgblue-300 p-2 text-smin-[350px]sm:text-base">
+                          <p>You have a call on <span className="font-bold">December 15, 2023</span> at <span className="font-bold">10:30am</span> pst time with one of our project managers.</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <div className="flex p-2 font-bold bggreen-300 border-b border-b-[#6c6c6c] min-[350px]:w-[80%]">
+                          <h1>DESIGN PACKAGE</h1>
+                        </div>
+                        <div className="flex bgblue-300 p-2 text-sm sm:text-base">
+                          <p>You currently have an active package to design both areas of your home (Front yard & BackYard).</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section> */}
+                {
+                  (asideSelectedOption === "projects") && <Projects />
+                }
                 </div>
               </div>
             </div>
@@ -111,9 +155,9 @@ function PanelClient() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="flex flex-col w-full bg-[#f0f0ef] place-self-center bgblue-300 justify-center items-center max-sm:py-12  sm:py-24">
+      {/* <section className="flex flex-col w-full bg-[#f0f0ef] place-self-center bgblue-300 justify-center items-center max-sm:py-12  sm:py-24">
         <div className="flex flex-col bgred-200 w-[75%]">
           <div className="flex bggreen-200 gap4 text-[#69664c] text-sm sm:text-lg font-bold w-full">
             <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
@@ -245,9 +289,9 @@ function PanelClient() {
 
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="flex w-full py-12 bgred-300 justify-center items-center">
+      {/* <section className="flex w-full py-12 bgred-300 justify-center items-center">
         <div className="flex flex-col w-[90%] ">
           <div className="flex pl-6 bg-[#302626]">
             <h1 className="text-2xl font-semibold">Projects</h1>

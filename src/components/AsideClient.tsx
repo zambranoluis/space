@@ -27,22 +27,31 @@ interface AsideProps {
   isAsideOpen: boolean;
   toggleSiteContainer: () => void;
   isSiteContainerOpen: boolean;
+  asideSelectedOption: string;
+  handleSelectedOption: (option: string) => void;
 }
 
 interface Option {
   name: string;
+  tag: string;
   path: string;
   icon: React.ReactNode;
 }
 
 const asideOptions: Option[] = [
-  { name: "My Profile", path: "/my-profile", icon: < FaClipboardList className="text-xl" /> },
-  { name: "Projects", path: "/projects", icon: <FaFolder className="text-xl" /> },
-  { name: "Cart", path: "/shopping-cart", icon: <FaRegCalendarDays className="text-xl" /> },  
+  { name: "My Profile", tag: "myprofile", path: "/my-profile", icon: < FaClipboardList className="text-xl" /> },
+  { name: "Projects", tag: "projects", path: "/projects", icon: <FaFolder className="text-xl" /> },
+  { name: "Cart", tag: "cart", path: "/shopping-cart", icon: <FaRegCalendarDays className="text-xl" />, },  
 ];
 
-const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen, toggleSiteContainer, isSiteContainerOpen }) => {
-  const [asideSelectedOption, setAsideSelectedOption] = useState<string | null>(null);
+const Aside: React.FunctionComponent<AsideProps> = ({
+  toggleAside,
+  isAsideOpen,
+  toggleSiteContainer,
+  isSiteContainerOpen,
+  asideSelectedOption, handleSelectedOption
+}) => {
+  
   const { theme } = useTheme();
 
   return (
@@ -59,7 +68,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen, 
             key={option.name}
             id={`link-${option.name}`}
             // href={option.path}
-            onClick={() => {setAsideSelectedOption(option.name); toggleSiteContainer();}}
+            onClick={() => {handleSelectedOption(option.tag); if (!isSiteContainerOpen) toggleSiteContainer();}}
           >
             <div className={`flex justify-center items-center gap-3 px-2`}>
               <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
@@ -77,13 +86,12 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen, 
 
 
         <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
-            asideSelectedOption === "settings"
+            asideSelectedOption === "logout"
               ? ""
               : ""
           } w-full items-center  cursor-pointer transition-colors duration-300 `}
           
-          id={`link-settings`}
-          onClick={() => setAsideSelectedOption("settings")}
+          id={`link-logout`}
         >
           <div className={`flex justify-center items-center gap-3 px-2`}>
             <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
@@ -91,7 +99,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen, 
             </p>
             <label
               className={` ${isAsideOpen ? "" : "hidden "} bgblue-300 cursor-pointer text-sm  bgblue-200 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]  text-nowrap`}
-              htmlFor={`link-settings`}
+              htmlFor={`link-logout`}
             >
               Log Out
             </label>
