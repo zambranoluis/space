@@ -42,16 +42,16 @@ function PanelClient() {
     };
 
   return (
-    <main className="flex flex-col w-full">
+    <main className="flex flex-col h-full w-full">
 
-      <section className='w-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
-      <div className="relative w-full ">
-        <div className="absolute w-full  gap-8 flex flex-col">
+      <section className='w-full h-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
+      <div className="relative w-full h-full">
+        <div className="absolute w-full h-full gap-8 flex flex-col">
           <NavbarClient toggleAside={toggleAside} />
           <AsideClient toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
         </div>
-        <div className=" w-full  relative">
-          <div className="flex absolute bottom-[10px] right-[10px] z-[2000]">
+        <div className=" w-full h-full bgblue-300 relative">
+          <div className="flex bgred-200 absolute bottom-[10px] items-end h-full right-[10px] z-[2000]">
             <ChatModal />
           </div>
         </div>
