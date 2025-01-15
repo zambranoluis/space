@@ -7,6 +7,8 @@ import { Image } from "@nextui-org/image";
 
 import { TiArrowSortedDown } from "react-icons/ti";
 
+import { IoCloseOutline } from "react-icons/io5";
+
 
 import NavbarClient from "@/components/NavbarClient";
 
@@ -45,10 +47,20 @@ function PanelClient() {
     <main className="flex flex-col h-full w-full">
 
       <section className='w-full h-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: "url('/panel-clientBg.jpg')"}} >
+      
       <div className="relative w-full h-full">
         <div className="absolute w-full h-full gap-8 flex flex-col">
           <NavbarClient toggleAside={toggleAside} />
           <AsideClient toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
+          <div className=" absolute w-full h-full bgred-300 flex justify-center items-center">
+            <div className="w-[60%] h-[70%] flex bg-blue-300 rounded-3xl shadow-md shadow-black">
+              <div className="flex flex-col w-full rounded-t-3xl">
+                <div className="w-full  flex justify-end items-center rounded-t-3xl bgred-300 p-2">
+                  <IoCloseOutline className="text-xl" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className=" w-full h-full bgblue-300 relative">
           <div className="flex bgred-200 absolute bottom-[10px] items-end h-full right-[10px] z-[2000]">
@@ -56,6 +68,7 @@ function PanelClient() {
           </div>
         </div>
       </div>
+      
       </section>
 
       {/* <section className='w-[90%] py-12 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center' >
