@@ -67,6 +67,31 @@ const steps = [
   }
 ]
 
+const projects = [
+  {
+    id: 1,
+    title: "Project 1 U1 - [ ID: 1 ]",
+    status: "Pending",
+    type: "Area Basic",
+    steps: steps
+  },
+  {
+    id: 2,
+    title: "Project 2 U2 - [ ID: 2 ]",
+    status: "Pending",
+    type: "Area Basic",
+    steps: steps
+  },
+  {
+    id: 3,
+    title: "Project 3 U3 - [ ID: 3 ]",
+    status: "Pending",
+    type: "Area Basic",
+    steps: steps
+  }
+]
+
 export {
+  projects,
   steps
 }
