@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-// import { useRouter } from "next/navigation"; // Importar desde "next/navigation" en apps con appDir
 import { useTheme } from "../context/ThemeContext";
+
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -53,6 +54,9 @@ const Aside: React.FunctionComponent<AsideProps> = ({
   
   const { theme } = useTheme();
 
+  
+
+
   return (
     <aside
       className={` ${isAsideOpen ? "w-[170px]" : "w-[70px]"} transitionall duration300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
@@ -60,7 +64,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
       <div id="asideOptions" className="flex flex-col gap-3  w-full  bgrose-300 ">
         <div className="flex flex-col">
           {asideOptions.map((option) => (
-            <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
+            <div className={` flex  hover:bg-white/20 ${asideSelectedOption === option.tag ? "bg-white/20" : ""} w-full  pt-3 pb-4 ${
                 asideSelectedOption === option.name
                   ? ""
                   : ""

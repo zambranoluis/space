@@ -61,7 +61,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
       <div id="asideOptions" className="flex flex-col gap-3  w-full  bgrose-300 ">
         <div className="flex flex-col">
           {asideOptions.map((option) => (
-            <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
+            <div className={` flex  hover:bg-white/20 w-full ${asideSelectedOption === option.tag ? "bg-white/20" : ""}  pt-3 pb-4 ${
                 asideSelectedOption === option.name
                   ? ""
                   : ""
