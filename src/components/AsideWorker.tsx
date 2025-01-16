@@ -91,7 +91,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
                 : ""
             } w-full items-center  cursor-pointer transition-colors duration-300  `}
             id={`link-logout`}
-            onClick={() => {window.location.href = "/";}}
+            onClick={() => {window.location.href = "/login";}}
           >
             <div className={`flex justify-center items-center gap-3 px-3`}>
               <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
