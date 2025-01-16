@@ -326,18 +326,18 @@ const CreateAccount = () => {
                       </div>
                     </div>
                     <div id="phone" className="flex w-full p-2 gap-2">
-                      <div id="areaCode" className="flex bgred-400 w-[120px] items-center justify-center text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]" >
+                      <div id="areaCode" className="flex bgred-400 w-[120px] items-center justify-center text-[#828282] border border-[#828282] rounded-full  max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]" >
                         <div ref={selectRef} id="selected" className="flex gap-1 p-1 items-center justify-center w-[120px] h-full cursor-pointer" onClick={handleShowCodesList} >
                           <p className="text-xs">{areaCodes[selectedCode].code}</p>
                           <Image className="w-[35px] rounded-md" src={areaCodes[selectedCode].flag} alt="" />
                           <IoMdArrowDropdown className="text-xl" />
                         </div>
                         {isListVisible && (
-                          <div ref={listRef} id="list" className="flex flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll border border-[#6d786f]">
+                          <div ref={listRef} id="list" className="flex  flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll border border-[#6d786f]">
                             {areaCodes.map((country) => (
                               <div
                                 key={country.id}
-                                className="flex gap-1 border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
+                                className="flex gap-1 cursor-pointer border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
                                 onClick={() => handleSelectCode(country.id - 1)}
                               >
                                 <Image className="w-[35px] rounded-md" src={country.flag} alt="" />

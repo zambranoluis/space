@@ -145,8 +145,8 @@ const ProjectsWorker = () => {
 
   return (
     <>
-      <section className="flex flex-col w-full bg-[#f0f0ef] place-self-center bgblue-300 justify-center items-center max-sm:py-12  sm:py-24">
-        <div className="flex flex-col bgred-200 w-[75%]">
+      <section className="flex flex-col w-full  place-self-center bgblue-300 justify-center items-center py-8  ">
+        <div className="flex flex-col bgred-200 w-[90%] p-2 rounded-3xl bg-[#f0f0ef]">
           <div className="flex bggreen-200 gap4 text-[#69664c] text-sm sm:text-lg font-bold w-full">
             <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
             <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>

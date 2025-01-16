@@ -282,7 +282,7 @@ const MyProfile = () => {
                   {areaCodes.map((country) => (
                     <div
                       key={country.id}
-                      className="flex gap-1 border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
+                      className="flex gap-1 border-b cursor-pointer border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
                       onClick={() => handleSelectCode(country.id - 1)}
                     >
                       <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
