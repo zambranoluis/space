@@ -5,41 +5,26 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { useState, ReactNode } from "react";
 // import { Image } from "@nextui-org/image";
 
-import Navbar from "@/components/NavbarWorker";
+import Navbar from "@/components/NavbarClient";
 
-import Aside from "@/components/AsideWorker";
+import Aside from "@/components/AsideClient";
+
+import ChatModal from "@/components/ChatModal";
 
 interface WorkerPanelLayout {
   children: ReactNode; // Define el tipo para las props de children
 }
 
-export default function DashboardLayout({ children }: WorkerPanelLayout) {
-  
-  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
-
-
-
-
-
-  const toggleAside = () => {
-    setIsAsideOpen((prev) => !prev);
-  };
+export default function PanelClientLayout({ children }: WorkerPanelLayout) {  
 
 
 
   return (
     <DataProvider>
       <ThemeProvider>
-        <div className="relative w-full h-full">
-          <div className="absolute w-full h-full gap-8 flex flex-col">
-            <Navbar toggleAside={toggleAside} />
-            <Aside toggleAside={toggleAside} isAsideOpen={isAsideOpen} />
-          </div>
-          <div className=" w-full h-full ">
-            <section className="w-full h-full">{children}</section>
-          </div>
-        </div>
-        <footer></footer>
+        <section className="flex w-full bgred-300  h-screen">
+          {children}
+        </section>
       </ThemeProvider>
     </DataProvider>
   );

@@ -8,103 +8,113 @@ import Link from "next/link";
 
 import { FaPersonCircleQuestion } from "react-icons/fa6";
 
+import { PiPowerFill } from "react-icons/pi";
+
+
 import { FaClipboardList } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa6";
 import { FaRegCalendarDays } from "react-icons/fa6";
 import { IoMdNotifications } from "react-icons/io";
 import { FaEnvelope } from "react-icons/fa";
+import { TiShoppingCart } from "react-icons/ti";
+
 import { FaUserCircle } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 
+import { TiArrowSortedDown } from "react-icons/ti";
 
 
 interface AsideProps {
   toggleAside: () => void;
   isAsideOpen: boolean;
+  toggleSiteContainer: (tag: string) => void;
+  isSiteContainerOpen: boolean;
+  asideSelectedOption: string;
+  handleSelectedOption: (option: string) => void;
 }
 
 interface Option {
   name: string;
+  tag: string;
   path: string;
   icon: React.ReactNode;
 }
 
 const asideOptions: Option[] = [
-  { name: "Projects", path: "/projects", icon: < FaClipboardList className="text-xl" /> },
-  { name: "Projects History", path: "/projects-history", icon: <FaFolder className="text-xl" /> },
-  { name: "Work Calendar", path: "/work-calendar", icon: <FaRegCalendarDays className="text-xl" /> },
-  { name: "Notification", path: "/notifications", icon: <IoMdNotifications className="text-xl" /> },
-  { name: "Message", path: "/message", icon: <FaEnvelope className="text-xl" /> },
-  { name: "My Profile", path: "/my-profile", icon: <FaUserCircle className="text-xl" /> },
-  { name: "Settings", path: "/settings", icon: <IoSettingsSharp className="text-xl" /> },
+  { name: "My Profile", tag: "myprofile", path: "/my-profile", icon: < FaUserCircle className="text-xl" /> },
+  { name: "Projects", tag: "projects", path: "/projects", icon: <FaFolder className="text-xl" /> },
+  { name: "Cart", tag: "cart", path: "/shopping-cart", icon: <TiShoppingCart className="text-xl" />, },  
 ];
 
-const Aside: React.FunctionComponent<AsideProps> = ({ toggleAside, isAsideOpen }) => {
-  const [asideSelectedOption, setAsideSelectedOption] = useState<string | null>(null);
+const Aside: React.FunctionComponent<AsideProps> = ({
+  toggleAside,
+  isAsideOpen,
+  toggleSiteContainer,
+  isSiteContainerOpen,
+  asideSelectedOption, handleSelectedOption
+}) => {
+  
   const { theme } = useTheme();
-  // const router = useRouter(); // Hook de Next.js para acceder al pathname
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true); // Marcar como montado en el cliente
-
-    if (!isMounted) return;
-
-    const currentPath = window.location.pathname.toLowerCase();
-
-    // Verificar si el pathname incluye alguna de las palabras clave
-    const matchedOption = asideOptions.find((option) =>
-      currentPath.includes(option.name.toLowerCase())
-    );
-
-    // Actualizar el estado si se encuentra una coincidencia
-    if (matchedOption) {
-      setAsideSelectedOption(matchedOption.name);
-    }
-  }, [isMounted]); // Ejecutar después del montaje
 
   return (
     <aside
-      className={` select-none noScrollBar  bg-black/50 w-[210px] z-[2000] max-[900px]:h-[310px] overflow-auto    flex flex-col   rounded-r-3xl justify-between gap-12 py-6  text-[#8e7842]`}
+      className={` ${isAsideOpen ? "w-[170px]" : "w-[80px]"} transitionall duration300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}
     >
-      
-
-      <div id="asideTop" className="flex flex-col   w-full  bgrose-300 ">
-        {asideOptions.map((option) => (
-          <Link className={` flex  hover:bg-black w-full px-3 py-4 ${
-              asideSelectedOption === option.name
+      <div id="asideOptions" className="flex flex-col gap-3  w-full  bgrose-300 ">
+        <div className="flex flex-col">
+          {asideOptions.map((option) => (
+            <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
+                asideSelectedOption === option.name
+                  ? ""
+                  : ""
+              } w-full items-center  cursor-pointer transition-colors duration-300 `}
+              key={option.name}
+              id={`link-${option.name}`}
+              onClick={() => { if ( option.tag !== "cart") { toggleSiteContainer(option.tag); } if (option.tag === "cart") window.location.href = "/shopping-cart" ; }}
+            >
+              <div className={`flex justify-center items-center gap-3 px-3`}>
+                <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
+                  {option.icon}
+                </p>
+                <label
+                  className={`${isAsideOpen ? "" : "hidden "} bgblue-300 cursor-pointer text-sm bgblue-200 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] text-nowrap`}
+                  htmlFor={`link-${option.name}`}
+                >
+                  {option.name}
+                </label>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex">
+          <div className={` flex  hover:bg-white/20 w-full  pt-3 pb-4 ${
+              asideSelectedOption === "logout"
                 ? ""
                 : ""
-            } w-full items-center  cursor-pointer transition-colors duration-300 `}
-            key={option.name}
-            id={`link-${option.name}`}
-            href={option.path}
-            onClick={() => setAsideSelectedOption(option.name)}
+            } w-full items-center  cursor-pointer transition-colors duration-300  `}
+            id={`link-logout`}
+            onClick={() => {window.location.href = "/";}}
           >
-            <div className="flex justify-center items-center gap-4 px-4">
-              <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
-                {option.icon}
+            <div className={`flex justify-center items-center gap-3 px-3`}>
+              <p className="drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)] bgred-200">
+                <PiPowerFill className="text-xl" />
               </p>
               <label
-                className="cursor-pointer text-sm font-medium drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
-                htmlFor={`link-${option.name}`}
+                className={` ${isAsideOpen ? "" : "hidden "} bgblue-300 cursor-pointer text-sm  bgblue-200 drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]  text-nowrap`}
+                htmlFor={`link-logout`}
               >
-                {option.name}
+                Log Out
               </label>
             </div>
-          </Link>
-        ))}
-      </div>
-
-      <div id="asideBottom" className="flex  hover:bg-black w-full  cursor-pointer">
-        <div className="flex   w-full   items-center  transition-colors duration-300">
-          <div className="flex justify-center items-center gap-4  cursor-pointer   hover:bg-black w-full px-3 py-4">
-            <FaPersonCircleQuestion className="text-xl" />
-            <p>Help & Support</p>
           </div>
         </div>
       </div>
-
+      <div className="bgred-300 flex justify-center items-center pr-2">
+        <div className={`${isAsideOpen ? "border-l border-l-white" : "border-r border-r-white "} bgblue-300  py-2 cursor-pointer`}
+        onClick={() => { toggleAside();}}>
+          <TiArrowSortedDown className={`${isAsideOpen ? "rotate-90" : "-rotate-90"} text-3xl`} />
+        </div>
+      </div>
     </aside>
   );
 };
