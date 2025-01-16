@@ -107,12 +107,12 @@ function PanelClient() {
           <div id="siteContainer" className={` transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
             <div className="w-[60%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">
               <div className="flex flex-col w-full rounded-t-3xl">
-                <div className="w-full  flex justify-end items-center rounded-t-3xl bgred-300 p-2">
+                <div className="w-full  flex justify-end items-center rounded-t-3xl  p-2">
                   <div  className="bgrose-400 cursor-pointer " onClick={() => {closeSiteContainer()}} >
                     <IoCloseOutline className="text-xl bgblue-300" />
                   </div>
                 </div>
-                <div id="site" className={` h-full py4 w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
+                <div id="site" className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
                 
                 {
                   (asideSelectedOption === "projects") && <Projects />
