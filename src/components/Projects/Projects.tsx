@@ -145,14 +145,14 @@ const ProjectsWorker = () => {
 
   return (
     <>
-      <section className="flex flex-col w-full  place-self-center bgblue-300 justify-center items-center py-8  ">
-        <div className="flex flex-col bgred-200 w-[90%] p-2 rounded-3xl bg-[#f0f0ef]">
+      <section className="flex flex-col w-full  place-self-center bgblue-300 justify-center items-center pt-8 pb-4  ">
+        <div className="flex flex-col bgred-200 w-[90%] p-4 rounded-3xl bg-[#f0f0ef]">
           <div className="flex bggreen-200 gap4 text-[#69664c] text-sm sm:text-lg font-bold w-full">
             <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
             <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>
             <div className="w-full w[170px] px-6 py-4 bgyellow-200 flex justify-center items-center text-center">Project Manager</div>
           </div>
-          <div className="flex flex-col text-xs overflow-y-auto noScrollBar max-h-[600px] sm:text-sm md:text-base w-full bgslate-400 gap-2 bgred-300 py-8 ">
+          <div className="flex flex-col text-xs overflow-y-auto noScrollBar h-[300px] bgred-200 sm:text-sm md:text-base w-full bgslate-400 gap-2  py-8 ">
             <div className="flex bg-[#848d5a] rounded-3xl  w-full h-[90px]">
               <div className="w-full w[100px]  flex justify-center items-center">
                 12345678
@@ -279,7 +279,7 @@ const ProjectsWorker = () => {
         </div>
       </section>
 
-      <section className="flex w-full bgred-300 justify-center items-center py-8">
+      <section className="flex w-full bgred-300 justify-center items-center pb-8 pt-4">
         <div className="flex flex-col w-[90%] ">
           <div className="flex pl-6 bg-[#302626]">
             <h1 className="text-2xl font-semibold">Projects</h1>
