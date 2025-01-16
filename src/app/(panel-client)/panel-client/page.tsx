@@ -90,7 +90,7 @@ function PanelClient() {
   return (
     <main className="flex flex-col h-full w-full">
       
-      <section className='w-full h-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: `url('${backgrounds[selectedBackground].path}')`}} >
+      <section className='w-full h-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: `url('/panel-clientBg.jpg')`}} >
       
       <div className="relative w-full h-full">
         <div className="absolute w-full h-full gap-8 flex flex-col">
