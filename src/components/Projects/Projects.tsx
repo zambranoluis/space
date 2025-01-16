@@ -279,7 +279,7 @@ const ProjectsWorker = () => {
         </div>
       </section>
 
-      <section className="flex w-full bgred-300 justify-center items-center pb-8 pt-4">
+      {/* <section className="flex w-full bgred-300 justify-center items-center pb-8 pt-4">
         <div className="flex flex-col w-[90%] ">
           <div className="flex pl-6 bg-[#302626]">
             <h1 className="text-2xl font-semibold">Projects</h1>
@@ -347,7 +347,7 @@ const ProjectsWorker = () => {
             }
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
