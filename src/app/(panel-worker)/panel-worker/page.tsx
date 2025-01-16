@@ -20,6 +20,8 @@ import AsideWorker from "@/components/AsideWorker";
 import ChatModal from "@/components/ChatModal";
 
 import {ProjectsWorker} from "@/components/Projects/Projects"
+
+import History from "@/components/History/History";
 import MyProfile from "@/components/MyProfile/MyProfile";
 import { aside } from "framer-motion/client";
 
@@ -99,6 +101,9 @@ function PanelClient() {
                 }
                 {
                   (asideSelectedOption === "myprofile") && <MyProfile />
+                }
+                {
+                  (asideSelectedOption === "history") && <History />
                 }
                 </div>
               </div>
