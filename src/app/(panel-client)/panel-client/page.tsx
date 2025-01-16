@@ -30,7 +30,6 @@ function PanelClient() {
   
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("projects");
-  const [isSiteContainerOpen, setIsSiteContainerOpen] = useState<boolean>(true);
   
   const [selectedBackground, setSelectedBackground] = useState<number>(1);
   
@@ -50,10 +49,12 @@ function PanelClient() {
       setIsAsideOpen((prev) => !prev);
     };
 
-    const toggleSiteContainer = (tag: string) => {
-      
-      if (tag !== asideSelectedOption) {
-        const container = document.getElementById(`siteContainer`);
+    
+  const toggleSiteContainer = (tag: string) => {
+    console.log("tag: ", tag);
+    console.log("asideSelectedOption: ", asideSelectedOption);
+    const container = document.getElementById(`siteContainer`);
+    if (tag !== asideSelectedOption) {
       if (container?.classList.contains("togglePanel")) {
         setAsideSelectedOption(tag);
         container?.classList.remove("togglePanel");
@@ -66,23 +67,21 @@ function PanelClient() {
           container?.classList.remove("togglePanel");
         },300)
       }
-      }
-      
-      
-    };
-
-    const closeSiteContainer = () => {
-      const container = document.getElementById(`siteContainer`);
+    } else if (tag === asideSelectedOption ) {
       if (container?.classList.contains("togglePanel")) {
-        
-      } else {
-        container?.classList.add("togglePanel");
+        container?.classList.remove("togglePanel");
       }
-    };
+    }
+  };
 
-    const handleSelectedOption = (option: string) => {
-      setAsideSelectedOption(option);
-    };
+  const closeSiteContainer = () => {
+    const container = document.getElementById(`siteContainer`);
+    if (container?.classList.contains("togglePanel")) {
+      return;
+    } else {
+      container?.classList.add("togglePanel");
+    }
+  };
 
     
     
@@ -100,9 +99,7 @@ function PanelClient() {
             toggleAside={toggleAside}
             isAsideOpen={isAsideOpen}
             toggleSiteContainer={toggleSiteContainer}
-            isSiteContainerOpen={isSiteContainerOpen}
             asideSelectedOption={asideSelectedOption}
-            handleSelectedOption={handleSelectedOption}
           />
           <div id="siteContainer" className={` transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
             <div className="w-[60%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">

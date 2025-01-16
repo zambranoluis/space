@@ -67,9 +67,6 @@ function PanelClient() {
     }
   };
 
-  const handleSelectedOption = (option: string) => {
-    setAsideSelectedOption(option);
-  };
 
 
 

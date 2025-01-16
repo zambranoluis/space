@@ -28,9 +28,7 @@ interface AsideProps {
   toggleAside: () => void;
   isAsideOpen: boolean;
   toggleSiteContainer: (tag: string) => void;
-  isSiteContainerOpen: boolean;
   asideSelectedOption: string;
-  handleSelectedOption: (option: string) => void;
 }
 
 interface Option {
@@ -50,8 +48,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
   toggleAside,
   isAsideOpen,
   toggleSiteContainer,
-  isSiteContainerOpen,
-  asideSelectedOption, handleSelectedOption
+  asideSelectedOption
 }) => {
   
   const { theme } = useTheme();
