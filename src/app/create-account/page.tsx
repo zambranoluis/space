@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
@@ -224,13 +224,35 @@ const areaCodes = [
 const CreateAccount = () => {
 
   const [selectedCode, setSelectedCode] = useState<number>(26);
+  const [isListVisible, setIsListVisible] = useState<boolean>(false);
+
+  const selectRef = useRef<HTMLDivElement>(null);
+    const listRef = useRef<HTMLDivElement>(null);
+  
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (selectRef.current && !selectRef.current.contains(event.target as Node) &&
+            listRef.current && !listRef.current.contains(event.target as Node)) {
+          setIsListVisible(false); // Cerrar la lista si se hace clic fuera
+        }
+      };
+  
+      // Agregar el event listener al hacer clic fuera
+      document.addEventListener("mousedown", handleClickOutside);
+  
+      // Limpiar el event listener cuando el componente se desmonte
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
 
   const handleShowCodesList = () => {
-    const codesList = document.getElementById("list");
+    setIsListVisible(!isListVisible);
+  }
 
-    if (codesList) {
-      codesList.classList.toggle("hidden");
-    }
+  const handleSelectCode = (id: number) => {
+    setSelectedCode(id);
+    setIsListVisible(false);  // Cerrar la lista después de seleccionar
   }
 
 
@@ -304,20 +326,26 @@ const CreateAccount = () => {
                       </div>
                     </div>
                     <div id="phone" className="flex w-full p-2 gap-2">
-                      <div tabIndex={0} id="areaCode" className="flex bgred-400 w-[150px] items-center justify-center text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]" onClick={handleShowCodesList} onBlur={handleShowCodesList} >
-                        <div  id="selected" className="flex gap-1 p-1 items-center justify-center w-[140px]" >
-                          <p>{areaCodes[selectedCode].code}</p>
+                      <div id="areaCode" className="flex bgred-400 w-[120px] items-center justify-center text-[#828282] border border-[#828282] rounded-full cursor-pointer max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]" >
+                        <div ref={selectRef} id="selected" className="flex gap-1 p-1 items-center justify-center w-[120px] h-full cursor-pointer" onClick={handleShowCodesList} >
+                          <p className="text-xs">{areaCodes[selectedCode].code}</p>
                           <Image className="w-[35px] rounded-md" src={areaCodes[selectedCode].flag} alt="" />
                           <IoMdArrowDropdown className="text-xl" />
                         </div>
-                        <div id="list" className={`flex hidden flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll `}>
-                          {areaCodes.map((country) => (
-                            <div  key={country.id} className="flex gap-1 border-b border-[#828282] items-center  w-full hover:bg-primary hover:text-white justify-between p-2" onClick={() => {setSelectedCode(country.id-1);}}>
-                              <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
-                              <p>{country.code}</p>
-                            </div>
-                          ))}
-                        </div>
+                        {isListVisible && (
+                          <div ref={listRef} id="list" className="flex flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll border border-[#6d786f]">
+                            {areaCodes.map((country) => (
+                              <div
+                                key={country.id}
+                                className="flex gap-1 border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
+                                onClick={() => handleSelectCode(country.id - 1)}
+                              >
+                                <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
+                                <p className="text-sm">{country.code}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
 
                       </div>
                       <input

@@ -1,8 +1,9 @@
 "use client";
-
+import React, { useEffect, useState, useRef } from "react";
 import { area, option } from "framer-motion/client";
 import { FaUserCircle } from "react-icons/fa";
 import { Image } from "@nextui-org/image";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const areaCodes = [
   {
@@ -213,9 +214,41 @@ const areaCodes = [
 ]
 
 const MyProfile = () => {
+  const [selectedCode, setSelectedCode] = useState<number>(26);
+  const [isListVisible, setIsListVisible] = useState<boolean>(false);
+
+  const selectRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (selectRef.current && !selectRef.current.contains(event.target as Node) &&
+          listRef.current && !listRef.current.contains(event.target as Node)) {
+        setIsListVisible(false); // Cerrar la lista si se hace clic fuera
+      }
+    };
+
+    // Agregar el event listener al hacer clic fuera
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Limpiar el event listener cuando el componente se desmonte
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleShowCodesList = () => {
+    setIsListVisible(!isListVisible);
+  }
+
+  const handleSelectCode = (id: number) => {
+    setSelectedCode(id);
+    setIsListVisible(false);  // Cerrar la lista después de seleccionar
+  }
+  
   return (
     <section className="flex flex-col wfull  bgred-500 max-w-[500px] justify-center items-center w-[80%] place-self-center py4 gap6">
-      <div className="text-center text-[#6d786f]  bg-white w-full sticky top-0">
+      <div className="text-center text-[#6d786f]  bg-white w-full sticky top-0 z-[100]">
         <div className="flex justify-center items-center">
           < FaUserCircle className="text-[100px] " />
         </div>
@@ -238,20 +271,28 @@ const MyProfile = () => {
             <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Email" />
           </div>
           <div className="flex max-md:flex-col w-full gap-2" id="phone">
-            <div id="areaCode" className="bgred-300 rounded-full border border-[#6d786f] w-[100px] h-[50px]">
-              <select className="w-full h-full rounded-full bg-white border border[#6d786f] text-[#6d786f]" name="" id="" >
-                {
-                  areaCodes.map((code) => (
-                    <option className="text-[#6d786f]" key={code.id} value={code.code} >
-                      <p>{code.code}</p>
-                      <Image src={code.flag} alt="" />
-                    </option>
-
-                  ))
-                }
-              </select>
+            <div id="areaCode" className="w-[120px] relative h-[50px] rounded-full bg-white border border-[#6d786f]  text-[#6d786f]  noScrollBar"  >
+              <div ref={selectRef} id="selected" className="flex gap-1 p-1 items-center justify-center w-[120px] h-full cursor-pointer" onClick={handleShowCodesList}>
+                <p className="text-xs">{areaCodes[selectedCode].code}</p>
+                <Image className="w-[35px] rounded-md" src={areaCodes[selectedCode].flag} alt="" />
+                <IoMdArrowDropdown className="text-xl" />
+              </div>
+              {isListVisible && (
+                <div ref={listRef} id="list" className="flex flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll border border-[#6d786f]">
+                  {areaCodes.map((country) => (
+                    <div
+                      key={country.id}
+                      className="flex gap-1 border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
+                      onClick={() => handleSelectCode(country.id - 1)}
+                    >
+                      <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
+                      <p className="text-sm">{country.code}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-            <div id="number" className="w-full md:w-[calc(100%-100px)] flex">
+            <div id="number" className="w-full md:w-[calc(100%-120px)] flex">
               <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Phone Number" />
             </div>
           </div>
