@@ -41,8 +41,8 @@ interface Option {
 const asideOptions: Option[] = [
   { name: "My Profile", tag: "myprofile", path: "/my-profile", icon: < FaUserCircle className="text-xl" /> },
   { name: "Projects", tag: "projects", path: "/projects", icon: <FaFolder className="text-xl" /> },
-  { name: "Work Calendar", tag: "workcalendar", path: "/work-calendar", icon: <FaRegCalendarDays className="text-xl" /> },
   { name: "History", tag: "history", path: "/projects-history", icon: <FaClipboardList className="text-xl" />, },  
+  { name: "Work Calendar", tag: "workcalendar", path: "/work-calendar", icon: <FaRegCalendarDays className="text-xl" /> },
 ];
 
 const Aside: React.FunctionComponent<AsideProps> = ({

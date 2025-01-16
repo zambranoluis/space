@@ -69,24 +69,27 @@ const steps = [
 
 const projects = [
   {
-    id: 1,
+    id: 1234223,
     title: "Project 1 U1 - [ ID: 1 ]",
     status: "Pending",
     type: "Area Basic",
+    designer: "Joao Da Silva",
     steps: steps
   },
   {
-    id: 2,
+    id: 2234332,
     title: "Project 2 U2 - [ ID: 2 ]",
     status: "Pending",
     type: "Area Basic",
+    designer: "Joao Da Silva",
     steps: steps
   },
   {
-    id: 3,
+    id: 433358776,
     title: "Project 3 U3 - [ ID: 3 ]",
     status: "Pending",
     type: "Area Basic",
+    designer: "Joao Da Silva",
     steps: steps
   }
 ]

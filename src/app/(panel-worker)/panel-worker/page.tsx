@@ -19,7 +19,7 @@ import AsideWorker from "@/components/AsideWorker";
 
 import ChatModal from "@/components/ChatModal";
 
-import Projects from "@/components/Projects/Projects"
+import {ProjectsWorker} from "@/components/Projects/Projects"
 import MyProfile from "@/components/MyProfile/MyProfile";
 import { aside } from "framer-motion/client";
 
@@ -95,7 +95,7 @@ function PanelClient() {
                 <div id="site" className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
                 
                 {
-                  (asideSelectedOption === "projects") && <Projects />
+                  (asideSelectedOption === "projects") && <ProjectsWorker />
                 }
                 {
                   (asideSelectedOption === "myprofile") && <MyProfile />
