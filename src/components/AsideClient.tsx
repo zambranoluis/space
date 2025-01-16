@@ -109,10 +109,10 @@ const Aside: React.FunctionComponent<AsideProps> = ({
           </div>
         </div>
       </div>
-      <div className="bgred-300 flex justify-center items-center">
-        <div className="bgblue-300 border-l border-l-white py-2 cursor-pointer"
+      <div className="bgred-300 flex justify-center items-center pr-2">
+        <div className={`${isAsideOpen ? "border-l border-l-white" : "border-r border-r-white "} bgblue-300  py-2 cursor-pointer`}
         onClick={() => { toggleAside();}}>
-          <TiArrowSortedDown className="rotate-90 text-3xl" />
+          <TiArrowSortedDown className={`${isAsideOpen ? "rotate-90" : "-rotate-90"} text-3xl`} />
         </div>
       </div>
     </aside>
