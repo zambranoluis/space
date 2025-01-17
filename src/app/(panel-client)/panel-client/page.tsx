@@ -65,7 +65,7 @@ function PanelClient() {
 
     try {
       const res = await axios.get<Customer>(
-        'https://715vq04v-4000.use2.devtunnels.ms/space/customers/6789c1afce8c2f0ad7736d00'
+        'https://715vq04v-4000.use2.devtunnels.ms/space/customers/6789c1afce8c2f0ad7736d00',
       );
       setCustomer(res.data); // Almacena los datos del cliente
       
