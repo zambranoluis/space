@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 
+import Axios from "axios";
+
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
@@ -223,11 +225,23 @@ const areaCodes = [
 
 const CreateAccount = () => {
 
+  const [formData, setFormData] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    skype: "",
+    address: ""
+  });
+
   const [selectedCode, setSelectedCode] = useState<number>(26);
+  const [areaCode, setAreaCode] = useState<string>("+1");
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
 
   const selectRef = useRef<HTMLDivElement>(null);
-    const listRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -250,9 +264,32 @@ const CreateAccount = () => {
     setIsListVisible(!isListVisible);
   }
 
-  const handleSelectCode = (id: number) => {
+  const handleSelectCode = (id: number, code: string) => {
     setSelectedCode(id);
+    setAreaCode(code);
     setIsListVisible(false);  // Cerrar la lista después de seleccionar
+  }
+
+  const handleBuildPhone = (phoneNumber: string) => {
+    console.log("Area code", areaCode);
+    const phone = `${areaCode}${phoneNumber}`;
+    console.log("phone", phone);
+    setFormData({ ...formData, phone: phone });
+  }
+
+
+  const handleCreateAccount = () => {
+    console.log("create account 1.");
+    console.log("2. form data", formData);
+    const register = async () => {
+      try {
+        const res = await Axios.post("http://localhost:4000/space/customers", formData);
+        console.log("3. result", res);
+    } catch (error) {
+        console.log("error", error);
+      }
+    };
+    register();
   }
 
 
@@ -279,49 +316,55 @@ const CreateAccount = () => {
               <div className="flex  overflow-y-auto bgred-400">
                 <form
                   className="flex flex-col w-full h-full bgorange-300"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    window.location.href = "#";
-                  }}
                 >
                   <div id="fields" className="flex flex-col w-[80%] h-full  place-self-center"
                   >
                     <div id="name-lastname" className="flex w-full bgblue-500">
                       <div id="name" className="flex w-full p-2 bgrose-400">
                         <input
+                          id="fieldName"
                           className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="First Name"
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
                       </div>
                       <div id="lastname" className="flex w-full p-2 bgpurple-500">
                         <input
+                          id="fieldLastName"
                           className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="Last Name"
+                          onChange={(e) => setFormData({ ...formData, lastname: e.target.value })}
                         />
                       </div>
                     </div>
                     <div id="email" className="flex w-full p-2">
                       <input
+                        id="fieldEmail"
                         className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                         type="text"
                         placeholder="Email"
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       />
                     </div>
                     <div id="password" className="flex flex-col w-full">
                       <div id="createPassword" className="flex w-full p-2">
                         <input
+                          id="fieldPassword"
                           className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="Create Password"
+                          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
                       </div>
                       <div id="confirmPassword" className="flex w-full p-2">
                         <input
+                          id="fieldConfirmPassword"
                           className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="Confirm Password"
+                          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                         />
                       </div>
                     </div>
@@ -338,7 +381,7 @@ const CreateAccount = () => {
                               <div
                                 key={country.id}
                                 className="flex gap-1 cursor-pointer border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
-                                onClick={() => handleSelectCode(country.id - 1)}
+                                onClick={() => {handleSelectCode(country.id - 1, country.code);}}
                               >
                                 <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
                                 <p className="text-sm">{country.code}</p>
@@ -349,9 +392,11 @@ const CreateAccount = () => {
 
                       </div>
                       <input
+                        id="fieldPhone"
                         className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                         type="text"
                         placeholder="Phone"
+                        onChange={(e) => {handleBuildPhone(e.target.value)}}
                       />
                     </div>
                     <div id="skype" className="flex w-full p-2">
@@ -361,22 +406,27 @@ const CreateAccount = () => {
                         </div>
                         <div className="flex w-full">
                           <input
+                            id="fieldSkype"
                             className="bg-white text-[#828282] w-full h-full outline-none"
                             type="text"
                             placeholder="Skype"
+                            onChange={(e) => setFormData({ ...formData, skype: e.target.value })}
                           />
                         </div>
                       </div>
                     </div>
                     <div id="address" className="flex w-full p-2">
                       <input
+                        id="fieldAddress"
                         className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                         type="text"
                         placeholder="Address"
+                        onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       />
                     </div>
                     <div id="birthdate" className="flex w-[60%] p-2 max-w-[300px]">
                       <DatePicker
+                        id="fieldBirthdate"
                         className="max-w-sm max-lg:bg-white rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                         label={"Birth date"}
                         radius="full"
@@ -389,7 +439,13 @@ const CreateAccount = () => {
                     id="submit"
                     className="flex items-center justify-center w-full mt-2 p-2 bgrose-400"
                   >
-                    <button className="px-12 py-2 font-bold text-white bg-[#5ea789] rounded-bl-2xl rounded-tr-2xl hover:bg-green-800 max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
+                    <button
+                      className="px-12 py-2 font-bold text-white bg-[#5ea789] rounded-bl-2xl rounded-tr-2xl hover:bg-green-800 max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCreateAccount();
+                      }}
+                    >
                       Create Account
                     </button>
                   </div>

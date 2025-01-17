@@ -14,10 +14,10 @@ import {Avatar} from "@nextui-org/avatar";
 
 
 interface NavbarProps {
-  toggleAside: () => void; // Una función que no recibe argumentos y no retorna nada
+  
 }
 
-const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
+const Navbar: React.FC<NavbarProps> = ( {  } ) => {
 
 
 

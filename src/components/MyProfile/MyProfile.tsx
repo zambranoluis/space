@@ -213,7 +213,9 @@ const areaCodes = [
 
 ]
 
-const MyProfile = () => {
+const MyProfile = (customer: any) => {
+
+  console.log("customeeeeer: ", customer);
   const [selectedCode, setSelectedCode] = useState<number>(26);
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
 
@@ -262,13 +264,13 @@ const MyProfile = () => {
       <div className="flex flex-col gap-6 py-6 bgred-200 w-full">
         <form className="bg-[#f3f3f3] rounded-3xl flex flex-col w-full justify-center items-center gap-4  p-8">
           <div className="flex w-full" id="firstName">
-            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="First Name"/>
+            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.name}/>
           </div>
           <div className="flex w-full" id="lastName">
-            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Last Name" />
+            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.lastname} />
           </div>
           <div className="flex w-full" id="email">
-            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Email" />
+            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.email} />
           </div>
           <div className="flex max-md:flex-col w-full gap-2" id="phone">
             <div id="areaCode" className="w-[120px] relative h-[50px] rounded-full bg-white border border-[#6d786f]  text-[#6d786f]  noScrollBar"  >
@@ -293,11 +295,11 @@ const MyProfile = () => {
               )}
             </div>
             <div id="number" className="w-full md:w-[calc(100%-120px)] flex">
-              <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Phone Number" />
+              <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.phone} />
             </div>
           </div>
-          <div className="flex w-full" id="adress">
-            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Adress" />
+          <div className="flex w-full" id="address">
+            <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.address} />
           </div>
           <div className="flex justify-center items-center">
             <button onClick={(e) => {e.preventDefault();}} className="bg-[#6d786f] text-sm text-white rounded-tl-2xl rounded-br-2xl px-4 py-2">
