@@ -17,7 +17,8 @@ interface Customer {
   birthdate: string;
 }
 
-const url = "http://localhost:4000/space";
+// const url = "http://localhost:4000/space";
+const url = "https://715vq04v-4000.use2.devtunnels.ms/space"
 
 export const apiService = {
   createCustomer: async (customer: Customer) => {
