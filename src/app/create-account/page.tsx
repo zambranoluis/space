@@ -1,8 +1,19 @@
 'use client'
 
-import { useState, useRef, useEffect } from "react";
+import {
+  validateText,
+validateTextWithSpaces,
+validateNumber,
+validateEmail,
+validatePassword
+} from "@/utils/validation";
 
-import Axios from "axios";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+
+import axios from "axios";
+import { apiService } from "@/services/apiService";
+
+
 
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
@@ -11,7 +22,10 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { GrSkype } from "react-icons/gr";
 
 import { DatePicker } from "@nextui-org/date-picker";
-import { code } from "@nextui-org/react";
+import { parseDate, getLocalTimeZone, DateValue, } from "@internationalized/date";
+
+
+
 
 const areaCodes = [
   {
@@ -221,20 +235,41 @@ const areaCodes = [
 
 ]
 
-
+interface Customer {
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone: {
+    areaCode: string;
+    number: string;
+  }[];
+  skype: string;
+  address: string;
+  birthdate: string;
+}
 
 const CreateAccount = () => {
 
-  const [formData, setFormData] = useState({
+
+  const [formData, setFormData] = useState<Customer>({
     name: "",
     lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phone: "",
+    phone: [
+      {
+        areaCode: "",
+        number: "",
+      }
+    ],
     skype: "",
-    address: ""
+    address: "",
+    birthdate: "",
   });
+
 
   const [selectedCode, setSelectedCode] = useState<number>(26);
   const [areaCode, setAreaCode] = useState<string>("+1");
@@ -243,22 +278,22 @@ const CreateAccount = () => {
   const selectRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (selectRef.current && !selectRef.current.contains(event.target as Node) &&
-            listRef.current && !listRef.current.contains(event.target as Node)) {
-          setIsListVisible(false); // Cerrar la lista si se hace clic fuera
-        }
-      };
-  
-      // Agregar el event listener al hacer clic fuera
-      document.addEventListener("mousedown", handleClickOutside);
-  
-      // Limpiar el event listener cuando el componente se desmonte
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (selectRef.current && !selectRef.current.contains(event.target as Node) &&
+          listRef.current && !listRef.current.contains(event.target as Node)) {
+        setIsListVisible(false); // Cerrar la lista si se hace clic fuera
+      }
+    };
+
+    // Agregar el event listener al hacer clic fuera
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Limpiar el event listener cuando el componente se desmonte
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleShowCodesList = () => {
     setIsListVisible(!isListVisible);
@@ -267,30 +302,34 @@ const CreateAccount = () => {
   const handleSelectCode = (id: number, code: string) => {
     setSelectedCode(id);
     setAreaCode(code);
-    setIsListVisible(false);  // Cerrar la lista después de seleccionar
+    setIsListVisible(false);
   }
 
   const handleBuildPhone = (phoneNumber: string) => {
-    console.log("Area code", areaCode);
-    const phone = `${areaCode}${phoneNumber}`;
-    console.log("phone", phone);
-    setFormData({ ...formData, phone: phone });
+    setFormData({ ...formData, phone: [{ areaCode: areaCode, number: phoneNumber }] });
   }
 
+  
+  const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false); // Estado de carga
+  const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error
 
-  const handleCreateAccount = () => {
-    console.log("create account 1.");
-    console.log("2. form data", formData);
-    const register = async () => {
-      try {
-        const res = await Axios.post("https://715vq04v-4000.use2.devtunnels.ms/space/customers", formData);
-        console.log("3. result", res);
-    } catch (error) {
-        console.log("error", error);
+
+  const handleCreateAccount = async () => {
+    try {
+      setIsLoadingCustomer(true);
+      setErrorCustomer(null);
+      const response = await apiService.createCustomer(formData);
+      console.log("response peticion createCustomer en create account", response);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err) && err.response) {
+        setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
+      } else {
+        setErrorCustomer("Error: No se pudo obtener los extras.");
       }
-    };
-    register();
-  }
+    } finally {
+      setIsLoadingCustomer(false);
+    }
+  };
 
 
   return (
@@ -326,7 +365,7 @@ const CreateAccount = () => {
                           className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
                           type="text"
                           placeholder="First Name"
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          onChange={(e) => {if (validateTextWithSpaces(e.target.value)) setFormData({ ...formData, name: e.target.value })}}
                         />
                       </div>
                       <div id="lastname" className="flex w-full p-2 bgpurple-500">
@@ -425,13 +464,16 @@ const CreateAccount = () => {
                       />
                     </div>
                     <div id="birthdate" className="flex w-[60%] p-2 max-w-[300px]">
-                      <DatePicker
+                      <input
                         id="fieldBirthdate"
-                        className="max-w-sm max-lg:bg-white rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                        label={"Birth date"}
-                        radius="full"
-                        variant="bordered"
-                        showMonthAndYearPickers
+                        className="bg-white w-full max-w-[200px] p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                        type="date"
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            birthdate: e.target.value,
+                          });
+                        }}
                       />
                     </div>
                   </div>

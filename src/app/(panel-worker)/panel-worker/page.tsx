@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { useEffect, useState, ReactNode } from "react";
 import { Image } from "@nextui-org/image";
 
-
+import axios from "axios";
 
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -27,11 +27,59 @@ import { aside } from "framer-motion/client";
 
 // import { projects } from "./steps"
 
-function PanelClient() {
+interface Customer {
+  id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  skype: string;
+  verified: boolean;
+  isActive: boolean;
+  softDelete: boolean;
+  [key: string]: any; // Para propiedades adicionales
+}
+
+
+
+function PanelWorker() {
 
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("projects");
 
+  const [customer, setCustomer] = useState<Customer | null>(null); // Cliente inicializado como `null`
+    const [isLoading, setIsLoading] = useState<boolean>(false); // Estado de carga
+    const [error, setError] = useState<string | null>(null); // Estado de error
+
+  const getCustomer = async () => {
+    setIsLoading(true); // Inicia el indicador de carga
+    setError(null); // Resetea cualquier error previo
+    try {
+      const res = await axios.get<Customer>(
+        'http://localhost:4000/space/customers/6789c1afce8c2f0ad7736d00',
+      );
+      setCustomer(res.data); // Almacena los datos del cliente
+    } catch (err: unknown) {
+      // Manejo de errores robusto  
+      if (axios.isAxiosError(err) && err.response) {
+        setError(`Error: ${err.response.status} - ${err.response.data.message}`);
+      } else {
+        setError('Error: No se pudo obtener el cliente.');
+      }
+    } finally {
+      setIsLoading(false); // Finaliza el indicador de carga
+    }
+  };
+
+  useEffect(() => {
+    getCustomer();
+  }, []);
+
+  useEffect(() => {
+    console.log('customer desde panel worker:', customer);
+  }, [customer]);
+
+  
   const toggleAside = () => {
     setIsAsideOpen((prev) => !prev);
   };
@@ -100,7 +148,7 @@ function PanelClient() {
                   (asideSelectedOption === "projects") && <ProjectsWorker />
                 }
                 {
-                  (asideSelectedOption === "myprofile") && <MyProfile />
+                  (asideSelectedOption === "myprofile") && <MyProfile customer={customer} />
                 }
                 {
                   (asideSelectedOption === "history") && <History />
@@ -361,4 +409,4 @@ function PanelClient() {
   )
 }
 
-export default PanelClient;
+export default PanelWorker;

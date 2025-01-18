@@ -213,11 +213,26 @@ const areaCodes = [
 
 ]
 
+interface Customer {
+  id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  skype: string;
+  verified: boolean;
+  isActive: boolean;
+  softDelete: boolean;
+  [key: string]: any; // Para propiedades adicionales
+}
 const MyProfile = (customer: any) => {
 
-  console.log("customeeeeer: ", customer);
+  console.log("custome desde my profile: ", customer.customer);
+  const [customerData, setCustomerData] = useState<Customer>(customer.customer);
+  
   const [selectedCode, setSelectedCode] = useState<number>(26);
   const [isListVisible, setIsListVisible] = useState<boolean>(false);
+
 
   const selectRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -248,20 +263,27 @@ const MyProfile = (customer: any) => {
     setIsListVisible(false);  // Cerrar la lista después de seleccionar
   }
   
+  
   return (
     <section className="flex flex-col wfull  bgred-500 max-w-[500px] justify-center items-center w-[80%] place-self-center py4 gap6">
       <div className="text-center text-[#6d786f]  bg-white w-full sticky top-0 z-[100]">
         <div className="flex justify-center items-center">
           < FaUserCircle className="text-[100px] " />
         </div>
-        <div>
-          <h1 className="font-bold">arkweb@gmail.com</h1>
-          <h2 className="">Claudia Alves</h2>
-          <p className="">Client</p>
-        </div>
+        {(customerData !== null) 
+          ? <div>
+              <h1 className="font-bold">arkweb@gmail.com</h1>
+              <h2 className="">Claudia Alves</h2>
+              <p className="">Client</p>
+            </div> 
+          : <div>
+              <p>No user data available right now.</p> 
+            </div>
+        }
       </div>
 
-      <div className="flex flex-col gap-6 py-6 bgred-200 w-full">
+      {
+        (customerData !== null) && <div className="flex flex-col gap-6 py-6 bgred-200 w-full">
         <form className="bg-[#f3f3f3] rounded-3xl flex flex-col w-full justify-center items-center gap-4  p-8">
           <div className="flex w-full" id="firstName">
             <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.name}/>
@@ -325,6 +347,7 @@ const MyProfile = (customer: any) => {
           </div>
         </form>
       </div>
+      }
     </section>
   );
 }
