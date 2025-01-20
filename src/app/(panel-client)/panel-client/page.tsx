@@ -26,16 +26,19 @@
 
 
   interface Customer {
-    id: string;
+    _id: string;
     name: string;
     lastname: string;
     email: string;
-    phone: string;
+    password: string;
+    confirmPassword: string;
+    phone: {
+      areaCode: string;
+      number: string;
+    }[];
     skype: string;
-    verified: boolean;
-    isActive: boolean;
-    softDelete: boolean;
-    [key: string]: any; // Para propiedades adicionales
+    address: string;
+    birthdate: string;
   }
 
   function PanelClient() {
@@ -49,16 +52,11 @@
     const [isLoading, setIsLoading] = useState<boolean>(false); // Estado de carga
     const [error, setError] = useState<string | null>(null); // Estado de error
     
-
-    
-
-
-
     const getCustomer = useCallback(async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await apiService.getCustomer('678adb322f1981e3e1f545dd');
+        const data = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
         
           console.log("data", data);
           setCustomer(data);

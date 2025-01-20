@@ -16,6 +16,7 @@ import {Switch} from "@nextui-org/switch";
 import { apiService } from "@/services/apiService";
 
 interface Product {
+  _id: string;
   name: string;
   type: string;
   area: [];
@@ -28,6 +29,7 @@ interface Product {
 }
 
 interface Extra {
+  _id: string;
   name: string;
   description: string;
   items: [];
@@ -35,10 +37,76 @@ interface Extra {
   price: number;
 }
 
+interface Purchase {
+  customer: string;
+  product: string;
+  extras: [
+    {
+      extra: string;
+      isActive: boolean;
+    },
+    {
+      extra: string;
+      isActive: boolean;
+    },
+    {
+      extra: string;
+      isActive: boolean;
+    },
+    {
+      extra: string;
+      isActive: boolean;
+    }
+  ];
+  status: string;
+  isActive: boolean;
+}
+
+
+interface Customer {
+  _id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone: {
+    areaCode: string;
+    number: string;
+  }[];
+  skype: string;
+  address: string;
+  birthdate: string;
+}
 
 function ShoppingCart() {
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [customer, setCustomer] = useState<Customer | null>(null);
+  const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false); // Estado de carga
+  const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error
+
+  const getCustomer = useCallback(async () => {
+    setIsLoadingCustomer(true);
+    setErrorCustomer(null);
+    try {
+      const data = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
+      setCustomer(data);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err) && err.response) {
+        setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
+      } else {
+        setErrorCustomer("Error: No se pudo obtener el cliente.");
+      }
+    } finally {
+      setIsLoadingCustomer(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getCustomer();
+  }, [getCustomer]);
+
+  const [products, setProducts] = useState<Product[]>([]) || null;
   const [isLoadingProducts, setIsLoadingProducts] = useState<boolean>(false); // Estado de carga
   const [errorProducts, setErrorProducts] = useState<string | null>(null); // Estado de error
 
@@ -64,7 +132,7 @@ function ShoppingCart() {
   }, [getProducts]);
 
 
-  const [extras, setExtras] = useState<Extra[]>([]);
+  const [extras, setExtras] = useState<Extra[]>([]) || null;
   const [isLoadingExtras, setIsLoadingExtras] = useState<boolean>(false); // Estado de carga
   const [errorExtras, setErrorExtras] = useState<string | null>(null); // Estado de error
 
@@ -89,23 +157,65 @@ function ShoppingCart() {
     getExtras();
   }, [getExtras]);
 
-  const isMounted = true;
-  if (isMounted) {
-    setTimeout(() => {
+  useEffect(() => {
+    if (customer && products && extras) {
+      console.log("customer desde shopping cart", customer);
       console.log("products desde shopping cart", products);
       console.log("extras desde shopping cart", extras);
-    }, 300);
-  }
+    }
+  }, [customer, products, extras]);
 
 
 
   const scrollContainerRef = useRef(null);
   const [selectedYard, setSelectedYard] = useState("frontyard");
   const [selectedPackage, setSelectedPackage] = useState(0);
-  const [areaPro, setAreaPro] = useState<boolean>(false);
+  const [selectedExtras, setSelectedExtras] = useState([
+    {
+      extra: "",
+      isActive: false
+    },
+    {
+      extra: "",
+      isActive: false
+    },
+    {
+      extra: "",
+      isActive: false
+    },
+    {
+      extra: "",
+      isActive: false
+    }
+  ]);
 
+  const handlePurchase = async () => {
+    if (customer !== null && products !== null && extras !== null) {
+      const newPurchase: Purchase = {
+        customer: customer._id,
+        product: products[selectedPackage]._id,
+        extras: [
+          { extra: extras[0]._id, isActive: false },
+          { extra: extras[1]._id, isActive: false },
+          { extra: extras[2]._id, isActive: false },
+          { extra: extras[3]._id, isActive: false },
+        ],
+        status: "pending",
+        isActive: true
+      };
 
+      try {
+        const data = await apiService.createPurchase(newPurchase);
+      } catch (err: unknown) {
+        if (axios.isAxiosError(err) && err.response) {
+          setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
+        } else {
+          setErrorExtras("Error: No se pudo obtener los extras.");
+        }
+      }
+    }
 
+    }
 
   const handleSelectedPackage = (index: number, direction: "next" | "prev") => {
 
@@ -145,6 +255,31 @@ function ShoppingCart() {
     setSelectedYard(yard);
   };
 
+
+  const handleExtras = (index: number) => {
+    console.log("selectedExtras", selectedExtras);
+    if (products[selectedPackage].name.includes("pro")){
+
+      const newExtras = [...selectedExtras];
+      const includedExtras = [
+        { extra: extras[0]._id, isActive: false },
+        { extra: extras[1]._id, isActive: true },
+        { extra: extras[2]._id, isActive: true },
+        { extra: extras[3]._id, isActive: false },
+      ];
+      
+
+    } else {
+      const newExtras = [...selectedExtras];
+      newExtras[index].extra = extras[index]._id;
+      newExtras[index].isActive = !newExtras[index].isActive;
+      setSelectedExtras(newExtras);
+    }
+  };
+
+
+
+
   return (
     <main className="w-full bgrose-400 flex flex-col bgred-400">
 
@@ -173,7 +308,7 @@ function ShoppingCart() {
                   <h2 className="font-black">Includes:</h2>
                   <div className="flex flex-col">
                     {
-                      products[selectedPackage].include.map((item, index) => (
+                      products[selectedPackage]?.include?.map((item, index) => (
                         <div key={index}>
                           <p>● {item}</p>
                         </div>
@@ -265,7 +400,8 @@ function ShoppingCart() {
                             {
                               (products[selectedPackage].type.toLowerCase().includes("pro") && (index === 1 || index === 2))
                                 ? <Switch isSelected isDisabled className=" rounded-full" id={`extra-${index}`} size="sm" />
-                                : <Switch className=" rounded-full" id={`extra-${index}`} size="sm" />
+                                : <Switch className=" rounded-full" id={`extra-${index}`} size="sm" isSelected={selectedExtras[index]?.isActive || false}
+                                onChange={() => handleExtras(index)} />
                             }
 
                           </div>
@@ -285,9 +421,9 @@ function ShoppingCart() {
                     </div>
                   </div>
                   <div className="flex justify-center bgpurple-400 relative">
-                    <Link className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " href="/questionnaire">
+                    <button className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " onClick={() => { handlePurchase() }}>
                       PAY FOR
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

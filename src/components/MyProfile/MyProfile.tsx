@@ -214,17 +214,20 @@ const areaCodes = [
 ]
 
 interface Customer {
-  id: string;
   name: string;
   lastname: string;
   email: string;
-  phone: string;
+  password: string;
+  confirmPassword: string;
+  phone: {
+    areaCode: string;
+    number: string;
+  }[];
   skype: string;
-  verified: boolean;
-  isActive: boolean;
-  softDelete: boolean;
-  [key: string]: any; // Para propiedades adicionales
+  address: string;
+  birthdate: string;
 }
+
 const MyProfile = (customer: any) => {
 
   console.log("custome desde my profile: ", customer.customer);
@@ -317,7 +320,7 @@ const MyProfile = (customer: any) => {
               )}
             </div>
             <div id="number" className="w-full md:w-[calc(100%-120px)] flex">
-              <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.phone} />
+              <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.phone[0].number} />
             </div>
           </div>
           <div className="flex w-full" id="address">
