@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['github.com'], // Agrega aquí los dominios permitidos
   },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
 };
 
 export default nextConfig;
