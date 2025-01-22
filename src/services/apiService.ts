@@ -65,41 +65,74 @@ const url = "http://localhost:4000/space";
 
 export const apiService = {
   createCustomer: async (customer: CreateCustomer) => {
-    const response = await axios.post(`${url}/customers`, customer);
-    console.log("response peticion createCustomer", response);
-    return response.data;
+    try {
+      const response = await axios.post<CreateCustomer>(`${url}/customers`, customer);
+      console.log("1. peticion axios createCustomer", response);
+      if (response) {
+        console.log("2. respuesta peticion axios createCustomer", response);
+        return response.data;
+      } else {
+        return null
+      }
+    } catch (error) {
+      
+    }
   },
   getCustomer: async (customerId: string) => {
-    const response = await axios.get<Customer>(`${url}/customers/${customerId}`);
-    console.log("response peticion getCustomer con ID", response);
-    return response.data;
+    try {
+      const response = await axios.get<Customer>(`${url}/customers/${customerId}`);
+      if (response) {
+        console.log("peticion axios getCustomer", response);
+        return response.data;
+      } else {
+        return null
+      }
+    } catch (error) {
+      
+    }
+    
   },
   getProducts: async () => {
     try {
-      const response = await axios.get(`${url}/products`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true, // Asegúrate de enviar credenciales si el servidor las requiere
-      });
-  
-      console.log("response peticion getProducts", response);
-      return response.data;
+      const response = await axios.get(`${url}/products`);
+      if (response) {
+        console.log("peticion axios getProducts", response);
+        return response.data;
+      } else {
+        return null
+      }
     } catch (error) {
-      console.error("Error en la petición getProducts:", error);
-      throw error;
+      // console.error("Error en la petición getProducts:", error);
+      // throw error;
     }
   },
   getExtras: async () => {
-    const response = await axios.get(`${url}/extras`);
-    console.log("response peticion getExtras", response);
-    return response.data;
-  },
 
+    try {
+      const response = await axios.get(`${url}/extras`);
+      if (response) {
+        console.log("peticion axios getExtras", response);
+        return response.data;
+      } else {
+        return null
+      }
+    } catch (error) {
+      
+    }
+  },
   createPurchase: async (purchase: Purchase) => {
-    const response = await axios.post(`${url}/purchases`, purchase);
-    console.log("response peticion createPurchase", response);
-    return response.data;
+
+    try {
+      const response = await axios.post(`${url}/purchases`, purchase);
+      if (response) {
+        console.log("peticion axios createPurchase", response);
+        return response.data;
+      } else {
+        return null
+      }
+    } catch (error) {
+      
+    }
   },
 
 };
