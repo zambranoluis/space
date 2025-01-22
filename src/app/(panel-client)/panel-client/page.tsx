@@ -6,6 +6,7 @@ import { useEffect, useState, ReactNode, useCallback } from "react";
 import { Image } from "@nextui-org/image";
 
 import axios from "axios";
+
 import { apiService } from "@/services/apiService";
 
 import { IoCloseOutline } from "react-icons/io5";
@@ -56,9 +57,9 @@ function PanelClient() {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await apiService.getCustomer<Customer>('678b3cb754c8efd3f5677ee5');
-      
-        if (data) {
+      const requestResponse = await apiService.getCustomer("6789c1afce8c2f0ad7736d00");
+      if (requestResponse) {
+          const data: Customer = requestResponse;
           console.log("data", data);
           setCustomer(data);
         }
