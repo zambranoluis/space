@@ -27,7 +27,7 @@ const ProjectsClient = () => {
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="flex p-4">
-            <h1 className="font-bold text-[#6b776d] text-center">Let's start designing together!</h1>
+            <h1 className="font-bold text-[#6b776d] text-center">Let&apos;s start designing together!</h1>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center">
             <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to schedule a call</button>
