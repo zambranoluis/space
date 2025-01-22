@@ -253,8 +253,8 @@ function ShoppingCart() {
           (products.length > 0) ? (
             <CardsDisplay products={products} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} handleSelectedPackage={handleSelectedPackage} scrollContainerRef={scrollContainerRef}  />
           ) : (
-            // <></>
-            <LoadingShoppingCart />
+            <></>
+            // <LoadingShoppingCart />
           )
         }
       </section>
