@@ -175,62 +175,6 @@ function ShoppingCart() {
   );
 
   
-
-
-
-  // const handlePurchase = async () => {
-  //   if (customer !== null && products !== null && extras !== null) {
-  //     const newPurchase: Purchase = {
-  //       customer: customer._id,
-  //       product: products[selectedPackage]._id,
-  //       selectedAreas: products[selectedPackage].name.includes("2")
-  //         ? [
-  //           { nameArea: selectedArea[0].nameArea, isActive: true },
-  //           { nameArea: selectedArea[1].nameArea, isActive: true },
-  //         ]
-  //         : [
-  //           { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
-  //           { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
-  //         ],
-  //       extras: products[selectedPackage].type === "Pro"
-  //         ? [
-  //           { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-  //           { extra: selectedExtras[1].extra, isActive: true },
-  //           { extra: selectedExtras[2].extra, isActive: true },
-  //           { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-  //         ]
-  //         : [
-  //           { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-  //           { extra: selectedExtras[1].extra, isActive: selectedExtras[1].isActive },
-  //           { extra: selectedExtras[2].extra, isActive: selectedExtras[2].isActive },
-  //           { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-  //         ],
-  //       status: "pending",
-  //       isActive: true
-  //     };
-
-  //     console.log("newPurchase", newPurchase);
-
-  //     try {
-  //       // const data = await apiService.createPurchase(newPurchase);
-
-  //     } catch (err: unknown) {
-  //       // if (axios.isAxiosError(err) && err.response) {
-  //       //   setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
-  //       // } else {
-  //       //   setErrorExtras("Error: No se pudo obtener los extras.");
-  //       // }
-  //     }
-  //   }
-
-  // }
-
-  
-
-
-
-
-
   return (
     <main className="w-full bgrose-400 flex flex-col bgred-400">
 
@@ -263,19 +207,12 @@ function ShoppingCart() {
         (products.length > 0) ? (
           <PayProductSection
           customer={customer}
-          // selectedArea={selectedArea}
-          // setSelectedArea={setSelectedArea}
-          // handleSelectedArea={handleSelectedArea}
           products={products}
           extras={extras}
-          // selectedExtras={selectedExtras}
-          // setSelectedExtras={setSelectedExtras}
           selectedPackage={selectedPackage}
           handleSelectedPackage={handleSelectedPackage}
-          // handlePurchase={handlePurchase}
           />
         ) : (
-          // <div></div>
           <LoadingShoppingCart />
         )
           

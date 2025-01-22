@@ -85,11 +85,6 @@ interface PayProductSectionProps {
   extras: Extra[];
   selectedPackage: number;
   handleSelectedPackage: (index: number, direction: "next" | "prev") => void;
-  // handlePurchase: () => void;
-  // selectedArea: Area[];
-  // setSelectedArea: React.Dispatch<React.SetStateAction<Area[]>>;
-  // selectedExtras: { extra: string; isActive: boolean, price: number }[];
-  // setSelectedExtras: React.Dispatch<React.SetStateAction<{ extra: string; isActive: boolean, price: number }[]>>;
 }
 
 const PayProductSection: React.FC<PayProductSectionProps> = ({
@@ -97,19 +92,21 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   products,
   selectedPackage,
   handleSelectedPackage,
-  // handlePurchase,
-  // selectedArea,
-  // setSelectedArea,
   extras,
-  // selectedExtras,
-  // setSelectedExtras,
 }) => {
+
+  const extrasInfo = [
+    "678ad9d12f1981e3e1f545a7",
+    "678ad9da2f1981e3e1f545a9",
+    "678ad9e02f1981e3e1f545ab",
+    "678ad9e52f1981e3e1f545ad",
+  ]
   
   const [selectedExtras, setSelectedExtras] = useState<{ extra: string; isActive: boolean, price: number }[]>([
-    { extra: "", isActive: false, price: extras[0].price },
-    { extra: "", isActive: false, price: extras[1].price },
-    { extra: "", isActive: false, price: extras[2].price },
-    { extra: "", isActive: false, price: extras[3].price },
+    { extra: extrasInfo[0], isActive: false, price: extras[0].price },
+    { extra: extrasInfo[1], isActive: false, price: extras[1].price },
+    { extra: extrasInfo[2], isActive: false, price: extras[2].price },
+    { extra: extrasInfo[3], isActive: false, price: extras[3].price },
   ]);
   
 
@@ -153,9 +150,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     }
   };
 
-
-  
-
   const handleSelectedExtras = (index: number) => {
     console.log("extras seleccionados en el componente pay: ", selectedExtras);
     console.log("extra accionado - extra: ", index)
@@ -176,14 +170,33 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
 
   const handleFinalPrice = () => {
+    console.log("calculating final price...");
     const base = products[selectedPackage].price;
-    
+    console.log("base: ", base);
+
+    const extrasPrice = selectedExtras.reduce((total, extra) => {
+      if (extra.isActive) {
+        console.log("extraPrice : ", extra.price);
+        return total + extra.price;
+      }
+      return total;
+    }, 0);
+
+    console.log("total extras: ", extrasPrice);
+
+    const totalPrice = base + extrasPrice;
+    console.log("totalPrice: ", totalPrice);
+    setFinalPrice(totalPrice);
   }
+
+  useEffect(() => {
+    handleFinalPrice();
+  }, [selectedExtras]);
 
 
     const handlePurchase = async () => {
       if (!customer || !products || !extras || !selectedExtras || !selectedArea) {
-        console.error("Error: Customer is null");
+        console.error("Error: Customer or products or extras or selectedArea is null");
         return;
       }
 
@@ -293,11 +306,11 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
                       </p>
                     </div>
                     <div className="flex border border-black rounded-sm px-4">
-                      <p className="font-semibold">{products[selectedPackage].price}</p>
+                      <p className="font-semibold">{finalPrice}</p>
                     </div>
                   </div>
                   <div className="flex justify-center bgpurple-400 relative">
-                    <button className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " onClick={() => { handlePurchase() }}>
+                    <button className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " onClick={() => { handleFinalPrice(); handlePurchase() }}>
                       PAY FOR
                     </button>
                   </div>
