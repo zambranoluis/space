@@ -13,11 +13,7 @@ import {Avatar} from "@nextui-org/avatar";
 
 
 
-interface NavbarProps {
-  
-}
-
-const Navbar: React.FC<NavbarProps> = ( {  } ) => {
+const Navbar: React.FC = ( {  } ) => {
 
 
 
