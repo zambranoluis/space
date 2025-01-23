@@ -346,13 +346,20 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
               {
                 purchases.map((purchase, index) => (
                   <div className="bgred-300 flex flex-col  p-2" key={index}>
-                    <div className="flex flex-col bgblue-200 text-[#6b776d]">
-                      <h1 className="text-3xl font-black">Project</h1>
-                      <h2 className="text-xl">{purchase.product.name}{" "}{purchase.product.type}</h2>
+                    <div className="flex flex-col bgblue-200 text-[#6b776d] bg-red-200">
+                      <h1 className="text-3xl font-black">Project - {index+1}</h1>
                     </div>
                     <div className="flex flex-col  text-black">
-                      <div className="flex text-xl bg-[#6b776d] place-self-start px-2 py-1">
-                        <h2 className="text-white">Selected Areas:</h2>
+                      <div className="flex flex-col">
+                        <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1 ">
+                          <h2>Package Purchased:</h2>
+                        </div>
+                        <div className="flex">
+                          <p className="text-xl">{purchase.product.name}{" "}{purchase.product.type}</p>
+                        </div>
+                      </div>
+                      <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
+                        <h2 className="">Selected Areas:</h2>
                       </div>
                       {
                         purchase.selectedAreas.map((area, index) => (
@@ -361,8 +368,8 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
                       }
                     </div>
                     <div className="flex flex-col text-black">
-                      <div className="flex bg-[#6b776d] place-self-start px-2 py-1 ">
-                        <h2 className="text-white">Extras:</h2>
+                      <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
+                        <h2 className="">Extras:</h2>
                       </div>
                       <div className="flex flex-col text-black">
                         {
