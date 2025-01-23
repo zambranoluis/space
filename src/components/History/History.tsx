@@ -12,7 +12,6 @@ import {Tooltip} from "@nextui-org/tooltip";
 
 import {Image} from "@nextui-org/image";
 
-import { IoPersonAdd } from "react-icons/io5";
 
 
 import { FaUserCheck } from "react-icons/fa";
@@ -34,7 +33,6 @@ import { LuFolderX } from "react-icons/lu";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { FaUserPen } from "react-icons/fa6";
 import { FaBan } from "react-icons/fa";
-import { div } from "framer-motion/client";
 
 
 
@@ -45,24 +43,20 @@ const typeClients = [
     icon: <MdOutlineFolderCopy className=""/>
   },
   {
-    name: "Completed",
-    icon: <LuFolderCheck className=""/>
-  },
-  {
     name: "Pending",
-    icon: <LuFolderClock className=""/>
+    // icon: <LuFolderCheck className=""/>
   },
   {
-    name: "Corrected",
-    icon: <LuFolderSync className=""/>
+    name: "Development",
+    // icon: <LuFolderClock className=""/>
   },
   {
-    name: "Approved",
-    icon: <LuFolderSymlink className=""/>
+    name: "Completed",
+    // icon: <LuFolderSync className=""/>
   },
   {
     name: "Canceled",
-    icon: <LuFolderX className=""/>
+    icon: <LuFolderSymlink className=""/>
   },
 ]
 

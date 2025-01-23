@@ -246,12 +246,18 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
 
     const handlePurchase = async () => {
+      console.log("data to be evaluated: ");
+      console.log("customer: ", customer);
+      console.log("products: ", products);
+      console.log("extras: ", extras);
+      console.log("selectedExtras: ", selectedExtras);
+      console.log("selectedArea: ", selectedArea);
       if (!customer || !products || !extras || !selectedExtras || !selectedArea) {
         console.error("Error: Customer or products or extras or selectedArea is null");
         return;
       }
 
-      const newPurchase: Purchase = {
+      setPurchase({
         customer: customer._id,
         product: products[selectedPackage],
         selectedAreas: products[selectedPackage].name.includes("2")
@@ -279,12 +285,12 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
         price: finalPrice,
         status: "pending",
         isActive: true
-      };
+      })
 
-      console.log("newPurchase", newPurchase);
+      console.log("newPurchase", purchase);
 
       try {
-        const data = await apiService.createPurchase(newPurchase);
+        const data = await apiService.createPurchase(purchase);
         window.location.href = "/panel-client";
 
       } catch (err: unknown) {

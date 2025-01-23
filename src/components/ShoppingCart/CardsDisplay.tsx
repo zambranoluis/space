@@ -32,6 +32,8 @@ const CardsDisplay: React.FC<CardsDisplayProps> = ({
   handleSelectedPackage,
   scrollContainerRef,
 }) => {
+
+  
   return (
     <div className="flex w-full bgred-500 p2">
       <div className="w-full h-[650px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito1.webp')" }}>

@@ -94,6 +94,7 @@ function ShoppingCart() {
     setErrorCustomer(null);
     try {
       const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
+      console.log("response peticion getCustomer en shopping cart: ", response);
       if (response){
         setCustomer(response.data);
       }
@@ -113,9 +114,9 @@ function ShoppingCart() {
     setIsLoadingProducts(true);
     setErrorProducts(null);
     try {
-      const data = await apiService.getProducts();
-      if (data){
-        setProducts(data.data);
+      const response = await apiService.getProducts();
+      if (response){
+        setProducts(response.data);
       }
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {
@@ -132,9 +133,9 @@ function ShoppingCart() {
     setIsLoadingExtras(true);
     setErrorExtras(null);
     try {
-      const data = await apiService.getExtras();
-      if (data){
-        setExtras(data.data);
+      const response = await apiService.getExtras();
+      if (response){
+        setExtras(response.data);
       }
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {

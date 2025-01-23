@@ -2,6 +2,8 @@
 "use client";
 import axios from "axios";
 
+
+
 interface Customer {
   _id: string;
   name: string;
@@ -16,6 +18,19 @@ interface Customer {
   skype: string;
   address: string;
   birthdate: string;
+}
+
+export interface Product {
+  _id: string;
+  name: string;
+  type: string;
+  area: number;
+  image: string;
+  include: [];
+  extra: [];
+  cost: number;
+  price: number;
+  picture: string;
 }
 
 interface CreateCustomer {
@@ -36,7 +51,7 @@ interface CreateCustomer {
 
 interface Purchase {
   customer: string;
-  product: string;
+  product: Product;
   extras: [
     {
       extra: string;
