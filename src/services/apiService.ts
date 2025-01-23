@@ -156,6 +156,19 @@ export const apiService = {
       
     }
   },
+  getPurchasesByCustomerId: async (customerId: string) => {
+    try {
+      const response = await axios.get(`${url}/purchases/customer/${customerId}`);
+      if (response) {
+        console.log("peticion API axios getPurchasesByCustomer", response);
+        return response.data;
+      } else {
+        return null
+      }
+    } catch (error) {
+      
+    }
+  },
   getPurchasesByCustomerAndId: async (customerId: string) => {
     try {
       const response = await axios.get(`${url}/purchases/customer/${customerId}/purchase/679198fcdb75b57ef3541e4f`);

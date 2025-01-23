@@ -55,7 +55,17 @@ export interface Product {
   area: number;
   image: string;
   include: [];
-  extra: [];
+  extra: [
+    {
+      _id: string;
+      name: string;
+      description: string;
+      items: [];
+      cost: number;
+      price: number;
+      isActive: boolean;
+    }
+  ];
   cost: number;
   price: number;
   picture: string;
@@ -274,16 +284,16 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
   ]
   
   
-  const [purchase, setPurchase] = useState<Purchase[]>([]);
+  const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [isLoadingPurchase, setIsLoadingPurchase] = useState<boolean>(false);
 
   const getPurchasesByCustomer = useCallback(async () => {
     setIsLoadingPurchase(true);
     try {
-      const response = await apiService.getPurchasesByCustomerAndId("678b3cb754c8efd3f5677ee5");
+      const response = await apiService.getPurchasesByCustomerId("678b3cb754c8efd3f5677ee5");
       if (response) {
         console.log("1- respuesta axios getPurchasesByCustomer", response);
-        setPurchase(response.data);
+        setPurchases(response.data);
         setIsLoadingPurchase(false);
         console.log("2- data axios getPurchasesByCustomer", response.data);
       }
@@ -301,8 +311,8 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
   }, [getPurchasesByCustomer]);
 
   useEffect(() => {
-    console.log("purchase: ", purchase);
-  }, [purchase]);
+    console.log("purchase: ", purchases);
+  }, [purchases]);
 
   const toggleProject = (id: number) => {
     const project = document.getElementById(`project${id}Container`);
@@ -311,7 +321,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
 
   return (
     <div className="flex flex-col w-[90%] h-full place-self-center bgred-200  gap-2 ">
-          <div className="flex  place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[460px] overflow-x-scroll scrollbar-hide">
+          <div className="flex  place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[415px] overflow-x-scroll scrollbar-hide">
             {typeClients.map((client, index) => (
               <div className={`flex justify-center items-center p-1 `} key={index}>
                 <p className={`${currentClients === client.name ? "bg-[#6b776d] text-white rounded-md" : ""} text-xs transition-all duration-300 select-none flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap  `} onClick={() => { setCurrentClients(client.name) }} ><span className="text-lg ">{client.icon}</span>{client.name}</p>
@@ -332,46 +342,51 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
               </div>
             </div>
     
-            <div className="grid overflow-y-scroll  h-[90%]  sm:grid-cols-2 lg:grid-cols-3  p-2 py-4 gap-6 w-full   bgred-600">
+            <div className="grid overflow-y-scroll  h-[90%]  p-2 py-4 gap-6 w-full   bgred-600">
               {
-                // clientsTest.map((client) => (
-                //   <Card className='w-full max-w-[350px] h-[250px] p-4 bg-white border border-[#6b776d]' key={client.id}>
-                //     <CardHeader className='flex gap-4  justify-center  rounded-md p-4 bgred-300'>
-                //       <div>
-                //         <Avatar src="https://github.com/BPM94/TTMD/raw/main/avatarAang.jpg" className="w-20 h-20 " />
-                //       </div>
-                //       <div className='flex flex-col w-full font-bold   text-[#6b776d]'>
-                //         <h1>{client.name}</h1>
-                //         <h2>{client.email}</h2>
-                //         <h2>{client.phone}</h2>
-                //       </div>
-                //     </CardHeader>
-                //     <CardBody className='text-[#6b776d]'>
-                //       <h3>Subscription: {client.suscription}</h3>
-                //       <h3>Plans: {client.plan}</h3>
-                //       <h3>Schedules: {client.schedules}</h3>
-                //     </CardBody>
-                //     <CardFooter className='flex justify-end  bgblue-400 gap-2  '>
-                //       <Tooltip content="View Assistance Calendar">
-                //         <div className='flex hover:text-white  text-[#6b776d]  bggreen-400 cursor-pointer bg[--color-button] hover:bgbg[--color-button-hover] p-2 rounded-md border hover:bg-[#6b776d] border-[#6b776d]'>
-                //           <RiCalendarScheduleFill className="text-lg " />
-                //         </div>
-                //       </Tooltip>
-                //       <Tooltip content="Edit Client">
-                //         <div className='flex hover:text-white  text-[#6b776d] bggreen-400 cursor-pointer bg[--color-button] hover:bgbg[--color-button-hover] p-2 rounded-md border hover:bg-[#6b776d] border-[#6b776d]'>
-                //           <FaUserPen className="text-lg " />
-                //         </div>
-                //       </Tooltip>
-                //       <Tooltip content="Ban Client">
-                //         <div className='flex hover:text-white text-[#6b776d]  bggreen-400 cursor-pointer bg[--color-button] hover:bgbg[--color-button-hover] p-2 rounded-md border hover:bg-[#6b776d] border-[#6b776d]'>
-                //           <FaBan className="text-lg " />
-                //         </div>
-                //       </Tooltip>
-                //     </CardFooter>
-                //   </Card>
-                // ))
+                purchases.map((purchase, index) => (
+                  <div className="bgred-300 flex flex-col  p-2" key={index}>
+                    <div className="flex flex-col bgblue-200 text-[#6b776d]">
+                      <h1 className="text-3xl font-black">Project</h1>
+                      <h2 className="text-xl">{purchase.product.name}{" "}{purchase.product.type}</h2>
+                    </div>
+                    <div className="flex flex-col  text-black">
+                      <div className="flex text-xl bg-[#6b776d] place-self-start px-2 py-1">
+                        <h2 className="text-white">Selected Areas:</h2>
+                      </div>
+                      {
+                        purchase.selectedAreas.map((area, index) => (
+                          (area.isActive && <p key={index}>{area.nameArea}</p>)
+                        ))
+                      }
+                    </div>
+                    <div className="flex flex-col text-black">
+                      <div className="flex bg-[#6b776d] place-self-start px-2 py-1 ">
+                        <h2 className="text-white">Extras:</h2>
+                      </div>
+                      <div className="flex flex-col text-black">
+                        {
+                          (purchase.extras.length > 0)
+                            ? purchase.extras.map((extra, index) => (
+                              <p key={index}>{extra.extra.name}</p>
+                            ))
+                            : <p>No extras selected</p>
+                        }
+                      </div>
+                    </div>
+                    <div className="flex gap-1 text-black">
+                      <div className="flex">
+                        <h2>Price:</h2>
+                      </div>
+                      <div className="flex">
+                        <p>{purchase.total}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))
               }
             </div>
+            
           </div>
         </div>
   );
