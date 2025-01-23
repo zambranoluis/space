@@ -154,7 +154,7 @@ function PanelClient() {
                   (asideSelectedOption === "myprofile" && customer) && <MyProfile customer={customer} />
                 }
                 {
-                  (asideSelectedOption === "purchases" && customer) && <Purchases customerId={customer._id} />
+                  (asideSelectedOption === "purchases" ) && <Purchases  />
                 }
                 </div>
               </div>

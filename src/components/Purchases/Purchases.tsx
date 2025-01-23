@@ -96,12 +96,12 @@ export interface Purchase {
   isActive: boolean;
 }
 
-interface PurchasesProps {
-  customerId: string;
-}
+// interface PurchasesProps {
+//   customerId: string;
+// }
 
 
-export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
+export const Purchases: React.FC = ({  }) => {
   
 
   const [currentClients, setCurrentClients] = useState<string | null>("All Purchases");
