@@ -23,28 +23,16 @@ import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
 import {Tooltip} from "@nextui-org/tooltip";
 
 
-import { FaUserCheck } from "react-icons/fa";
-import { FaUserClock } from "react-icons/fa";
-import { FaUserTimes } from "react-icons/fa";
-import { FaUserAltSlash } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 
-import { MdOutlineFolderCopy } from "react-icons/md";
-import { LuFolderCheck } from "react-icons/lu";
-import { LuFolderClock } from "react-icons/lu";
-import { LuFolderSync } from "react-icons/lu";
-import { LuFolderSymlink } from "react-icons/lu";
-import { LuFolderX } from "react-icons/lu";
+
 
 import { FaTags } from "react-icons/fa6";
+import { PiTagSimpleFill } from "react-icons/pi";
+
+import { GiCheckMark } from "react-icons/gi";
 
 
-
-
-
-import { RiCalendarScheduleFill } from "react-icons/ri";
-import { FaUserPen } from "react-icons/fa6";
-import { FaBan } from "react-icons/fa";
 
 
 
@@ -124,7 +112,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
       preserveAspectRatio="xMidYMid meet">
      
      <g transform="translate(0.000000,849.000000) scale(0.100000,-0.100000)"
-     fill={`${currentClients === "Pending" ? "#FFFFFF" : "#6b776d"}`} stroke="none">
+     fill={`${currentClients === "Pending" ? "#f5a524" : "#f5a524"}`} stroke="none">
      <path d="M6550 8070 c-283 -43 -497 -230 -579 -506 -21 -70 -21 -86 -21 -864
      0 -776 0 -794 21 -864 73 -249 260 -431 504 -493 63 -16 127 -18 655 -18 l585
      0 42 27 c53 35 77 79 77 144 0 64 -35 122 -91 150 -36 18 -73 19 -623 24
@@ -267,19 +255,23 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
     },
     {
       name: "Pending",
-      icon: svgIcons[0].icon
+      icon: <img src={"/purchasePendingSpaceColorsGreen.png"} className="w-[25px] h-[25px]"/>,
+      iconSelected: ""
     },
     {
       name: "Development",
-      icon: svgIcons[1].icon
+      icon: <img src={"/purchaseDevelopmentColorsGreen.png"} className="w-[25px] h-[25px]"/>,
+      iconSelected: ""
     },
     {
       name: "Completed",
-      icon: svgIcons[2].icon
+      icon: <img src={"/purchaseCompletedColorsGreen.png"} className="w-[25px] h-[25px]"/>,
+      iconSelected: ""
     },
     {
       name: "Canceled",
-      icon: svgIcons[3].icon
+      icon: <img src={"/purchaseCanceledColorsGreen.png"} className="w-[25px] h-[25px]"/>,
+      iconSelected: ""
     },
   ]
   
@@ -346,49 +338,58 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
               {
                 purchases.map((purchase, index) => (
                   <div className="bgred-300 flex flex-col  p-2" key={index}>
-                    <div className="flex flex-col bgblue-200 text-[#6b776d] bg-red-200">
-                      <h1 className="text-3xl font-black">Project - {index+1}</h1>
+                    <div id="projectTitle" className="flex items-center gap-2 p-2 text-[#6b776d] bgred-200 justify-between border border-[#6b776d] rounded-md">
+                      <div className="flex items-center">
+                        <PiTagSimpleFill className="text-2xl text-[#f5a524]" />
+                        <h1 className="text-3xl font-black">Project - #{index + 1}</h1>
+                      </div>
+                      <div>Status: Pending Payment</div>
                     </div>
-                    <div className="flex flex-col  text-black">
-                      <div className="flex flex-col">
+                    <div id="projectContainer" className="flex flex-col  text-black">
+                      <div id="packagePurchased" className="flex flex-col">
                         <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1 ">
                           <h2>Package Purchased:</h2>
                         </div>
-                        <div className="flex">
+                        <div className="flex p-2">
                           <p className="text-xl">{purchase.product.name}{" "}{purchase.product.type}</p>
                         </div>
                       </div>
-                      <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
-                        <h2 className="">Selected Areas:</h2>
-                      </div>
-                      {
-                        purchase.selectedAreas.map((area, index) => (
-                          (area.isActive && <p key={index}>{area.nameArea}</p>)
-                        ))
-                      }
-                    </div>
-                    <div className="flex flex-col text-black">
-                      <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
-                        <h2 className="">Extras:</h2>
-                      </div>
-                      <div className="flex flex-col text-black">
-                        {
-                          (purchase.extras.length > 0)
-                            ? purchase.extras.map((extra, index) => (
-                              <p key={index}>{extra.extra.name}</p>
+                      <div id="selectedAreas" className="flex flex-col ">
+                        <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
+                          <h2 className="">Selected Areas:</h2>
+                        </div>
+                        <div className="flex p-2 gap-2 ">
+                          {
+                            purchase.selectedAreas.map((area, index) => (
+                              (area.isActive && <p key={index}>{area.nameArea}</p>)
                             ))
-                            : <p>No extras selected</p>
-                        }
+                          }
+                        </div>
+                      </div>
+                      <div id="extras" className="flex flex-col ">
+                        <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
+                          <h2 className="">Extras:</h2>
+                        </div>
+                        <div className="flex flex-col text-black p-2">
+                          {
+                            (purchase.extras.length > 0)
+                              ? purchase.extras.map((extra, index) => (
+                                <p key={index}>{extra.extra.name}</p>
+                              ))
+                              : <p>No extras selected</p>
+                          }
+                        </div>
+                      </div>
+                      <div id="price" className="flex font-black gap-1 text-[#6b776d]">
+                        <div className="flex">
+                          <h2>Price:</h2>
+                        </div>
+                        <div className="flex">
+                          <p>{purchase.total}$</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex gap-1 text-black">
-                      <div className="flex">
-                        <h2>Price:</h2>
-                      </div>
-                      <div className="flex">
-                        <p>{purchase.total}</p>
-                      </div>
-                    </div>
+                    
                   </div>
                 ))
               }
