@@ -230,7 +230,7 @@ interface Customer {
 
 const MyProfile = (customer: any) => {
 
-  console.log("custome desde my profile: ", customer.customer);
+  console.log("customer desde my profile: ", customer.customer);
   const [customerData, setCustomerData] = useState<Customer>(customer.customer);
   
   const [selectedCode, setSelectedCode] = useState<number>(26);

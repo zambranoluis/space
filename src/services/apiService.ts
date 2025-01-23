@@ -66,7 +66,11 @@ const url = "http://localhost:4000/space";
 export const apiService = {
   createCustomer: async (customer: CreateCustomer) => {
     try {
-      const response = await axios.post<CreateCustomer>(`${url}/customers`, customer);
+      const response = await axios.post(`${url}/customers`, customer, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log("1. peticion axios createCustomer", response);
       if (response) {
         console.log("2. respuesta peticion axios createCustomer", response);
@@ -80,7 +84,7 @@ export const apiService = {
   },
   getCustomer: async (customerId: string) => {
     try {
-      const response = await axios.get<Customer>(`${url}/customers/${customerId}`);
+      const response = await axios.get(`${url}/customers/${customerId}`);
       if (response) {
         console.log("peticion axios getCustomer", response);
         return response.data;
@@ -121,11 +125,27 @@ export const apiService = {
     }
   },
   createPurchase: async (purchase: Purchase) => {
-
     try {
-      const response = await axios.post(`${url}/purchases`, purchase);
+      const response = await axios.post(`${url}/purchases`, purchase, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (response) {
         console.log("peticion axios createPurchase", response);
+        return response.data;
+      } else {
+        return null
+      }
+    } catch (error) {
+      
+    }
+  },
+  getPurchasesByCustomerAndId: async (customerId: string) => {
+    try {
+      const response = await axios.get(`${url}/purchases/customer/${customerId}/purchase/679198fcdb75b57ef3541e4f`);
+      if (response) {
+        console.log("peticion API axios getPurchasesByCustomer", response);
         return response.data;
       } else {
         return null

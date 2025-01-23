@@ -9,6 +9,7 @@ import Link from "next/link";
 
 import { FaPersonCircleQuestion } from "react-icons/fa6";
 
+
 import { PiPowerFill } from "react-icons/pi";
 
 
@@ -18,6 +19,8 @@ import { FaRegCalendarDays } from "react-icons/fa6";
 import { IoMdNotifications } from "react-icons/io";
 import { FaEnvelope } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+import { BiSolidPurchaseTag } from "react-icons/bi";
+
 
 import { FaUserCircle } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
@@ -42,7 +45,8 @@ interface Option {
 const asideOptions: Option[] = [
   { name: "My Profile", tag: "myprofile", path: "/my-profile", icon: < FaUserCircle className="text-xl" /> },
   { name: "Projects", tag: "projects", path: "/projects", icon: <FaFolder className="text-xl" /> },
-  { name: "Cart", tag: "cart", path: "/shopping-cart", icon: <TiShoppingCart className="text-xl" />, },  
+  { name: "Cart", tag: "cart", path: "/shopping-cart", icon: <TiShoppingCart className="text-xl" />, },
+  { name: "Purchases", tag: "purchases", path: "/purchases", icon: <BiSolidPurchaseTag className="text-xl" /> },
 ];
 
 const Aside: React.FunctionComponent<AsideProps> = ({

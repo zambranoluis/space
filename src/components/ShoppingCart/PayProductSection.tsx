@@ -3,9 +3,10 @@
 import { useRef, useCallback, useEffect, useState, use } from "react";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { apiService } from "@/services/apiService";
 
 import {Switch} from "@nextui-org/switch";
-import { select } from "@nextui-org/react";
+// import { select } from "@nextui-org/react";
 
 
 export interface Area {
@@ -14,32 +15,47 @@ export interface Area {
 }
 
 
+export interface Customer {
+  _id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone: {
+    areaCode: string;
+    number: string;
+  }[];
+  skype: string;
+  address: string;
+  birthdate: string;
+}
 
 
-// Define types for the products, areas, and extras
-type Product = {
+export interface Product {
   _id: string;
   name: string;
   type: string;
-  picture: string;
-  include: string[];
+  area: number;
+  image: string;
+  include: [];
+  extra: [];
+  cost: number;
   price: number;
-};
-
-type Customer = {
-  name: string;
-  _id: string;
-  lastname: string;
-  email: string;
-  
+  picture: string;
 }
 
-type Extra = {
+
+export interface Extra {
+  _id: string;
   name: string;
-  description?: string;
-  items: string[];
+  description: string;
+  items: [];
+  cost: number;
   price: number;
-};
+  isActive: boolean;
+}
+
 
 export interface Purchase {
   customer: string;
@@ -53,7 +69,7 @@ export interface Purchase {
       isActive: boolean;
     }
   ],
-  product: string;
+  product: Product;
   extras: [
     {
       extra: string;
@@ -72,6 +88,7 @@ export interface Purchase {
       isActive: boolean;
     }
   ];
+  price: number;
   status: string;
   isActive: boolean;
 }
@@ -101,12 +118,45 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     "678ad9e02f1981e3e1f545ab",
     "678ad9e52f1981e3e1f545ad",
   ]
+
+  const [purchase, setPurchase] = useState<Purchase>({
+    customer: "",
+    selectedAreas: [{
+      nameArea: "",
+      isActive: false
+    },{
+      nameArea: "",
+      isActive: false
+    }],
+    product: products[selectedPackage],
+    extras: [
+      {
+        extra: extrasInfo[0],
+        isActive: false
+      },
+      {
+        extra: extrasInfo[1],
+        isActive: false
+      },
+      {
+        extra: extrasInfo[2],
+        isActive: false
+      },
+      {
+        extra: extrasInfo[3],
+        isActive: false
+      }
+    ],
+    price: 0,
+    status: "pending",
+    isActive: false,
+  });
   
   const [selectedExtras, setSelectedExtras] = useState<{ extra: string; isActive: boolean, price: number }[]>([
     { extra: extrasInfo[0], isActive: false, price: extras[0].price },
-    { extra: extrasInfo[1], isActive: false, price: extras[1].price },
+    { extra: extrasInfo[1], isActive: (products[selectedPackage].type === "Pro") ? true : false, price: extras[1].price },
     { extra: extrasInfo[2], isActive: false, price: extras[2].price },
-    { extra: extrasInfo[3], isActive: false, price: extras[3].price },
+    { extra: extrasInfo[3], isActive: (products[selectedPackage].type === "Pro") ? true : false, price: extras[3].price },
   ]);
   
 
@@ -187,11 +237,12 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     const totalPrice = base + extrasPrice;
     console.log("totalPrice: ", totalPrice);
     setFinalPrice(totalPrice);
+
   }
 
   useEffect(() => {
     handleFinalPrice();
-  }, [selectedExtras]);
+  }, [selectedExtras, selectedPackage, products]);
 
 
     const handlePurchase = async () => {
@@ -202,7 +253,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
       const newPurchase: Purchase = {
         customer: customer._id,
-        product: products[selectedPackage]._id,
+        product: products[selectedPackage],
         selectedAreas: products[selectedPackage].name.includes("2")
           ? [
             { nameArea: selectedArea[0].nameArea, isActive: true },
@@ -225,6 +276,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
             { extra: selectedExtras[2].extra, isActive: selectedExtras[2].isActive },
             { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
           ],
+        price: finalPrice,
         status: "pending",
         isActive: true
       };
@@ -232,7 +284,8 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       console.log("newPurchase", newPurchase);
 
       try {
-        // const data = await apiService.createPurchase(newPurchase);
+        const data = await apiService.createPurchase(newPurchase);
+        window.location.href = "/panel-client";
 
       } catch (err: unknown) {
         // if (axios.isAxiosError(err) && err.response) {

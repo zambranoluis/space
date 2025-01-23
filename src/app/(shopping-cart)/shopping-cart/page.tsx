@@ -19,13 +19,46 @@ import LoadingShoppingCart from "@/components/ShoppingCart/LoadingShoppingCart"
 import { apiService } from "@/services/apiService";
 import { products } from '../../../components/ShoppingCart/shopping-cart';
 
-import {
-  Product,
-  Extra,
-  Purchase,
-  Customer,
-  Area
-} from "@/utils/types";
+export interface Customer {
+  _id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone: {
+    areaCode: string;
+    number: string;
+  }[];
+  skype: string;
+  address: string;
+  birthdate: string;
+}
+
+
+export interface Product {
+  _id: string;
+  name: string;
+  type: string;
+  area: number;
+  image: string;
+  include: [];
+  extra: [];
+  cost: number;
+  price: number;
+  picture: string;
+}
+
+
+export interface Extra {
+  _id: string;
+  name: string;
+  description: string;
+  items: [];
+  cost: number;
+  price: number;
+  isActive: boolean;
+}
 
 
 
@@ -60,9 +93,9 @@ function ShoppingCart() {
     setIsLoadingCustomer(true);
     setErrorCustomer(null);
     try {
-      const data = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
-      if (data){
-        setCustomer(data);
+      const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
+      if (response){
+        setCustomer(response.data);
       }
     } catch (err: unknown) {
       // if (axios.isAxiosError(err) && err.response) {
@@ -71,7 +104,7 @@ function ShoppingCart() {
       //   setErrorCustomer("Error: No se pudo obtener el cliente.");
       // }
     } finally {
-      setIsLoadingCustomer(false);
+      // setIsLoadingCustomer(false);
     }
   }, []);
 
@@ -116,18 +149,13 @@ function ShoppingCart() {
 
   useEffect(() => {
     getCustomer();
-  
-    
   }, [getCustomer]);
 
   useEffect(() => {
-    
     getProducts();
-    
   }, [getProducts]);
 
   useEffect(() => {
-
     getExtras();
   }, [getExtras]);
 
@@ -148,7 +176,7 @@ function ShoppingCart() {
   const handleSelectedPackage = useCallback(
     (index: number, direction: "next" | "prev") => {
       const container = scrollContainerRef.current;
-      if (!container) return; // Si no hay contenedor, no hacemos nada
+      if (!container) return;
 
       switch (direction) {
         case "next":
@@ -174,7 +202,7 @@ function ShoppingCart() {
     [products]
   );
 
-  
+
   return (
     <main className="w-full bgrose-400 flex flex-col bgred-400">
 
