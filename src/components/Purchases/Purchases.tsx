@@ -277,31 +277,73 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
   ]
   
   
-  const [purchases, setPurchases] = useState<Purchase[]>([]);
+  const [purchases, setPurchases] = useState([
+    {
+      product: {
+          name: "1 Area",
+          type: "Basic",
+      },
+      extras: [
+        {
+          extra: {
+            name: "Irrigation Plan",
+            isActive: true
+          },
+        },
+        {
+          extra: {
+            name: "360° Virtual Tour of Design",
+          },
+        },
+        {
+          extra: {
+            name: "Lighting Plan",
+          },
+        },
+        {
+          extra: {
+            name: "Side Yard",
+          },
+        },
+      ],
+      selectedAreas: [
+          {
+              nameArea: "Frontyard",
+              isActive: true,
+          },
+          {
+              nameArea: "Backyard",
+              isActive: true,
+          }
+      ],
+      total: 1,
+      status: "pending",
+  }
+  ]);
   const [isLoadingPurchase, setIsLoadingPurchase] = useState<boolean>(false);
 
-  const getPurchasesByCustomer = useCallback(async () => {
-    setIsLoadingPurchase(true);
-    try {
-      const response = await apiService.getPurchasesByCustomerId("678b3cb754c8efd3f5677ee5");
-      if (response) {
-        console.log("1- respuesta axios getPurchasesByCustomer", response);
-        setPurchases(response.data);
-        setIsLoadingPurchase(false);
-        console.log("2- data axios getPurchasesByCustomer", response.data);
-      }
-    } catch (error) {
+  // const getPurchasesByCustomer = useCallback(async () => {
+  //   setIsLoadingPurchase(true);
+  //   try {
+  //     const response = await apiService.getPurchasesByCustomerId("678b3cb754c8efd3f5677ee5");
+  //     if (response) {
+  //       console.log("1- respuesta axios getPurchasesByCustomer", response);
+  //       setPurchases(response.data);
+  //       setIsLoadingPurchase(false);
+  //       console.log("2- data axios getPurchasesByCustomer", response.data);
+  //     }
+  //   } catch (error) {
       
-    }
-  }, []);
+  //   }
+  // }, []);
   
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      getPurchasesByCustomer();
-    }, 300);
-    return () => clearTimeout(timeoutId);
-  }, [getPurchasesByCustomer]);
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     getPurchasesByCustomer();
+  //   }, 300);
+  //   return () => clearTimeout(timeoutId);
+  // }, [getPurchasesByCustomer]);
 
   useEffect(() => {
     console.log("purchase: ", purchases);
@@ -379,8 +421,8 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
                             {
                               (purchase.extras.length > 0)
                                 ? purchase.extras.map((extra, index) => (
-                                  // <p className="flex gap-2" key={index}><GiCheckMark className="text-xl text-[#6b776d]"/>{extra.extra.name}</p>
-                                  <></>
+                                  <p className="flex gap-2" key={index}><GiCheckMark className="text-xl text-[#6b776d]"/>{extra.extra.name}</p>
+                                  // <div key={index} ></div >
                                 ))
                                 : <p>No extras selected</p>
                             }
