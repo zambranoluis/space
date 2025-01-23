@@ -379,7 +379,8 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
                             {
                               (purchase.extras.length > 0)
                                 ? purchase.extras.map((extra, index) => (
-                                  <p className="flex gap-2" key={index}><GiCheckMark className="text-xl text-[#6b776d]"/>{extra.extra.name}</p>
+                                  // <p className="flex gap-2" key={index}><GiCheckMark className="text-xl text-[#6b776d]"/>{extra.extra.name}</p>
+                                  <></>
                                 ))
                                 : <p>No extras selected</p>
                             }
@@ -391,7 +392,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
                             <h2>Price:</h2>
                           </div>
                           <div className="flex">
-                            <p>{purchase.total}$</p>
+                            {/* <p>{purchase.total}$</p> */}
                           </div>
                         </div>
                       </div>
