@@ -31,6 +31,7 @@ import { FaTags } from "react-icons/fa6";
 import { PiTagSimpleFill } from "react-icons/pi";
 
 import { GiCheckMark } from "react-icons/gi";
+import { p } from "framer-motion/client";
 
 
 
@@ -256,22 +257,22 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
     {
       name: "Pending",
       icon: <img src={"/purchasePendingSpaceColorsGreen.png"} className="w-[25px] h-[25px]"/>,
-      iconSelected: ""
+      iconSelected: <img src={"purchasePendingColorsWhite.png.png"} className="w-[25px] h-[25px]"/>,
     },
     {
       name: "Development",
       icon: <img src={"/purchaseDevelopmentColorsGreen.png"} className="w-[25px] h-[25px]"/>,
-      iconSelected: ""
+      iconSelected: <img src={"/purchaseDevelopmentColorsWhite.png"} className="w-[25px] h-[25px]"/>,
     },
     {
       name: "Completed",
       icon: <img src={"/purchaseCompletedColorsGreen.png"} className="w-[25px] h-[25px]"/>,
-      iconSelected: ""
+      iconSelected: <img src={"/purchaseCompletedColorsWhite.png"} className="w-[25px] h-[25px]"/>,
     },
     {
       name: "Canceled",
       icon: <img src={"/purchaseCanceledColorsGreen.png"} className="w-[25px] h-[25px]"/>,
-      iconSelected: ""
+      iconSelected: <img src={"purchaseCanceledColorsWhite.png"} className="w-[25px] h-[25px]"/>,
     },
   ]
   
@@ -306,17 +307,17 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
     console.log("purchase: ", purchases);
   }, [purchases]);
 
-  const toggleProject = (id: number) => {
-    const project = document.getElementById(`project${id}Container`);
-    project?.classList.toggle("max-h-0");
-  };
-
+  const togglePurchase = (id: number) => {
+    const purchase = document.getElementById(`purchase${id}Container`);
+    purchase?.classList.toggle("max-h-0");
+};
+  
   return (
     <div className="flex flex-col w-[90%] h-full place-self-center bgred-200  gap-2 ">
           <div className="flex  place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[415px] overflow-x-scroll scrollbar-hide">
             {typeClients.map((client, index) => (
               <div className={`flex justify-center items-center p-1 `} key={index}>
-                <p className={`${currentClients === client.name ? "bg-[#6b776d] text-white rounded-md" : ""} text-xs transition-all duration-300 select-none flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap  `} onClick={() => { setCurrentClients(client.name) }} ><span className="text-lg ">{client.icon}</span>{client.name}</p>
+                <p className={`${currentClients === client.name ? "bg-[#6b776d] text-white rounded-md" : ""} text-xs transition-all duration-300 select-none flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap  `} onClick={() => { setCurrentClients(client.name) }} ><span className="text-lg ">{((currentClients === client.name && client.name !== "All Purchases") ? client.iconSelected : client.icon)}</span>{client.name}</p>
               </div>
             ))
             }
@@ -338,54 +339,60 @@ export const Purchases: React.FC<PurchasesProps> = ({ customerId }) => {
               {
                 purchases.map((purchase, index) => (
                   <div className="bgred-300 flex flex-col  p-2" key={index}>
-                    <div id="projectTitle" className="flex items-center gap-2 p-2 text-[#6b776d] bgred-200 justify-between border border-[#6b776d] rounded-md">
+                    <div id="projectTitle" className="flex items-center gap-2 p-2  bg-[#6b776d] text-white justify-between border border-[#6b776d] rounded-t-md cursor-pointer" onClick={() => togglePurchase(index)}>
                       <div className="flex items-center">
-                        <PiTagSimpleFill className="text-2xl text-[#f5a524]" />
+                        <PiTagSimpleFill className="text-2xl pr-2 text-[#f5a524]" />
                         <h1 className="text-3xl font-black">Project - #{index + 1}</h1>
                       </div>
-                      <div>Status: Pending Payment</div>
+                      <div className="flex gap-1">
+                        <p>Status:</p>
+                        <p className="text-[#f5a524]">Pending</p>
+                      </div>
                     </div>
-                    <div id="projectContainer" className="flex flex-col  text-black">
-                      <div id="packagePurchased" className="flex flex-col">
-                        <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1 ">
-                          <h2>Package Purchased:</h2>
+                    <div id={`purchase${index}Container`} className="flex max-h-0 transition-all duration-300 flex-col overflow-hidden bgred-300  text-black p4 border-t-0 border rounded-b-md border-[#6b776d]">
+                      <div className="flex flex-col p-4">
+                        <div id="packagePurchased" className="flex flex-col">
+                          <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1 ">
+                            <h2>Package Purchased:</h2>
+                          </div>
+                          <div className="flex p-2 pl-4">
+                            <p className="text-xl">{purchase.product.name}{" "}{purchase.product.type}</p>
+                          </div>
                         </div>
-                        <div className="flex p-2">
-                          <p className="text-xl">{purchase.product.name}{" "}{purchase.product.type}</p>
-                        </div>
-                      </div>
-                      <div id="selectedAreas" className="flex flex-col ">
-                        <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
-                          <h2 className="">Selected Areas:</h2>
-                        </div>
-                        <div className="flex p-2 gap-2 ">
-                          {
-                            purchase.selectedAreas.map((area, index) => (
-                              (area.isActive && <p key={index}>{area.nameArea}</p>)
-                            ))
-                          }
-                        </div>
-                      </div>
-                      <div id="extras" className="flex flex-col ">
-                        <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
-                          <h2 className="">Extras:</h2>
-                        </div>
-                        <div className="flex flex-col text-black p-2">
-                          {
-                            (purchase.extras.length > 0)
-                              ? purchase.extras.map((extra, index) => (
-                                <p key={index}>{extra.extra.name}</p>
+                        <div id="selectedAreas" className="flex flex-col ">
+                          <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
+                            <h2 className="">Selected Areas:</h2>
+                          </div>
+                          <div className="flex p-2 gap-2 pl-4">
+                            {
+                              purchase.selectedAreas.map((area, index) => (
+                                (area.isActive && <p key={index}>{area.nameArea}</p>)
                               ))
-                              : <p>No extras selected</p>
-                          }
+                            }
+                          </div>
                         </div>
-                      </div>
-                      <div id="price" className="flex font-black gap-1 text-[#6b776d]">
-                        <div className="flex">
-                          <h2>Price:</h2>
+                        <div id="extras" className="flex flex-col ">
+                          <div className="flex text-white text-xl bg-[#6b776d] rounded-lg place-self-start px-2 py-1">
+                            <h2 className="">Extras:</h2>
+                          </div>
+                          <div className="flex flex-col text-black p-2 pl-4">
+                            {
+                              (purchase.extras.length > 0)
+                                ? purchase.extras.map((extra, index) => (
+                                  <p className="flex gap-2" key={index}><GiCheckMark className="text-xl text-[#6b776d]"/>{extra.extra.name}</p>
+                                ))
+                                : <p>No extras selected</p>
+                            }
+                            
+                          </div>
                         </div>
-                        <div className="flex">
-                          <p>{purchase.total}$</p>
+                        <div id="price" className="flex font-black gap-1 text-[#6b776d]">
+                          <div className="flex">
+                            <h2>Price:</h2>
+                          </div>
+                          <div className="flex">
+                            <p>{purchase.total}$</p>
+                          </div>
                         </div>
                       </div>
                     </div>
