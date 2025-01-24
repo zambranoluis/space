@@ -165,10 +165,8 @@ function ShoppingCart() {
                                 ? <Switch isSelected isDisabled className=" rounded-full" id={`extra-${index}`} size="sm" />
                                 : <Switch className=" rounded-full" id={`extra-${index}`} size="sm" />
                             }
-
                           </div>
                         </div>
-
                       ))
                     }
                   </div>
@@ -201,13 +199,13 @@ function ShoppingCart() {
                     <h3 className="text-sm  font-bold">{extra.name}</h3>
                     {(extra.description) && <p className="  text-xs">{extra.description}</p>}
                     <div className="flex text-xs max-sm:flex-col sm:gap-2">
-                      {/* {
-                        extras.items?.map((item, index) => (
+                      {
+                        extra.items?.map((item, index) => (
                           <div key={`item-${index}`} >
                             <p className="">{item}</p>
                           </div>
                         ))
-                      } */}
+                      }
                     </div>
                   </div>
                   ))

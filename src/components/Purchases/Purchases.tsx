@@ -437,6 +437,9 @@ export const Purchases: React.FC = ({  }) => {
                             {/* <p>{purchase.total}$</p> */}
                           </div>
                         </div>
+                        <div id="payNow" className="flex mt-4">
+                            <button className="px-3 py-2 bg-[#858e5b] text-white rounded-tl-3xl rounded-br-3xl">Process your payment here</button>
+                        </div>
                       </div>
                     </div>
                     
