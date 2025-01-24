@@ -20,15 +20,6 @@ export interface Customer {
   name: string;
   lastname: string;
   email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  }[];
-  skype: string;
-  address: string;
-  birthdate: string;
 }
 
 

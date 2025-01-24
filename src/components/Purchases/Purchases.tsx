@@ -356,10 +356,10 @@ export const Purchases: React.FC = ({  }) => {
   
   return (
     <div className="flex flex-col w-[90%] h-full place-self-center bgred-200  gap-2 ">
-          <div className="flex  place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[415px] overflow-x-scroll scrollbar-hide">
+          <div className="flex  place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[505px] h-[80px] overflow-x-scroll scrollbar-hide">
             {typeClients.map((client, index) => (
-              <div className={`flex justify-center items-center p-1 `} key={index}>
-                <p className={`${currentClients === client.name ? "bg-[#6b776d] text-white rounded-md" : ""} text-xs transition-all duration-300 select-none flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap  `} onClick={() => { setCurrentClients(client.name) }} ><span className="text-lg ">{((currentClients === client.name && client.name !== "All Purchases") ? client.iconSelected : client.icon)}</span>{client.name}</p>
+              <div className={`flex justify-center items-center p-1 w-[100px]`} key={index}>
+                <p className={`w-full borderwhite ${currentClients === client.name ? "border border-[#6b776d] textwhite rounded-md" : ""} text-xs transition-all duration-300 select-none flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap  `} onClick={() => { setCurrentClients(client.name) }} ><span className="text-lg ">{client.icon}</span>{client.name}</p>
               </div>
             ))
             }

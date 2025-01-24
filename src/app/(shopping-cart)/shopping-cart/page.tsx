@@ -24,15 +24,15 @@ export interface Customer {
   name: string;
   lastname: string;
   email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  }[];
-  skype: string;
-  address: string;
-  birthdate: string;
+  // password: string;
+  // confirmPassword: string;
+  // phone: {
+  //   areaCode: string;
+  //   number: string;
+  // }[];
+  // skype: string;
+  // address: string;
+  // birthdate: string;
 }
 
 
@@ -64,19 +64,7 @@ export interface Extra {
 
 function ShoppingCart() {
 
-  const [customer, setCustomer] = useState<Customer | null>({
-    _id: "",
-    name: "",
-    lastname: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    phone: [],
-    skype: "",
-    address: "",
-    birthdate: "",
-  });
-  
+  const [customer, setCustomer] = useState<Customer | null>(null);
   const [products, setProducts] = useState<Product[]>([]) || null;
   const [extras, setExtras] = useState<Extra[]>([]) || null;
   
@@ -89,83 +77,119 @@ function ShoppingCart() {
   const [isLoadingExtras, setIsLoadingExtras] = useState<boolean>(false); // Estado de carga
   const [errorExtras, setErrorExtras] = useState<string | null>(null); // Estado de error
 
-  const getCustomer = useCallback(async () => {
-    setIsLoadingCustomer(true);
-    setErrorCustomer(null);
-    try {
-      const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
-      console.log("response peticion getCustomer en shopping cart: ", response);
-      if (response){
-        setCustomer(response.data);
-      }
-    } catch (err: unknown) {
-      // if (axios.isAxiosError(err) && err.response) {
-      //   setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
-      // } else {
-      //   setErrorCustomer("Error: No se pudo obtener el cliente.");
-      // }
-    } finally {
-      // setIsLoadingCustomer(false);
-    }
-  }, []);
+  // const getCustomer = useCallback(async () => {
+  //   setIsLoadingCustomer(true);
+  //   setErrorCustomer(null);
+  //   try {
+  //     const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
+  //     console.log("response peticion getCustomer en shopping cart: ", response);
+  //     if (response){
+  //       setCustomer(response.data);
+        
+  //     }
+  //   } catch (err: unknown) {
+  //     // if (axios.isAxiosError(err) && err.response) {
+  //     //   setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
+  //     // } else {
+  //     //   setErrorCustomer("Error: No se pudo obtener el cliente.");
+  //     // }
+  //   } finally {
+  //     setIsLoadingCustomer(false);
+  //   }
+  // }, []);
 
 
-  const getProducts = useCallback(async () => {
-    setIsLoadingProducts(true);
-    setErrorProducts(null);
-    try {
-      const response = await apiService.getProducts();
-      if (response){
-        setProducts(response.data);
-      }
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err) && err.response) {
-        // setErrorProducts(`Error: ${err.response.status} - ${err.response.data.message}`);
-      } else {
-        // setErrorProducts("Error: No se pudo obtener los productos.");
-      }
-    } finally {
-      setIsLoadingProducts(false);
-    }
-  }, []);
+  // const getProducts = useCallback(async () => {
+  //   setIsLoadingProducts(true);
+  //   setErrorProducts(null);
+  //   try {
+  //     const response = await apiService.getProducts();
+  //     if (response){
+  //       setProducts(response.data);
+  //     }
+  //   } catch (err: unknown) {
+  //     if (axios.isAxiosError(err) && err.response) {
+  //       // setErrorProducts(`Error: ${err.response.status} - ${err.response.data.message}`);
+  //     } else {
+  //       // setErrorProducts("Error: No se pudo obtener los productos.");
+  //     }
+  //   } finally {
+  //     setIsLoadingProducts(false);
+  //   }
+  // }, []);
 
-  const getExtras = useCallback(async () => {
-    setIsLoadingExtras(true);
-    setErrorExtras(null);
-    try {
-      const response = await apiService.getExtras();
-      if (response){
-        setExtras(response.data);
-      }
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err) && err.response) {
-        // setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
-      } else {
-        // setErrorExtras("Error: No se pudo obtener los extras.");
-      }
-    } finally {
-      setIsLoadingExtras(false);
-    }
-  }, []);
+  // const getExtras = useCallback(async () => {
+  //   setIsLoadingExtras(true);
+  //   setErrorExtras(null);
+  //   try {
+  //     const response = await apiService.getExtras();
+  //     if (response){
+  //       setExtras(response.data);
+  //     }
+  //   } catch (err: unknown) {
+  //     if (axios.isAxiosError(err) && err.response) {
+  //       // setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
+  //     } else {
+  //       // setErrorExtras("Error: No se pudo obtener los extras.");
+  //     }
+  //   } finally {
+  //     setIsLoadingExtras(false);
+  //   }
+  // }, []);
+
 
   useEffect(() => {
-    getCustomer();
-  }, [getCustomer]);
-
-  useEffect(() => {
-    getProducts();
-  }, [getProducts]);
-
-  useEffect(() => {
-    getExtras();
-  }, [getExtras]);
-
+    const fetchCustomer = async () => {
+      try {
+        const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
+        console.log('xxxx - Customer response:', response); // Log the API response
+        if (response) {
+          setCustomer(response);
+          console.log('xxxx - Customer data:', response); // Log the API response
+        }
+      } catch (err: unknown) {
+        console.error('Error fetching customer:', err);
+      }
+    };
+  
+    const fetchProducts = async () => {
+      try {
+        const response = await apiService.getProducts();
+        console.log('Products response:', response); // Log the API response
+        if (response) {
+          setProducts(response.data);
+        }
+      } catch (err: unknown) {
+        console.error('Error fetching products:', err);
+      }
+    };
+  
+    const fetchExtras = async () => {
+      try {
+        const response = await apiService.getExtras();
+        console.log('Extras response:', response); // Log the API response
+        if (response) {
+          setExtras(response.data);
+        }
+      } catch (err: unknown) {
+        console.error('Error fetching extras:', err);
+      }
+    };
+  
+    const fetchData = async () => {
+      await Promise.all([fetchCustomer(), fetchProducts(), fetchExtras()]);
+    };
+  
+    fetchData();
+  }, []);
+  
   useEffect(() => {
     if (customer && products && extras) {
-      console.log("customer desde shopping cart", customer);
-      console.log("products desde shopping cart", products);
-      console.log("extras desde shopping cart", extras);
+      console.log('1. Data is available!');
     }
+    console.log('2. Customer:', customer); // Log the state value
+    console.log('3. Products:', products); // Log the state value
+    console.log('4. Extras:', extras); // Log the state value
   }, [customer, products, extras]);
 
   const [selectedPackage, setSelectedPackage] = useState(0);
@@ -206,7 +230,6 @@ function ShoppingCart() {
 
   return (
     <main className="w-full bgrose-400 flex flex-col bgred-400">
-
       <section className="bgpurple-500 flex flex-col w-full">
         <div className="flex max-lg:flex-col max-lg:gap-2 max-lg:justify-center items-center w-full  py-8 lg:gap-6">
           <div className="lg:w-[40%] bgblue-300 flex justify-center items-center max-lg:w-full p-2">
