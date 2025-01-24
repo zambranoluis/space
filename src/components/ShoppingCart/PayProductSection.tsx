@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useEffect, useState, use } from "react";
+import { useRef, useCallback, useEffect, useState, useMemo } from "react";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { apiService } from "@/services/apiService";
@@ -14,12 +14,15 @@ export interface Area {
   isActive: boolean;
 }
 
-
 export interface Customer {
-  _id: string;
+  id: string;
   name: string;
   lastname: string;
   email: string;
+  phone: {
+    
+  };
+  address: string
 }
 
 
@@ -36,6 +39,16 @@ export interface Product {
   picture: string;
 }
 
+export interface SelectedProduct {
+  id: string;
+  name: string;
+  type: string;
+  area: number;
+  price: number;
+  picture: string;
+  include: [];
+}
+
 
 export interface Extra {
   _id: string;
@@ -49,7 +62,7 @@ export interface Extra {
 
 
 export interface Purchase {
-  customer: string;
+  customer: Customer;
   selectedAreas: [
     {
       nameArea: string;
@@ -89,8 +102,8 @@ export interface Purchase {
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
   customer: Customer | null;
-  products: Product[];
-  extras: Extra[];
+  products: Product[] | null;
+  extras: Extra[] | null;
   selectedPackage: number;
   handleSelectedPackage: (index: number, direction: "next" | "prev") => void;
 }
@@ -103,6 +116,38 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   extras,
 }) => {
 
+  console.log("--- Componente Pay ---")
+  console.log("Compoonente Pay --- Customer: ", customer)
+  console.log("Compoonente Pay --- Product: ", products)
+  console.log("Compoonente Pay --- Extras: ", extras)
+
+  const [productSelectedInfo, setProductSelectedInfo] = useState<{
+    id: string;
+    name: string;
+    type: string;
+    area: number;
+    price: number;
+    picture: string;
+    include: [];
+
+  } | null>(null); // Inicializamos con null ya que puede no haber datos
+  
+  useEffect(() => {
+    if (products !== null) {
+      const productInfo = {
+        id: products[selectedPackage]._id,
+        name: products[selectedPackage].name,
+        type: products[selectedPackage].type,
+        area: products[selectedPackage].area,
+        price: products[selectedPackage].price,
+        picture: products[selectedPackage].picture,
+        include: products[selectedPackage].include,
+      };
+      setProductSelectedInfo(productInfo);
+      console.log("xxx Pay Product: product selected info:", productInfo);
+    }
+  }, [selectedPackage]);
+
   const extrasInfo = [
     "678ad9d12f1981e3e1f545a7",
     "678ad9da2f1981e3e1f545a9",
@@ -110,63 +155,100 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     "678ad9e52f1981e3e1f545ad",
   ]
 
-  const [purchase, setPurchase] = useState<Purchase>({
-    customer: "",
-    selectedAreas: [{
-      nameArea: "",
-      isActive: false
-    },{
-      nameArea: "",
-      isActive: false
-    }],
-    product: products[selectedPackage],
-    extras: [
-      {
-        extra: extrasInfo[0],
-        isActive: false
-      },
-      {
-        extra: extrasInfo[1],
-        isActive: false
-      },
-      {
-        extra: extrasInfo[2],
-        isActive: false
-      },
-      {
-        extra: extrasInfo[3],
-        isActive: false
-      }
-    ],
-    price: 0,
-    status: "pending",
-    isActive: false,
-  });
-  
   const [selectedExtras, setSelectedExtras] = useState<{ extra: string; isActive: boolean, price: number }[]>([
-    { extra: extrasInfo[0], isActive: false, price: extras[0].price },
-    { extra: extrasInfo[1], isActive: (products[selectedPackage].type === "Pro") ? true : false, price: extras[1].price },
-    { extra: extrasInfo[2], isActive: false, price: extras[2].price },
-    { extra: extrasInfo[3], isActive: (products[selectedPackage].type === "Pro") ? true : false, price: extras[3].price },
+    {
+      extra: "678ad9d12f1981e3e1f545a7",
+      isActive: false,
+      price: 1
+    },
+    {
+      extra: "678ad9da2f1981e3e1f545a9",
+      isActive: false,
+      price: 1
+    },
+    {
+      extra: "678ad9e02f1981e3e1f545ab",
+      isActive: false,
+      price: 1
+    },
+    {
+      extra: "678ad9e52f1981e3e1f545ad",
+      isActive: false,
+      price: 1
+    }
+    
   ]);
-  
-
-  const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(products[selectedPackage].name.includes("2") || null);
 
   useEffect(() => {
-    setIsTwoAreasAllowed(products[selectedPackage].name.includes("2") || null);
+    console.log("zzzzzzzzzzz selected Extras: ", selectedExtras)
+    if (products && products[selectedPackage].type === "Pro"){
+      setSelectedExtras(
+        [
+          {
+            extra: "678ad9d12f1981e3e1f545a7",
+            isActive: selectedExtras[0].isActive,
+            price: 1
+          },
+          {
+            extra: "678ad9da2f1981e3e1f545a9",
+            isActive: true,
+            price: 1
+          },
+          {
+            extra: "678ad9e02f1981e3e1f545ab",
+            isActive: true,
+            price: 1
+          },
+          {
+            extra: "678ad9e52f1981e3e1f545ad",
+            isActive: selectedExtras[3].isActive,
+            price: 1
+          }
+        ]
+      );
+    } else {
+      setSelectedExtras(
+        [
+          {
+            extra: "678ad9d12f1981e3e1f545a7",
+            isActive: selectedExtras[0].isActive,
+            price: 1
+          },
+          {
+            extra: "678ad9da2f1981e3e1f545a9",
+            isActive: selectedExtras[1].isActive,
+            price: 1
+          },
+          {
+            extra: "678ad9e02f1981e3e1f545ab",
+            isActive: selectedExtras[2].isActive,
+            price: 1
+          },
+          {
+            extra: "678ad9e52f1981e3e1f545ad",
+            isActive: selectedExtras[3].isActive,
+            price: 1
+          }
+        ]
+      );
+    }
+    console.log("zzzzzzzzzzz selected Extras Inicializadosssxxxsawwww: ", selectedExtras)
+
+  }, [selectedPackage, productSelectedInfo]);
+
+
+  
+
+  const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(productSelectedInfo?.area === 2 || null);
+
+  useEffect(() => {
+    setIsTwoAreasAllowed(productSelectedInfo?.area === 2 || null);
   }, [selectedPackage]);
 
   const [selectedArea, setSelectedArea] = useState(
     [
-      {
-        nameArea: "Frontyard",
-        isActive: true
-      },
-      {
-        nameArea: "Backyard",
-        isActive: false
-      }
+      { nameArea: "Frontyard", isActive: true },
+      { nameArea: "Backyard", isActive: false },
     ]
   );
 
@@ -192,208 +274,216 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   };
 
   const handleSelectedExtras = (index: number) => {
-    console.log("extras seleccionados en el componente pay: ", selectedExtras);
-    console.log("extra accionado - extra: ", index)
-    if (selectedExtras[index].isActive) {
-      // Si el extra ya estaba activo, lo desactivamos
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = false;
-      setSelectedExtras(newSelectedExtras);
+    console.log("extras previamente seleccionados en el componente pay: ", selectedExtras);
+    console.log("extra accionado - índice: ", index);
+  
+    if (productSelectedInfo?.type === "Pro") {
+      // Si es "Pro", índices 1 y 2 siempre activos
+      const updatedExtras = selectedExtras.map((extra, i) => {
+        if (i === 1 || i === 2) {
+          return { ...extra, isActive: true }; // Índices 1 y 2 siempre permanecen activos
+        }
+        if (i === index) {
+          return { ...extra, isActive: !extra.isActive }; // Alternar el estado del índice seleccionado
+        }
+        return extra; // Mantener el estado de los demás
+      });
+      setSelectedExtras(updatedExtras);
     } else {
-      // Si el extra estaba desactivado, lo activamos
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = true;
-      setSelectedExtras(newSelectedExtras);
+      // Si no es "Pro", alternar libremente el estado
+      const updatedExtras = selectedExtras.map((extra, i) => {
+        if (i === index) {
+          return { ...extra, isActive: !extra.isActive }; // Alternar el estado del índice seleccionado
+        }
+        return extra; // Mantener el estado de los demás
+      });
+      setSelectedExtras(updatedExtras);
     }
+  
+    console.log("extras seleccionados ajustados en el componente pay: ", selectedExtras);
   };
 
-  const [finalPrice, setFinalPrice] = useState<number>(products[selectedPackage].price);
 
 
-  const handleFinalPrice = () => {
-    console.log("calculating final price...");
-    const base = products[selectedPackage].price;
-    console.log("base: ", base);
-
-    const extrasPrice = selectedExtras.reduce((total, extra) => {
-      if (extra.isActive) {
-        console.log("extraPrice : ", extra.price);
-        return total + extra.price;
-      }
-      return total;
-    }, 0);
-
-    console.log("total extras: ", extrasPrice);
-
-    const totalPrice = base + extrasPrice;
-    console.log("totalPrice: ", totalPrice);
-    setFinalPrice(totalPrice);
-
-  }
-
+  const [finalPrice, setFinalPrice] = useState(0);
+  
   useEffect(() => {
-    handleFinalPrice();
-  }, [selectedExtras, selectedPackage, products]);
-
-
-    const handlePurchase = async () => {
-      console.log("data to be evaluated: ");
-      console.log("customer: ", customer);
-      console.log("products: ", products);
-      console.log("extras: ", extras);
-      console.log("selectedExtras: ", selectedExtras);
-      console.log("selectedArea: ", selectedArea);
-      if (!customer || !products || !extras || !selectedExtras || !selectedArea) {
-        console.error("Error: Customer or products or extras or selectedArea is null");
-        return;
+    if (!productSelectedInfo || !selectedExtras) {
+      setFinalPrice(0);
+      return;
+    }
+  
+    const basePrice = productSelectedInfo.price;
+  
+    const extrasPrice = selectedExtras.reduce((total, extra, index) => {
+      if (productSelectedInfo?.type === "Pro") {
+        // Si el tipo de producto es "Pro", solo sumamos los índices 0 y 3
+        return (index === 0 || index === 3) && extra.isActive ? total + extra.price : total;
+      } else {
+        // Si no es "Pro", sumamos todos los extras activos
+        return extra.isActive ? total + extra.price : total;
       }
+    }, 0);
+  
+    setFinalPrice(basePrice + extrasPrice);
+  }, [productSelectedInfo, selectedExtras]);
 
-      setPurchase({
-        customer: customer._id,
-        product: products[selectedPackage],
-        selectedAreas: products[selectedPackage].name.includes("2")
-          ? [
-            { nameArea: selectedArea[0].nameArea, isActive: true },
-            { nameArea: selectedArea[1].nameArea, isActive: true },
-          ]
-          : [
-            { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
-            { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
-          ],
-        extras: products[selectedPackage].type === "Pro"
-          ? [
-            { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-            { extra: selectedExtras[1].extra, isActive: true },
-            { extra: selectedExtras[2].extra, isActive: true },
-            { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-          ]
-          : [
-            { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-            { extra: selectedExtras[1].extra, isActive: selectedExtras[1].isActive },
-            { extra: selectedExtras[2].extra, isActive: selectedExtras[2].isActive },
-            { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-          ],
-        price: finalPrice,
-        status: "pending",
-        isActive: true
-      })
+  const handlePurchase = async () => {
+    console.log("Purchase ----- data to be evaluated: ");
+    console.log("Purchase ----- customer: ", customer);
+    console.log("Purchase ----- product: ", productSelectedInfo);
+    console.log("Purchase ----- selectedExtras: ", selectedExtras);
+    console.log("Purchase ----- selectedArea: ", selectedArea);
+    // if (!customer || !products || !extras || !selectedExtras || !selectedArea) {
+    //   console.error("Error: Customer or products or extras or selectedArea is null");
+    //   return;
+    // }
 
-      console.log("newPurchase", purchase);
+    // setPurchase({
+    //   customer: customer,
+    //   product: productSelectedInfo,
+    //   selectedAreas: products[selectedPackage].name.includes("2")
+    //     ? [
+    //       { nameArea: selectedArea[0].nameArea, isActive: true },
+    //       { nameArea: selectedArea[1].nameArea, isActive: true },
+    //     ]
+    //     : [
+    //       { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
+    //       { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
+    //     ],
+    //   extras: products[selectedPackage].type === "Pro"
+    //     ? [
+    //       { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
+    //       { extra: selectedExtras[1].extra, isActive: true },
+    //       { extra: selectedExtras[2].extra, isActive: true },
+    //       { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
+    //     ]
+    //     : [
+    //       { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
+    //       { extra: selectedExtras[1].extra, isActive: selectedExtras[1].isActive },
+    //       { extra: selectedExtras[2].extra, isActive: selectedExtras[2].isActive },
+    //       { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
+    //     ],
+    //   price: finalPrice,
+    //   status: "pending",
+    //   isActive: true
+    // })
 
-      try {
-        const data = await apiService.createPurchase(purchase);
-        window.location.href = "/panel-client";
+    // console.log("newPurchase", purchase);
 
-      } catch (err: unknown) {
-        // if (axios.isAxiosError(err) && err.response) {
-        //   setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
-        // } else {
-        //   setErrorExtras("Error: No se pudo obtener los extras.");
-        // }
-      }
+    try {
+      // const data = await apiService.createPurchase(purchase);
+      // window.location.href = "/panel-client";
 
+    } catch (err: unknown) {
+      // if (axios.isAxiosError(err) && err.response) {
+      //   setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
+      // } else {
+      //   setErrorExtras("Error: No se pudo obtener los extras.");
+      // }
+    }
   }
 
 
 
   return (
-    <section id="selectedPackageContainer" className={`relative select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex `} style={{ backgroundImage: `url(${products[selectedPackage].picture})` }} >
-        <div className="flex absolute bggreen-400 md:left-[5%] max-md:top-[0.5%] max-md:left-[3%] md:flex-col gap-4">
-          <div className={`${selectedPackage === 0 ? "hidden" : ""} p-2 md:p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full rotate-90 cursor-pointer`} onClick={() => { handleSelectedPackage(selectedPackage, "prev") }} >
-            <TiArrowSortedDown className="text-4xl" />
-          </div>
-          <div className={`${selectedPackage === products.length - 1 ? "hidden" : ""} p-2 md:p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full -rotate-90 cursor-pointer`} onClick={() => { handleSelectedPackage(selectedPackage, "next") }} >
-            <TiArrowSortedDown className="text-4xl" />
-          </div>
+    <section id="selectedPackageContainer" className={`relative select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex `} style={{ backgroundImage: `url(${productSelectedInfo?.picture})` }} >
+      <div className="flex absolute bggreen-400 md:left-[5%] max-md:top-[0.5%] max-md:left-[3%] md:flex-col gap-4">
+        <div className={`${selectedPackage === 0 ? "hidden" : ""} p-2 md:p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full rotate-90 cursor-pointer`} onClick={() => { handleSelectedPackage(selectedPackage, "prev") }} >
+          <TiArrowSortedDown className="text-4xl" />
         </div>
-        <div className="bgred-500 py-8 w-[90%] max-w-[450px] flex">
-          <div id="extrasCard" className="bgpink-400 w-full bg-white flex flex-col justify-center items-center">
-            <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
-              <p className="text-2xl sm:text-3xl py-4 text-white max-sm:text-center">{products[selectedPackage].name}{" "}{products[selectedPackage].type}</p>
-            </div>
-            <div id="productCardBody" className="  bgpurple-600 place-self-center py-8 w-[65%]  " >
-              <div id="bodyIncludes" className="flex flex-col text-black bgred-400 h-[350px]">
-                <h2 className="font-black text-sm">Includes:</h2>
-                <div className="flex flex-col gap-1 py-4">
-                  {
-                    products[selectedPackage].include.map((item, index) => (
-                      <div key={index}>
-                        <p>● {item}</p>
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-              <div id="bodyOptions" className="flex flex-col bg-[#f0f0ef] p-4">
-                <div className="w-full gap-4 flex place-self-center">
-                  <button className={`w-full text-black text-sm border border-gray-500 ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}  ${selectedArea[0].isActive === true ? "bg-[#6b776d] text-white" : ""} `} onClick={() => { handleSelectedArea("frontyard") }}>Frontyard</button>
-                  <button className={`w-full text-black text-sm border border-gray-500 ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}  ${selectedArea[1].isActive === true ? "bg-[#6b776d] text-white" : ""} `} onClick={() => { handleSelectedArea("backyard") }}>Backyard</button>
-                </div>
-                <div className="bggreen-700 p-6">
-                  <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>
-                  <div className="flex flex-col bggray-600 justify-center items-center p-2 gap-2">
-                    {
-                      extras.map((item, index) => (
-                        <div className="flex bgpink-300 justify-center w-full gap-2" key={index}>
-                          <div className="text-xs w-[50%] bgyellow-300 text-[#9a9989]">
-                            <p>{item.name}</p>
-                          </div>
-                          <div className=" bgblue-300">
-                            {
-                              (products[selectedPackage].type === "Pro" && (index === 1 || index === 2))
-                                ? <Switch isSelected isDisabled  />
-                                : <Switch onChange={() => { handleSelectedExtras(index) }} />
-                            }
-                          </div>
-                        </div>
-                      ))
-                    }
-                  </div>
-                  <div className="flex bgred-300 justify-center gap-2 text-black">
-                    <div className="flex">
-                      <p>
-                        Final Price:
-                      </p>
-                    </div>
-                    <div className="flex border border-black rounded-sm px-4">
-                      <p className="font-semibold">{finalPrice}</p>
-                    </div>
-                  </div>
-                  <div className="flex justify-center bgpurple-400 relative">
-                    <button className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " onClick={() => { handleFinalPrice(); handlePurchase() }}>
-                      PAY FOR
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="productCardFooter" className="px-12 py-6 bgpurple-800 w-full bg-[#dcd6c8] text-black relative" >
-              <div id="extrasCircle" className="bg-[#302626] rounded-full w-[50px] h-[50px] min-[500px]:w-[70px] min-[500px]:h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute top-0 min-[320px]:top-[40%] sm:top-[40%] left-[0px] min-[320px]:left-[-20px] min-[500px]:left-[-30px]  md:left-[-60px] text-xs sm:text-sm md:text-lg">
-                <p>EXTRAS</p>
-              </div>
-              <div className="flex flex-col">
+        <div className={`${selectedPackage === 3 ? "hidden" : ""} p-2 md:p-4 bg-white border border-[#dcd6c8] text-[#dcd6c8] rounded-full -rotate-90 cursor-pointer`} onClick={() => { handleSelectedPackage(selectedPackage, "next") }} >
+          <TiArrowSortedDown className="text-4xl" />
+        </div>
+      </div>
+      <div className="bgred-500 py-8 w-[90%] max-w-[450px] flex">
+        <div id="extrasCard" className="bgpink-400 w-full bg-white flex flex-col justify-center items-center">
+          <div id="productCardTitle" className=" bg-[#848d5a] w-full  items-center flex py-6 pl-8" >
+            <p className="text-2xl sm:text-3xl py-4 text-white max-sm:text-center">{productSelectedInfo?.name}{" "}{productSelectedInfo?.type}</p>
+          </div>
+          <div id="productCardBody" className="  bgpurple-600 place-self-center py-8 w-[65%]  " >
+            <div id="bodyIncludes" className="flex flex-col text-black bgred-400 h-[350px]">
+              <h2 className="font-black text-sm">Includes:</h2>
+              <div className="flex flex-col gap-1 py-4">
                 {
-                  extras.map((extra, index) => (
-                    (extra.name !== "Side Yard" ) && <div className={`py-4 gap-2 flex flex-col ${(index !== extras.length - 1 ? "border-b border-black" : "")}`} key={index}>
-                    <h3 className="text-sm  font-bold">{extra.name}</h3>
-                    {(extra.description) && <p className="  text-xs">{extra.description}</p>}
-                    <div className="flex text-xs max-sm:flex-col sm:gap-2">
-                      {
-                        extra.items.map((item, index) => (
-                          <div key={`item-${index}`} >
-                            <p className="">{item}</p>
-                          </div>
-                        ))
-                      }
+                  productSelectedInfo?.include.map((item, index) => (
+                    <div key={index}>
+                      <p>● {item}</p>
                     </div>
-                  </div>
                   ))
                 }
               </div>
             </div>
+            <div id="bodyOptions" className="flex flex-col bg-[#f0f0ef] p-4">
+              <div className="w-full gap-4 flex place-self-center">
+                <button className={`w-full text-black text-sm border border-gray-500 ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}  ${selectedArea[0].isActive === true ? "bg-[#6b776d] text-white" : ""} `} onClick={() => { handleSelectedArea("frontyard") }}>Frontyard</button>
+                <button className={`w-full text-black text-sm border border-gray-500 ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}  ${selectedArea[1].isActive === true ? "bg-[#6b776d] text-white" : ""} `} onClick={() => { handleSelectedArea("backyard") }}>Backyard</button>
+              </div>
+              <div className="bggreen-700 p-6">
+                <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>
+                <div className="flex flex-col bggray-600 justify-center items-center p-2 gap-2">
+                  {
+                    extras?.map((item, index) => (
+                      <div className="flex bgpink-300 justify-center w-full gap-2" key={index}>
+                        <div className="text-xs w-[50%] bgyellow-300 text-[#9a9989]">
+                          <p>{item.name}</p>
+                        </div>
+                        <div className=" bgblue-300">
+                          {
+                            (products && products[selectedPackage].type === "Pro" && (index === 1 || index === 2))
+                              ? <Switch isSelected isDisabled />
+                              : <Switch onChange={() => { handleSelectedExtras(index) }} />
+                          }
+                        </div>
+                      </div>
+                    ))
+                  }
+                </div>
+                <div className="flex bgred-300 justify-center gap-2 text-black">
+                  <div className="flex">
+                    <p>
+                      Final Price:
+                    </p>
+                  </div>
+                  <div className="flex border border-black rounded-sm px-4">
+                    <p className="font-semibold">{finalPrice}</p>
+                  </div>
+                </div>
+                <div className="flex justify-center bgpurple-400 relative">
+                  <button className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " onClick={() => { handlePurchase() }}>
+                    PAY FOR
+                  </button>
+                </div>
+            </div>
           </div>
         </div>
-      </section>
+        <div id="productCardFooter" className="px-12 py-6 bgpurple-800 w-full bg-[#dcd6c8] text-black relative" >
+          <div id="extrasCircle" className="bg-[#302626] rounded-full w-[50px] h-[50px] min-[500px]:w-[70px] min-[500px]:h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute top-0 min-[320px]:top-[40%] sm:top-[40%] left-[0px] min-[320px]:left-[-20px] min-[500px]:left-[-30px]  md:left-[-60px] text-xs sm:text-sm md:text-lg">
+            <p>EXTRAS</p>
+          </div>
+          <div className="flex flex-col">
+            {
+              extras?.map((extra, index) => (
+                (extra.name !== "Side Yard") && <div className={`py-4 gap-2 flex flex-col ${(index !== extras.length - 1 ? "border-b border-black" : "")}`} key={index}>
+                  <h3 className="text-sm  font-bold">{extra.name}</h3>
+                  {(extra.description) && <p className="  text-xs">{extra.description}</p>}
+                  <div className="flex text-xs max-sm:flex-col sm:gap-2">
+                    {
+                      extra.items.map((item, index) => (
+                        <div key={`item-${index}`} >
+                          <p className="">{item}</p>
+                        </div>
+                      ))
+                    }
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
   );
 }
 

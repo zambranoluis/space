@@ -24,15 +24,15 @@ export interface Customer {
   name: string;
   lastname: string;
   email: string;
-  // password: string;
-  // confirmPassword: string;
-  // phone: {
-  //   areaCode: string;
-  //   number: string;
-  // }[];
-  // skype: string;
-  // address: string;
-  // birthdate: string;
+  password: string;
+  confirmPassword: string;
+  phone: {
+    areaCode: string;
+    number: string;
+  }[];
+  skype: string;
+  address: string;
+  birthdate: string;
 }
 
 
@@ -64,9 +64,10 @@ export interface Extra {
 
 function ShoppingCart() {
 
+
   const [customer, setCustomer] = useState<Customer | null>(null);
-  const [products, setProducts] = useState<Product[]>([]) || null;
-  const [extras, setExtras] = useState<Extra[]>([]) || null;
+  const [products, setProducts] = useState<Product[] | null>(null);
+  const [extras, setExtras] = useState<Extra[] | null>(null);
   
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false); // Estado de carga
   const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error
@@ -77,122 +78,99 @@ function ShoppingCart() {
   const [isLoadingExtras, setIsLoadingExtras] = useState<boolean>(false); // Estado de carga
   const [errorExtras, setErrorExtras] = useState<string | null>(null); // Estado de error
 
-  // const getCustomer = useCallback(async () => {
-  //   setIsLoadingCustomer(true);
-  //   setErrorCustomer(null);
-  //   try {
-  //     const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
-  //     console.log("response peticion getCustomer en shopping cart: ", response);
-  //     if (response){
-  //       setCustomer(response.data);
-        
-  //     }
-  //   } catch (err: unknown) {
-  //     // if (axios.isAxiosError(err) && err.response) {
-  //     //   setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
-  //     // } else {
-  //     //   setErrorCustomer("Error: No se pudo obtener el cliente.");
-  //     // }
-  //   } finally {
-  //     setIsLoadingCustomer(false);
-  //   }
-  // }, []);
-
-
-  // const getProducts = useCallback(async () => {
-  //   setIsLoadingProducts(true);
-  //   setErrorProducts(null);
-  //   try {
-  //     const response = await apiService.getProducts();
-  //     if (response){
-  //       setProducts(response.data);
-  //     }
-  //   } catch (err: unknown) {
-  //     if (axios.isAxiosError(err) && err.response) {
-  //       // setErrorProducts(`Error: ${err.response.status} - ${err.response.data.message}`);
-  //     } else {
-  //       // setErrorProducts("Error: No se pudo obtener los productos.");
-  //     }
-  //   } finally {
-  //     setIsLoadingProducts(false);
-  //   }
-  // }, []);
-
-  // const getExtras = useCallback(async () => {
-  //   setIsLoadingExtras(true);
-  //   setErrorExtras(null);
-  //   try {
-  //     const response = await apiService.getExtras();
-  //     if (response){
-  //       setExtras(response.data);
-  //     }
-  //   } catch (err: unknown) {
-  //     if (axios.isAxiosError(err) && err.response) {
-  //       // setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
-  //     } else {
-  //       // setErrorExtras("Error: No se pudo obtener los extras.");
-  //     }
-  //   } finally {
-  //     setIsLoadingExtras(false);
-  //   }
-  // }, []);
-
 
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
         const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
-        console.log('xxxx - Customer response:', response); // Log the API response
+        console.log('ShoppingCart: Customer response:', response); // Log the API response
         if (response) {
           setCustomer(response);
-          console.log('xxxx - Customer data:', response); // Log the API response
+          console.log('ShoppingCart: Customer data:', response); // Log the API response
         }
       } catch (err: unknown) {
-        console.error('Error fetching customer:', err);
+        console.error('ShoppingCart: Error fetching customer:', err);
       }
     };
   
     const fetchProducts = async () => {
       try {
         const response = await apiService.getProducts();
-        console.log('Products response:', response); // Log the API response
+        console.log('ShoppingCart: Products response:', response); // Log the API response
         if (response) {
           setProducts(response.data);
+          console.log('ShoppingCart: Products data:', response.data); // Log the API response
         }
       } catch (err: unknown) {
-        console.error('Error fetching products:', err);
+        console.error('ShoppingCart: Error fetching products:', err);
       }
     };
   
     const fetchExtras = async () => {
       try {
         const response = await apiService.getExtras();
-        console.log('Extras response:', response); // Log the API response
+        console.log('ShoppingCart: Extras response:', response); // Log the API response
         if (response) {
           setExtras(response.data);
+          console.log('ShoppingCart: Extras data:', response.data); // Log the API response
         }
       } catch (err: unknown) {
-        console.error('Error fetching extras:', err);
+        console.error('ShoppingCart: Error fetching extras:', err);
       }
     };
   
     const fetchData = async () => {
       await Promise.all([fetchCustomer(), fetchProducts(), fetchExtras()]);
     };
-  
     fetchData();
   }, []);
   
   useEffect(() => {
     if (customer && products && extras) {
-      console.log('1. Data is available!');
+      console.log('ShoppingCart Render: Data is available');
+      console.log('ShoppingCart Render: Customer:', customer); // Log the state value
+      console.log('ShoppingCart Render: Products:', products); // Log the state value
+      console.log('ShoppingCart Render: Extras:', extras); // Log the state value
     }
-    console.log('2. Customer:', customer); // Log the state value
-    console.log('3. Products:', products); // Log the state value
-    console.log('4. Extras:', extras); // Log the state value
   }, [customer, products, extras]);
 
+  const [customerSelectedInfo, setCustomerSelectedInfo] = useState<{
+    id: string;
+    name: string;
+    lastname: string;
+    email: string;
+    phone: {
+      areaCode: string;
+      number: string;
+    }; // Cambiado de un array a un solo objeto
+    address: string;
+  } | null>(null); // Inicializamos con null ya que puede no haber datos
+
+  useEffect(() => {
+    if (customer !== null) {
+      const customerInfo = {
+        id: customer._id,
+        name: customer.name,
+        lastname: customer.lastname,
+        email: customer.email,
+        phone: {
+          areaCode: customer.phone[0].areaCode, // Tomamos el primer número
+          number: customer.phone[0].number,
+        },
+        address: customer.address,
+      };
+      setCustomerSelectedInfo(customerInfo);
+      console.log("xxx Shopping Cart: Customer info:", customerInfo);
+    }
+  }, [customer]);
+
+
+  
+
+
   const [selectedPackage, setSelectedPackage] = useState(0);
+
+  
 
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -201,7 +179,7 @@ function ShoppingCart() {
   const handleSelectedPackage = useCallback(
     (index: number, direction: "next" | "prev") => {
       const container = scrollContainerRef.current;
-      if (!container) return;
+      if (!container || !products) return;
 
       switch (direction) {
         case "next":
@@ -246,7 +224,7 @@ function ShoppingCart() {
           </div>
         </div>
         {
-          (products.length > 0) ? (
+          (products && products.length > 0) ? (
             <CardsDisplay products={products} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} handleSelectedPackage={handleSelectedPackage} scrollContainerRef={scrollContainerRef}  />
           ) : (
             <></>
@@ -256,9 +234,9 @@ function ShoppingCart() {
       </section>
 
       {
-        (products.length > 0) ? (
+        (products && products.length > 0) ? (
           <PayProductSection
-          customer={customer}
+          customer={customerSelectedInfo}
           products={products}
           extras={extras}
           selectedPackage={selectedPackage}
@@ -267,7 +245,6 @@ function ShoppingCart() {
         ) : (
           <LoadingShoppingCart />
         )
-          
       }
 
     </main>

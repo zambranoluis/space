@@ -48,6 +48,16 @@ interface CreateCustomer {
   birthdate: string;
 }
 
+interface PurchaseCustomerInfo {
+  id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  phone: {
+    
+  };
+  address: string
+}
 
 interface Purchase {
   customer: string;
@@ -121,8 +131,7 @@ export const apiService = {
         return null
       }
     } catch (error) {
-      // console.error("Error en la petición getProducts:", error);
-      // throw error;
+      console.error("Error en la petición getProducts:", error);
     }
   },
   getExtras: async () => {
@@ -136,16 +145,12 @@ export const apiService = {
         return null
       }
     } catch (error) {
-      
+      console.error("Error en la petición getExtras:", error);
     }
   },
   createPurchase: async (purchase: Purchase) => {
     try {
-      const response = await axios.post(`${url}/purchases`, purchase, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(`${url}/purchases`, purchase);
       if (response) {
         console.log("peticion axios createPurchase", response);
         return response.data;
@@ -166,7 +171,7 @@ export const apiService = {
         return null
       }
     } catch (error) {
-      
+      console.log("Error en la petición getPurchasesByCustomerId:", error);
     }
   },
   getPurchasesByCustomerAndId: async (customerId: string) => {
@@ -179,7 +184,7 @@ export const apiService = {
         return null
       }
     } catch (error) {
-      
+      console.log("Error en la petición getPurchasesByCustomerId:", error);
     }
   },
 
