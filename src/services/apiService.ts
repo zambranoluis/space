@@ -73,26 +73,14 @@ export interface SelectedExtra {
 
 interface Purchase {
   customer: string;
-  product: string;
-  extras: [
-    {
-      extra: string;
-      isActive: boolean;
-    },
-    {
-      extra: string;
-      isActive: boolean;
-    },
-    {
-      extra: string;
-      isActive: boolean;
-    },
-    {
-      extra: string;
-      isActive: boolean;
-    },
-  ];
+  product: string; // Cambiado de Product a string
+  extras: {
+    extra: string;
+    isActive: boolean;
+  }[];
+  selectedAreas: { nameArea: string; isActive: boolean }[];
   status: string;
+  total: number;
   isActive: boolean;
 }
 
@@ -174,15 +162,26 @@ export const apiService = {
   },
   createPurchase: async (purchase: CreatePurchase) => {
     try {
-      const response = await axios.post(`${url}/purchases`, purchase);
-      if (response) {
-        console.log("peticion axios createPurchase", response);
-        return response.data;
-      } else {
-        return null;
-      }
+      const response = await axios.post(`${url}/purchases`, purchase, {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data;
     } catch (error) {
-      console.error("Error en la petición createPurchase:", error);
+      console.error("Error al crear la compra:", error);
+    }
+  },
+  processPurchase: async (purchaseId: string) => {
+    try {
+      const response = await axios.post(
+        `${url}/process-purchase`,
+        { purchaseId },
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error al procesar la compra:", error);
     }
   },
   getPurchasesByCustomerId: async (customerId: string) => {
