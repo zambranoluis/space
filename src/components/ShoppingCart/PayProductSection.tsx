@@ -62,7 +62,8 @@ export interface Extra {
 
 
 export interface Purchase {
-  customer: Customer;
+  customer: Customer | null;
+  product: SelectedProduct | null;
   selectedAreas: [
     {
       nameArea: string;
@@ -73,7 +74,6 @@ export interface Purchase {
       isActive: boolean;
     }
   ],
-  product: Product;
   extras: [
     {
       extra: string;
@@ -101,9 +101,9 @@ export interface Purchase {
 
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
-  customer: Customer | null;
-  products: Product[] | null;
-  extras: Extra[] | null;
+  customer: Customer;
+  products: Product[];
+  extras: Extra[];
   selectedPackage: number;
   handleSelectedPackage: (index: number, direction: "next" | "prev") => void;
 }
@@ -116,21 +116,14 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   extras,
 }) => {
 
-  console.log("--- Componente Pay ---")
-  console.log("Compoonente Pay --- Customer: ", customer)
-  console.log("Compoonente Pay --- Product: ", products)
-  console.log("Compoonente Pay --- Extras: ", extras)
+  // console.log("--- Componente Pay ---")
+  // console.log("Compoonente Pay --- Customer: ", customer)
+  // console.log("Compoonente Pay --- Product: ", products)
+  // console.log("Compoonente Pay --- Extras: ", extras)
 
-  const [productSelectedInfo, setProductSelectedInfo] = useState<{
-    id: string;
-    name: string;
-    type: string;
-    area: number;
-    price: number;
-    picture: string;
-    include: [];
 
-  } | null>(null); // Inicializamos con null ya que puede no haber datos
+  
+  const [productSelectedInfo, setProductSelectedInfo] = useState<SelectedProduct | null>(null); // Inicializamos con null ya que puede no haber datos
   
   useEffect(() => {
     if (products !== null) {
@@ -144,9 +137,22 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
         include: products[selectedPackage].include,
       };
       setProductSelectedInfo(productInfo);
-      console.log("xxx Pay Product: product selected info:", productInfo);
+      // console.log("xxx Pay Product: product selected info:", productInfo);
     }
   }, [selectedPackage]);
+
+  const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(productSelectedInfo?.area === 2 || null);
+  const [isProductPro, setIsProductPro] = useState(productSelectedInfo?.type === "Pro" || null);
+
+  useEffect(() => {
+    setIsTwoAreasAllowed(productSelectedInfo?.area === 2 || null);
+  }, [selectedPackage]);
+
+  useEffect(() => {
+    setIsProductPro(productSelectedInfo?.type === "Pro" || null);
+  }, [selectedPackage]);
+
+  
 
   const extrasInfo = [
     "678ad9d12f1981e3e1f545a7",
@@ -155,96 +161,30 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     "678ad9e52f1981e3e1f545ad",
   ]
 
-  const [selectedExtras, setSelectedExtras] = useState<{ extra: string; isActive: boolean, price: number }[]>([
-    {
-      extra: "678ad9d12f1981e3e1f545a7",
-      isActive: false,
-      price: 1
-    },
-    {
-      extra: "678ad9da2f1981e3e1f545a9",
-      isActive: false,
-      price: 1
-    },
-    {
-      extra: "678ad9e02f1981e3e1f545ab",
-      isActive: false,
-      price: 1
-    },
-    {
-      extra: "678ad9e52f1981e3e1f545ad",
-      isActive: false,
-      price: 1
-    }
-    
-  ]);
-
-  useEffect(() => {
-    console.log("zzzzzzzzzzz selected Extras: ", selectedExtras)
-    if (products && products[selectedPackage].type === "Pro"){
-      setSelectedExtras(
-        [
-          {
-            extra: "678ad9d12f1981e3e1f545a7",
-            isActive: selectedExtras[0].isActive,
-            price: 1
-          },
-          {
-            extra: "678ad9da2f1981e3e1f545a9",
-            isActive: true,
-            price: 1
-          },
-          {
-            extra: "678ad9e02f1981e3e1f545ab",
-            isActive: true,
-            price: 1
-          },
-          {
-            extra: "678ad9e52f1981e3e1f545ad",
-            isActive: selectedExtras[3].isActive,
-            price: 1
-          }
-        ]
-      );
-    } else {
-      setSelectedExtras(
-        [
-          {
-            extra: "678ad9d12f1981e3e1f545a7",
-            isActive: selectedExtras[0].isActive,
-            price: 1
-          },
-          {
-            extra: "678ad9da2f1981e3e1f545a9",
-            isActive: selectedExtras[1].isActive,
-            price: 1
-          },
-          {
-            extra: "678ad9e02f1981e3e1f545ab",
-            isActive: selectedExtras[2].isActive,
-            price: 1
-          },
-          {
-            extra: "678ad9e52f1981e3e1f545ad",
-            isActive: selectedExtras[3].isActive,
-            price: 1
-          }
-        ]
-      );
-    }
-    console.log("zzzzzzzzzzz selected Extras Inicializadosssxxxsawwww: ", selectedExtras)
-
-  }, [selectedPackage, productSelectedInfo]);
+  
 
 
   
+  
+  
+  
+  const [selectedExtras, setSelectedExtras] = useState<{ extra: string; isActive: boolean, price: number | null}[]>([
+    {
+      extra: extrasInfo[0], isActive: false, price: 1
+    },
+    {
+      extra: extrasInfo[1], isActive: false, price: 1
+    },
+    {
+      extra: extrasInfo[2], isActive: false, price: 1
+    },
+    {
+      extra: extrasInfo[3], isActive: false, price: 1
+    }
+  ]);
 
-  const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(productSelectedInfo?.area === 2 || null);
 
-  useEffect(() => {
-    setIsTwoAreasAllowed(productSelectedInfo?.area === 2 || null);
-  }, [selectedPackage]);
-
+  
   const [selectedArea, setSelectedArea] = useState(
     [
       { nameArea: "Frontyard", isActive: true },
@@ -274,33 +214,20 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   };
 
   const handleSelectedExtras = (index: number) => {
-    console.log("extras previamente seleccionados en el componente pay: ", selectedExtras);
-    console.log("extra accionado - índice: ", index);
-  
-    if (productSelectedInfo?.type === "Pro") {
-      // Si es "Pro", índices 1 y 2 siempre activos
-      const updatedExtras = selectedExtras.map((extra, i) => {
-        if (i === 1 || i === 2) {
-          return { ...extra, isActive: true }; // Índices 1 y 2 siempre permanecen activos
-        }
-        if (i === index) {
-          return { ...extra, isActive: !extra.isActive }; // Alternar el estado del índice seleccionado
-        }
-        return extra; // Mantener el estado de los demás
-      });
-      setSelectedExtras(updatedExtras);
+    // console.log("extras seleccionados en el componente pay: ", selectedExtras);
+    // console.log("extra accionado - extra: ", index)
+    if (selectedExtras[index].isActive) {
+      // Si el extra ya estaba activo, lo desactivamos
+      const newSelectedExtras = [...selectedExtras];
+      newSelectedExtras[index].isActive = false;
+      setSelectedExtras(newSelectedExtras);
     } else {
-      // Si no es "Pro", alternar libremente el estado
-      const updatedExtras = selectedExtras.map((extra, i) => {
-        if (i === index) {
-          return { ...extra, isActive: !extra.isActive }; // Alternar el estado del índice seleccionado
-        }
-        return extra; // Mantener el estado de los demás
-      });
-      setSelectedExtras(updatedExtras);
+      // Si el extra estaba desactivado, lo activamos
+      const newSelectedExtras = [...selectedExtras];
+      newSelectedExtras[index].isActive = true;
+      setSelectedExtras(newSelectedExtras);
     }
-  
-    console.log("extras seleccionados ajustados en el componente pay: ", selectedExtras);
+    // console.log("extras actualizados en el componente pay: ", selectedExtras);
   };
 
 
@@ -316,17 +243,19 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     const basePrice = productSelectedInfo.price;
   
     const extrasPrice = selectedExtras.reduce((total, extra, index) => {
-      if (productSelectedInfo?.type === "Pro") {
+      if (extra && productSelectedInfo?.type === "Pro") {
         // Si el tipo de producto es "Pro", solo sumamos los índices 0 y 3
-        return (index === 0 || index === 3) && extra.isActive ? total + extra.price : total;
+        return (index === 0 || index === 3) && extra.isActive && extra.price ? total + extra.price : total;
       } else {
         // Si no es "Pro", sumamos todos los extras activos
-        return extra.isActive ? total + extra.price : total;
+        return extra.isActive && extra.price ? total + extra.price : total;
       }
     }, 0);
   
     setFinalPrice(basePrice + extrasPrice);
   }, [productSelectedInfo, selectedExtras]);
+
+  const [purchase, setPurchase] = useState<Purchase>()
 
   const handlePurchase = async () => {
     console.log("Purchase ----- data to be evaluated: ");
@@ -334,42 +263,38 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     console.log("Purchase ----- product: ", productSelectedInfo);
     console.log("Purchase ----- selectedExtras: ", selectedExtras);
     console.log("Purchase ----- selectedArea: ", selectedArea);
-    // if (!customer || !products || !extras || !selectedExtras || !selectedArea) {
-    //   console.error("Error: Customer or products or extras or selectedArea is null");
-    //   return;
-    // }
-
-    // setPurchase({
-    //   customer: customer,
-    //   product: productSelectedInfo,
-    //   selectedAreas: products[selectedPackage].name.includes("2")
-    //     ? [
-    //       { nameArea: selectedArea[0].nameArea, isActive: true },
-    //       { nameArea: selectedArea[1].nameArea, isActive: true },
-    //     ]
-    //     : [
-    //       { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
-    //       { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
-    //     ],
-    //   extras: products[selectedPackage].type === "Pro"
-    //     ? [
-    //       { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-    //       { extra: selectedExtras[1].extra, isActive: true },
-    //       { extra: selectedExtras[2].extra, isActive: true },
-    //       { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-    //     ]
-    //     : [
-    //       { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-    //       { extra: selectedExtras[1].extra, isActive: selectedExtras[1].isActive },
-    //       { extra: selectedExtras[2].extra, isActive: selectedExtras[2].isActive },
-    //       { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-    //     ],
-    //   price: finalPrice,
-    //   status: "pending",
-    //   isActive: true
-    // })
-
-    // console.log("newPurchase", purchase);
+    if (customer && products && selectedExtras && selectedArea) {
+      setPurchase({
+        customer: customer,
+        product: productSelectedInfo,
+        selectedAreas: isTwoAreasAllowed
+          ? [
+            { nameArea: selectedArea[0].nameArea, isActive: true },
+            { nameArea: selectedArea[1].nameArea, isActive: true },
+          ]
+          : [
+            { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
+            { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
+          ],
+        extras: isProductPro
+          ? [
+            { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
+            { extra: selectedExtras[1].extra, isActive: true },
+            { extra: selectedExtras[2].extra, isActive: true },
+            { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
+          ]
+          : [
+            { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
+            { extra: selectedExtras[1].extra, isActive: selectedExtras[1].isActive },
+            { extra: selectedExtras[2].extra, isActive: selectedExtras[2].isActive },
+            { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
+          ],
+        price: finalPrice,
+        status: "pending",
+        isActive: true
+      })
+    }
+    console.log("newPurchase", purchase);
 
     try {
       // const data = await apiService.createPurchase(purchase);

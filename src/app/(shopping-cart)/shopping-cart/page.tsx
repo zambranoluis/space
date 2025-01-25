@@ -83,10 +83,10 @@ function ShoppingCart() {
     const fetchCustomer = async () => {
       try {
         const response = await apiService.getCustomer('678b3cb754c8efd3f5677ee5');
-        console.log('ShoppingCart: Customer response:', response); // Log the API response
+        // console.log('ShoppingCart: Customer response:', response); // Log the API response
         if (response) {
           setCustomer(response);
-          console.log('ShoppingCart: Customer data:', response); // Log the API response
+          // console.log('ShoppingCart: Customer data:', response); // Log the API response
         }
       } catch (err: unknown) {
         console.error('ShoppingCart: Error fetching customer:', err);
@@ -96,10 +96,10 @@ function ShoppingCart() {
     const fetchProducts = async () => {
       try {
         const response = await apiService.getProducts();
-        console.log('ShoppingCart: Products response:', response); // Log the API response
+        // console.log('ShoppingCart: Products response:', response); // Log the API response
         if (response) {
           setProducts(response.data);
-          console.log('ShoppingCart: Products data:', response.data); // Log the API response
+          // console.log('ShoppingCart: Products data:', response.data); // Log the API response
         }
       } catch (err: unknown) {
         console.error('ShoppingCart: Error fetching products:', err);
@@ -109,10 +109,10 @@ function ShoppingCart() {
     const fetchExtras = async () => {
       try {
         const response = await apiService.getExtras();
-        console.log('ShoppingCart: Extras response:', response); // Log the API response
+        // console.log('ShoppingCart: Extras response:', response); // Log the API response
         if (response) {
           setExtras(response.data);
-          console.log('ShoppingCart: Extras data:', response.data); // Log the API response
+          // console.log('ShoppingCart: Extras data:', response.data); // Log the API response
         }
       } catch (err: unknown) {
         console.error('ShoppingCart: Error fetching extras:', err);
@@ -127,10 +127,10 @@ function ShoppingCart() {
   
   useEffect(() => {
     if (customer && products && extras) {
-      console.log('ShoppingCart Render: Data is available');
-      console.log('ShoppingCart Render: Customer:', customer); // Log the state value
-      console.log('ShoppingCart Render: Products:', products); // Log the state value
-      console.log('ShoppingCart Render: Extras:', extras); // Log the state value
+      // console.log('ShoppingCart Render: Data is available');
+      // console.log('ShoppingCart Render: Customer:', customer); // Log the state value
+      // console.log('ShoppingCart Render: Products:', products); // Log the state value
+      // console.log('ShoppingCart Render: Extras:', extras); // Log the state value
     }
   }, [customer, products, extras]);
 
@@ -160,7 +160,7 @@ function ShoppingCart() {
         address: customer.address,
       };
       setCustomerSelectedInfo(customerInfo);
-      console.log("xxx Shopping Cart: Customer info:", customerInfo);
+      // console.log("xxx Shopping Cart: Customer info:", customerInfo);
     }
   }, [customer]);
 
