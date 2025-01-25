@@ -1,8 +1,5 @@
-
 "use client";
 import axios from "axios";
-
-
 
 interface Customer {
   _id: string;
@@ -53,10 +50,8 @@ interface PurchaseCustomerInfo {
   name: string;
   lastname: string;
   email: string;
-  phone: {
-    
-  };
-  address: string
+  phone: {};
+  address: string;
 }
 
 interface Purchase {
@@ -78,11 +73,10 @@ interface Purchase {
     {
       extra: string;
       isActive: boolean;
-    }
+    },
   ];
   status: string;
   isActive: boolean;
-
 }
 
 const url = "http://localhost:4000/space";
@@ -101,11 +95,9 @@ export const apiService = {
         console.log("2. respuesta peticion axios createCustomer", response);
         return response.data;
       } else {
-        return null
+        return null;
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   },
   getCustomer: async (customerId: string) => {
     try {
@@ -114,12 +106,9 @@ export const apiService = {
         console.log("peticion axios getCustomer", response);
         return response.data;
       } else {
-        return null
+        return null;
       }
-    } catch (error) {
-      
-    }
-    
+    } catch (error) {}
   },
   getProducts: async () => {
     try {
@@ -128,21 +117,20 @@ export const apiService = {
         console.log("peticion axios getProducts", response);
         return response.data;
       } else {
-        return null
+        return null;
       }
     } catch (error) {
       console.error("Error en la petición getProducts:", error);
     }
   },
   getExtras: async () => {
-
     try {
       const response = await axios.get(`${url}/extras`);
       if (response) {
         console.log("peticion axios getExtras", response);
         return response.data;
       } else {
-        return null
+        return null;
       }
     } catch (error) {
       console.error("Error en la petición getExtras:", error);
@@ -155,11 +143,9 @@ export const apiService = {
         console.log("peticion axios createPurchase", response);
         return response.data;
       } else {
-        return null
+        return null;
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   },
   getPurchasesByCustomerId: async (customerId: string) => {
     try {
@@ -168,7 +154,7 @@ export const apiService = {
         console.log("peticion API axios getPurchasesByCustomer", response);
         return response.data;
       } else {
-        return null
+        return null;
       }
     } catch (error) {
       console.log("Error en la petición getPurchasesByCustomerId:", error);
@@ -176,16 +162,17 @@ export const apiService = {
   },
   getPurchasesByCustomerAndId: async (customerId: string) => {
     try {
-      const response = await axios.get(`${url}/purchases/customer/${customerId}/purchase/679198fcdb75b57ef3541e4f`);
+      const response = await axios.get(
+        `${url}/purchases/customer/${customerId}/purchase/679198fcdb75b57ef3541e4f`,
+      );
       if (response) {
         console.log("peticion API axios getPurchasesByCustomer", response);
         return response.data;
       } else {
-        return null
+        return null;
       }
     } catch (error) {
       console.log("Error en la petición getPurchasesByCustomerId:", error);
     }
   },
-
 };
