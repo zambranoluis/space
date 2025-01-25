@@ -276,15 +276,15 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
               { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
               { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
             ],
-            extras: (isProductPro && isProductPro !== null)
-  ? [
-      ...selectedExtras.slice(0, 2).map(extra => ({ extra: extra.extra, isActive: true })),
-      ...selectedExtras.slice(2),
-    ]
-  : selectedExtras.map((extra) => ({
-      extra: extra.extra,
-      isActive: extra.isActive,
-    })),
+        extras: (isProductPro && isProductPro !== null)
+          ? [
+            ...selectedExtras.slice(0, 2).map(extra => ({ extra: extra.extra, isActive: true })),
+            ...selectedExtras.slice(2),
+          ]
+          : selectedExtras.map((extra) => ({
+            extra: extra.extra,
+            isActive: extra.isActive,
+          })),
         price: finalPrice,
         status: "pending",
         isActive: true,
