@@ -91,7 +91,7 @@ export interface Purchase {
       extra: string;
       isActive: boolean;
     }
-  ];
+  ] | null;
   price: number;
   status: string;
   isActive: boolean;
@@ -101,9 +101,9 @@ export interface Purchase {
 
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
-  customer: Customer;
+  customer: Customer | null;
   products: Product[];
-  extras: Extra[];
+  extras: Extra[] | null;
   selectedPackage: number;
   handleSelectedPackage: (index: number, direction: "next" | "prev") => void;
 }
@@ -264,37 +264,33 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     console.log("Purchase ----- selectedExtras: ", selectedExtras);
     console.log("Purchase ----- selectedArea: ", selectedArea);
     if (customer && products && selectedExtras && selectedArea) {
-      setPurchase({
+      const newPurchase = {
         customer: customer,
         product: productSelectedInfo,
-        selectedAreas: isTwoAreasAllowed
+        selectedAreas: (isTwoAreasAllowed && isTwoAreasAllowed !== null)
           ? [
-            { nameArea: selectedArea[0].nameArea, isActive: true },
-            { nameArea: selectedArea[1].nameArea, isActive: true },
-          ]
+              { nameArea: selectedArea[0].nameArea, isActive: true },
+              { nameArea: selectedArea[1].nameArea, isActive: true },
+            ]
           : [
-            { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
-            { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
-          ],
-        extras: isProductPro
-          ? [
-            { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-            { extra: selectedExtras[1].extra, isActive: true },
-            { extra: selectedExtras[2].extra, isActive: true },
-            { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-          ]
-          : [
-            { extra: selectedExtras[0].extra, isActive: selectedExtras[0].isActive },
-            { extra: selectedExtras[1].extra, isActive: selectedExtras[1].isActive },
-            { extra: selectedExtras[2].extra, isActive: selectedExtras[2].isActive },
-            { extra: selectedExtras[3].extra, isActive: selectedExtras[3].isActive },
-          ],
+              { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
+              { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
+            ],
+            extras: (isProductPro && isProductPro !== null)
+  ? [
+      ...selectedExtras.slice(0, 2).map(extra => ({ extra: extra.extra, isActive: true })),
+      ...selectedExtras.slice(2),
+    ]
+  : selectedExtras.map((extra) => ({
+      extra: extra.extra,
+      isActive: extra.isActive,
+    })),
         price: finalPrice,
         status: "pending",
-        isActive: true
-      })
+        isActive: true,
+      };
+      console.log("newPurchase", newPurchase);
     }
-    console.log("newPurchase", purchase);
 
     try {
       // const data = await apiService.createPurchase(purchase);
