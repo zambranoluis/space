@@ -39,8 +39,8 @@ const socials = [
 const Footer = () => {
   return (
     <footer className="flex flex-col justify-center md:justify-between h-[55vh] bg-[#848d5a] md:py-16 md:px-24 max-md:gap-8">
-      <Link id="top" className="flex  justify-center md:justify-start items-center" href="/">
-        <Image className="w-full max-w-[300px]" src="https://github.com/BPM94/SCCTMD/raw/main/logoWhite.png" alt="logo"  />
+      <Link id="top" className="flex bgred-300 max-md:place-self-center md:place-self-start justify-center md:justify-start items-center" href="/">
+        <Image className="w-full max-w-[300px] bgrose-700" src="https://github.com/BPM94/SCCTMD/raw/main/logoWhite.png" alt="logo"  />
       </Link>
       <div id="bottom" className="flex max-md:flex-col max-md:text-center md:justify-between items-center max-md:gap-8 ">
         <div id="ctaLogin" className="text-white">

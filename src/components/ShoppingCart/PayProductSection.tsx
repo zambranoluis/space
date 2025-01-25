@@ -60,10 +60,15 @@ export interface Extra {
   isActive: boolean;
 }
 
+export interface SelectedExtra {
+  extra: string;
+  isActive: boolean;
+}
+
 
 export interface Purchase {
-  customer: Customer | null;
-  product: SelectedProduct | null;
+  customer: string;
+  product: string;
   selectedAreas: [
     {
       nameArea: string;
@@ -74,24 +79,7 @@ export interface Purchase {
       isActive: boolean;
     }
   ],
-  extras: [
-    {
-      extra: string;
-      isActive: boolean;
-    },
-    {
-      extra: string;
-      isActive: boolean;
-    },
-    {
-      extra: string;
-      isActive: boolean;
-    },
-    {
-      extra: string;
-      isActive: boolean;
-    }
-  ] | null;
+  extras: SelectedExtra[];
   price: number;
   status: string;
   isActive: boolean;
@@ -116,14 +104,17 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   extras,
 }) => {
 
-  // console.log("--- Componente Pay ---")
-  // console.log("Compoonente Pay --- Customer: ", customer)
-  // console.log("Compoonente Pay --- Product: ", products)
-  // console.log("Compoonente Pay --- Extras: ", extras)
+  console.log("--- Componente Pay ---")
+  console.log("1. Componente Pay --- Customer: ", customer)
+  console.log("2. Componente Pay --- Product: ", products)
+  console.log("3. Componente Pay --- Extras: ", extras)
 
 
   
-  const [productSelectedInfo, setProductSelectedInfo] = useState<SelectedProduct | null>(null); // Inicializamos con null ya que puede no haber datos
+  const [productSelectedInfo, setProductSelectedInfo] = useState<SelectedProduct>(
+  );
+  const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(false);
+  const [isProductPro, setIsProductPro] = useState(false);
   
   useEffect(() => {
     if (products !== null) {
@@ -137,20 +128,53 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
         include: products[selectedPackage].include,
       };
       setProductSelectedInfo(productInfo);
-      // console.log("xxx Pay Product: product selected info:", productInfo);
+      setIsTwoAreasAllowed(productInfo.area === 2);
+      setIsProductPro(productInfo.type === "Pro");
+      console.log("4. Componente Pay --- Producto Seleccionado: ", productInfo);
+      
     }
   }, [selectedPackage]);
 
-  const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(productSelectedInfo?.area === 2 || null);
-  const [isProductPro, setIsProductPro] = useState(productSelectedInfo?.type === "Pro" || null);
-
   useEffect(() => {
-    setIsTwoAreasAllowed(productSelectedInfo?.area === 2 || null);
-  }, [selectedPackage]);
+    console.log("5. Componente Pay --- isTwoAreasAllowed: ", isTwoAreasAllowed);
+    console.log("6. Componente Pay --- isProductPro: ", isProductPro);
+  }, [isTwoAreasAllowed, isProductPro]);
 
-  useEffect(() => {
-    setIsProductPro(productSelectedInfo?.type === "Pro" || null);
-  }, [selectedPackage]);
+
+
+
+
+  const [selectedArea, setSelectedArea] = useState(
+    [
+      { nameArea: "Frontyard", isActive: true },
+      { nameArea: "Backyard", isActive: false },
+    ]
+  );
+  
+  // useEffect(() => {
+  //   console.log("7. Componente Pay --- Updating selectedArea Automaticlly");
+  //   if (isTwoAreasAllowed) {
+  //     console.log ("7. Componente Pay --- Area es Doble");
+  //     setSelectedArea((prevArea) => prevArea.map((area) => ({ ...area, isActive: true })));
+  //   } else {
+  //     console.log ("7. Componente Pay --- Area No es Doble");
+  //     setSelectedArea((prevArea) => [
+  //       { ...prevArea[0], isActive: true },
+  //       { ...prevArea[1], isActive: false },
+  //     ]);
+  //   }
+  // }, [selectedPackage, isTwoAreasAllowed]);
+
+  
+  const handleSelectedArea = (area: "frontyard" | "backyard") => {
+    setSelectedArea((prevArea) =>
+      prevArea.map((prevAreaItem) =>
+        prevAreaItem.nameArea.toLowerCase() === area
+          ? { ...prevAreaItem, isActive: true }
+          : { ...prevAreaItem, isActive: isTwoAreasAllowed ? prevAreaItem.isActive : false }
+      )
+    );
+  };
 
   
 
@@ -161,14 +185,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     "678ad9e52f1981e3e1f545ad",
   ]
 
-  
-
-
-  
-  
-  
-  
-  const [selectedExtras, setSelectedExtras] = useState<{ extra: string; isActive: boolean, price: number | null}[]>([
+  const [selectedExtras, setSelectedExtras] = useState<{ extra: string; isActive: boolean, price: number}[]>([
     {
       extra: extrasInfo[0], isActive: false, price: 1
     },
@@ -183,67 +200,42 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     }
   ]);
 
-
-  
-  const [selectedArea, setSelectedArea] = useState(
-    [
-      { nameArea: "Frontyard", isActive: true },
-      { nameArea: "Backyard", isActive: false },
-    ]
-  );
-
-  const handleSelectedArea = (area: "frontyard" | "backyard" ) => {
-    if (isTwoAreasAllowed) {
-      // Si se permiten ambas áreas, ambas están activas
-      setSelectedArea([
-        { nameArea: "Frontyard", isActive: true },
-        { nameArea: "Backyard", isActive: true },
-      ]);
-    } else if (area === "frontyard") {
-      // Si solo se permite una área, activamos el área seleccionada y desactivamos la otra
-      setSelectedArea([
-        { nameArea: "Frontyard", isActive: true },
-        { nameArea: "Backyard", isActive: false },
-      ]);
-    } else if (area === "backyard") {
-      setSelectedArea([
-        { nameArea: "Frontyard", isActive: false },
-        { nameArea: "Backyard", isActive: true },
-      ]);
-    }
-  };
+  // useEffect(() => {
+  //     setSelectedExtras((prevExtras) => {
+  //       if (isProductPro) {
+  //         console.log("Handling extras for Pro product...");
+  //         return prevExtras.map((extra, index) => ({
+  //           ...extra,
+  //           isActive: index === 1 || index === 2 ? true : extra.isActive,
+  //         }));
+  //       } else {
+  //         console.log("Handling extras for non-Pro product...");
+  //         return [...prevExtras];
+  //       }
+  //     });
+  // }, [selectedPackage]);
 
   const handleSelectedExtras = (index: number) => {
-    // console.log("extras seleccionados en el componente pay: ", selectedExtras);
-    // console.log("extra accionado - extra: ", index)
     if (selectedExtras[index].isActive) {
-      // Si el extra ya estaba activo, lo desactivamos
       const newSelectedExtras = [...selectedExtras];
       newSelectedExtras[index].isActive = false;
       setSelectedExtras(newSelectedExtras);
     } else {
-      // Si el extra estaba desactivado, lo activamos
       const newSelectedExtras = [...selectedExtras];
       newSelectedExtras[index].isActive = true;
       setSelectedExtras(newSelectedExtras);
     }
-    // console.log("extras actualizados en el componente pay: ", selectedExtras);
   };
 
 
-
-  const [finalPrice, setFinalPrice] = useState(0);
+  const [finalPrice, setFinalPrice] = useState(productSelectedInfo?.price);
   
   useEffect(() => {
-    if (!productSelectedInfo || !selectedExtras) {
-      setFinalPrice(0);
-      return;
-    }
-  
-    const basePrice = productSelectedInfo.price;
+    if (productSelectedInfo) {
+      const basePrice = productSelectedInfo.price;
   
     const extrasPrice = selectedExtras.reduce((total, extra, index) => {
-      if (extra && productSelectedInfo?.type === "Pro") {
+      if (extra && isProductPro) {
         // Si el tipo de producto es "Pro", solo sumamos los índices 0 y 3
         return (index === 0 || index === 3) && extra.isActive && extra.price ? total + extra.price : total;
       } else {
@@ -253,7 +245,9 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     }, 0);
   
     setFinalPrice(basePrice + extrasPrice);
-  }, [productSelectedInfo, selectedExtras]);
+    }
+    
+  }, [selectedPackage, selectedExtras, productSelectedInfo]);
 
   const [purchase, setPurchase] = useState<Purchase>()
 
@@ -264,10 +258,10 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     console.log("Purchase ----- selectedExtras: ", selectedExtras);
     console.log("Purchase ----- selectedArea: ", selectedArea);
     if (customer && products && selectedExtras && selectedArea) {
-      const newPurchase = {
-        customer: customer,
-        product: productSelectedInfo,
-        selectedAreas: (isTwoAreasAllowed && isTwoAreasAllowed !== null)
+      const newPurchase: Purchase = {
+        customer: customer.id,
+        product: (productSelectedInfo) ? productSelectedInfo.id : "",
+        selectedAreas: (isTwoAreasAllowed)
           ? [
               { nameArea: selectedArea[0].nameArea, isActive: true },
               { nameArea: selectedArea[1].nameArea, isActive: true },
@@ -276,33 +270,35 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
               { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
               { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
             ],
-        extras: (isProductPro && isProductPro !== null)
-          ? [
-            ...selectedExtras.slice(0, 2).map(extra => ({ extra: extra.extra, isActive: true })),
-            ...selectedExtras.slice(2),
-          ]
-          : selectedExtras.map((extra) => ({
-            extra: extra.extra,
-            isActive: extra.isActive,
-          })),
-        price: finalPrice,
+        extras: selectedExtras.map((extra, index) => {
+          if (isProductPro && (index === 1 || index === 2)) {
+            return { extra: extra.extra, isActive: true, price: extra.price };
+          } else {
+            return { extra: extra.extra, isActive: extra.isActive, price: extra.price };
+          }
+        }) as SelectedExtra[],
+        price: finalPrice as number,
         status: "pending",
         isActive: true,
       };
       console.log("newPurchase", newPurchase);
+      try {
+        const data = await apiService.createPurchase(newPurchase);
+        console.log("Purchase created successfully:", data);
+        // window.location.href = "/panel-client";
+
+      } catch (err: unknown) {
+        console.error("Error creating purchase:", err);
+        // if (axios.isAxiosError(err) && err.response) {
+        //   setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
+        // } else {
+        //   setErrorExtras("Error: No se pudo obtener los extras.");
+        // }
+      }
+
     }
 
-    try {
-      // const data = await apiService.createPurchase(purchase);
-      // window.location.href = "/panel-client";
-
-    } catch (err: unknown) {
-      // if (axios.isAxiosError(err) && err.response) {
-      //   setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
-      // } else {
-      //   setErrorExtras("Error: No se pudo obtener los extras.");
-      // }
-    }
+    
   }
 
 
@@ -337,8 +333,8 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
             </div>
             <div id="bodyOptions" className="flex flex-col bg-[#f0f0ef] p-4">
               <div className="w-full gap-4 flex place-self-center">
-                <button className={`w-full text-black text-sm border border-gray-500 ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}  ${selectedArea[0].isActive === true ? "bg-[#6b776d] text-white" : ""} `} onClick={() => { handleSelectedArea("frontyard") }}>Frontyard</button>
-                <button className={`w-full text-black text-sm border border-gray-500 ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}  ${selectedArea[1].isActive === true ? "bg-[#6b776d] text-white" : ""} `} onClick={() => { handleSelectedArea("backyard") }}>Backyard</button>
+                <button className={`w-full text-black text-sm border border-gray-500   ${selectedArea[0].isActive === true ? "bg-[#6b776d] text-white" : ""} ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}`} onClick={() => { handleSelectedArea("frontyard") }}>Frontyard</button>
+                <button className={`w-full text-black text-sm border border-gray-500   ${selectedArea[1].isActive === true ? "bg-[#6b776d] text-white" : ""} ${isTwoAreasAllowed ? "bg-[#6b776d] text-white" : ""}`} onClick={() => { handleSelectedArea("backyard") }}>Backyard</button>
               </div>
               <div className="bggreen-700 p-6">
                 <div className="flex bg-[#ab9a62] place-self-start px-2 py-1 rounded-md" ><p className="text-xs text-white">Extras</p></div>
@@ -375,35 +371,35 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
                     PAY FOR
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div id="productCardFooter" className="px-12 py-6 bgpurple-800 w-full bg-[#dcd6c8] text-black relative" >
+            <div id="extrasCircle" className="bg-[#302626] rounded-full w-[50px] h-[50px] min-[500px]:w-[70px] min-[500px]:h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute top-0 min-[320px]:top-[40%] sm:top-[40%] left-[0px] min-[320px]:left-[-20px] min-[500px]:left-[-30px]  md:left-[-60px] text-xs sm:text-sm md:text-lg">
+              <p>EXTRAS</p>
+            </div>
+            <div className="flex flex-col">
+              {
+                extras?.map((extra, index) => (
+                  (extra.name !== "Side Yard") && <div className={`py-4 gap-2 flex flex-col ${(index !== extras.length - 1 ? "border-b border-black" : "")}`} key={index}>
+                    <h3 className="text-sm  font-bold">{extra.name}</h3>
+                    {(extra.description) && <p className="  text-xs">{extra.description}</p>}
+                    <div className="flex text-xs max-sm:flex-col sm:gap-2">
+                      {
+                        extra.items.map((item, index) => (
+                          <div key={`item-${index}`} >
+                            <p className="">{item}</p>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
-        <div id="productCardFooter" className="px-12 py-6 bgpurple-800 w-full bg-[#dcd6c8] text-black relative" >
-          <div id="extrasCircle" className="bg-[#302626] rounded-full w-[50px] h-[50px] min-[500px]:w-[70px] min-[500px]:h-[70px]  md:w-[100px] md:h-[100px] flex justify-center items-center text-white absolute top-0 min-[320px]:top-[40%] sm:top-[40%] left-[0px] min-[320px]:left-[-20px] min-[500px]:left-[-30px]  md:left-[-60px] text-xs sm:text-sm md:text-lg">
-            <p>EXTRAS</p>
-          </div>
-          <div className="flex flex-col">
-            {
-              extras?.map((extra, index) => (
-                (extra.name !== "Side Yard") && <div className={`py-4 gap-2 flex flex-col ${(index !== extras.length - 1 ? "border-b border-black" : "")}`} key={index}>
-                  <h3 className="text-sm  font-bold">{extra.name}</h3>
-                  {(extra.description) && <p className="  text-xs">{extra.description}</p>}
-                  <div className="flex text-xs max-sm:flex-col sm:gap-2">
-                    {
-                      extra.items.map((item, index) => (
-                        <div key={`item-${index}`} >
-                          <p className="">{item}</p>
-                        </div>
-                      ))
-                    }
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
       </div>
-    </div>
     </section>
   );
 }

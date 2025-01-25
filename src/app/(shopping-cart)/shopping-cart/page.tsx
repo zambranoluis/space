@@ -136,7 +136,7 @@ function ShoppingCart() {
       number: string;
     }; // Cambiado de un array a un solo objeto
     address: string;
-  } | null>(null); // Inicializamos con null ya que puede no haber datos
+  } | null>(null);
 
   useEffect(() => {
     if (customer !== null) {

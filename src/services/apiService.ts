@@ -45,18 +45,35 @@ interface CreateCustomer {
   birthdate: string;
 }
 
-interface PurchaseCustomerInfo {
+interface SelectedCustomer {
   id: string;
   name: string;
   lastname: string;
   email: string;
-  phone: {};
-  address: string;
+  phone: {
+    
+  };
+  address: string
 }
+export interface SelectedProduct {
+  id: string;
+  name: string;
+  type: string;
+  area: number;
+  price: number;
+  picture: string;
+  include: [];
+}
+
+export interface SelectedExtra {
+  extra: string;
+  isActive: boolean;
+}
+
 
 interface Purchase {
   customer: string;
-  product: Product;
+  product: string;
   extras: [
     {
       extra: string;
@@ -79,6 +96,25 @@ interface Purchase {
   isActive: boolean;
 }
 
+interface CreatePurchase {
+  customer: string;
+    product: string;
+    selectedAreas: [
+      {
+        nameArea: string;
+        isActive: boolean;
+      },
+      {
+        nameArea: string;
+        isActive: boolean;
+      }
+    ],
+    extras: SelectedExtra[];
+    price: number;
+    status: string;
+    isActive: boolean;
+}
+
 const url = "http://localhost:4000/space";
 // const url = "https://715vq04v-4000.use2.devtunnels.ms/space"
 
@@ -90,9 +126,9 @@ export const apiService = {
           "Content-Type": "application/json",
         },
       });
-      console.log("1. peticion axios createCustomer", response);
+      // console.log("1. peticion axios createCustomer", response);
       if (response) {
-        console.log("2. respuesta peticion axios createCustomer", response);
+        // console.log("2. respuesta peticion axios createCustomer", response);
         return response.data;
       } else {
         return null;
@@ -103,7 +139,7 @@ export const apiService = {
     try {
       const response = await axios.get(`${url}/customers/${customerId}`);
       if (response) {
-        console.log("peticion axios getCustomer", response);
+        // console.log("peticion axios getCustomer", response);
         return response.data;
       } else {
         return null;
@@ -114,7 +150,7 @@ export const apiService = {
     try {
       const response = await axios.get(`${url}/products`);
       if (response) {
-        console.log("peticion axios getProducts", response);
+        // console.log("peticion axios getProducts", response);
         return response.data;
       } else {
         return null;
@@ -127,7 +163,7 @@ export const apiService = {
     try {
       const response = await axios.get(`${url}/extras`);
       if (response) {
-        console.log("peticion axios getExtras", response);
+        // console.log("peticion axios getExtras", response);
         return response.data;
       } else {
         return null;
@@ -136,7 +172,7 @@ export const apiService = {
       console.error("Error en la petición getExtras:", error);
     }
   },
-  createPurchase: async (purchase: Purchase) => {
+  createPurchase: async (purchase: CreatePurchase) => {
     try {
       const response = await axios.post(`${url}/purchases`, purchase);
       if (response) {
@@ -145,19 +181,21 @@ export const apiService = {
       } else {
         return null;
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error en la petición createPurchase:", error);
+    }
   },
   getPurchasesByCustomerId: async (customerId: string) => {
     try {
       const response = await axios.get(`${url}/purchases/customer/${customerId}`);
       if (response) {
-        console.log("peticion API axios getPurchasesByCustomer", response);
+        // console.log("peticion API axios getPurchasesByCustomer", response);
         return response.data;
       } else {
         return null;
       }
     } catch (error) {
-      console.log("Error en la petición getPurchasesByCustomerId:", error);
+      // console.log("Error en la petición getPurchasesByCustomerId:", error);
     }
   },
   getPurchasesByCustomerAndId: async (customerId: string) => {
@@ -166,13 +204,13 @@ export const apiService = {
         `${url}/purchases/customer/${customerId}/purchase/679198fcdb75b57ef3541e4f`,
       );
       if (response) {
-        console.log("peticion API axios getPurchasesByCustomer", response);
+        // console.log("peticion API axios getPurchasesByCustomer", response);
         return response.data;
       } else {
         return null;
       }
     } catch (error) {
-      console.log("Error en la petición getPurchasesByCustomerId:", error);
+      // console.log("Error en la petición getPurchasesByCustomerId:", error);
     }
   },
 };
