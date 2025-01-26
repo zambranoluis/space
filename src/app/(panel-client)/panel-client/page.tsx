@@ -8,20 +8,16 @@ import { apiService } from "@/services/apiService";
 
 import { IoCloseOutline } from "react-icons/io5";
 
-
-
 import NavbarClient from "@/components/NavbarClient";
 
 import AsideClient from "@/components/AsideClient";
 
 import ChatModal from "@/components/ChatModal";
 
-import {ProjectsClient} from "@/components/Projects/Projects"
+import { ProjectsClient } from "@/components/Projects/Projects";
 import MyProfile from "@/components/MyProfile/MyProfile";
 
-import {Purchases} from "@/components/Purchases/Purchases"
-
-
+import { Purchases } from "@/components/Purchases/Purchases";
 
 interface Customer {
   _id: string;
@@ -40,11 +36,8 @@ interface Customer {
 }
 
 function PanelClient() {
-
-  
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("projects");
-  
 
   const [customer, setCustomer] = useState<Customer | null>(null); // Cliente inicializado como `null`
   const [isLoading, setIsLoading] = useState<boolean>(false); // Estado de carga
@@ -52,17 +45,16 @@ function PanelClient() {
 
   const [purchases, setPurchases] = useState<[]>([]);
 
-  
   const getCustomer = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await apiService.getCustomer("678b3cb754c8efd3f5677ee5");
+      const response = await apiService.getCustomer("675388347f312ad7cc0a2ba2");
       if (response) {
         console.log("response customer en panel client: ", response);
         setTimeout(() => {
           setCustomer(response);
-        }, 300)
+        }, 300);
         setIsLoading(false);
         console.log("data customer en panel client: ", response);
       }
@@ -77,18 +69,14 @@ function PanelClient() {
     }
   }, []);
 
-
   useEffect(() => {
     getCustomer();
   }, [getCustomer]);
 
-  
-  
-    const toggleAside = () => {
-      setIsAsideOpen((prev) => !prev);
-    };
+  const toggleAside = () => {
+    setIsAsideOpen((prev) => !prev);
+  };
 
-    
   const toggleSiteContainer = (tag: string) => {
     console.log("tag: ", tag);
     console.log("asideSelectedOption: ", asideSelectedOption);
@@ -101,12 +89,12 @@ function PanelClient() {
         container?.classList.add("togglePanel");
         setTimeout(() => {
           setAsideSelectedOption(tag);
-        }, 300)
+        }, 300);
         setTimeout(() => {
           container?.classList.remove("togglePanel");
-        },300)
+        }, 300);
       }
-    } else if (tag === asideSelectedOption ) {
+    } else if (tag === asideSelectedOption) {
       if (container?.classList.contains("togglePanel")) {
         container?.classList.remove("togglePanel");
       }
@@ -122,55 +110,54 @@ function PanelClient() {
     }
   };
 
-
   return (
-    <main className="flex flex-col h-full w-full">
-      
-      <section className='w-full h-full bg-cover bg-no-repeat bg-center ' style={{ backgroundImage: `url('/panel-clientBg.jpg')`}} >
-      
-      <div className="relative w-full h-full">
-        <div className="absolute w-full h-full gap-8 flex flex-col">
-          <NavbarClient />
-          <AsideClient
-            toggleAside={toggleAside}
-            isAsideOpen={isAsideOpen}
-            toggleSiteContainer={toggleSiteContainer}
-            asideSelectedOption={asideSelectedOption}
-          />
-          <div id="siteContainer" className={`bgred-400 transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex max-md:pl-12  md:justify-center items-center z-[1000]`}>
-            <div className="max-md:w-[90%] w-[80%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">
-              <div className="flex flex-col w-full rounded-t-3xl">
-                <div className="w-full  flex justify-end items-center rounded-t-3xl  p-2">
-                  <div  className="bgrose-400 cursor-pointer " onClick={() => {closeSiteContainer()}} >
-                    <IoCloseOutline className="text-xl bgblue-300" />
+    <main className='flex flex-col h-full w-full'>
+      <section
+        className='w-full h-full bg-cover bg-no-repeat bg-center '
+        style={{ backgroundImage: `url('/panel-clientBg.jpg')` }}>
+        <div className='relative w-full h-full'>
+          <div className='absolute w-full h-full gap-8 flex flex-col'>
+            <NavbarClient />
+            <AsideClient
+              toggleAside={toggleAside}
+              isAsideOpen={isAsideOpen}
+              toggleSiteContainer={toggleSiteContainer}
+              asideSelectedOption={asideSelectedOption}
+            />
+            <div
+              id='siteContainer'
+              className={`bgred-400 transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex max-md:pl-12  md:justify-center items-center z-[1000]`}>
+              <div className='max-md:w-[90%] w-[80%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black'>
+                <div className='flex flex-col w-full rounded-t-3xl'>
+                  <div className='w-full  flex justify-end items-center rounded-t-3xl  p-2'>
+                    <div
+                      className='bgrose-400 cursor-pointer '
+                      onClick={() => {
+                        closeSiteContainer();
+                      }}>
+                      <IoCloseOutline className='text-xl bgblue-300' />
+                    </div>
                   </div>
-                </div>
-                <div id="site" className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
-                
-                {
-                  (asideSelectedOption === "projects") && <ProjectsClient />
-                }
-                {
-                  (asideSelectedOption === "myprofile" && customer) && <MyProfile customer={customer} />
-                }
-                {
-                  (asideSelectedOption === "purchases" ) && <Purchases  />
-                }
+                  <div
+                    id='site'
+                    className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
+                    {asideSelectedOption === "projects" && <ProjectsClient />}
+                    {asideSelectedOption === "myprofile" && customer && (
+                      <MyProfile customer={customer} />
+                    )}
+                    {asideSelectedOption === "purchases" && <Purchases />}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div className='flex bgred-200 absolute bottom-[10px] items-end  right-[10px] z-[3000]'>
+            <ChatModal />
+          </div>
         </div>
-        <div className="flex bgred-200 absolute bottom-[10px] items-end  right-[10px] z-[3000]">
-          <ChatModal />
-        </div>
-      </div>
-      
       </section>
     </main>
-
-    
-  )
+  );
 }
 
 export default PanelClient;

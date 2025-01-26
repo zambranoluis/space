@@ -74,7 +74,7 @@ function ShoppingCart() {
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const response = await apiService.getCustomer("678b3cb754c8efd3f5677ee5");
+        const response = await apiService.getCustomer("675388347f312ad7cc0a2ba2");
         console.log("ShoppingCart: Customer response:", response); // Log the API response
         if (response) {
           setCustomer(response);
