@@ -16,7 +16,7 @@ export const products = [
     "include": ["30-minutes phone call with a project manager", "One round of design revision", "2-3 week for design delivery", "Plant selection specific for your property", "List of materials selected for your project"],
     "extra": ["678abbf4eb501b940b71dc8c", "678abc0beb501b940b71dc8e", "678abc39eb501b940b71dc90", "678abc41eb501b940b71dc92"],
     "cost": 90,
-    "price": 100,
+    "price": 0,
     "isActive": true
   },
 
@@ -37,7 +37,7 @@ export const products = [
     "include": ["45-minutes phone call with a project manager", "Unlimited rounds design of revisions for 30 days", "1-2 week for design delivery", "Plant selection specific for your property", "List of materials selected for your project", "360° virtual tour of design", "Lighting Plan"],
     "extra": ["678abbf4eb501b940b71dc8c", "678abc0beb501b940b71dc8e", "678abc39eb501b940b71dc90", "678abc41eb501b940b71dc92"],
     "cost": 100,
-    "price": 110,
+    "price": 0,
     "isActive": true
   },
 
@@ -65,7 +65,7 @@ export const products = [
     ],
     "extra": ["678abbf4eb501b940b71dc8c", "678abc0beb501b940b71dc8e", "678abc39eb501b940b71dc90", "678abc41eb501b940b71dc92"],
     "cost": 110,
-    "price": 120,
+    "price": 0,
     "isActive": true
   },
 
@@ -94,7 +94,7 @@ export const products = [
     ],
     "extra": ["678abbf4eb501b940b71dc8c", "678abc0beb501b940b71dc8e", "678abc39eb501b940b71dc90", "678abc41eb501b940b71dc92"],
     "cost": 120,
-    "price": 130,
+    "price": 0,
     "isActive": true
   }
 
