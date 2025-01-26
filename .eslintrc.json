@@ -3,7 +3,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/ban-types": ["error", { "types": { "{}": false } }],
+    "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
