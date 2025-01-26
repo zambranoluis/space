@@ -137,8 +137,8 @@ function PanelClient() {
             toggleSiteContainer={toggleSiteContainer}
             asideSelectedOption={asideSelectedOption}
           />
-          <div id="siteContainer" className={` transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex justify-center items-center z-[1000]`}>
-            <div className="w-[60%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">
+          <div id="siteContainer" className={`bgred-400 transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex max-md:pl-12  md:justify-center items-center z-[1000]`}>
+            <div className="max-md:w-[90%] w-[80%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black">
               <div className="flex flex-col w-full rounded-t-3xl">
                 <div className="w-full  flex justify-end items-center rounded-t-3xl  p-2">
                   <div  className="bgrose-400 cursor-pointer " onClick={() => {closeSiteContainer()}} >
