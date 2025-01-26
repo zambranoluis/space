@@ -134,13 +134,13 @@ export const Purchases: React.FC = () => {
           {purchases.map((purchase: Purchase, index: number) => (
             <div key={index} className='flex flex-col p-2 '>
               <div id="purchaseTitle"
-                className='flex cursor-pointer items-center gap-2 p-2 bg-[#6b776d] text-white justify-between border border-[#6b776d] rounded-t-md'
+                className='flex max-sm:flex-col cursor-pointer items-center sm:gap-2 p-2 bg-[#6b776d] text-white justify-between border border-[#6b776d] rounded-t-md'
                 onClick={() =>
                   document.getElementById(`purchase${index}`)?.classList.toggle("hidden")
                 }>
-                <div className='flex items-center'>
+                <div className='flex max-sm:justify-center items-center'>
                   <PiTagSimpleFill className='text-4xl pr-2 text-[#f5a524]' />
-                  <h1 className='text-3xl font-black'>Project - #{index + 1}</h1>
+                  <h1 className='text-xl sm:text-3xl font-black'>Project - #{index + 1}</h1>
                 </div>
                 <div className='flex gap-1'>
                   <p>Status:</p>
