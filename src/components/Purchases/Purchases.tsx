@@ -4,6 +4,8 @@ import { GiCheckMark } from "react-icons/gi";
 import { PiTagSimpleFill } from "react-icons/pi";
 import { FaSearch } from "react-icons/fa";
 import { FaTags } from "react-icons/fa6";
+import { FaFileInvoiceDollar } from "react-icons/fa6";
+
 
 interface Area {
   nameArea: string;
@@ -137,7 +139,7 @@ export const Purchases: React.FC = () => {
                   document.getElementById(`purchase${index}`)?.classList.toggle("hidden")
                 }>
                 <div className='flex items-center'>
-                  <PiTagSimpleFill className='text-2xl pr-2 text-[#f5a524]' />
+                  <PiTagSimpleFill className='text-4xl pr-2 text-[#f5a524]' />
                   <h1 className='text-3xl font-black'>Project - #{index + 1}</h1>
                 </div>
                 <div className='flex gap-1'>
@@ -147,7 +149,7 @@ export const Purchases: React.FC = () => {
               </div>
               <div
                 id={`purchase${index}`}
-                className='hidden flex flex-col bg-gray-100 text-black p-4 border border-[#6b776d]'>
+                className='hidden flex flex-col bg-gray-100 text-black p-4 border border-[#6b776d] rounded-b-md'>
                 <div  className='flex flex-col '>
                   <h2 className='font-bold text-xl'>Package:</h2>
                   <p>
@@ -179,13 +181,24 @@ export const Purchases: React.FC = () => {
                 </div>
                 <div className='flex flex-col mt-4'>
                   <h2 className='font-bold text-xl'>Price: ${purchase.total}</h2>
-                  {purchase.status === "pending" && (
-                    <button
-                      onClick={() => handlePayment(purchase._id)}
-                      className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-start rounded-tl-3xl rounded-br-3xl'>
-                      Process Payment
-                    </button>
-                  )}
+                  <div className="flex gap-2">
+                    {purchase.status === "pending" && (
+                      <button
+                        onClick={() => handlePayment(purchase._id)}
+                        className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-start rounded-tl-3xl rounded-br-3xl'>
+                        Process Payment
+                      </button>
+                    )}
+                    {
+                      
+                        <button
+                          onClick={() => {}}
+                          className='mt-2 bg-blue-600 text-white place-self-start rounded-md p-2'>
+                          <FaFileInvoiceDollar className="text-2xl" />
+                        </button>
+                      
+                    }
+                  </div>
                 </div>
               </div>
             </div>
