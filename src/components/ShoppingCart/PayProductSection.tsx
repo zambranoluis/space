@@ -18,7 +18,10 @@ export interface Customer {
   name: string;
   lastname: string;
   email: string;
-  phone: {};
+  phone: {
+    areaCode: string;
+    number: string;
+  };
   address: string;
 }
 
@@ -132,19 +135,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     { nameArea: "Backyard", isActive: false },
   ]);
 
-  // useEffect(() => {
-  //   console.log("7. Componente Pay --- Updating selectedArea Automaticlly");
-  //   if (isTwoAreasAllowed) {
-  //     console.log ("7. Componente Pay --- Area es Doble");
-  //     setSelectedArea((prevArea) => prevArea.map((area) => ({ ...area, isActive: true })));
-  //   } else {
-  //     console.log ("7. Componente Pay --- Area No es Doble");
-  //     setSelectedArea((prevArea) => [
-  //       { ...prevArea[0], isActive: true },
-  //       { ...prevArea[1], isActive: false },
-  //     ]);
-  //   }
-  // }, [selectedPackage, isTwoAreasAllowed]);
 
   const handleSelectedArea = (area: "frontyard" | "backyard") => {
     setSelectedArea((prevArea) =>
@@ -161,7 +151,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
   const [selectedExtras, setSelectedExtras] = useState<
     { extra: string; isActive: boolean; price: number }[]
-  >([
+  >(extras ? [
     {
       extra: extras[0]._id,
       isActive: false,
@@ -182,22 +172,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       isActive: false,
       price: 1,
     },
-  ]);
-
-  // useEffect(() => {
-  //     setSelectedExtras((prevExtras) => {
-  //       if (isProductPro) {
-  //         console.log("Handling extras for Pro product...");
-  //         return prevExtras.map((extra, index) => ({
-  //           ...extra,
-  //           isActive: index === 1 || index === 2 ? true : extra.isActive,
-  //         }));
-  //       } else {
-  //         console.log("Handling extras for non-Pro product...");
-  //         return [...prevExtras];
-  //       }
-  //     });
-  // }, [selectedPackage]);
+  ]: []);
 
   const handleSelectedExtras = (index: number) => {
     if (selectedExtras[index].isActive) {

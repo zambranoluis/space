@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiService } from "@/services/apiService";
+import { Image } from "@nextui-org/image";
 import { GiCheckMark } from "react-icons/gi";
 import { PiTagSimpleFill } from "react-icons/pi";
 import { FaSearch } from "react-icons/fa";
@@ -40,22 +41,16 @@ const typePurchase = [
   {
     name: "Pending",
     icon: (
-      <img src={"/purchasePendingSpaceColorsGreen.png"} className='w-[25px] h-[25px]' />
-    ),
-  },
-  {
-    name: "Development",
-    icon: (
-      <img src={"/purchaseDevelopmentColorsGreen.png"} className='w-[25px] h-[25px]' />
+      <Image src={"/purchasePendingSpaceColorsGreen.png"} className='w-[25px] h-[25px]' />
     ),
   },
   {
     name: "Completed",
-    icon: <img src={"/purchaseCompletedColorsGreen.png"} className='w-[25px] h-[25px]' />,
+    icon: <Image src={"/purchaseCompletedColorsGreen.png"} className='w-[25px] h-[25px]' />,
   },
   {
     name: "Canceled",
-    icon: <img src={"/purchaseCanceledColorsGreen.png"} className='w-[25px] h-[25px]' />,
+    icon: <Image src={"/purchaseCanceledColorsGreen.png"} className='w-[25px] h-[25px]' />,
   },
 ];
 
@@ -69,7 +64,7 @@ export const Purchases: React.FC = () => {
       setIsLoadingPurchase(true);
       try {
         const response = await apiService.getPurchasesByCustomerId(
-          "675388347f312ad7cc0a2ba2",
+          "678b3cb754c8efd3f5677ee5",
         );
         if (response?.data) {
           console.log("Datos de las compras:", response.data);
@@ -101,10 +96,10 @@ export const Purchases: React.FC = () => {
 
   return (
     <div className='flex flex-col w-[90%] h-full place-self-center gap-2'>
-      <div className='flex place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[505px] h-[80px] overflow-x-scroll scrollbar-hide'>
+      <div className='flex place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[405px] h-[80px] overflow-x-scroll scrollbar-hide'>
         {typePurchase.map((purchase, index) => (
           <div key={index} className='flex justify-center items-center p-1 w-[100px]'>
-            <p
+            <div
               className={`w-full ${
                 currentClients === purchase.name
                   ? "border border-[#6b776d] rounded-md"
@@ -113,7 +108,7 @@ export const Purchases: React.FC = () => {
               onClick={() => setCurrentClients(purchase.name)}>
               {purchase.icon}
               {purchase.name}
-            </p>
+            </div>
           </div>
         ))}
       </div>
@@ -142,14 +137,14 @@ export const Purchases: React.FC = () => {
                   document.getElementById(`purchase${index}`)?.classList.toggle("hidden")
                 }>
                 <div className='flex max-sm:justify-center items-center'>
-                  <PiTagSimpleFill className='text-4xl pr-2 text-[#f5a524]' />
+                  <PiTagSimpleFill className={`text-4xl pr-2 ${(purchase.status === "pending") ? "text-[#f5a524]" : "" } ${(purchase.status === "completed") ? "text-[#17c964]" : "" } ${(purchase.status === "canceled") ? "text-[#f31260]" : "" }`} />
                   <h1 className='text-xl sm:text-3xl font-black'>
                     Project - #{index + 1}
                   </h1>
                 </div>
                 <div className='flex gap-1'>
                   <p>Status:</p>
-                  <p className='text-[#f5a524]'>{purchase.status}</p>
+                  <p className={`${(purchase.status === "pending") ? "text-[#f5a524]" : "" } ${(purchase.status === "completed") ? "text-[#17c964]" : "" } ${(purchase.status === "canceled") ? "text-[#f31260]" : "" }`}>{purchase.status}</p>
                 </div>
               </div>
               <div
@@ -199,11 +194,13 @@ export const Purchases: React.FC = () => {
                       </button>
                     )}
                     {
-                      <button
-                        onClick={() => {}}
-                        className='mt-2 bg-blue-600 text-white place-self-start rounded-md p-2'>
-                        <FaFileInvoiceDollar className='text-2xl' />
-                      </button>
+                      purchase.status !== "pending" && (
+                        <button
+                          onClick={() => {}}
+                          className='mt-2 bg-blue-600 text-white place-self-start rounded-md p-2'>
+                          <FaFileInvoiceDollar className='text-2xl' />
+                        </button>
+                      )
                     }
                   </div>
                 </div>

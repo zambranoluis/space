@@ -49,7 +49,7 @@ function PanelClient() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await apiService.getCustomer("675388347f312ad7cc0a2ba2");
+      const response = await apiService.getCustomer("678b3cb754c8efd3f5677ee5");
       if (response) {
         console.log("response customer en panel client: ", response);
         setTimeout(() => {
