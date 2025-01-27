@@ -273,7 +273,7 @@ const MyProfile = (customer: any) => {
         <div className="flex justify-center items-center">
           < FaUserCircle className="text-[100px] " />
         </div>
-        {(customerData !== null) 
+        {(customerData) 
           ? <div>
               <h1 className="font-bold">arkweb@gmail.com</h1>
               <h2 className="">Claudia Alves</h2>
@@ -286,7 +286,7 @@ const MyProfile = (customer: any) => {
       </div>
 
       {
-        (customerData !== null) && <div className="flex flex-col gap-6 py-6 bgred-200 w-full">
+        (customerData) && <div className="flex flex-col gap-6 py-6 bgred-200 w-full">
         <form className="bg-[#f3f3f3] rounded-3xl flex flex-col w-full justify-center items-center gap-4  p-8">
           <div className="flex w-full" id="firstName">
             <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.name}/>
@@ -327,7 +327,7 @@ const MyProfile = (customer: any) => {
             <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.address} />
           </div>
           <div className="flex justify-center items-center">
-            <button onClick={(e) => {e.preventDefault();}} className="bg-[#6d786f] text-sm text-white rounded-tl-2xl rounded-br-2xl px-4 py-2">
+            <button onClick={() => {}} className="bg-[#6d786f] text-sm text-white rounded-tl-2xl rounded-br-2xl px-4 py-2">
               Save Changes
             </button>
           </div>
@@ -344,7 +344,7 @@ const MyProfile = (customer: any) => {
             <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder="Confirm Password" />
           </div>
           <div className="flex justify-center items-center">
-            <button onClick={(e) => {e.preventDefault();}} className="bg-[#6d786f] text-sm text-white rounded-tl-2xl rounded-br-2xl px-4 py-2">
+            <button onClick={() => {}} className="bg-[#6d786f] text-sm text-white rounded-tl-2xl rounded-br-2xl px-4 py-2">
               Save Changes
             </button>
           </div>

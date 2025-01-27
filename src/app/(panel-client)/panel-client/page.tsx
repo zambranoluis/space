@@ -39,23 +39,22 @@ function PanelClient() {
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("projects");
 
-  const [customer, setCustomer] = useState<Customer | null>(null); // Cliente inicializado como `null`
-  const [isLoading, setIsLoading] = useState<boolean>(false); // Estado de carga
-  const [error, setError] = useState<string | null>(null); // Estado de error
+  const [customer, setCustomer] = useState<Customer | null>(null);
+  const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const [purchases, setPurchases] = useState<[]>([]);
 
   const getCustomer = useCallback(async () => {
-    setIsLoading(true);
+    setIsLoadingCustomer(true);
     setError(null);
     try {
-      const response = await apiService.getCustomer("675388347f312ad7cc0a2ba2");
+      const response = await apiService.getCustomer("678b3cb754c8efd3f5677ee5");
       if (response) {
         console.log("response customer en panel client: ", response);
         setTimeout(() => {
           setCustomer(response);
         }, 300);
-        setIsLoading(false);
+        setIsLoadingCustomer(false);
         console.log("data customer en panel client: ", response);
       }
     } catch (err: unknown) {

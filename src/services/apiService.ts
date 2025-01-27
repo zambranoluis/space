@@ -11,7 +11,7 @@ interface Customer {
   phone: {
     areaCode: string;
     number: string;
-  }[];
+  };
   skype: string;
   address: string;
   birthdate: string;
@@ -39,7 +39,7 @@ interface CreateCustomer {
   phone: {
     areaCode: string;
     number: string;
-  }[];
+  };
   skype: string;
   address: string;
   birthdate: string;
@@ -51,7 +51,8 @@ interface SelectedCustomer {
   lastname: string;
   email: string;
   phone: {
-    
+    areaCode: string;
+    number: string;
   };
   address: string
 }
@@ -73,7 +74,7 @@ export interface SelectedExtra {
 
 interface Purchase {
   customer: string;
-  product: string; // Cambiado de Product a string
+  product: string; 
   extras: {
     extra: string;
     isActive: boolean;
@@ -87,16 +88,7 @@ interface Purchase {
 interface CreatePurchase {
   customer: string;
     product: string;
-    selectedAreas: [
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-      {
-        nameArea: string;
-        isActive: boolean;
-      }
-    ],
+    selectedAreas: { nameArea: string; isActive: boolean }[],
     extras: SelectedExtra[];
     price: number;
     status: string;
@@ -104,7 +96,6 @@ interface CreatePurchase {
 }
 
 const url = "http://localhost:4000/space";
-// const url = "https://715vq04v-4000.use2.devtunnels.ms/space"
 
 export const apiService = {
   createCustomer: async (customer: CreateCustomer) => {
@@ -170,6 +161,16 @@ export const apiService = {
       console.error("Error al crear la compra:", error);
     }
   },
+  updatePurchaseStatus: async (purchase: string, status: string) => {
+    try {
+      const response = await axios.patch(`${url}/purchases/${purchase}`, { status }, {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error al actualizar el estado de la compra:", error);
+    }
+  },
   processPurchase: async (purchaseId: string) => {
     try {
       const response = await axios.post(
@@ -210,6 +211,34 @@ export const apiService = {
       }
     } catch (error) {
       // console.log("Error en la petición getPurchasesByCustomerId:", error);
+    }
+  },
+
+  getTransactionById: async (transactionId: string) => {
+    try {
+      const response = await axios.get(`${url}/transactions/${transactionId}`);
+      if (response) {
+        // console.log("peticion API axios getTransactionById", response);
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      // console.log("Error en la petición getTransactionById:", error);
+    }
+  },
+  updateTransaction: async (transactionId: string, status: string) => {
+    try {
+      const response = await axios.patch(
+        `${url}/transactions/${transactionId}`,
+        { status },
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error al actualizar la transacción:", error);
     }
   },
 };
