@@ -208,7 +208,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     }
   }, [selectedPackage, selectedExtras, productSelectedInfo]);
 
-  const [purchase, setPurchase] = useState<Purchase>();
 
   const handlePurchase = async () => {
     console.log("Purchase ----- data to be evaluated: ");
@@ -253,7 +252,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
         // Redirigir al panel de cliente
         alert("Compra creada correctamente. Redirigiendo al panel...");
-        window.location.href = `/panel-client?purchaseId=${response.data._id}`;
+        window.location.href = `/panel-client?panel=purchases`;
       } catch (err: unknown) {
         console.error("Error creating purchase:", err);
         // if (axios.isAxiosError(err) && err.response) {
@@ -379,7 +378,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
                     onClick={() => {
                       handlePurchase();
                     }}>
-                    PAY FOR
+                    PAY
                   </button>
                 </div>
               </div>

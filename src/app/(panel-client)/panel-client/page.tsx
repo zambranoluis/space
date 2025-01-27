@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState, ReactNode, useCallback } from "react";
+import { useEffect, useState, ReactNode, useCallback, use } from "react";
 
-import axios from "axios";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { apiService } from "@/services/apiService";
 
@@ -18,6 +18,7 @@ import { ProjectsClient } from "@/components/Projects/Projects";
 import MyProfile from "@/components/MyProfile/MyProfile";
 
 import { Purchases } from "@/components/Purchases/Purchases";
+import { s } from "framer-motion/client";
 
 interface Customer {
   _id: string;
@@ -36,8 +37,21 @@ interface Customer {
 }
 
 function PanelClient() {
+  const searchParams = useSearchParams();
+  const panel = searchParams.get("panel");
+  const isPanelPurchases = panel === "purchases";
+
+  const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
+  useEffect(() => {
+    if (isPanelPurchases) {
+      setAsideSelectedOption("purchases");
+    } else {
+      setAsideSelectedOption("projects");
+    }
+  }, [isPanelPurchases]);
+
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
-  const [asideSelectedOption, setAsideSelectedOption] = useState<string>("projects");
+  
 
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false);
@@ -140,11 +154,11 @@ function PanelClient() {
                   <div
                     id='site'
                     className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
-                    {asideSelectedOption === "projects" && <ProjectsClient />}
+                    {(asideSelectedOption === "projects" ) && <ProjectsClient />}
                     {asideSelectedOption === "myprofile" && customer && (
                       <MyProfile customer={customer} />
                     )}
-                    {asideSelectedOption === "purchases" && <Purchases />}
+                    {(asideSelectedOption === "purchases" ) && <Purchases />}
                   </div>
                 </div>
               </div>

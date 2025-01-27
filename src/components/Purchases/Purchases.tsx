@@ -55,7 +55,7 @@ const typePurchase = [
 ];
 
 export const Purchases: React.FC = () => {
-  const [currentClients, setCurrentClients] = useState<string | null>("All Purchases");
+  const [currentPurchases, setCurrentPurchases] = useState<string | null>("All Purchases");
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [isLoadingPurchase, setIsLoadingPurchase] = useState<boolean>(false);
 
@@ -84,7 +84,7 @@ export const Purchases: React.FC = () => {
     try {
       const response = await apiService.processPurchase(purchaseId);
       if (response?.sessionUrl) {
-        window.location.href = response.sessionUrl; // Redirige a la sesión de Stripe Checkout
+        window.location.href = response.sessionUrl;
       } else {
         alert("Error al iniciar el proceso de pago. Inténtalo de nuevo.");
       }
@@ -94,6 +94,13 @@ export const Purchases: React.FC = () => {
     }
   };
 
+  const filteredPurchases = (): Purchase[] => {
+    if (currentPurchases === "All Purchases") {
+      return purchases;
+    }
+    return purchases.filter((purchase) => purchase.status.toLowerCase() === currentPurchases?.toLowerCase());
+  };
+
   return (
     <div className='flex flex-col w-[90%] h-full place-self-center gap-2'>
       <div className='flex place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[405px] h-[80px] overflow-x-scroll scrollbar-hide'>
@@ -101,11 +108,11 @@ export const Purchases: React.FC = () => {
           <div key={index} className='flex justify-center items-center p-1 w-[100px]'>
             <div
               className={`w-full ${
-                currentClients === purchase.name
+                currentPurchases === purchase.name
                   ? "border border-[#6b776d] rounded-md"
                   : ""
               } text-xs flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap`}
-              onClick={() => setCurrentClients(purchase.name)}>
+              onClick={() => setCurrentPurchases(purchase.name)}>
               {purchase.icon}
               {purchase.name}
             </div>
@@ -127,9 +134,9 @@ export const Purchases: React.FC = () => {
           </div>
         </div>
 
-        <div className='grid overflow-y-scroll h-[90%] p-2 py-4 gap-6 w-full'>
-          {purchases.map((purchase: Purchase, index: number) => (
-            <div key={index} className='flex flex-col p-2 '>
+        <div className=' overflow-y-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
+          {filteredPurchases().map((purchase: Purchase, index: number) => (
+            <div key={index} className='flex flex-col p-2 bgred-300 '>
               <div
                 id='purchaseTitle'
                 className='flex max-sm:flex-col cursor-pointer items-center sm:gap-2 p-2 bg-[#6b776d] text-white justify-between border border-[#6b776d] rounded-t-md'
@@ -139,7 +146,7 @@ export const Purchases: React.FC = () => {
                 <div className='flex max-sm:justify-center items-center'>
                   <PiTagSimpleFill className={`text-4xl pr-2 ${(purchase.status === "pending") ? "text-[#f5a524]" : "" } ${(purchase.status === "completed") ? "text-[#17c964]" : "" } ${(purchase.status === "canceled") ? "text-[#f31260]" : "" }`} />
                   <h1 className='text-xl sm:text-3xl font-black'>
-                    Project - #{index + 1}
+                    Purchase #{index + 1}
                   </h1>
                 </div>
                 <div className='flex gap-1'>
