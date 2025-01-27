@@ -11,7 +11,7 @@ interface Customer {
   phone: {
     areaCode: string;
     number: string;
-  }[];
+  };
   skype: string;
   address: string;
   birthdate: string;
@@ -39,7 +39,7 @@ interface CreateCustomer {
   phone: {
     areaCode: string;
     number: string;
-  }[];
+  };
   skype: string;
   address: string;
   birthdate: string;
@@ -51,7 +51,8 @@ interface SelectedCustomer {
   lastname: string;
   email: string;
   phone: {
-    
+    areaCode: string;
+    number: string;
   };
   address: string
 }
@@ -87,16 +88,7 @@ interface Purchase {
 interface CreatePurchase {
   customer: string;
     product: string;
-    selectedAreas: [
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-      {
-        nameArea: string;
-        isActive: boolean;
-      }
-    ],
+    selectedAreas: { nameArea: string; isActive: boolean }[],
     extras: SelectedExtra[];
     price: number;
     status: string;
@@ -104,7 +96,6 @@ interface CreatePurchase {
 }
 
 const url = "http://localhost:4000/space";
-// const url = "https://715vq04v-4000.use2.devtunnels.ms/space"
 
 export const apiService = {
   createCustomer: async (customer: CreateCustomer) => {
