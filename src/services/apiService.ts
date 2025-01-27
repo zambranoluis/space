@@ -74,7 +74,7 @@ export interface SelectedExtra {
 
 interface Purchase {
   customer: string;
-  product: string; // Cambiado de Product a string
+  product: string; 
   extras: {
     extra: string;
     isActive: boolean;
