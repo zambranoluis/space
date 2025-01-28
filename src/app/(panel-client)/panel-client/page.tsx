@@ -139,7 +139,7 @@ function PanelClient() {
             />
             <div
               id='siteContainer'
-              className={`bgred-400 transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex max-md:pl-12  md:justify-center items-center z-[1000]`}>
+              className={`bgred-400 transition-all duration-300 overflowhidden absolute w-full h-full bgred-300 flex max-md:pl-12  md:justify-center items-center `}>
               <div className='max-md:w-[90%] w-[80%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black'>
                 <div className='flex flex-col w-full rounded-t-3xl'>
                   <div className='w-full  flex justify-end items-center rounded-t-3xl  p-2'>

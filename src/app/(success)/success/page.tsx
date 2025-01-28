@@ -66,7 +66,7 @@ const SuccessPage: React.FC = () => {
       updatePurchaseSuccess(transaction[0].purchase, "completed");
       
     }
-    window.location.href = "/panel-client";
+    window.location.href = "/panel-client?panel=purchases";
   }
 
   return (

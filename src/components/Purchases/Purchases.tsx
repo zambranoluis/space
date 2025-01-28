@@ -7,6 +7,8 @@ import { FaSearch } from "react-icons/fa";
 import { FaTags } from "react-icons/fa6";
 import { FaFileInvoiceDollar } from "react-icons/fa6";
 
+import PurchaseDetails from "./PurchaseDetails";
+
 interface Area {
   nameArea: string;
   isActive: boolean;
@@ -146,7 +148,7 @@ export const Purchases: React.FC = () => {
                 <div className='flex max-sm:justify-center items-center'>
                   <PiTagSimpleFill className={`text-4xl pr-2 ${(purchase.status === "pending") ? "text-[#f5a524]" : "" } ${(purchase.status === "completed") ? "text-[#17c964]" : "" } ${(purchase.status === "canceled") ? "text-[#f31260]" : "" }`} />
                   <h1 className='text-xl sm:text-3xl font-black'>
-                    Purchase #{index + 1}
+                    {purchase.product.name} {purchase.product.type}
                   </h1>
                 </div>
                 <div className='flex gap-1'>
@@ -201,14 +203,9 @@ export const Purchases: React.FC = () => {
                       </button>
                     )}
                     {
-                      purchase.status !== "pending" && (
-                        <button
-                          onClick={() => {}}
-                          className='mt-2 bg-blue-600 text-white place-self-start rounded-md p-2'>
-                          <FaFileInvoiceDollar className='text-2xl' />
-                        </button>
-                      )
-                    }
+                      purchase.status === "completed" && (
+                        <PurchaseDetails purchaseId={purchase._id} />
+                    )}
                   </div>
                 </div>
               </div>
