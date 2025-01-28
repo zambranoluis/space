@@ -2,87 +2,86 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-
-
 import { apiService } from "@/services/apiService";
-
-
 
 const SuccessPage: React.FC = () => {
   const searchParams = useSearchParams();
-  const [sessionId, setSessionId] = useState<string>("");
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [transaction, setTransaction] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const fetchTransaction = async () => {
+    if (!sessionId) return;
+
     try {
       const response = await apiService.getTransactionById(sessionId);
-      console.log("Success: Transaction response:", response); // Log the API response
-      if (response) {
-        setTransaction(response.data);
-        console.log("Success: Transaction data:", transaction); // Log the API response
+      if (response && response.data.length > 0) {
+        const transaction = response.data[0];
+        if (transaction.status === "succeeded") {
+          setTransaction(transaction);
+        } else {
+          setError("Payment not yet verified. Please refresh after a moment.");
+        }
+      } else {
+        setError("Transaction not found.");
       }
-    } catch (err: unknown) {
-      console.error("Success: Error fetching Transaction:", err);
-    }
-  };
-
-  const updatePurchaseSuccess = async (transaction:string, status: string) => {
-    try {
-      const response = await apiService.updatePurchaseStatus(transaction, status);
-      console.log("Success: Update response:", response); // Log the API response
-      if (response) {
-        console.log("Success: Update data:", transaction); // Log the API response
-      }
-    } catch (err: unknown) {
+    } catch (err) {
+      console.error("Error fetching transaction:", err);
+      setError("Failed to fetch transaction.");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    const sessionIdFromQuery = searchParams.get('sessionId');
+    const sessionIdFromQuery = searchParams.get("sessionId");
     if (sessionIdFromQuery) {
       setSessionId(sessionIdFromQuery);
     }
+  }, [searchParams]);
 
+  useEffect(() => {
     if (sessionId) {
       fetchTransaction();
     }
+  }, [sessionId]);
 
+  const handleGoToDashboard = () => {
+    router.push("/panel-client?panel=purchases");
+  };
 
-  }, [searchParams, sessionId]);
+  if (loading) {
+    return (
+      <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
+        <h1 className='text-2xl'>Loading...</h1>
+      </div>
+    );
+  }
 
-  
-
-
-
-  
-
-  const handleSuccessPurchase = () => {
-    console.log("Session ID:", sessionId);
-    console.log("transaccion a evaluar:", transaction);
-    
-
-    if (sessionId && transaction !== null) {
-      console.log("sessionID existe")
-      updatePurchaseSuccess(transaction[0].purchase, "completed");
-      
-    }
-    window.location.href = "/panel-client?panel=purchases";
+  if (error) {
+    return (
+      <div className='flex flex-col items-center justify-center h-screen bg-red-100'>
+        <h1 className='text-2xl text-red-600'>Error</h1>
+        <p className='mt-4'>{error}</p>
+      </div>
+    );
   }
 
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-green-100'>
       <h1 className='text-4xl font-bold text-green-600'>Payment Successful!</h1>
       <p className='mt-4 text-lg'>
-        Thank you for your purchase. Your order is now payed and soon to be assigned for development.
+        Thank you for your purchase. Your order is now paid and will soon be processed.
       </p>
       <button
-        onClick={() => {handleSuccessPurchase()}}
+        onClick={handleGoToDashboard}
         className='mt-6 px-4 py-2 bg-green-600 text-white rounded-md'>
         Go to Dashboard
       </button>
     </div>
   );
-
 };
 
 export default SuccessPage;
