@@ -102,5 +102,6 @@ export const authOptions: NextAuthOptions = {
     error: "/auth/error",
   },
 };
-
-export default NextAuth(authOptions);
+// Export HTTP methods
+export const GET = NextAuth(authOptions);
+export const POST = NextAuth(authOptions);
