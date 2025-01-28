@@ -23,7 +23,7 @@ import {ProjectsWorker} from "@/components/Projects/Projects"
 
 import History from "@/components/History/History";
 import MyProfile from "@/components/MyProfile/MyProfile";
-import { aside } from "framer-motion/client";
+import WorkCalendar from "@/components/Work-Calendar/WorkCalendar";
 
 // import { projects } from "./steps"
 
@@ -152,6 +152,9 @@ function PanelWorker() {
                 }
                 {
                   (asideSelectedOption === "history") && <History />
+                }
+                {
+                  (asideSelectedOption === "workcalendar") && <WorkCalendar />
                 }
                 </div>
               </div>

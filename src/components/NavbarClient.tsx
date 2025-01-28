@@ -35,9 +35,6 @@ const Navbar: React.FC = ( {  } ) => {
           <p className="textcenter text-sm min-[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">Claudia Alves</p>
           <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">Client</p>
         </div>
-        <div className="flex justify-center items-center bggreen-300">
-          <Avatar className="h-[60px] w-[60px] min-[350px]:w-[30px] min-[350px]:h-[30px] min-[400px]:w-[60px] min-[400px]:h-[60px]  text-large drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-        </div>
       </div>
     </nav>
   );
