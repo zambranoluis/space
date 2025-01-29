@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
 import {
   validateText,
-validateTextWithSpaces,
-validateNumber,
-validateEmail,
-validatePassword
+  validateTextWithSpaces,
+  validateNumber,
+  validateEmail,
+  validatePassword,
 } from "@/utils/validation";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
@@ -13,7 +13,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import { apiService } from "@/services/apiService";
 
-
+import CryptoJS from "crypto-js";
 
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
@@ -22,10 +22,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { GrSkype } from "react-icons/gr";
 
 import { DatePicker } from "@nextui-org/date-picker";
-import { parseDate, getLocalTimeZone, DateValue, } from "@internationalized/date";
-
-
-
+import { parseDate, getLocalTimeZone, DateValue } from "@internationalized/date";
 
 const areaCodes = [
   {
@@ -230,10 +227,8 @@ const areaCodes = [
     code: "+58",
     abreviation: "VE",
     flag: "/flags/venezuela.png",
-  }
-
-
-]
+  },
+];
 
 interface Customer {
   name: string;
@@ -251,24 +246,20 @@ interface Customer {
 }
 
 const CreateAccount = () => {
-
-
   const [formData, setFormData] = useState<Customer>({
     name: "",
     lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phone: 
-      {
-        areaCode: "",
-        number: "",
-      },
+    phone: {
+      areaCode: "",
+      number: "",
+    },
     skype: "",
     address: "",
     birthdate: "",
   });
-
 
   const [selectedCode, setSelectedCode] = useState<number>(26);
   const [areaCode, setAreaCode] = useState<string>("+1");
@@ -276,11 +267,15 @@ const CreateAccount = () => {
 
   const selectRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node) &&
-          listRef.current && !listRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node) &&
+        listRef.current &&
+        !listRef.current.contains(event.target as Node)
+      ) {
         setIsListVisible(false); // Cerrar la lista si se hace clic fuera
       }
     };
@@ -296,29 +291,37 @@ const CreateAccount = () => {
 
   const handleShowCodesList = () => {
     setIsListVisible(!isListVisible);
-  }
+  };
 
   const handleSelectCode = (id: number, code: string) => {
     setSelectedCode(id);
     setAreaCode(code);
     setIsListVisible(false);
-  }
+  };
 
   const handleBuildPhone = (phoneNumber: string) => {
     setFormData({ ...formData, phone: { areaCode: areaCode, number: phoneNumber } });
-  }
+  };
 
-  
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false); // Estado de carga
   const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error
-
 
   const handleCreateAccount = async () => {
     try {
       setIsLoadingCustomer(true);
       setErrorCustomer(null);
-      const response = await apiService.createCustomer(formData);
-      // console.log("response peticion createCustomer en create account", response);
+
+      // Hash MD5 la contraseña antes de enviarla
+      const hashedPasswordMD5 = CryptoJS.MD5(formData.password).toString();
+      const hashedConfirmPasswordMD5 = CryptoJS.MD5(formData.confirmPassword).toString();
+
+      const response = await apiService.createCustomer({
+        ...formData,
+        password: hashedPasswordMD5,
+        confirmPassword: hashedConfirmPasswordMD5,
+      });
+
+      console.log("response peticion createCustomer en create account", response);
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {
         setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
@@ -330,143 +333,176 @@ const CreateAccount = () => {
     }
   };
 
-
   return (
-    <main className="flex w-full min-h-screen bgred-500">
-      <div className="flex w-full max-lg:relative">
+    <main className='flex w-full min-h-screen bgred-500'>
+      <div className='flex w-full max-lg:relative'>
         <div
-          className="w-[40%] max-lg:w-full max-lg:absolute h-full bgblue-400 bg-center bg-no-repeat bg-cover"
-          style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/createAccountBG.webp')" }}
-        >
-        </div>
-        <div className="w-[60%] h-full bggreen-400 max-lg:w-full z-[100]">
-          <div className="flex flex-col h-full w-full">
-            <div className="flex flex-col lg:h-full lg:bg-white">
-              <div className="w-full h-[15%] flex justify-center items-center bgred-500">
-                <Link href="/">
+          className='w-[40%] max-lg:w-full max-lg:absolute h-full bgblue-400 bg-center bg-no-repeat bg-cover'
+          style={{
+            backgroundImage:
+              "url('https://github.com/BPM94/SCCTMD/raw/main/opt/createAccountBG.webp')",
+          }}></div>
+        <div className='w-[60%] h-full bggreen-400 max-lg:w-full z-[100]'>
+          <div className='flex flex-col h-full w-full'>
+            <div className='flex flex-col lg:h-full lg:bg-white'>
+              <div className='w-full h-[15%] flex justify-center items-center bgred-500'>
+                <Link href='/'>
                   <Image
-                    src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
-                    alt="logo"
-                    className="h-full"
+                    src='https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png'
+                    alt='logo'
+                    className='h-full'
                   />
                 </Link>
               </div>
-              <div className="flex  overflow-y-auto bgred-400">
-                <form
-                  className="flex flex-col w-full h-full bgorange-300"
-                >
-                  <div id="fields" className="flex flex-col w-[80%] h-full  place-self-center"
-                  >
-                    <div id="name-lastname" className="flex w-full bgblue-500">
-                      <div id="name" className="flex w-full p-2 bgrose-400">
+              <div className='flex  overflow-y-auto bgred-400'>
+                <form className='flex flex-col w-full h-full bgorange-300'>
+                  <div
+                    id='fields'
+                    className='flex flex-col w-[80%] h-full  place-self-center'>
+                    <div id='name-lastname' className='flex w-full bgblue-500'>
+                      <div id='name' className='flex w-full p-2 bgrose-400'>
                         <input
-                          id="fieldName"
-                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                          type="text"
-                          placeholder="First Name"
-                          onChange={(e) => {if (validateTextWithSpaces(e.target.value)) setFormData({ ...formData, name: e.target.value })}}
+                          id='fieldName'
+                          className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                          type='text'
+                          placeholder='First Name'
+                          onChange={(e) => {
+                            if (validateTextWithSpaces(e.target.value))
+                              setFormData({ ...formData, name: e.target.value });
+                          }}
                         />
                       </div>
-                      <div id="lastname" className="flex w-full p-2 bgpurple-500">
+                      <div id='lastname' className='flex w-full p-2 bgpurple-500'>
                         <input
-                          id="fieldLastName"
-                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                          type="text"
-                          placeholder="Last Name"
-                          onChange={(e) => setFormData({ ...formData, lastname: e.target.value })}
+                          id='fieldLastName'
+                          className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                          type='text'
+                          placeholder='Last Name'
+                          onChange={(e) =>
+                            setFormData({ ...formData, lastname: e.target.value })
+                          }
                         />
                       </div>
                     </div>
-                    <div id="email" className="flex w-full p-2">
+                    <div id='email' className='flex w-full p-2'>
                       <input
-                        id="fieldEmail"
-                        className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                        type="text"
-                        placeholder="Email"
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        id='fieldEmail'
+                        className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                        type='text'
+                        placeholder='Email'
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                       />
                     </div>
-                    <div id="password" className="flex flex-col w-full">
-                      <div id="createPassword" className="flex w-full p-2">
+                    <div id='password' className='flex flex-col w-full'>
+                      <div id='createPassword' className='flex w-full p-2'>
                         <input
-                          id="fieldPassword"
-                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                          type="text"
-                          placeholder="Create Password"
-                          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                          id='fieldPassword'
+                          className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                          type='text'
+                          placeholder='Create Password'
+                          onChange={(e) =>
+                            setFormData({ ...formData, password: e.target.value })
+                          }
                         />
                       </div>
-                      <div id="confirmPassword" className="flex w-full p-2">
+                      <div id='confirmPassword' className='flex w-full p-2'>
                         <input
-                          id="fieldConfirmPassword"
-                          className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                          type="text"
-                          placeholder="Confirm Password"
-                          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                          id='fieldConfirmPassword'
+                          className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                          type='text'
+                          placeholder='Confirm Password'
+                          onChange={(e) =>
+                            setFormData({ ...formData, confirmPassword: e.target.value })
+                          }
                         />
                       </div>
                     </div>
-                    <div id="phone" className="flex w-full p-2 gap-2">
-                      <div id="areaCode" className="flex bgred-400 w-[120px] items-center justify-center text-[#828282] border border-[#828282] rounded-full  max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]" >
-                        <div ref={selectRef} id="selected" className="flex gap-1 p-1 items-center justify-center w-[120px] h-full cursor-pointer" onClick={handleShowCodesList} >
-                          <p className="text-xs">{areaCodes[selectedCode].code}</p>
-                          <Image className="w-[35px] rounded-md" src={areaCodes[selectedCode].flag} alt="" />
-                          <IoMdArrowDropdown className="text-xl" />
+                    <div id='phone' className='flex w-full p-2 gap-2'>
+                      <div
+                        id='areaCode'
+                        className='flex bgred-400 w-[120px] items-center justify-center text-[#828282] border border-[#828282] rounded-full  max-lg:bg-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] relative z-[500]'>
+                        <div
+                          ref={selectRef}
+                          id='selected'
+                          className='flex gap-1 p-1 items-center justify-center w-[120px] h-full cursor-pointer'
+                          onClick={handleShowCodesList}>
+                          <p className='text-xs'>{areaCodes[selectedCode].code}</p>
+                          <Image
+                            className='w-[35px] rounded-md'
+                            src={areaCodes[selectedCode].flag}
+                            alt=''
+                          />
+                          <IoMdArrowDropdown className='text-xl' />
                         </div>
                         {isListVisible && (
-                          <div ref={listRef} id="list" className="flex  flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll border border-[#6d786f]">
+                          <div
+                            ref={listRef}
+                            id='list'
+                            className='flex  flex-col w-[140px] absolute top-[55px] bg-white rounded-md px-2 py-4 gap-4 max-h-[180px] overflow-y-scroll border border-[#6d786f]'>
                             {areaCodes.map((country) => (
                               <div
                                 key={country.id}
-                                className="flex gap-1 cursor-pointer border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2"
-                                onClick={() => {handleSelectCode(country.id - 1, country.code);}}
-                              >
-                                <Image className="w-[35px] rounded-md" src={country.flag} alt="" />
-                                <p className="text-sm">{country.code}</p>
+                                className='flex gap-1 cursor-pointer border-b border-[#828282] items-center w-full hover:bg-primary hover:text-white justify-between p-2'
+                                onClick={() => {
+                                  handleSelectCode(country.id - 1, country.code);
+                                }}>
+                                <Image
+                                  className='w-[35px] rounded-md'
+                                  src={country.flag}
+                                  alt=''
+                                />
+                                <p className='text-sm'>{country.code}</p>
                               </div>
                             ))}
                           </div>
                         )}
-
                       </div>
                       <input
-                        id="fieldPhone"
-                        className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                        type="text"
-                        placeholder="Phone"
-                        onChange={(e) => {handleBuildPhone(e.target.value)}}
+                        id='fieldPhone'
+                        className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                        type='text'
+                        placeholder='Phone'
+                        onChange={(e) => {
+                          handleBuildPhone(e.target.value);
+                        }}
                       />
                     </div>
-                    <div id="skype" className="flex w-full p-2">
-                      <div className="flex w-full p-2 bgred-300 rounded-full border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] max-lg:bg-white max-w-[350px]">
-                        <div className="flex items-center justify-center w-[70px]">
-                          <GrSkype className="text-3xl text-[#08b2f0]" />
+                    <div id='skype' className='flex w-full p-2'>
+                      <div className='flex w-full p-2 bgred-300 rounded-full border border-[#828282] max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)] max-lg:bg-white max-w-[350px]'>
+                        <div className='flex items-center justify-center w-[70px]'>
+                          <GrSkype className='text-3xl text-[#08b2f0]' />
                         </div>
-                        <div className="flex w-full">
+                        <div className='flex w-full'>
                           <input
-                            id="fieldSkype"
-                            className="bg-white text-[#828282] w-full h-full outline-none"
-                            type="text"
-                            placeholder="Skype"
-                            onChange={(e) => setFormData({ ...formData, skype: e.target.value })}
+                            id='fieldSkype'
+                            className='bg-white text-[#828282] w-full h-full outline-none'
+                            type='text'
+                            placeholder='Skype'
+                            onChange={(e) =>
+                              setFormData({ ...formData, skype: e.target.value })
+                            }
                           />
                         </div>
                       </div>
                     </div>
-                    <div id="address" className="flex w-full p-2">
+                    <div id='address' className='flex w-full p-2'>
                       <input
-                        id="fieldAddress"
-                        className="bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                        type="text"
-                        placeholder="Address"
-                        onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                        id='fieldAddress'
+                        className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                        type='text'
+                        placeholder='Address'
+                        onChange={(e) =>
+                          setFormData({ ...formData, address: e.target.value })
+                        }
                       />
                     </div>
-                    <div id="birthdate" className="flex w-[60%] p-2 max-w-[300px]">
+                    <div id='birthdate' className='flex w-[60%] p-2 max-w-[300px]'>
                       <input
-                        id="fieldBirthdate"
-                        className="bg-white w-full max-w-[200px] p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
-                        type="date"
+                        id='fieldBirthdate'
+                        className='bg-white w-full max-w-[200px] p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
+                        type='date'
                         onChange={(e) => {
                           setFormData({
                             ...formData,
@@ -477,26 +513,24 @@ const CreateAccount = () => {
                     </div>
                   </div>
                   <div
-                    id="submit"
-                    className="flex items-center justify-center w-full mt-2 p-2 bgrose-400"
-                  >
+                    id='submit'
+                    className='flex items-center justify-center w-full mt-2 p-2 bgrose-400'>
                     <button
-                      className="px-12 py-2 font-bold text-white bg-[#5ea789] rounded-bl-2xl rounded-tr-2xl hover:bg-green-800 max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]"
+                      className='px-12 py-2 font-bold text-white bg-[#5ea789] rounded-bl-2xl rounded-tr-2xl hover:bg-green-800 max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
                       onClick={(e) => {
                         e.preventDefault();
                         handleCreateAccount();
-                      }}
-                    >
+                      }}>
                       Create Account
                     </button>
                   </div>
                 </form>
               </div>
             </div>
-            <div className="flex items-center justify-center w-full bgred-300 lg:h-[10%] lg:bg-[#353535]">
-              <p className="text-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]">
+            <div className='flex items-center justify-center w-full bgred-300 lg:h-[10%] lg:bg-[#353535]'>
+              <p className='text-white max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'>
                 Already Registered?{" "}
-                <Link href="/login" className="font-bold">
+                <Link href='/login' className='font-bold'>
                   Login here.
                 </Link>
               </p>
