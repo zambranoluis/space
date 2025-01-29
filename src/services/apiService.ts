@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 
-interface Customer {
+export interface Customer {
   _id: string;
   name: string;
   lastname: string;
@@ -30,7 +30,7 @@ export interface Product {
   picture: string;
 }
 
-interface CreateCustomer {
+export interface CreateCustomer {
   name: string;
   lastname: string;
   email: string;
@@ -45,7 +45,7 @@ interface CreateCustomer {
   birthdate: string;
 }
 
-interface SelectedCustomer {
+export interface SelectedCustomer {
   id: string;
   name: string;
   lastname: string;
@@ -54,8 +54,9 @@ interface SelectedCustomer {
     areaCode: string;
     number: string;
   };
-  address: string
+  address: string;
 }
+
 export interface SelectedProduct {
   id: string;
   name: string;
@@ -71,10 +72,9 @@ export interface SelectedExtra {
   isActive: boolean;
 }
 
-
-interface Purchase {
+export interface Purchase {
   customer: string;
-  product: string; 
+  product: string;
   extras: {
     extra: string;
     isActive: boolean;
@@ -85,14 +85,14 @@ interface Purchase {
   isActive: boolean;
 }
 
-interface CreatePurchase {
+export interface CreatePurchase {
   customer: string;
-    product: string;
-    selectedAreas: { nameArea: string; isActive: boolean }[],
-    extras: SelectedExtra[];
-    price: number;
-    status: string;
-    isActive: boolean;
+  product: string;
+  selectedAreas: { nameArea: string; isActive: boolean }[];
+  extras: SelectedExtra[];
+  price: number;
+  status: string;
+  isActive: boolean;
 }
 
 const url = "http://localhost:4000/space";
@@ -163,9 +163,13 @@ export const apiService = {
   },
   updatePurchaseStatus: async (purchase: string, status: string) => {
     try {
-      const response = await axios.patch(`${url}/purchases/${purchase}`, { status }, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.patch(
+        `${url}/purchases/${purchase}`,
+        { status },
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
       return response.data;
     } catch (error) {
       console.error("Error al actualizar el estado de la compra:", error);

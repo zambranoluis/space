@@ -67,9 +67,7 @@ export const authOptions: NextAuthOptions = {
 
           throw new Error("Invalid credentials");
         } catch (error: any) {
-          const errorMessage =
-            error.response?.data?.message || error.message || "Unknown error";
-          console.error("Error in authorize:", errorMessage);
+          console.error("Error in authorize:", error.message);
           throw new Error("Invalid login credentials");
         }
       },
@@ -78,6 +76,21 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 24 * 60 * 60, // Tiempo de expiración de la sesión (24 horas)
+  },
+  cookies: {
+    sessionToken: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+      },
+    },
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -102,6 +115,7 @@ export const authOptions: NextAuthOptions = {
     error: "/auth/error",
   },
 };
+
 // Export HTTP methods
 export const GET = NextAuth(authOptions);
 export const POST = NextAuth(authOptions);
