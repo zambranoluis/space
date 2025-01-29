@@ -69,7 +69,7 @@ export const Purchases: React.FC = () => {
           "678b3cb754c8efd3f5677ee5",
         );
         if (response?.data) {
-          console.log("Datos de las compras:", response.data);
+          // console.log("Datos de las compras:", response.data);
           setPurchases(response.data);
         }
       } catch (error) {

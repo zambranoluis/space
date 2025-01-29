@@ -244,7 +244,7 @@ interface Customer {
   phone: {
     areaCode: string;
     number: string;
-  }[];
+  };
   skype: string;
   address: string;
   birthdate: string;
@@ -259,12 +259,11 @@ const CreateAccount = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    phone: [
+    phone: 
       {
         areaCode: "",
         number: "",
-      }
-    ],
+      },
     skype: "",
     address: "",
     birthdate: "",
@@ -306,7 +305,7 @@ const CreateAccount = () => {
   }
 
   const handleBuildPhone = (phoneNumber: string) => {
-    setFormData({ ...formData, phone: [{ areaCode: areaCode, number: phoneNumber }] });
+    setFormData({ ...formData, phone: { areaCode: areaCode, number: phoneNumber } });
   }
 
   
@@ -319,7 +318,7 @@ const CreateAccount = () => {
       setIsLoadingCustomer(true);
       setErrorCustomer(null);
       const response = await apiService.createCustomer(formData);
-      console.log("response peticion createCustomer en create account", response);
+      // console.log("response peticion createCustomer en create account", response);
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {
         setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);

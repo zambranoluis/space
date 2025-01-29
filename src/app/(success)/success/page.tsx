@@ -16,10 +16,10 @@ const SuccessPage: React.FC = () => {
   const fetchTransaction = async () => {
     try {
       const response = await apiService.getTransactionById(sessionId);
-      console.log("Success: Transaction response:", response); // Log the API response
+      // console.log("Success: Transaction response:", response); // Log the API response
       if (response) {
         setTransaction(response.data);
-        console.log("Success: Transaction data:", transaction); // Log the API response
+        // console.log("Success: Transaction data:", transaction); // Log the API response
       }
     } catch (err: unknown) {
       console.error("Success: Error fetching Transaction:", err);
@@ -29,9 +29,9 @@ const SuccessPage: React.FC = () => {
   const updatePurchaseSuccess = async (transaction:string, status: string) => {
     try {
       const response = await apiService.updatePurchaseStatus(transaction, status);
-      console.log("Success: Update response:", response); // Log the API response
+      // console.log("Success: Update response:", response); // Log the API response
       if (response) {
-        console.log("Success: Update data:", transaction); // Log the API response
+        // console.log("Success: Update data:", transaction); // Log the API response
       }
     } catch (err: unknown) {
     }
@@ -57,12 +57,12 @@ const SuccessPage: React.FC = () => {
   
 
   const handleSuccessPurchase = () => {
-    console.log("Session ID:", sessionId);
-    console.log("transaccion a evaluar:", transaction);
+    // console.log("Session ID:", sessionId);
+    // console.log("transaccion a evaluar:", transaction);
     
 
     if (sessionId && transaction !== null) {
-      console.log("sessionID existe")
+      // console.log("sessionID existe")
       updatePurchaseSuccess(transaction[0].purchase, "completed");
       
     }

@@ -64,12 +64,12 @@ function PanelClient() {
     try {
       const response = await apiService.getCustomer("678b3cb754c8efd3f5677ee5");
       if (response) {
-        console.log("response customer en panel client: ", response);
+        // console.log("response customer en panel client: ", response);
         setTimeout(() => {
           setCustomer(response);
         }, 300);
         setIsLoadingCustomer(false);
-        console.log("data customer en panel client: ", response);
+        // console.log("data customer en panel client: ", response);
       }
     } catch (err: unknown) {
       // if (axios.isAxiosError(err) && err.response) {
@@ -91,8 +91,8 @@ function PanelClient() {
   };
 
   const toggleSiteContainer = (tag: string) => {
-    console.log("tag: ", tag);
-    console.log("asideSelectedOption: ", asideSelectedOption);
+    // console.log("tag: ", tag);
+    // console.log("asideSelectedOption: ", asideSelectedOption);
     const container = document.getElementById(`siteContainer`);
     if (tag !== asideSelectedOption) {
       if (container?.classList.contains("togglePanel")) {
