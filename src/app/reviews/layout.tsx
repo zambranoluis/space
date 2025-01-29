@@ -6,15 +6,13 @@ import { useState, ReactNode } from "react";
 import { Image } from "@nextui-org/image";
 
 import Navbar from "@/components/Navbar";
-
-import Aside from "@/components/Aside";
 import Footer from "@/components/Footer";
 
-interface DashboardLayoutProps {
+interface Reviews {
   children: ReactNode; // Define el tipo para las props de children
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function ReviewsLayout({ children }: Reviews) {
   
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
 

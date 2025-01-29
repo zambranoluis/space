@@ -21,8 +21,8 @@ const Navbar: React.FC = ( {  } ) => {
 
   
   return (
-    <nav  className=" flex max-h-[100px]  top-0 bg-black/50 w-full z-[1500] py-4 bgred-300 justify-between items-center  px-4 ">
-      <Link id="logoNavbar" className="flex bgred-200" href="/">
+    <nav  className=" flex h-[100px]  top-0 bg-black/50 w-full z-[1500] py-4 bgred-300 justify-between items-center  px-4 ">
+      <Link id="logoNavbar" className="flex bgred-200" href="/panel-worker">
         <Image className="h-full place-self-center max-w-[150px]  drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
           src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
           alt=""

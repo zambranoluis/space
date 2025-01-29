@@ -38,7 +38,7 @@ import { FaStarHalfAlt } from "react-icons/fa";
 
 
 import { FaqsContactUsEmail } from "@/components/faqsContactUs";
-import { b } from "framer-motion/client";
+
 
 const reviews = [
   {
@@ -99,7 +99,7 @@ const reviews = [
 
 
 
-const CreateAccount = () => {
+const Reviews: React.FC = () => {
   const [selectedReview1, setSelectedReview1] = useState(reviews[0]);
   const [selectedReview2, setSelectedReview2] = useState(reviews[1]);
 
@@ -238,4 +238,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default Reviews;

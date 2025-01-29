@@ -12,16 +12,24 @@ interface PurchaseDetailsProps {
   purchaseId: string;
 }
 
+interface PurchaseDetails {
+  amount: string;
+  currency: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 
 const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purchaseId }) => {
-  console.log("purchaseId:", purchaseId);
+  // console.log("purchaseId:", purchaseId);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [purchaseDetails, setPurchaseDetails] = useState(null);
+  const [purchaseDetails, setPurchaseDetails] = useState<PurchaseDetails | null>(null);
 
   const fetchTransactionDetails = async () => {
     try {
-      const response = await apiService.getTransactionById(purchaseId);
-      console.log("response:", response);
+      const response = await apiService.getTransactionByPurchaseId(purchaseId);
+      // console.log("response:", response);
       if (response) {
         const transactionDetails = response.data;
         setPurchaseDetails(transactionDetails);
@@ -38,7 +46,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
 
 
 
-  const handleOpenReport = () => {
+  const handleOpenPurchaseDetails = () => {
     onOpen();
   };
 
@@ -46,7 +54,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
     <div className="">
       <div className="">
         <button
-          onClick={() => {handleOpenReport()}}
+          onClick={() => {handleOpenPurchaseDetails()}}
           className='mt-2 bg-blue-600 text-white place-self-start rounded-md p-2'>
           <FaFileInvoiceDollar className='text-2xl' />
         </button>
@@ -57,8 +65,19 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
             {(onClose) =>
                 <>
                   <ModalHeader className="flex">Purchase Details</ModalHeader>
-                  <ModalBody className="flex">asdasdasdasd</ModalBody>
-                  <ModalFooter className="flex">asdasdsd</ModalFooter>
+                  <ModalBody className="flex">
+                    {
+                      purchaseDetails && (
+                        <div className="flex flex-col">
+                          <p>Amount: {purchaseDetails.amount}</p>
+                          <p>Currency: {purchaseDetails.currency}</p>
+                          <p>Created At: {purchaseDetails.createdAt}</p>
+                          <p>Updated At: {purchaseDetails.updatedAt}</p>
+                        </div>
+                      )
+                    }
+                  </ModalBody>
+                  {/* <ModalFooter className="flex">asdasdsd</ModalFooter> */}
                 </>
             }
           </ModalContent>

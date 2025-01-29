@@ -98,10 +98,10 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   handleSelectedPackage,
   extras,
 }) => {
-  console.log("--- Componente Pay ---");
-  console.log("1. Componente Pay --- Customer: ", customer);
-  console.log("2. Componente Pay --- Product: ", products);
-  console.log("3. Componente Pay --- Extras: ", extras);
+  // console.log("--- Componente Pay ---");
+  // console.log("1. Componente Pay --- Customer: ", customer);
+  // console.log("2. Componente Pay --- Product: ", products);
+  // console.log("3. Componente Pay --- Extras: ", extras);
 
   const [productSelectedInfo, setProductSelectedInfo] = useState<SelectedProduct>();
   const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(false);
@@ -121,13 +121,13 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       setProductSelectedInfo(productInfo);
       setIsTwoAreasAllowed(productInfo.area === 2);
       setIsProductPro(productInfo.type === "Pro");
-      console.log("4. Componente Pay --- Producto Seleccionado: ", productInfo);
+      // console.log("4. Componente Pay --- Producto Seleccionado: ", productInfo);
     }
   }, [selectedPackage]);
 
   useEffect(() => {
-    console.log("5. Componente Pay --- isTwoAreasAllowed: ", isTwoAreasAllowed);
-    console.log("6. Componente Pay --- isProductPro: ", isProductPro);
+    // console.log("5. Componente Pay --- isTwoAreasAllowed: ", isTwoAreasAllowed);
+    // console.log("6. Componente Pay --- isProductPro: ", isProductPro);
   }, [isTwoAreasAllowed, isProductPro]);
 
   const [selectedArea, setSelectedArea] = useState([
@@ -210,11 +210,11 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
 
   const handlePurchase = async () => {
-    console.log("Purchase ----- data to be evaluated: ");
-    console.log("Purchase ----- customer: ", customer);
-    console.log("Purchase ----- product: ", productSelectedInfo);
-    console.log("Purchase ----- selectedExtras: ", selectedExtras);
-    console.log("Purchase ----- selectedArea: ", selectedArea);
+    // console.log("Purchase ----- data to be evaluated: ");
+    // console.log("Purchase ----- customer: ", customer);
+    // console.log("Purchase ----- product: ", productSelectedInfo);
+    // console.log("Purchase ----- selectedExtras: ", selectedExtras);
+    // console.log("Purchase ----- selectedArea: ", selectedArea);
     if (customer && products && selectedExtras && selectedArea) {
       const newPurchase: Purchase = {
         customer: customer.id,
@@ -239,10 +239,10 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
         status: "pending",
         isActive: true,
       };
-      console.log("newPurchase", newPurchase);
+      // console.log("newPurchase", newPurchase);
       try {
         const response = await apiService.createPurchase(newPurchase);
-        console.log("Purchase created successfully:", response);
+        // console.log("Purchase created successfully:", response);
 
         if (!response) {
           console.error("Error al crear la compra");

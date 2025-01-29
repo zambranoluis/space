@@ -132,223 +132,144 @@ const ProjectsClient = () => {
 
 
 const ProjectsWorker = () => {
-  const toggleProject = (id: number) => {
-    const project = document.getElementById(`project${id}Container`);
-    project?.classList.toggle("max-h-0");
-  };
-  const toggleStep = ( projectId: number, stepId: number) => {
-    const step = document.getElementById(`project${projectId}Step${stepId}Container`);
-    const arrow = document.getElementById(`project${projectId}Arrow${stepId}`);
-    arrow?.classList.toggle("rotate-180");
-    step?.classList.toggle("max-h-0");
-  };
+  const handleProjectDevelopment = () => {
+    window.open("/project-development?1234", '_blank');
+  }
 
   return (
-    <>
-      <section className="flex flex-col w-full  place-self-center bgblue-300 justify-center items-center pt-8 pb-4  ">
-        <div className="flex flex-col bgred-200 w-[90%] p-4 rounded-3xl bg-[#f0f0ef]">
-          <div className="flex bggreen-200 gap4 text-[#69664c] text-sm sm:text-lg font-bold w-full">
-            <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
-            <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>
-            <div className="w-full w[170px] px-6 py-4 bgyellow-200 flex justify-center items-center text-center">Project Manager</div>
+    <section className="flex flex-col w-full  place-self-center bgblue-300 justify-center items-center pt-8 pb-4  ">
+      <div className="flex flex-col bgred-200 w-[90%] p-4 rounded-3xl bg-[#f0f0ef]">
+        <div className="flex bggreen-200 gap4 text-[#69664c] text-sm sm:text-lg font-bold w-full">
+          <div className="w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center">ID</div>
+          <div className="w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center">Package name</div>
+          <div className="w-full w[170px] px-6 py-4 bgyellow-200 flex justify-center items-center text-center">Project Manager</div>
+        </div>
+        <div className="flex flex-col text-xs  overflow-y-auto noScrollBar h-[300px] bgred-200 sm:text-sm md:text-base w-full bgslate-400 gap-4 py-8 ">
+          <div className="flex cursor-pointer bg-[#848d5a] rounded-3xl  w-full h-[90px]" onClick={handleProjectDevelopment}>
+            <div className="w-full w[100px]  flex justify-center items-center">
+              12345678
+            </div>
+            <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+
+            </div>
+            <div className="flex w-full w[170px]  justify-center items-center">
+              Joao Da Silva
+            </div>
           </div>
-          <div className="flex flex-col text-xs overflow-y-auto noScrollBar h-[300px] bgred-200 sm:text-sm md:text-base w-full bgslate-400 gap-2  py-8 ">
-            <div className="flex bg-[#848d5a] rounded-3xl  w-full h-[90px]">
-              <div className="w-full w[100px]  flex justify-center items-center">
-                12345678
-              </div>
-              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
-                <p>1 Area Pro</p>
-                <p>BACKYARD</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
 
-              </div>
-              <div className="flex w-full w[170px]  justify-center items-center">
-                Joao Da Silva
-              </div>
+          <div className="flex cursor-pointer bg[#848d5a] text-black rounded-3xl  w-full h-[90px]">
+            <div className="w-full w[100px]  flex justify-center items-center">
+              12345678
             </div>
-            <div className="flex bg[#848d5a] text-black rounded-3xl  w-full h-[90px]">
-              <div className="w-full w[100px]  flex justify-center items-center">
-                12345678
-              </div>
-              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
-                <p>1 Area Pro</p>
-                <p>BACKYARD</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
+            <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
 
-              </div>
-              <div className="flex w-full w[170px]  justify-center items-center">
-                Joao Da Silva
-              </div>
             </div>
-
-            <div className="flex bg-[#6b776d] rounded-3xl  w-full h-[90px]">
-              <div className="w-full w[100px]  flex justify-center items-center">
-                12345678
-              </div>
-              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
-                <p>1 Area Pro</p>
-                <p>BACKYARD</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-
-              </div>
-              <div className="flex w-full w[170px]  justify-center items-center">
-                Joao Da Silva
-              </div>
+            <div className="flex w-full w[170px]  justify-center items-center">
+              Joao Da Silva
             </div>
+          </div>
 
-            <div className="flex bg[#848d5a] text-black rounded-3xl  w-full h-[90px]">
-              <div className="w-full w[100px]  flex justify-center items-center">
-                12345678
-              </div>
-              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
-                <p>1 Area Pro</p>
-                <p>BACKYARD</p>
-                <p>Lighting Plan</p>
-
-              </div>
-              <div className="flex w-full w[170px]  justify-center items-center">
-                Joao Da Silva
-              </div>
+          <div className="flex cursor-pointer bg-[#6b776d] rounded-3xl  w-full h-[90px]">
+            <div className="w-full w[100px]  flex justify-center items-center">
+              12345678
             </div>
+            <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
 
-            <div className="flex bg-[#302626] rounded-3xl  w-full h-[90px]">
-              <div className="w-full w[100px]  flex justify-center items-center">
-                12345678
-              </div>
-              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
-                <p>1 Area Pro</p>
-                <p>BACKYARD</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-
-              </div>
-              <div className="flex w-full w[170px]  justify-center items-center">
-                Joao Da Silva
-              </div>
             </div>
-
-            <div className="flex bg[#302626] text-black rounded-3xl  w-full h-[90px]">
-              <div className="w-full w[100px]  flex justify-center items-center">
-                12345678
-              </div>
-              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
-                <p>1 Area Pro</p>
-                <p>BACKYARD</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-
-              </div>
-              <div className="flex w-full w[170px]  justify-center items-center">
-                Joao Da Silva
-              </div>
+            <div className="flex w-full w[170px]  justify-center items-center">
+              Joao Da Silva
             </div>
+          </div>
 
-            <div className="flex bg-[#3b543e]  rounded-3xl  w-full h-[90px]">
-              <div className="w-full w[100px]  flex justify-center items-center">
-                12345678
-              </div>
-              <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
-                <p>1 Area Pro</p>
-                <p>BACKYARD</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-                <p>Lighting Plan</p>
-
-              </div>
-              <div className="flex w-full w[170px]  justify-center items-center">
-                Joao Da Silva
-              </div>
+          <div className="flex cursor-pointer bg[#848d5a] text-black rounded-3xl  w-full h-[90px]">
+            <div className="w-full w[100px]  flex justify-center items-center">
+              12345678
             </div>
+            <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
 
+            </div>
+            <div className="flex w-full w[170px]  justify-center items-center">
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className="flex cursor-pointer bg-[#302626] rounded-3xl  w-full h-[90px]">
+            <div className="w-full w[100px]  flex justify-center items-center">
+              12345678
+            </div>
+            <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+
+            </div>
+            <div className="flex w-full w[170px]  justify-center items-center">
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className="flex cursor-pointer bg[#302626] text-black rounded-3xl  w-full h-[90px]">
+            <div className="w-full w[100px]  flex justify-center items-center">
+              12345678
+            </div>
+            <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+
+            </div>
+            <div className="flex w-full w[170px]  justify-center items-center">
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className="flex cursor-pointer bg-[#3b543e]  rounded-3xl  w-full h-[90px]">
+            <div className="w-full w[100px]  flex justify-center items-center">
+              12345678
+            </div>
+            <div className="flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1">
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+
+            </div>
+            <div className="flex w-full w[170px]  justify-center items-center">
+              Joao Da Silva
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* <section className="flex w-full bgred-300 justify-center items-center pb-8 pt-4">
-        <div className="flex flex-col w-[90%] ">
-          <div className="flex pl-6 bg-[#302626]">
-            <h1 className="text-2xl font-semibold">Projects</h1>
-          </div>
-          <div id="projectsContainer" className="flex flex-col gap-2 px-6">
-            {
-              projects.map((project, index) => (
-                <div className="flex flex-col   bgred-200" key={project.id}>
-                  <div
-                    className="flex max-sm:flex-col max-sm:gap-2 bg-[#f0f0ef] justify-between px-2 py-2 text-[#67664c]"
-                    onClick={() => { toggleProject(project.id) }}
-                  >
-                    <div className="flex text-sm">{project.title}</div>
-                    <div className="flex max-[400px]:flex-col text-white sm:font-bold text-xs justify-center items-center gap-2">
-                      <button className="px-2 rounded-lg py-1 bg-[#6d786f] ">{project.type}</button>
-                      <button className="px-2 rounded-lg py-1 bg-[#858e5b] ">{project.status}</button>
-                    </div>
-                  </div>
-                  <div id={`project${project.id}Container`} className="flex flex-col bgrose-500 transition-all ease-out duration-300 max-h-0 overflow-hidden">
-                    {
-                      project.steps.map((step, index) => (
-                        <div
-                          className="p-4 border border-[#e4e0d5] text-[#6b6950] border-t-0"
-                          key={step.id}
-                          onClick={() => { toggleStep(project.id, step.id) }}
-                        >
-                          <div className="flex bgred-300 items-center p2 gap-2 font-bold">
-                            <TiArrowSortedDown id={`project${project.id}Arrow${step.id}`} className="" />
-                            <h3>{step.title}</h3>
-                          </div>
-                          <div id={`project${project.id}Step${step.id}Container`} className="flex flex-col px-6 transition ease-in-out duration-300 max-h-0 overflow-hidden">
-                            {step.areaType && (
-                              <div>
-                                <p>Area Type: <span>{step.areaType}</span></p>
-                              </div>
-                            )
-                            }
-                            {
-                              step.questions && (
-                                step.questions.map((question) => (
-                                  <div className="flex gap-6 justifycenter items-center text-sm" key={question.id}>
-                                    <p>{question.title}</p>
-                                    {
-                                      (question.filled === true) && (
-                                        <Image className="w-[20px] rounded-none bgred-200" src="/spaceStepCheck.png" alt="fliiedChecked" />
-                                      )
-                                    }
-                                  </div>
-                                ))
-                              )
-                            }
-                            <div className="text-xs max-sm:flex-col max-sm:gap-2 mt-6 flex max-sm:justify-center sm:justify-between max-sm:items-start items-center">
-                              <p className="">Status: {step.status}</p>
-                              {(step.status === "Completed") && (
-                                <p>{step.date}</p>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    }
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </section> */}
-    </>
+      </div>
+    </section>
   );
 }
 

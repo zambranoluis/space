@@ -218,9 +218,9 @@ export const apiService = {
     }
   },
 
-  getTransactionById: async (transactionId: string) => {
+  getTransactionByPurchaseId: async (transactionId: string) => {
     try {
-      const response = await axios.get(`${url}/transactions/${transactionId}`);
+      const response = await axios.get(`${url}/transaction/${transactionId}`);
       if (response) {
         // console.log("peticion API axios getTransactionById", response);
         return response.data;
@@ -231,6 +231,7 @@ export const apiService = {
       // console.log("Error en la petición getTransactionById:", error);
     }
   },
+
   updateTransaction: async (transactionId: string, status: string) => {
     try {
       const response = await axios.patch(
