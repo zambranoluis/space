@@ -15,7 +15,7 @@ export default function ProyectDevelopmentLayout({ children }: WorkerPanelLayout
   return (
     <DataProvider>
       <ThemeProvider>
-        <section className="flex w-full bg-red-300  h-screen">
+        <section className="flex w-full bgred-300 ">
           {children}
         </section>
       </ThemeProvider>
