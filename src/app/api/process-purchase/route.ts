@@ -4,9 +4,12 @@ import axios from "axios";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const response = await axios.get(`${BACKEND_URL}/products`);
+    const body = await req.json();
+    const response = await axios.post(`${BACKEND_URL}/process-purchase`, body, {
+      headers: { "Content-Type": "application/json" },
+    });
     return NextResponse.json(response.data);
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
