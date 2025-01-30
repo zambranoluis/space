@@ -26,7 +26,8 @@ const questionnaire = {
           name: "Side Yard",
           img:""
         }
-      ]
+      ],
+      note: false
     },
     {
       id: "qg2",
@@ -72,7 +73,8 @@ const questionnaire = {
           name: "Zen",
           img: "/questionnaire/nuevo-cuestionario-22.png"
         }
-      ]
+      ],
+      note: true
     },
     {
       id: "qg3",
@@ -86,14 +88,16 @@ const questionnaire = {
       title: "Can toxic plants be used?",
       buttonText: "Yes/No",
       img: "/questionnaire/nuevo-cuestionario-24.png",
-      options: []
+      options: [],
+      note: false
     },
     {
       id: "qg5",
       title: "Do you entertain a lot in your yard area?",
       buttonText: "Yes/No",
       img: "/questionnaire/nuevo-cuestionario-25.png",
-      options: []
+      options: [],
+      note: false
     }
   ],
   backyard: [
@@ -103,7 +107,8 @@ const questionnaire = {
       img: "/questionnaire/nuevo-cuestionario-26.png",
       buttonText: "Colorful / Green and white",
       options: [],
-      question: ""
+      question: "",
+      note: true
     },
     {
       id: "qb2",
@@ -129,7 +134,8 @@ const questionnaire = {
           img:""
         }
       ],
-      question: ""
+      question: "",
+      note: false
     },
     {
       id: "qb3",
@@ -157,7 +163,8 @@ const questionnaire = {
       img: "/questionnaire/nuevo-cuestionario-29.png",
       buttonText: "Yes/No",
       options: [],
-      question: ""
+      question: "",
+      note: true
     },
     {
       id: "qb5",
@@ -189,7 +196,8 @@ const questionnaire = {
           detail: ""
         }
       ],
-      question: "For how many people?",
+      question: "",
+      note: true
     },
     {
       id: "qb6",
@@ -217,7 +225,8 @@ const questionnaire = {
       img: "/questionnaire/nuevo-cuestionario-36.png",
       buttonText: "Yes/No",
       options: [],
-      question: ""
+      question: "",
+      note: true
     },
     {
       id: "qb8",
@@ -225,7 +234,8 @@ const questionnaire = {
       img: "/questionnaire/nuevo-cuestionario-37.png",
       buttonText: "Yes/No",
       options: [],
-      question: ""
+      question: "",
+      note: true
     },
     {
       id: "qb9",
@@ -233,7 +243,8 @@ const questionnaire = {
       img: "/questionnaire/nuevo-cuestionario-38.png",
       buttonText: "Yes/No",
       options: [],
-      question: ""
+      question: "",
+      note: true
     },
     {
       id: "qb10",
@@ -241,7 +252,8 @@ const questionnaire = {
       img: "/questionnaire/nuevo-cuestionario-39.png",
       buttonText: "Yes/No",
       options: [],
-      question: ""
+      question: "",
+      note: true
     }
 
   ],

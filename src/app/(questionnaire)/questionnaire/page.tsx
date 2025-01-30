@@ -756,7 +756,7 @@ function ShoppingCart() {
           </div>
         </div>
         <div id="filesContainer" className="flex flex-col w-[90%] gap-12">
-          <div id="eq1" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#e6e7eb] justify-center items-center">
+          <div id="f1" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#e6e7eb] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-8 pb-6 text-xl  rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200 font-light">Please upload here: The photos of the area to be worked on</h1>
@@ -780,7 +780,7 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-          <div id="eq2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#e6e7eb] justify-center items-center">
+          <div id="f2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#e6e7eb] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-8 pb-6 text-xl  rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200 font-light">Please upload here: Sketches of the areas to be worked
@@ -805,7 +805,7 @@ function ShoppingCart() {
               </div>
             </div>
           </div>
-          <div id="eq3" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#e6e7eb] justify-center items-center">
+          <div id="f3" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#e6e7eb] justify-center items-center">
             <div className="flex bg-[#6c786e] relative pt-4 pl-8 pb-6 text-xl  rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200 font-light">Please upload here: Images of plants and other landscaping designs that you like:</h1>
