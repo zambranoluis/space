@@ -6,9 +6,10 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function GET(req: NextRequest) {
   try {
-    const id = req.nextUrl.searchParams.get("id");
+    const customerId = req.nextUrl.searchParams.get("customerId");
+    const purchaseId = req.nextUrl.searchParams.get("purchaseId");
     const response = await axios.get(
-      `${BACKEND_URL}/purchases/customer/${id}/purchase/${id}`,
+      `${BACKEND_URL}/purchases/customer/${customerId}/purchase/${purchaseId}`,
     );
     return NextResponse.json(response.data);
   } catch (error: any) {
