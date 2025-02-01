@@ -4,27 +4,29 @@ import axios from "axios";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function GET(req: NextRequest) {
+// GET: Obtener cliente por ID
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const { searchParams } = new URL(req.url);
-    const customerId = searchParams.get("id");
-    const response = await axios.get(`${BACKEND_URL}/customers/${customerId}`);
+    const { id } = params;
+    const response = await axios.get(`${BACKEND_URL}/customers/${id}`);
     return NextResponse.json(response.data);
   } catch (error: any) {
+    console.error("Error al obtener cliente:", error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
-export async function PATCH(req: NextRequest) {
+// PATCH: Actualizar cliente por ID
+export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const { searchParams } = new URL(req.url);
-    const customerId = searchParams.get("id");
+    const { id } = params;
     const body = await req.json();
-    const response = await axios.patch(`${BACKEND_URL}/customers/${customerId}`, body, {
+    const response = await axios.patch(`${BACKEND_URL}/customers/${id}`, body, {
       headers: { "Content-Type": "application/json" },
     });
     return NextResponse.json(response.data);
   } catch (error: any) {
+    console.error("Error al actualizar cliente:", error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
