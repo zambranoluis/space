@@ -4,6 +4,7 @@
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useEffect, useState, useRef, use } from "react";
+import EmailSubscription from "@/components/EmailSubscription";
 
 
 
@@ -29,15 +30,9 @@ import{
 function HomePage() {
   const scrollContainerRef = useRef(null);
 
-
   const [currentPictureButton, setCurrentPictureButton] = useState(0);
 
-  const [currentPictureInterval, setCurrentPictureInterval] = useState(null);
-
   const [isAsideOpen, setIsAsideOpen] = useState(false);
-
-  
-
 
   const handleCurrentPictureButton = (sectionId: number) => {
     const targetSection = document.getElementById(`${sectionId}`);
@@ -45,28 +40,21 @@ function HomePage() {
 
     if (targetSection) {
       targetSection.scrollIntoView({
-        behavior: "smooth", // Hace que el scroll sea suave
-        block: "start", // Alinea el elemento al inicio de la pantalla
+        behavior: "smooth",
+        block: "start"
       });
     }
   };
-
-  // setTimeout(() => {
-    
-  // }, 4000);
-
 
   const toggleAside = () => {
     setIsAsideOpen((prev) => !prev);
   };
 
-  //  ruta raiz (home)
-
   return (
     <ThemeProvider>
       <DataProvider>
         <div className="flex flex-col relative ">
-          <Navbar toggleAside={toggleAside} />
+          <Navbar />
           <main className='w-full bgrose-400 text-black max-md:mt-[130px] md:mt-[100px] lg:mt-0 ' >
             <section id="CTA" className="flex bgpurple-400  sm:h-[70vh] lg:h-[85vh] max-sm:flex-col w-full">
               <div className="flex w-full text-[#6b776d] flex-col max-sm:h-[45vh] justify-center max-[350px]:gap-4 gap-10   items-center sm:w-[40vw] lg:w-[45vw] bgred-300 h-full sm:px-4 lg:px-0">
@@ -74,9 +62,9 @@ function HomePage() {
                   <Link className="bgred-200 w-full max-w-[300px] justify-center items-center flex border-2 border-[#6b776d] py-6" href="/shopping-cart">
                     EXPLORE DESIGN PACKAGES
                   </Link>
-                  <button className="bgred-200 w-full max-w-[300px]  bg-gray-200 py-6">
+                  <Link className="bgred-200 flex justify-center items-center w-full max-w-[300px]  bg-gray-200 py-6" href="/portfolio">
                     VISIT OUR PORTFOLIO
-                  </button>
+                  </Link>
                 </div>
                 <div className="w-full flex flex-col justify-center items-center ">
                   <p>
@@ -85,13 +73,10 @@ function HomePage() {
                   <p>Create your Account <Link className="text-[#6b776d] underline" href="/create-account" >here.</Link></p>
                 </div>
               </div>
-
-
               <div className="flex flex-col  w-full max-sm:h-[50vh]   sm:w-[60vw] lg:w-[55vw] bgblue-400 ">
                 <div className="flex w-full bgred-400 h-full overflow-x-auto noScrollBar" ref={scrollContainerRef}>
                   {
                     pictures.map((picture, index) => (
-
                       <div className="bgpurple-400 flex-shrink-0 h-full w-full flex" key={index} id={`${index}`} >
                         <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={picture.image}
                         loading="lazy"
@@ -99,30 +84,17 @@ function HomePage() {
                       </div>
                     ))
                   }
-
                 </div>
-
-
-
-                {/* <div className="flex  w-full h-full bgpurple-300 no-border-radius">
-                  <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={pictures[currentPicture].image}
-                  loading="lazy"
-                  alt="" />
-                </div> */}
                 <div className="flex bgblue-300 w-full justify-center items-center gap-2 py-4">
                   {
                     pictures.map((picture, index) => (
-                      // <div onClick={() => handleCurrentPicture(index)} className={` ${currentPicture === index ? "bg-[#6b776d]" : "bg-gray-400"} h-[20px] w-[20px] rounded-full cursor-pointer`} key={index}></div>
                       <div className={` ${currentPictureButton === index ? "bg-[#6b776d]" : "bg-gray-400"}  h-[20px] w-[20px] rounded-full cursor-pointer`} key={index} id={`${index}`} onClick={() => {handleCurrentPictureButton(index);}}>
                       </div>
                     ))
                   }
                 </div>
               </div>
-
             </section>
-            
-
             <section id="steps" className="flex mt-[20px] flex-col  justify-center items-center bgred-300">
               <div id="banner" className="w-full bg-[#848d5c] text-white  relative py-12 md:pl-16">
                 <div className="bgblue-200 max-w-[750px]  z-[100] flex flex-col px-6 gap-2">
@@ -157,9 +129,7 @@ function HomePage() {
                         <Image className="rounded-none object-cover   " src={step.image} alt="" />
                       </div>
                     </div>
-
                   ))
-
                 }
               </div>
             </section>
@@ -206,9 +176,7 @@ function HomePage() {
                     <div className="w-[85%]">
                       <p className="text-lg"> Landscape design and gardening advice delivered to your inbox. We&apos;ll send you deals, tips and style tips.</p>
                     </div>
-                    <button className="bg-[#848d5c] text-white px-4 py-2 rounded-xl">
-                      Subscription form
-                    </button>
+                    <EmailSubscription />
                   </div>
                 </div>
               </div>

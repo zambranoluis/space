@@ -1,15 +1,6 @@
 'use client'
-import { Button } from "@nextui-org/button";
-import {
-  Modal,
-  ModalHeader,
-  ModalContent,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from "@nextui-org/modal";
 
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Card, CardBody, CardFooter } from "@nextui-org/card";
 
 
 import { Image } from "@nextui-org/image";
@@ -19,25 +10,10 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import { SlArrowDown } from "react-icons/sl";
 
 import { useState } from "react";
-import Link from "next/link";
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-
-
-import { MdEmail } from "react-icons/md";
-import { GrSkype } from "react-icons/gr";
-import { RiWhatsappFill } from "react-icons/ri";
 
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
-import { FaStarHalfAlt } from "react-icons/fa";
-
-
-
-
-
-import { FaqsContactUsEmail } from "@/components/faqsContactUs";
 
 
 const reviews = [
@@ -136,7 +112,7 @@ const Reviews: React.FC = () => {
 
   return (
     
-    <main className="flex w-full bg-white pb-12 flex-col">
+    <main className="flex w-full bg-white flex-col">
       <section className="flex flex-col w-full   bg-[#302626]">
         <div id="title" className="bgred-200 pl-16 py-8 w-full">
           <h1 className="text-5xl font-bold text-white">Reviews</h1>

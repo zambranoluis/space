@@ -32,16 +32,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <DataProvider>
       <ThemeProvider>
-        <section className="flex flex-col bgpurple-500 p2 w-full relative">
-          <Navbar toggleAside={toggleAside} />
-          <div className="flex flex-col relative">
+        <section className="flex flex-col bgpurple-500 p2 w-full ">
+          <Navbar />
+          <div className="flex flex-col">
             <div className="w-full flex max-md:mt[130px]  md:mt[100px]">
               {children}
             </div>
           <Footer />
           </div>
-          <div className="absolute bottom-0 right-0">
-            <FaqsContactUsEmail />
+          <div className="fixed bottom-4 right-4">
+            <FaqsContactUsEmail />  
           </div>
         </section>
       </ThemeProvider>
