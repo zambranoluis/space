@@ -29,7 +29,7 @@ const ChatModal = () => {
 
   return (
   <div className="flex flex-col gap-2">
-    <div id="chatContainer" className="h[450px] w-[250px] max-h-0 overflow-hidden transition-all duration-300 bg-white bgred-300 rounded-3xl shadow-md shadow-black flex flex-col gap-2">
+    <div id="chatContainer" className="h[450px] w-[250px] max-h-0 overflow-hidden transition-all duration-300 bg-white bgred-300 rounded-3xl shadow-md shadow-black flex  flex-col gap-2">
       <div className="flex justify-between px-8 py-2">
         <div className="flex justify-center items-center gap-2">
           <Image className="w-[30px] aspect-square rounded-none" src="/logoGreenShort.png" alt="" />

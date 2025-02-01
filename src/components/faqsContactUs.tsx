@@ -1,21 +1,12 @@
 'use client'
-import { Button } from "@nextui-org/button";
+
 import {
   Modal,
-  ModalHeader,
   ModalContent,
   ModalBody,
-  ModalFooter,
   useDisclosure,
 } from "@nextui-org/modal";
 
-import { useState } from "react";
-
-import { Image } from "@nextui-org/image";
-import Link from "next/link";
-import { MdEmail } from "react-icons/md";
-import { GrSkype } from "react-icons/gr";
-import { RiWhatsappFill } from "react-icons/ri";
 
 import { MdOutlineEmail } from "react-icons/md";
 
@@ -26,7 +17,7 @@ const FaqsContactUsEmail = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div className="flex bg-[#6b776d]/70 px-4 py-6 text-white w-[200px] h-[200px]">
+    <div className="flex bg-[#6b776d]/70 px-4 py-6 text-white w-[200px] h-[200px]  ">
       <div className="flex flex-col bgred-300">
         <MdOutlineEmail className="text-5xl bgblue-300" />
         <div className="flex text-left">

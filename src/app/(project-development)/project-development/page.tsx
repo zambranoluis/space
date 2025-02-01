@@ -5,16 +5,13 @@ import { questionnaire } from "./questionnaire";
 import { useEffect, useState, ReactNode } from "react";
 import { Image } from "@nextui-org/image";
 
-import NavbarWorker from "@/components/NavbarWorker";
-
-import AsideWorker from "@/components/AsideWorker";
-
 import ChatModal from "@/components/ChatModal";
+
+
 
 const ProjectDevelopment: React.FC = () => {
   return (
-    <main className="flex flex-col w-full bggreen-400 ">
-      <NavbarWorker />
+    <main className="flex flex-col w-full bggreen-400 relative">
       <section id="developmentContainer" className="min-h-[calc(100vh-100px)] bgblue-300">
         <div id="customer" className="flex flex-col bgred-200 w-full">
           <div className="flex flex-col w-full bgred-300">
@@ -102,7 +99,7 @@ const ProjectDevelopment: React.FC = () => {
             <div className="bgrose-300  place-self-center w-full p-4 border rounded-md border-[#d7d7d7] flex flex-col gap-4">
               <textarea className="w-full bg-white text-black p-4" placeholder="Add Project Manager notes here..." name="" id=""></textarea>
               <div className="flex max-w-[500px] gap-5">
-                <select className="bg-gray-600 px-4 py-2 rounded-md" name="" id="">
+                <select className="cursor-pointer bg-gray-600 px-4 py-2 rounded-md" name="" id="">
                   <option value="1">Designer 1</option>
                   <option value="2">Designer 2</option>
                 </select>
@@ -160,7 +157,7 @@ const ProjectDevelopment: React.FC = () => {
             <div className="bgrose-300  place-self-center w-full p-4 border rounded-md border-[#d7d7d7] flex flex-col gap-4">
               <textarea className="w-full bg-white text-black p-4" placeholder="Add Quality Assurance notes here..." name="" id=""></textarea>
               <div className="flex max-w-[500px] gap-5">
-                <select className="bg-gray-600 px-4 py-2 rounded-md" name="" id="">
+                <select className="cursor-pointer bg-gray-600 px-4 py-2 rounded-md" name="" id="">
                   <option value="1">Submit Revision</option>
                   <option value="2">Submit Approval</option>
                 </select>
@@ -170,7 +167,7 @@ const ProjectDevelopment: React.FC = () => {
           </div>
         </div>
       </section>
-      <div className="flex bgred-200 absolute bottom-[10px] items-end  right-[10px] z-[3000]">
+      <div className="fixed bottom-2 right-4">
         <ChatModal />
       </div>
     </main>

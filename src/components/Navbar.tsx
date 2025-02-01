@@ -15,21 +15,17 @@ import {Avatar} from "@nextui-org/avatar";
 
 
 
-interface NavbarProps {
-  toggleAside: () => void; // Una función que no recibe argumentos y no retorna nada
-}
-
 const handleScrollToSection = (sectionId: string) => {
   const targetSection = document.getElementById(sectionId);
 
   if (targetSection) {
     targetSection.scrollIntoView({
-      behavior: "smooth", // Hace que el scroll sea suave
-      block: "start", // Alinea el elemento al inicio de la pantalla
+      behavior: "smooth",
+      block: "start"
     });
   }
 };
-const Navbar: React.FC<NavbarProps> = ( { toggleAside } ) => {
+const Navbar: React.FC = ( ) => {
 
 
   const navOptionsGeneral = [
