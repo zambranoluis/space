@@ -7,7 +7,7 @@ import "next-auth";
 declare module "next-auth" {
   interface User {
     id: string;
-    token: string;
+    token: string; // Token generado en el backend de Node (token.node)
     sessionId: string;
   }
 
@@ -49,6 +49,7 @@ export const authOptions: NextAuthOptions = {
         const hashedPassword = md5(password);
 
         try {
+          // Llamada al endpoint de autenticación del backend de Node, que genera el token y crea/actualiza la sesión
           const response = await axios.post(`${BACKEND_URL}/customers/login`, {
             email,
             password: hashedPassword,
@@ -57,10 +58,10 @@ export const authOptions: NextAuthOptions = {
 
           if (response.data?.message === "Authentication successful") {
             const { session } = response.data;
-
+            // Retornamos los datos proporcionados por el backend, incluyendo el token generado (almacenado en session.token.node)
             return {
               id: session.customerId,
-              token: session.token,
+              token: session.token.node,
               sessionId: session._id,
             };
           }
@@ -76,7 +77,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
-    maxAge: 24 * 60 * 60, // Tiempo de expiración de la sesión (24 horas)
+    maxAge: 24 * 60 * 60, // 24 horas de expiración
   },
   cookies: {
     sessionToken: {
@@ -96,7 +97,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.userId = user.id;
-        token.token = user.token;
+        token.token = user.token; // Token generado por el backend y extraído de la respuesta
         token.sessionId = user.sessionId;
       }
       return token;
@@ -116,6 +117,5 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-// Export HTTP methods
 export const GET = NextAuth(authOptions);
 export const POST = NextAuth(authOptions);
