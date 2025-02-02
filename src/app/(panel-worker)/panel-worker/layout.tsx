@@ -8,7 +8,7 @@ interface WorkerPanelLayout {
   children: ReactNode;
 }
 
-export default function PanelClientLayout({ children }: WorkerPanelLayout) {  
+export default function PanelWorkerLayout({ children }: WorkerPanelLayout) {  
 
 
 

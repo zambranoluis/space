@@ -10,6 +10,7 @@ import AsideWorker from "@/components/AsideWorker";
 
 import ChatModal from "@/components/ChatModal";
 
+
 interface WorkerPanelLayout {
   children: ReactNode;
 }
