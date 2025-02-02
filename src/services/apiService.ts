@@ -1,12 +1,12 @@
 "use client";
-import axios from "axios";
+import apiClient from "./apiClient";
 
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
 
 export const apiService = {
   createCustomer: async (customer: any) => {
     try {
-      const response = await axios.post(`${NEXT_URL_API}/customers`, customer);
+      const response = await apiClient.post(`${NEXT_URL_API}/customers`, customer);
       return response.data;
     } catch (error: any) {
       console.error("Error al crear el cliente:", error.response?.data || error.message);
@@ -16,7 +16,7 @@ export const apiService = {
 
   getCustomer: async (customerId: string) => {
     try {
-      const response = await axios.get(`${NEXT_URL_API}/customers/${customerId}`);
+      const response = await apiClient.get(`${NEXT_URL_API}/customers/${customerId}`);
       return response.data;
     } catch (error: any) {
       console.error(
@@ -29,7 +29,7 @@ export const apiService = {
 
   getProducts: async () => {
     try {
-      const response = await axios.get(`${NEXT_URL_API}/products`);
+      const response = await apiClient.get(`${NEXT_URL_API}/products`);
       return response.data;
     } catch (error: any) {
       console.error("Error al obtener productos:", error.response?.data || error.message);
@@ -39,7 +39,7 @@ export const apiService = {
 
   getExtras: async () => {
     try {
-      const response = await axios.get(`${NEXT_URL_API}/extras`);
+      const response = await apiClient.get(`${NEXT_URL_API}/extras`);
       return response.data;
     } catch (error: any) {
       console.error("Error al obtener extras:", error.response?.data || error.message);
@@ -49,7 +49,7 @@ export const apiService = {
 
   createPurchase: async (purchase: any) => {
     try {
-      const response = await axios.post(`${NEXT_URL_API}/purchases`, purchase);
+      const response = await apiClient.post(`${NEXT_URL_API}/purchases`, purchase);
       return response.data;
     } catch (error: any) {
       console.error("Error al crear la compra:", error.response?.data || error.message);
@@ -59,7 +59,7 @@ export const apiService = {
 
   updatePurchaseStatus: async (purchaseId: string, status: string) => {
     try {
-      const response = await axios.patch(`${NEXT_URL_API}/purchases/${purchaseId}`, {
+      const response = await apiClient.patch(`${NEXT_URL_API}/purchases/${purchaseId}`, {
         status,
       });
       return response.data;
@@ -74,7 +74,7 @@ export const apiService = {
 
   processPurchase: async (purchaseId: string) => {
     try {
-      const response = await axios.post(`${NEXT_URL_API}/process-purchase`, {
+      const response = await apiClient.post(`${NEXT_URL_API}/process-purchase`, {
         purchaseId,
       });
       return response.data;
@@ -89,7 +89,7 @@ export const apiService = {
 
   getPurchasesByCustomerId: async (customerId: string) => {
     try {
-      const response = await axios.get(
+      const response = await apiClient.get(
         `${NEXT_URL_API}/purchases/customer/${customerId}`,
       );
       return response.data;
@@ -104,7 +104,9 @@ export const apiService = {
 
   getTransactionByPurchaseId: async (transactionId: string) => {
     try {
-      const response = await axios.get(`${NEXT_URL_API}/transaction/${transactionId}`);
+      const response = await apiClient.get(
+        `${NEXT_URL_API}/transaction/${transactionId}`,
+      );
       return response.data;
     } catch (error: any) {
       console.error(
@@ -117,9 +119,10 @@ export const apiService = {
 
   updateTransaction: async (transactionId: string, status: string) => {
     try {
-      const response = await axios.patch(`${NEXT_URL_API}/transaction/${transactionId}`, {
-        status,
-      });
+      const response = await apiClient.patch(
+        `${NEXT_URL_API}/transaction/${transactionId}`,
+        { status },
+      );
       return response.data;
     } catch (error: any) {
       console.error(
