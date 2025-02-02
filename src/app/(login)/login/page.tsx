@@ -73,7 +73,7 @@ export default function Home() {
         <div id='video' className='max-md:absolute h-full md:w-[60dvw]'>
           <video className='h-full w-full object-cover z-[1]' autoPlay loop muted>
             <source
-              src='https://github.com/BPM94/SCCTMD/raw/main/opt/videoLogin.webm'
+              src='/spaceLoginVideoX.mp4'
               type='video/webm'
             />
           </video>

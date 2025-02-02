@@ -8,12 +8,11 @@ input::placeholder {
   opacity: 1;  /* Ensure the placeholder is fully visible */
 }
 
-*{
+/* *{
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-  
-}
+} */
 
 
 html[data-theme="dark"] {
@@ -70,18 +69,6 @@ html[data-theme="dark"] {
   --color-navbars-border: #333333;
   --color-shadow: black;
 } */
-
-:root {
-  background-color: white;
-}
-
-body {
-  background-color: white;
-  
-  /* background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: 'Roboto', sans-serif; */
-}
 
 *::-webkit-scrollbar {
   height: 7px;
