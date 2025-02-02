@@ -1,16 +1,14 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
-import md5 from "md5";
 import "next-auth";
 
 declare module "next-auth" {
   interface User {
     id: string;
-    token: string; // Token generado en el backend de Node (token.node)
+    token: string; // Token generado en el backend (session.token.node)
     sessionId: string;
   }
-
   interface Session {
     user: {
       id: string;
@@ -19,7 +17,6 @@ declare module "next-auth" {
     };
   }
 }
-
 declare module "next-auth/jwt" {
   interface JWT {
     userId?: string;
@@ -46,26 +43,36 @@ export const authOptions: NextAuthOptions = {
           geolocation: string;
         };
 
-        const hashedPassword = md5(password);
-
         try {
-          // Llamada al endpoint de autenticación del backend de Node, que genera el token y crea/actualiza la sesión
-          const response = await axios.post(`${BACKEND_URL}/customers/login`, {
-            email,
-            password: hashedPassword,
-            geolocation,
-          });
+          const normalizedEmail = email.trim().toLowerCase();
+          const normalizedPassword = password.trim();
+
+          console.log("En NextAuth authorize, email:", normalizedEmail);
+          console.log("En NextAuth authorize, password:", normalizedPassword);
+          console.log("Geolocation:", geolocation);
+
+          const response = await axios.post(
+            `${BACKEND_URL}/customers/login`,
+            {
+              email: normalizedEmail,
+              password: normalizedPassword,
+              geolocation,
+            },
+            {
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+
+          console.log("Response from backend:", response.data);
 
           if (response.data?.message === "Authentication successful") {
             const { session } = response.data;
-            // Retornamos los datos proporcionados por el backend, incluyendo el token generado (almacenado en session.token.node)
             return {
               id: session.customerId,
               token: session.token.node,
               sessionId: session._id,
             };
           }
-
           throw new Error("Invalid credentials");
         } catch (error: any) {
           console.error("Error in authorize:", error.message);
@@ -75,10 +82,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "jwt",
-    maxAge: 24 * 60 * 60, // 24 horas de expiración
-  },
+  session: { strategy: "jwt", maxAge: 24 * 60 * 60 },
   cookies: {
     sessionToken: {
       name:
@@ -97,7 +101,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.userId = user.id;
-        token.token = user.token; // Token generado por el backend y extraído de la respuesta
+        token.token = user.token;
         token.sessionId = user.sessionId;
       }
       return token;
@@ -111,10 +115,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  pages: {
-    signIn: "/login",
-    error: "/auth/error",
-  },
+  pages: { signIn: "/login", error: "/auth/error" },
 };
 
 export const GET = NextAuth(authOptions);

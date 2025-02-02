@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getSession } from "next-auth/react";
 
-// Lista de endpoints protegidos (puedes ajustar esta lista o usar expresiones regulares según lo necesites)
+// Lista de endpoints protegidos
 const protectedEndpoints = [
   "/customers",
   "/purchases",
@@ -17,6 +17,11 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   async (config) => {
+    // Si la URL es la de login, omitir la inyección del token.
+    if (config.url?.includes("/customers/login")) {
+      return config;
+    }
+
     // Verificamos si la URL de la petición coincide con algún endpoint protegido
     const isProtected = protectedEndpoints.some((endpoint) =>
       config.url?.includes(endpoint),

@@ -13,8 +13,6 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import { apiService } from "@/services/apiService";
 
-import CryptoJS from "crypto-js";
-
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
@@ -23,6 +21,8 @@ import { GrSkype } from "react-icons/gr";
 
 import { DatePicker } from "@nextui-org/date-picker";
 import { parseDate, getLocalTimeZone, DateValue } from "@internationalized/date";
+
+import { useRouter } from "next/navigation";
 
 const areaCodes = [
   {
@@ -268,6 +268,8 @@ const CreateAccount = () => {
   const selectRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
+  const router = useRouter();
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -311,22 +313,23 @@ const CreateAccount = () => {
       setIsLoadingCustomer(true);
       setErrorCustomer(null);
 
-      // Hash MD5 la contraseña antes de enviarla
-      const hashedPasswordMD5 = CryptoJS.MD5(formData.password).toString();
-      const hashedConfirmPasswordMD5 = CryptoJS.MD5(formData.confirmPassword).toString();
-
+      // Enviar la contraseña y confirmPassword en texto plano
       const response = await apiService.createCustomer({
         ...formData,
-        password: hashedPasswordMD5,
-        confirmPassword: hashedConfirmPasswordMD5,
+        // Se envían los valores tal cual, sin hash
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
       });
 
-      console.log("response peticion createCustomer en create account", response);
+      if (response && response.status === 201) {
+        // Redireccionar a la página de inicio de sesión
+        router.push("/login");
+      }
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {
         setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
       } else {
-        setErrorCustomer("Error: No se pudo obtener los extras.");
+        setErrorCustomer("Error: No se pudo crear la cuenta.");
       }
     } finally {
       setIsLoadingCustomer(false);
