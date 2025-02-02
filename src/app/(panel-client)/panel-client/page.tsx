@@ -20,6 +20,8 @@ import MyProfile from "@/components/MyProfile/MyProfile";
 import { Purchases } from "@/components/Purchases/Purchases";
 import { s } from "framer-motion/client";
 
+import { useSession } from "next-auth/react";
+
 interface Customer {
   _id: string;
   name: string;
@@ -41,6 +43,9 @@ function PanelClient() {
   const panel = searchParams.get("panel");
   const isPanelPurchases = panel === "purchases";
 
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
+
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
   useEffect(() => {
     if (isPanelPurchases) {
@@ -51,36 +56,28 @@ function PanelClient() {
   }, [isPanelPurchases]);
 
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
-  
 
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-
   const getCustomer = useCallback(async () => {
+    if (!userId) return; // Si no hay usuario autenticado, salir de la función
+
     setIsLoadingCustomer(true);
     setError(null);
     try {
-      const response = await apiService.getCustomer("678b3cb754c8efd3f5677ee5");
+      const response = await apiService.getCustomer(userId);
       if (response) {
-        // console.log("response customer en panel client: ", response);
         setTimeout(() => {
           setCustomer(response);
         }, 300);
         setIsLoadingCustomer(false);
-        // console.log("data customer en panel client: ", response);
       }
-    } catch (err: unknown) {
-      // if (axios.isAxiosError(err) && err.response) {
-      //   setError(`Error: ${err.response.status} - ${err.response.data.message}`);
-      // } else {
-      //   setError('Error: No se pudo obtener el cliente.');
-      // }
-    } finally {
-      // setIsLoading(false);
+    } catch (err) {
+      setError("Error al obtener el cliente.");
     }
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     getCustomer();
@@ -154,11 +151,11 @@ function PanelClient() {
                   <div
                     id='site'
                     className={` h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}>
-                    {(asideSelectedOption === "projects" ) && <ProjectsClient />}
+                    {asideSelectedOption === "projects" && <ProjectsClient />}
                     {asideSelectedOption === "myprofile" && customer && (
                       <MyProfile customer={customer} />
                     )}
-                    {(asideSelectedOption === "purchases" ) && <Purchases />}
+                    {asideSelectedOption === "purchases" && <Purchases />}
                   </div>
                 </div>
               </div>
