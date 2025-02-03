@@ -18,7 +18,6 @@ import { ProjectsClient } from "@/components/Projects/Projects";
 import MyProfile from "@/components/MyProfile/MyProfile";
 
 import { Purchases } from "@/components/Purchases/Purchases";
-import { s } from "framer-motion/client";
 
 import { useSession } from "next-auth/react";
 

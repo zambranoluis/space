@@ -275,8 +275,8 @@ const MyProfile = (customer: any) => {
         </div>
         {(customerData) 
           ? <div>
-              <h1 className="font-bold">arkweb@gmail.com</h1>
-              <h2 className="">Claudia Alves</h2>
+              <h1 className="font-bold">{customerData.email}</h1>
+              <h2 className="">{customerData.name} {customerData.lastname}</h2>
               <p className="">Client</p>
             </div> 
           : <div>
