@@ -8,11 +8,11 @@ input::placeholder {
   opacity: 1;  /* Ensure the placeholder is fully visible */
 }
 
-/* *{
+*{
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-} */
+}
 
 
 html[data-theme="dark"] {

@@ -8,6 +8,9 @@ import { Image } from "@nextui-org/image";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
+import {Spinner} from "@heroui/react";
+
+
 export default function Home() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -15,7 +18,7 @@ export default function Home() {
   const [geolocation, setGeolocation] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
@@ -42,7 +45,7 @@ export default function Home() {
       return;
     }
     setError("");
-    setLoading(true);
+    setLoadingLogin(true);
 
     const location = await getGeolocation();
     setGeolocation(location);
@@ -54,7 +57,7 @@ export default function Home() {
       redirect: false,
     });
 
-    setLoading(false);
+    setLoadingLogin(false);
 
     if (result?.error) {
       setError(result.error || "Invalid login credentials");
@@ -92,7 +95,7 @@ export default function Home() {
             </Link>
             <div
               id='fields'
-              className='md:max-w-[400px] md:w-full flex flex-col justify-center items-center'>
+              className='md:max-w-[400px] md:w-full flex flex-col justify-center items-center '>
               <div
                 id='title'
                 className='w-full flex flex-col justify-center items-center'>
@@ -102,9 +105,8 @@ export default function Home() {
               <form
                 id='formLogin'
                 onSubmit={handleLogin}
-                className='flex flex-col justify-center items-center p-2 gap4 w-full'>
-                {error && <p className='text-red-500'>{error}</p>}
-                <div className='flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px]'>
+                className='flex flex-col justify-center items-center p-2 gap4 w-full '>
+                <div className='flex flex-col p-2 rounded-md gap-2 w-full max-w-[350px] '>
                   <label className='font-medium' htmlFor='email'>
                     Email:
                   </label>
@@ -148,15 +150,11 @@ export default function Home() {
                 <div className='mt-4 flex gap-2 flex-col justify-center items-center'>
                   <button
                     type='submit'
-                    className='px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl'
-                    disabled={loading}>
-                    {loading ? "Logging in..." : "Log In Client"}
+                    className='px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl w-[220px]'
+                    disabled={loadingLogin}>
+                    {loadingLogin ? <div className="flex gap-2"><Spinner size="sm"/> Logging In</div> : "Log In Client"}
                   </button>
-                  <button
-                    className='px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl'
-                    onClick={handleVerPanel}>
-                    Log in Worker
-                  </button>
+                  <p className="text-red-600">{error && `${error}` || " "}</p>
                 </div>
               </form>
             </div>
