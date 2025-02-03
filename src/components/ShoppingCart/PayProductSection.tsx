@@ -217,61 +217,53 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   }, [selectedPackage, selectedExtras, productSelectedInfo]);
 
   const handlePurchase = async () => {
-    // console.log("Purchase ----- data to be evaluated: ");
-    // console.log("Purchase ----- customer: ", customer);
-    // console.log("Purchase ----- product: ", productSelectedInfo);
-    // console.log("Purchase ----- selectedExtras: ", selectedExtras);
-    // console.log("Purchase ----- selectedArea: ", selectedArea);
-    if (customer && products && selectedExtras && selectedArea) {
-      const newPurchase: Purchase = {
-        customer: customer.id,
-        product: productSelectedInfo ? productSelectedInfo.id : "",
-        selectedAreas: isTwoAreasAllowed
-          ? [
-              { nameArea: selectedArea[0].nameArea, isActive: true },
-              { nameArea: selectedArea[1].nameArea, isActive: true },
-            ]
-          : [
-              { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
-              { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
-            ],
-        extras: selectedExtras.map((extra, index) => {
-          if (isProductPro && (index === 1 || index === 2)) {
-            return { extra: extra.extra, isActive: true, price: extra.price };
-          } else {
-            return { extra: extra.extra, isActive: extra.isActive, price: extra.price };
-          }
-        }) as SelectedExtra[],
-        price: finalPrice as number,
-        status: "pending",
-        isActive: true,
-      };
-      // console.log("newPurchase", newPurchase);
-      try {
-        if (!session) {
-          router.push("/login");
-        } else {
-          const response = await apiService.createPurchase(newPurchase);
-          if (!response) {
-            console.error("Error al crear la compra");
-            alert("Error al crear la compra. Por favor, inténtalo de nuevo.");
-            return;
-          } else {
-            alert("Compra creada correctamente. Redirigiendo al panel...");
-            window.location.href = `/panel-client?panel=purchases`;
-          }
-        }
-        // console.log("Purchase created successfully:", response);
+    if (!session) {
+      alert("Debes iniciar sesión para realizar una compra.");
+      router.push("/login");
+      return;
+    }
 
-        // Redirigir al panel de cliente
-      } catch (err: unknown) {
-        console.error("Error creating purchase:", err);
-        // if (axios.isAxiosError(err) && err.response) {
-        //   setErrorExtras(`Error: ${err.response.status} - ${err.response.data.message}`);
-        // } else {
-        //   setErrorExtras("Error: No se pudo obtener los extras.");
-        // }
+    if (!customer || !productSelectedInfo) {
+      alert("No se puede proceder con la compra. Intenta nuevamente.");
+      return;
+    }
+
+    const newPurchase: Purchase = {
+      customer: customer.id, // Aseguramos que customer está definido
+      product: productSelectedInfo.id,
+      selectedAreas: isTwoAreasAllowed
+        ? [
+            { nameArea: selectedArea[0].nameArea, isActive: true },
+            { nameArea: selectedArea[1].nameArea, isActive: true },
+          ]
+        : [
+            { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
+            { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
+          ],
+      extras: selectedExtras.map((extra, index) => {
+        if (isProductPro && (index === 1 || index === 2)) {
+          return { extra: extra.extra, isActive: true };
+        } else {
+          return { extra: extra.extra, isActive: extra.isActive };
+        }
+      }) as SelectedExtra[],
+      price: finalPrice as number,
+      status: "pending",
+      isActive: true,
+    };
+
+    try {
+      const response = await apiService.createPurchase(newPurchase);
+      if (!response) {
+        alert("Error al crear la compra. Por favor, inténtalo de nuevo.");
+        return;
       }
+
+      alert("Compra creada correctamente. Redirigiendo al panel...");
+      router.push("/panel-client?panel=purchases");
+    } catch (err) {
+      console.error("Error creating purchase:", err);
+      alert("Hubo un problema con la compra. Inténtalo más tarde.");
     }
   };
 
@@ -385,9 +377,14 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
                 </div>
                 <div className='flex justify-center bgpurple-400 relative'>
                   <button
-                    className='w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 '
+                    className='w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1'
                     onClick={() => {
-                      handlePurchase();
+                      if (!session) {
+                        alert("Debes iniciar sesión para continuar con la compra.");
+                        router.push("/login");
+                      } else {
+                        handlePurchase();
+                      }
                     }}>
                     PAY
                   </button>

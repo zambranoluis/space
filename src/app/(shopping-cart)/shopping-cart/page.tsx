@@ -74,19 +74,24 @@ function ShoppingCart() {
   const [errorExtras, setErrorExtras] = useState<string | null>(null); // Estado de error
 
   useEffect(() => {
-    const fetchCustomer = async () => {
-      try {
-        const response = await apiService.getCustomer(session?.user.id as string);
-        // console.log("ShoppingCart: Customer response:", response); // Log the API response
-        if (response) {
-          setCustomer(response);
-          // console.log("ShoppingCart: Customer data:", response); // Log the API response
+    if (session?.user?.id) {
+      const fetchCustomer = async () => {
+        try {
+          const response = await apiService.getCustomer(session?.user?.id);
+          if (response) {
+            setCustomer(response);
+          }
+        } catch (err) {
+          console.error("Error fetching customer:", err);
         }
-      } catch (err: unknown) {
-        // console.error("ShoppingCart: Error fetching customer:", err);
-      }
-    };
+      };
+      fetchCustomer();
+    } else {
+      setCustomer(null); // Si no hay sesión, aseguramos que `customer` sea null
+    }
+  }, [session]);
 
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await apiService.getProducts();
@@ -114,7 +119,7 @@ function ShoppingCart() {
     };
 
     const fetchData = async () => {
-      await Promise.all([fetchCustomer(), fetchProducts(), fetchExtras()]);
+      await Promise.all([fetchProducts(), fetchExtras()]);
     };
     fetchData();
   }, []);
