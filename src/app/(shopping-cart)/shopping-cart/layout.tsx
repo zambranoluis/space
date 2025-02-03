@@ -4,6 +4,7 @@ import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useState, ReactNode } from "react";
 import { Image } from "@nextui-org/image";
+import { SessionProvider } from "next-auth/react";
 
 import Navbar from "@/components/Navbar";
 
@@ -15,29 +16,25 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
-
-
-
-
 
   const toggleAside = () => {
     setIsAsideOpen((prev) => !prev);
   };
 
-
   return (
-    <DataProvider>
-      <ThemeProvider>
-        <section className="flex flex-col bgpurple-500 p2 w-full relative">
-          <Navbar toggleAside={toggleAside} />
-          <div className="w-full flex max-md:mt[130px] md:mt[100px] bgred-400  ">
-            {children}
-          </div>
-          <Footer />
-        </section>
-      </ThemeProvider>
-    </DataProvider>
+    <SessionProvider>
+      <DataProvider>
+        <ThemeProvider>
+          <section className='flex flex-col bgpurple-500 p2 w-full relative'>
+            <Navbar toggleAside={toggleAside} />
+            <div className='w-full flex max-md:mt[130px] md:mt[100px] bgred-400  '>
+              {children}
+            </div>
+            <Footer />
+          </section>
+        </ThemeProvider>
+      </DataProvider>
+    </SessionProvider>
   );
 }

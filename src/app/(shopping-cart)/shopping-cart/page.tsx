@@ -17,6 +17,7 @@ import LoadingShoppingCart from "@/components/ShoppingCart/LoadingShoppingCart";
 
 import { apiService } from "@/services/apiService";
 import { products } from "../../../components/ShoppingCart/shopping-cart";
+import { useSession } from "next-auth/react";
 
 export interface Customer {
   _id: string;
@@ -61,6 +62,7 @@ function ShoppingCart() {
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [products, setProducts] = useState<Product[] | null>(null);
   const [extras, setExtras] = useState<Extra[] | null>(null);
+  const { data: session } = useSession();
 
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false); // Estado de carga
   const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error
@@ -74,7 +76,7 @@ function ShoppingCart() {
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const response = await apiService.getCustomer("6798e8ba8d3b0de6238a70da");
+        const response = await apiService.getCustomer(session?.user.id as string);
         // console.log("ShoppingCart: Customer response:", response); // Log the API response
         if (response) {
           setCustomer(response);
