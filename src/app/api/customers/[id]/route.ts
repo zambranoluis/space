@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token; // Aquí asumimos que en token se encuentra el token de Node
 
-    const { id } = params;
+    const { id } = await params;
     const response = await axios.get(`${BACKEND_URL}/customers/${id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token;
 
-    const { id } = params;
+    const { id } = await params;
     const body = await req.json();
     const response = await axios.patch(`${BACKEND_URL}/customers/${id}`, body, {
       headers: {

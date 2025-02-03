@@ -57,11 +57,12 @@ export default function Home() {
       redirect: false,
     });
 
-    setLoadingLogin(false);
-
+    
     if (result?.error) {
+      setLoadingLogin(false);
       setError(result.error || "Invalid login credentials");
     } else if (result?.ok) {
+      setLoadingLogin(false);
       router.push("/panel-client");
     }
   };
@@ -152,7 +153,7 @@ export default function Home() {
                     type='submit'
                     className='px-12 py-2 bg-[#5ea789] text-white hover:bg-green-800 font-bold rounded-bl-2xl rounded-tr-2xl w-[220px]'
                     disabled={loadingLogin}>
-                    {loadingLogin ? <div className="flex gap-2"><Spinner size="sm"/> Logging In</div> : "Log In Client"}
+                    {loadingLogin ? <div className="flex gap-2"><Spinner color="warning" size="sm"/> Logging In</div> : "Log In Client"}
                   </button>
                   <p className="text-red-600">{error && `${error}` || " "}</p>
                 </div>
