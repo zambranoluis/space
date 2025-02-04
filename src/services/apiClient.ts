@@ -3,7 +3,6 @@ import { getSession } from "next-auth/react";
 
 // Lista de endpoints protegidos
 const protectedEndpoints = [
-  "/customers",
   "/purchases",
   "/transaction",
   "/questionnaires",

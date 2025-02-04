@@ -3,8 +3,23 @@ import apiClient from "./apiClient";
 
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
 
+interface Customer {
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phone: {
+    areaCode: string;
+    number: string;
+  };
+  skype: string;
+  address: string;
+  birthdate: string;
+}
+
 export const apiService = {
-  createCustomer: async (customer: any) => {
+  createCustomer: async (customer: Customer) => {
     try {
       const response = await apiClient.post(`${NEXT_URL_API}/customers`, customer);
       return response.data;
@@ -88,6 +103,7 @@ export const apiService = {
   },
 
   getPurchasesByCustomerId: async (customerId: string) => {
+    console.log("customerId ApiServices:", customerId);
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/purchases/customer/${customerId}`,

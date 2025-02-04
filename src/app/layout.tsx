@@ -30,11 +30,16 @@ export default function RootLayout({
         <link rel='icon' href='https://github.com/BPM94/SCCTMD/raw/main/faviconSC.png' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </head>
-      <body
-        className={`antialiased min-h-[100vh] .noScrollBar bg-white`}
-      >
-        {children}
-      </body>
+      
+      <ThemeProvider>
+        <body
+          className={`antialiased min-h-[100vh] .noScrollBar bg-white`}
+        >
+          {children}
+        </body>
+      </ThemeProvider>
+
+      
     </html>
   );
 }

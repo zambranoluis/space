@@ -56,30 +56,14 @@ const typePurchase = [
   },
 ];
 
-export const Purchases: React.FC = () => {
+interface PurchasesProps {
+  purchases: Purchase[];
+}
+
+export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
+
+  console.log("purchases, ", purchases);
   const [currentPurchases, setCurrentPurchases] = useState<string | null>("All Purchases");
-  const [purchases, setPurchases] = useState<Purchase[]>([]);
-  const [isLoadingPurchase, setIsLoadingPurchase] = useState<boolean>(false);
-
-  useEffect(() => {
-    const getPurchasesByCustomer = async () => {
-      setIsLoadingPurchase(true);
-      try {
-        const response = await apiService.getPurchasesByCustomerId(
-          "67a0d9b290dbc6fc46ca7c09",
-        );
-        if (response?.data) {
-          setPurchases(response.data);
-        }
-      } catch (error) {
-        console.error("Error al obtener las compras:", error);
-      } finally {
-        setIsLoadingPurchase(false);
-      }
-    };
-
-    getPurchasesByCustomer();
-  }, []);
 
   const handlePayment = async (purchaseId: string) => {
     try {
