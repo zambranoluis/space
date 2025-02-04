@@ -7,12 +7,12 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function GET(req: NextRequest) {
   try {
-    const id = req.nextUrl.searchParams.get("id");
+    const customerId = req.nextUrl.searchParams.get("customerId");
     // Extraemos el token generado en Node (almacenado en la sesión de NextAuth)
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token;
 
-    const response = await axios.get(`${BACKEND_URL}/purchases/customer/${id}`, {
+    const response = await axios.get(`${BACKEND_URL}/purchases/customer/${customerId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${nodeToken}`,

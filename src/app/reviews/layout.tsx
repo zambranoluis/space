@@ -9,20 +9,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 interface Reviews {
-  children: ReactNode; // Define el tipo para las props de children
+  children: ReactNode;
 }
 
 export default function ReviewsLayout({ children }: Reviews) {
-  
-  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
-
-
-
-  const toggleAside = () => {
-    setIsAsideOpen((prev) => !prev);
-  };
-
-
   return (
     <DataProvider>
       <ThemeProvider>

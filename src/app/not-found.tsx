@@ -6,12 +6,14 @@ import { ThemeProvider } from "@/context/ThemeContext";
 
 import { RiArrowGoBackFill } from "react-icons/ri";
 
+import { useRouter } from "next/router";
+
 
 export default function NotFound() {
 
-  // setTimeout(() => {
-  //   window.location.href = "/home";
-  // }, 300000);
+  setTimeout(() => {
+    window.location.href = "/";
+  }, 3000);
 
 
   return (
