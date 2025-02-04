@@ -20,19 +20,15 @@ export async function POST(req: NextRequest) {
     console.log("✅ sessionId:", sessionId);
 
     // 🔹 Llamar al backend para eliminar la sesión
-    await axios.post(`${BACKEND_URL}/customers/logout/${sessionId}`);
-
     // ✅ 🔹 Obtener cookies correctamente (NO USAR `await cookies()`)
     const cookieStore = await cookies();
 
     // ✅ 🔹 Eliminar cookies de sesión de NextAuth
-    cookieStore.set("next-auth.session-token", "", { expires: new Date(0), path: "/" });
-    cookieStore.set("__Secure-next-auth.session-token", "", {
-      expires: new Date(0),
-      path: "/",
-    });
-    cookieStore.set("next-auth.callback-url", "", { expires: new Date(0), path: "/" });
-    cookieStore.set("next-auth.csrf-token", "", { expires: new Date(0), path: "/" });
+    cookieStore.delete("next-auth.session-token");
+    cookieStore.delete("next-auth.callback-url");
+    cookieStore.delete("next-auth.csrf-token");
+
+    await axios.post(`${BACKEND_URL}/customers/logout/${sessionId}`);
 
     return NextResponse.json({ message: "Logout successful" });
   } catch (error: any) {
