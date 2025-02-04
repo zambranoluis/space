@@ -132,4 +132,17 @@ export const apiService = {
       throw error;
     }
   },
+
+  getTransactionById: async (sessionId: string) => {
+    try {
+      const response = await apiClient.get(`${NEXT_URL_API}/transaction/${sessionId}`);
+      return response.data;
+    } catch (error: any) {
+      console.error(
+        "Error al obtener transacción por ID:",
+        error.response?.data || error.message,
+      );
+      throw error;
+    }
+  },
 };
