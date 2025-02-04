@@ -86,7 +86,7 @@ export interface Purchase {
 
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
-  customer: Customer | null;
+  customer: string | null;
   products: Product[];
   extras: Extra[] | null;
   selectedPackage: number;
@@ -100,12 +100,9 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   handleSelectedPackage,
   extras,
 }) => {
-  // console.log("--- Componente Pay ---");
-  // console.log("1. Componente Pay --- Customer: ", customer);
-  // console.log("2. Componente Pay --- Product: ", products);
-  // console.log("3. Componente Pay --- Extras: ", extras);
 
-  const [productSelectedInfo, setProductSelectedInfo] = useState<SelectedProduct>();
+
+  const [productSelectedInfo, setProductSelectedInfo] = useState<string>();
   const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(false);
   const [isProductPro, setIsProductPro] = useState(false);
   const { data: session } = useSession();
@@ -114,26 +111,11 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
   useEffect(() => {
     if (products !== null) {
-      const productInfo = {
-        id: products[selectedPackage]._id,
-        name: products[selectedPackage].name,
-        type: products[selectedPackage].type,
-        area: products[selectedPackage].area,
-        price: products[selectedPackage].price,
-        picture: products[selectedPackage].picture,
-        include: products[selectedPackage].include,
-      };
-      setProductSelectedInfo(productInfo);
-      setIsTwoAreasAllowed(productInfo.area === 2);
-      setIsProductPro(productInfo.type === "Pro");
-      // console.log("4. Componente Pay --- Producto Seleccionado: ", productInfo);
+      setProductSelectedInfo(products[selectedPackage]._id);
+      setIsTwoAreasAllowed(products[selectedPackage].area === 2);
+      setIsProductPro(products[selectedPackage].type === "Pro");
     }
   }, [selectedPackage]);
-
-  useEffect(() => {
-    // console.log("5. Componente Pay --- isTwoAreasAllowed: ", isTwoAreasAllowed);
-    // console.log("6. Componente Pay --- isProductPro: ", isProductPro);
-  }, [isTwoAreasAllowed, isProductPro]);
 
   const [selectedArea, setSelectedArea] = useState([
     { nameArea: "Frontyard", isActive: true },
@@ -194,11 +176,11 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     }
   };
 
-  const [finalPrice, setFinalPrice] = useState(productSelectedInfo?.price);
+  const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
   useEffect(() => {
-    if (productSelectedInfo) {
-      const basePrice = productSelectedInfo.price;
+    if (products[selectedPackage]) {
+      const basePrice = products[selectedPackage].price;
 
       const extrasPrice = selectedExtras.reduce((total, extra, index) => {
         if (extra && isProductPro) {
@@ -214,7 +196,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
       setFinalPrice(basePrice + extrasPrice);
     }
-  }, [selectedPackage, selectedExtras, productSelectedInfo]);
+  }, [selectedPackage, selectedExtras, products[selectedPackage]]);
 
   const handlePurchase = async () => {
     if (!session) {
@@ -223,14 +205,14 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       return;
     }
 
-    if (!customer || !productSelectedInfo) {
+    if (!customer || !products[selectedPackage]) {
       alert("No se puede proceder con la compra. Intenta nuevamente.");
       return;
     }
 
     const newPurchase: Purchase = {
-      customer: customer.id, // Aseguramos que customer está definido
-      product: productSelectedInfo.id,
+      customer: customer,
+      product: products[selectedPackage]._id,
       selectedAreas: isTwoAreasAllowed
         ? [
             { nameArea: selectedArea[0].nameArea, isActive: true },
@@ -271,7 +253,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     <section
       id='selectedPackageContainer'
       className={`relative select-none w-full bg-center bg-cover bg-no-repeat justify-center items-center sm:justify-end sm:pr-[120px]  flex `}
-      style={{ backgroundImage: `url(${productSelectedInfo?.picture})` }}>
+      style={{ backgroundImage: `url(${products[selectedPackage].picture})` }}>
       <div className='flex absolute bggreen-400 md:left-[5%] max-md:top-[0.5%] max-md:left-[3%] md:flex-col gap-4'>
         <div
           className={`${
@@ -300,7 +282,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
             id='productCardTitle'
             className=' bg-[#848d5a] w-full  items-center flex py-6 pl-8'>
             <p className='text-2xl sm:text-3xl py-4 text-white max-sm:text-center'>
-              {productSelectedInfo?.name} {productSelectedInfo?.type}
+              {products[selectedPackage].name} {products[selectedPackage].type}
             </p>
           </div>
           <div
@@ -311,7 +293,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
               className='flex flex-col text-black bgred-400 h-[350px]'>
               <h2 className='font-black text-sm'>Includes:</h2>
               <div className='flex flex-col gap-1 py-4'>
-                {productSelectedInfo?.include.map((item, index) => (
+                {products[selectedPackage].include.map((item, index) => (
                   <div key={index}>
                     <p>● {item}</p>
                   </div>

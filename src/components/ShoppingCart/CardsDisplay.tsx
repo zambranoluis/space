@@ -1,8 +1,8 @@
 
 "use client"
 
-import { useState, useRef, useCallback, useEffect, RefObject } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { RefObject } from "react";
+import { Card, CardHeader, CardBody } from "@nextui-org/card";
 
 import { TiArrowSortedDown } from "react-icons/ti";
 

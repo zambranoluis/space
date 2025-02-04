@@ -66,10 +66,9 @@ export const Purchases: React.FC = () => {
       setIsLoadingPurchase(true);
       try {
         const response = await apiService.getPurchasesByCustomerId(
-          "678b3cb754c8efd3f5677ee5",
+          "67a0d9b290dbc6fc46ca7c09",
         );
         if (response?.data) {
-          // console.log("Datos de las compras:", response.data);
           setPurchases(response.data);
         }
       } catch (error) {

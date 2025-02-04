@@ -27,7 +27,7 @@ export default function ReviewsLayout({ children }: Reviews) {
     <DataProvider>
       <ThemeProvider>
         <section className="flex flex-col bgpurple-500 p2 w-full">
-          <Navbar toggleAside={toggleAside} />
+          <Navbar />
           <div className="w-full flex max-md:mt[130px] md:mt[100px]  ">
             {children}
           </div>
