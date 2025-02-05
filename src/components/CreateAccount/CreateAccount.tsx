@@ -4,7 +4,7 @@
 
 
 import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 
 
@@ -32,6 +32,8 @@ interface Customer {
 }
 
 const CreateAccount = () => {
+
+  const [areaCode, setAreaCode] = useState<string>("+1");
   
   const [formData, setFormData] = useState<Customer>({
     name: "",
@@ -40,7 +42,7 @@ const CreateAccount = () => {
     password: "",
     confirmPassword: "",
     phone: {
-      areaCode: "",
+      areaCode: areaCode,
       number: "",
     },
     skype: "",
@@ -48,9 +50,8 @@ const CreateAccount = () => {
     birthdate: "",
   });
 
-  const [areaCode, setAreaCode] = useState<string>("+1");
+  
 
-  const router = useRouter();
 
 
   const handleBuildPhone = (field:string, value: string) => {
@@ -80,8 +81,9 @@ const CreateAccount = () => {
       });
 
       if (response) {
-        if (response.status === 201) {
-          router.push("/login");
+        console.log("response en create account: ", response);
+        if (response.message === "Customer created successfully") { 
+          redirect("/login");
         }
       }
     } catch (err: unknown) {
