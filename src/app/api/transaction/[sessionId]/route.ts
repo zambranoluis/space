@@ -11,7 +11,6 @@ export async function GET(req: NextRequest) {
 
     const pathParts = req.nextUrl.pathname.split("/");
     const id = pathParts[pathParts.length - 1];
-    console.log("ID de la transacció:", id);
     // Extraer el token de la sesión NextAuth (el token generado en Node se encuentra en token)
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token;
