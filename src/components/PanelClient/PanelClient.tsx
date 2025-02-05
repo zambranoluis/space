@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState,  useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 
-import Section from "./Section"
+import Section from "./Section";
 
 import NavbarClient from "@/components/NavbarClient";
 
@@ -12,7 +12,6 @@ import AsideClient from "@/components/AsideClient";
 import ChatModal from "@/components/ChatModal";
 
 import { apiService } from "@/services/apiService";
-
 
 import { useSession } from "next-auth/react";
 
@@ -42,8 +41,6 @@ interface Purchase {
   status: string;
 }
 
-
-
 interface Customer {
   _id: string;
   name: string;
@@ -60,45 +57,22 @@ interface Customer {
   birthdate: string;
 }
 
-
-
-
 interface PanelClientProps {
   // setAsideSelectedOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-
-
-
-
-
-
-
 const PanelClient: React.FC<PanelClientProps> = () => {
-  
-
-  const [userId, setUserId] = useState<string | null>(null);
-
   const { data: session } = useSession();
 
-  useEffect(() => {
-    if (session) {
-      setUserId(session.user.id);
-      console.log("userId:", userId);
-    }
-  }, [userId, session]);
+  const userId = session?.user?.id;
 
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false);
   const [errorCustomer, setErrorCustomer] = useState<string | null>(null);
 
-  
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [isLoadingPurchases, setIsLoadingPurchases] = useState<boolean>(false);
   const [errorPurchases, setErrorPurchases] = useState<string | null>(null);
-
-  
-
 
   const getCustomer = useCallback(async () => {
     if (!userId) return; // Si no hay usuario autenticado, salir de la función
@@ -122,9 +96,6 @@ const PanelClient: React.FC<PanelClientProps> = () => {
     getCustomer();
   }, [getCustomer]);
 
-
-
-
   const getPurchasesByCustomer = useCallback(async () => {
     if (!userId) return; // Si no hay usuario autenticado, salir de la función
 
@@ -147,8 +118,6 @@ const PanelClient: React.FC<PanelClientProps> = () => {
     getPurchasesByCustomer();
   }, [getPurchasesByCustomer]);
 
-  
-
   const closeSiteContainer = () => {
     const container = document.getElementById(`siteContainer`);
     if (container?.classList.contains("togglePanel")) {
@@ -158,26 +127,23 @@ const PanelClient: React.FC<PanelClientProps> = () => {
     }
   };
 
-
-
-
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
 
   const searchParams = useSearchParams();
   const panel = searchParams.get("panel");
   const isPanelPurchases = panel === "purchases";
-  
+
   const toggleAside = () => {
     setIsAsideOpen((prev) => !prev);
   };
 
   useEffect(() => {
-      if (isPanelPurchases) {
-        setAsideSelectedOption("purchases");
-      } else {
-        setAsideSelectedOption("projects");
-      }
-    }, [isPanelPurchases]);
+    if (isPanelPurchases) {
+      setAsideSelectedOption("purchases");
+    } else {
+      setAsideSelectedOption("projects");
+    }
+  }, [isPanelPurchases]);
 
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
 
@@ -203,29 +169,28 @@ const PanelClient: React.FC<PanelClientProps> = () => {
     }
   };
 
-
   return (
     <main className='flex flex-col h-full w-full relative'>
-        <NavbarClient />
-        <AsideClient
-          toggleAside={toggleAside}
-          isAsideOpen={isAsideOpen}
-          toggleSiteContainer={toggleSiteContainer}
+      <NavbarClient />
+      <AsideClient
+        toggleAside={toggleAside}
+        isAsideOpen={isAsideOpen}
+        toggleSiteContainer={toggleSiteContainer}
+        asideSelectedOption={asideSelectedOption}
+      />
+      <div className='absolute h-screen w-full'>
+        <Section
+          closeSiteContainer={closeSiteContainer}
           asideSelectedOption={asideSelectedOption}
+          customer={customer}
+          purchases={purchases}
         />
-        <div className="absolute h-screen w-full">
-          <Section
-            closeSiteContainer={closeSiteContainer}
-            asideSelectedOption={asideSelectedOption}
-            customer={customer}
-            purchases={purchases}
-          />
-        </div>
-        <div className='flex bgred-200 absolute bottom-[10px] items-end  right-[10px] z-[3000]'>
-          <ChatModal />
-        </div>
+      </div>
+      <div className='flex bgred-200 absolute bottom-[10px] items-end  right-[10px] z-[3000]'>
+        <ChatModal />
+      </div>
     </main>
   );
-}
+};
 
 export default PanelClient;

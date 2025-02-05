@@ -7,7 +7,9 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function GET(req: NextRequest) {
   try {
-    const customerId = req.nextUrl.searchParams.get("customerId");
+    const pathParts = req.nextUrl.pathname.split("/");
+    const customerId = pathParts[pathParts.length - 1];
+
     // Extraemos el token generado en Node (almacenado en la sesión de NextAuth)
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token;

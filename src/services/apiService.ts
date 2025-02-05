@@ -103,7 +103,6 @@ export const apiService = {
   },
 
   getPurchasesByCustomerId: async (customerId: string) => {
-    console.log("customerId ApiServices:", customerId);
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/purchases/customer/${customerId}`,
