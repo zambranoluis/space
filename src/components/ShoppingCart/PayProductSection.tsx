@@ -184,7 +184,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
       const extrasPrice = selectedExtras.reduce((total, extra, index) => {
         if (extra && isProductPro) {
-          // Si el tipo de producto es "Pro", solo sumamos los índices 0 y 3
+          // Si el tipo de producto es "Pro", solo sumamos los índices 0 y 3 ...
           return (index === 0 || index === 3) && extra.isActive && extra.price
             ? total + extra.price
             : total;
