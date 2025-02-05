@@ -134,45 +134,22 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   };
 
   const [selectedExtras, setSelectedExtras] = useState<
-    { extra: string; isActive: boolean; price: number }[]
-  >(
-    extras
-      ? [
-          {
-            extra: extras[0]._id,
-            isActive: false,
-            price: 1,
-          },
-          {
-            extra: extras[1]._id,
-            isActive: false,
-            price: 1,
-          },
-          {
-            extra: extras[2]._id,
-            isActive: false,
-            price: 1,
-          },
-          {
-            extra: extras[3]._id,
-            isActive: false,
-            price: 1,
-          },
-        ]
-      : [],
-  );
+  { extra: string; isActive: boolean; price: number }[]
+>(extras?.map((extra) => ({
+    extra: extra._id,
+    isActive: false,
+    price: extra.price,
+})) || []);
 
-  const handleSelectedExtras = (index: number) => {
-    if (selectedExtras[index].isActive) {
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = false;
-      setSelectedExtras(newSelectedExtras);
-    } else {
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = true;
-      setSelectedExtras(newSelectedExtras);
-    }
-  };
+const handleSelectedExtras = (index: number) => {
+  if (!selectedExtras[index]) return; // Prevent error if index is out of bounds
+
+  setSelectedExtras((prevExtras) => {
+    return prevExtras.map((extra, i) =>
+      i === index ? { ...extra, isActive: !extra.isActive } : extra
+    );
+  });
+};
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
