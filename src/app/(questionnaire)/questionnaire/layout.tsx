@@ -3,28 +3,12 @@
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useState, ReactNode } from "react";
-import { Image } from "@nextui-org/image";
 
-import Navbar from "@/components/Navbar";
-
-import Aside from "@/components/Aside";
-import Footer from "@/components/Footer";
-
-interface DashboardLayoutProps {
-  children: ReactNode; // Define el tipo para las props de children
+interface QuestionnaireProps {
+  children: ReactNode;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  
-  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
-
-
-
-
-
-  const toggleAside = () => {
-    setIsAsideOpen((prev) => !prev);
-  };
+export default function QuestionnaireLayout({ children }: QuestionnaireProps) {
 
 
   return (

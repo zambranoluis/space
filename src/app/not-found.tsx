@@ -1,19 +1,25 @@
 "use client";
 
+import { useEffect } from "react";
+
 import Link from "next/link";
 
 import { ThemeProvider } from "@/context/ThemeContext";
 
 import { RiArrowGoBackFill } from "react-icons/ri";
 
-import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 
 
 export default function NotFound() {
 
-  setTimeout(() => {
-    window.location.href = "/";
-  }, 3000);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      redirect("/");
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
 
   return (
