@@ -19,7 +19,7 @@ const SuccessPage: React.FC = () => {
       const response = await apiService.getTransactionById(sessionId);
       if (response && response.data.length > 0) {
         const transaction = response.data[0];
-        if (transaction.status === "succeeded") {
+        if (transaction.status === "COMPLETED") {
           setTransaction(transaction);
         } else {
           setError("Payment not yet verified. Please refresh after a moment.");

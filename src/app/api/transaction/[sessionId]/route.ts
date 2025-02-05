@@ -7,13 +7,16 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function GET(req: NextRequest) {
   try {
-    const id = req.nextUrl.searchParams.get("id");
+    // Obtener el ID de la transacció
 
+    const pathParts = req.nextUrl.pathname.split("/");
+    const id = pathParts[pathParts.length - 1];
+    console.log("ID de la transacció:", id);
     // Extraer el token de la sesión NextAuth (el token generado en Node se encuentra en token)
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token;
 
-    const response = await axios.get(`${BACKEND_URL}/transactions/${id}`, {
+    const response = await axios.get(`${BACKEND_URL}/transaction/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${nodeToken}`,
