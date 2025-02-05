@@ -5,15 +5,6 @@ import { useTheme } from "../context/ThemeContext";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
-import { FaCommentAlt } from "react-icons/fa";
-import { IoMdNotifications } from "react-icons/io";
-import { IoMdArrowDropdown } from "react-icons/io";
-
-
-import {Badge} from "@nextui-org/badge";
-import {Avatar} from "@nextui-org/avatar";
-
-
 
 const handleScrollToSection = (sectionId: string) => {
   const targetSection = document.getElementById(sectionId);

@@ -12,9 +12,6 @@ import  {portfolio} from "./portfolioFile"
 const Section:React.FC = () => {
   return (
     <main className="flex flex-col bgblue-300 w-full overflow-y-scroll noScrollBar">
-      <section>
-        
-      </section>
       {
         portfolio.map((project, index) => (
           <div className={`${index % 2 === 0 ? "bg-[#322727]" : "bg-[#6d786f]"}`} key={index}>
