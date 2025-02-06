@@ -51,20 +51,20 @@ const portfolio = [
       ],
       large: [
         {
-          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11.jpg"
         },
         {
-          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12.jpg"
         },
         {
-          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13.jpg"
         },
         {
-          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14.jpg"
         }
       ]
     },
-    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/nuevo-cuestionario-15.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style1.jpg",
     displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display1.png",
     color: "#b6c6b8"
   },
@@ -74,65 +74,65 @@ const portfolio = [
     beforePictures: {
       small: [
         {
-          url: "/portfolio/b21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21small.png"
         },
         {
-          url: "/portfolio/b22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22small.png"
         },
         {
-          url: "/portfolio/b23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23small.png"
         },
         {
-          url: "/portfolio/b24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/b21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21.png"
         },
         {
-          url: "/portfolio/b22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22.png"
         },
         {
-          url: "/portfolio/b23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23.png"
         },
         {
-          url: "/portfolio/b24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24.png"
         }
       ]
     },
     afterPictures: {
       small: [
         {
-          url: "/portfolio/a21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21small.png"
         },
         {
-          url: "/portfolio/a22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22small.png"
         },
         {
-          url: "/portfolio/a23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23small.png"
         },
         {
-          url: "/portfolio/a24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/a21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21.png"
         },
         {
-          url: "/portfolio/a22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22.png"
         },
         {
-          url: "/portfolio/a23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23.png"
         },
         {
-          url: "/portfolio/a24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24.jpg"
         }
       ]
     },
-    stylePicture: "/portfolio/nuevo-cuestionario-16.png",
-    displayPicture: "/portfolio/display2.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style2.jpg",
+    displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display2.png",
     color: "#6d786f"
   },
   {
@@ -141,65 +141,65 @@ const portfolio = [
     beforePictures: {
       small: [
         {
-          url: "/portfolio/b11small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b11small.png"
         },
         {
-          url: "/portfolio/b12small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b12small.png"
         },
         {
-          url: "/portfolio/b13small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b13small.png"
         },
         {
-          url: "/portfolio/b14small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b14small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/b11.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b11.png"
         },
         {
-          url: "/portfolio/b12.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b12.png"
         },
         {
-          url: "/portfolio/b13.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b13.png"
         },
         {
-          url: "/portfolio/b14.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b14.png"
         }
       ]
     },
     afterPictures: {
       small: [
         {
-          url: "/portfolio/a11small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11small.png"
         },
         {
-          url: "/portfolio/a12small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12small.png"
         },
         {
-          url: "/portfolio/a13small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13small.png"
         },
         {
-          url: "/portfolio/a14small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/a11.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11.jpg"
         },
         {
-          url: "/portfolio/a12.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12.jpg"
         },
         {
-          url: "/portfolio/a13.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13.jpg"
         },
         {
-          url: "/portfolio/a14.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14.jpg"
         }
       ]
     },
-    stylePicture: "/portfolio/nuevo-cuestionario-17.png",
-    displayPicture: "/portfolio/display1.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style3.jpg",
+    displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display1.png",
     color: "#ad9b64"
   },
   {
@@ -208,65 +208,65 @@ const portfolio = [
     beforePictures: {
       small: [
         {
-          url: "/portfolio/b21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21small.png"
         },
         {
-          url: "/portfolio/b22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22small.png"
         },
         {
-          url: "/portfolio/b23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23small.png"
         },
         {
-          url: "/portfolio/b24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/b21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21.png"
         },
         {
-          url: "/portfolio/b22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22.png"
         },
         {
-          url: "/portfolio/b23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23.png"
         },
         {
-          url: "/portfolio/b24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24.png"
         }
       ]
     },
     afterPictures: {
       small: [
         {
-          url: "/portfolio/a21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21small.png"
         },
         {
-          url: "/portfolio/a22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22small.png"
         },
         {
-          url: "/portfolio/a23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23small.png"
         },
         {
-          url: "/portfolio/a24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/a21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21.png"
         },
         {
-          url: "/portfolio/a22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22.png"
         },
         {
-          url: "/portfolio/a23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23.png"
         },
         {
-          url: "/portfolio/a24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24.jpg"
         }
       ]
     },
-    stylePicture: "/portfolio/nuevo-cuestionario-18.png",
-    displayPicture: "/portfolio/display2.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style4.jpg",
+    displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display2.png",
     color: "#858e5b"
   },
   {
@@ -275,65 +275,65 @@ const portfolio = [
     beforePictures: {
       small: [
         {
-          url: "/portfolio/b11small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b11small.png"
         },
         {
-          url: "/portfolio/b12small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b12small.png"
         },
         {
-          url: "/portfolio/b13small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b13small.png"
         },
         {
-          url: "/portfolio/b14small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b14small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/b11.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b11.png"
         },
         {
-          url: "/portfolio/b12.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b12.png"
         },
         {
-          url: "/portfolio/b13.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b13.png"
         },
         {
-          url: "/portfolio/b14.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b14.png"
         }
       ]
     },
     afterPictures: {
       small: [
         {
-          url: "/portfolio/a11small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11small.png"
         },
         {
-          url: "/portfolio/a12small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12small.png"
         },
         {
-          url: "/portfolio/a13small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13small.png"
         },
         {
-          url: "/portfolio/a14small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/a11.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11.jpg"
         },
         {
-          url: "/portfolio/a12.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12.jpg"
         },
         {
-          url: "/portfolio/a13.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13.jpg"
         },
         {
-          url: "/portfolio/a14.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14.jpg"
         }
       ]
     },
-    stylePicture: "/portfolio/nuevo-cuestionario-19.png",
-    displayPicture: "/portfolio/display1.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style5.jpg",
+    displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display1.png",
     color: "#68664d"
   },
   {
@@ -342,65 +342,65 @@ const portfolio = [
     beforePictures: {
       small: [
         {
-          url: "/portfolio/b21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21small.png"
         },
         {
-          url: "/portfolio/b22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22small.png"
         },
         {
-          url: "/portfolio/b23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23small.png"
         },
         {
-          url: "/portfolio/b24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/b21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21.png"
         },
         {
-          url: "/portfolio/b22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22.png"
         },
         {
-          url: "/portfolio/b23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23.png"
         },
         {
-          url: "/portfolio/b24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24.png"
         }
       ]
     },
     afterPictures: {
       small: [
         {
-          url: "/portfolio/a21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21small.png"
         },
         {
-          url: "/portfolio/a22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22small.png"
         },
         {
-          url: "/portfolio/a23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23small.png"
         },
         {
-          url: "/portfolio/a24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/a21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21.png"
         },
         {
-          url: "/portfolio/a22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22.png"
         },
         {
-          url: "/portfolio/a23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23.png"
         },
         {
-          url: "/portfolio/a24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24.jpg"
         }
       ]
     },
-    stylePicture: "/portfolio/nuevo-cuestionario-20.png",
-    displayPicture: "/portfolio/display2.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style6.jpg",
+    displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display2.png",
     color: "#604545"
   },
   {
@@ -409,65 +409,65 @@ const portfolio = [
     beforePictures: {
       small: [
         {
-          url: "/portfolio/b11small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b11small.png"
         },
         {
-          url: "/portfolio/b12small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b12small.png"
         },
         {
-          url: "/portfolio/b13small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b13small.png"
         },
         {
-          url: "/portfolio/b14small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b14small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/b11.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b11.png"
         },
         {
-          url: "/portfolio/b12.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b12.png"
         },
         {
-          url: "/portfolio/b13.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b13.png"
         },
         {
-          url: "/portfolio/b14.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b14.png"
         }
       ]
     },
     afterPictures: {
       small: [
         {
-          url: "/portfolio/a11small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11small.png"
         },
         {
-          url: "/portfolio/a12small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12small.png"
         },
         {
-          url: "/portfolio/a13small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13small.png"
         },
         {
-          url: "/portfolio/a14small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/a11.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a11.jpg"
         },
         {
-          url: "/portfolio/a12.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a12.jpg"
         },
         {
-          url: "/portfolio/a13.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a13.jpg"
         },
         {
-          url: "/portfolio/a14.jpg"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a14.jpg"
         }
       ]
     },
-    stylePicture: "/portfolio/nuevo-cuestionario-21.png",
-    displayPicture: "/portfolio/display1.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style7.jpg",
+    displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display1.png",
     color: "#9e8165"
   },
   {
@@ -476,65 +476,65 @@ const portfolio = [
     beforePictures: {
       small: [
         {
-          url: "/portfolio/b21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21small.png"
         },
         {
-          url: "/portfolio/b22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22small.png"
         },
         {
-          url: "/portfolio/b23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23small.png"
         },
         {
-          url: "/portfolio/b24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/b21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b21.png"
         },
         {
-          url: "/portfolio/b22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b22.png"
         },
         {
-          url: "/portfolio/b23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b23.png"
         },
         {
-          url: "/portfolio/b24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/b24.png"
         }
       ]
     },
     afterPictures: {
       small: [
         {
-          url: "/portfolio/a21small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21small.png"
         },
         {
-          url: "/portfolio/a22small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22small.png"
         },
         {
-          url: "/portfolio/a23small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23small.png"
         },
         {
-          url: "/portfolio/a24small.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24small.png"
         }
       ],
       large: [
         {
-          url: "/portfolio/a21.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a21.png"
         },
         {
-          url: "/portfolio/a22.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a22.png"
         },
         {
-          url: "/portfolio/a23.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a23.png"
         },
         {
-          url: "/portfolio/a24.png"
+          url: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/a24.jpg"
         }
       ]
     },
-    stylePicture: "/portfolio/nuevo-cuestionario-22.png",
-    displayPicture: "/portfolio/display2.png",
+    stylePicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/style8.jpg",
+    displayPicture: "https://github.com/BPM94/SCCTMD/raw/main/portfolio/display2.png",
     color: "#635757"
   },
   

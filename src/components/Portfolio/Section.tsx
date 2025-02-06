@@ -32,7 +32,7 @@ const Section:React.FC = () => {
       modalContainer?.classList.add("hidden");
   };
 
-  const [selectedPicture, setSelectedPicture] = useState("/portfolio/b11.png");
+  const [selectedPicture, setSelectedPicture] = useState<string | null>(null);
 
   const handleOpenModal = (project: string, group: string , index:string) => {
     const projectNumber = Number(project)
@@ -69,7 +69,7 @@ const Section:React.FC = () => {
             <h1 className="text-5xl md:text-6xl font-bold text-black">Styles Gallery</h1>
           </div>
           <div className="flex max-md:w-full md:w-[50%] bg-green-300 p2">
-            <Image className="rounded-none h-full" src={"/portfolio/landing.png"} />
+            <Image className="rounded-none h-full" src={"https://github.com/BPM94/SCCTMD/raw/main/portfolio/landing.png"} />
           </div>
         </div>
         <div className="grid grid-cols-1 bg-[#f2f2f1] sm:grid-cols-2 py-12 px-8  lg:grid-cols-4 gap-16">
@@ -77,7 +77,7 @@ const Section:React.FC = () => {
             portfolio.map((project, index) => (
               <button className="flex place-self-center max-sm:w-[70%] sm:w-full h-full" style={{backgroundColor: project.color}}  key={index} onClick={() => handleScrollToProject(`project-${index}`)}>
                 <div className="flex">
-                  <Image className="w-[100px]  " src={project.stylePicture} alt=""/>
+                  <Image className="w-[120px] rounded-none " src={project.stylePicture} alt=""/>
                 </div>
                 <div className="flex justify-start pl-6 items-center w-full bgred-300 h-full">
                   <h1 className="text-left text-sm">{project.style}</h1>
@@ -94,7 +94,7 @@ const Section:React.FC = () => {
               <MdCancel className="text-5xl cursor-pointer" onClick={() => handleCloseModal(`modal`)}/>
             </div>
             {selectedPicture ? (
-                <div className="flex h-full justify-center"><Image className="h-[80%]" src={selectedPicture} alt="Selected Image" /></div>
+                <div className="flex h-[80%] w-full bgred-300 justify-center"><Image className="h-full w-full" src={selectedPicture} alt="Selected Image" /></div>
               ) : (
                 <p className="text-white">No Image Selected</p>
               )
