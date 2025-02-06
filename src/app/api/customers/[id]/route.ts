@@ -1,4 +1,3 @@
-// src/app/api/customers/[id]/route.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import axios from "axios";
@@ -7,13 +6,13 @@ import { getToken } from "next-auth/jwt";
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 // GET: Obtener cliente por ID
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, context: { params: { id: string } }) {
   try {
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token;
 
-    // Extraer el ID correctamente
-    const id = params.id;
+    // Extraer ID correctamente
+    const { id } = context.params;
 
     const response = await axios.get(`${BACKEND_URL}/customers/${id}`, {
       headers: {
@@ -30,12 +29,12 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // PATCH: Actualizar cliente por ID
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, context: { params: { id: string } }) {
   try {
     const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = tokenData?.token;
 
-    const id = params.id;
+    const { id } = context.params;
     const body = await req.json();
 
     const response = await axios.patch(`${BACKEND_URL}/customers/${id}`, body, {
