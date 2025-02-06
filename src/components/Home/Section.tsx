@@ -17,8 +17,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 interface SectionProps {
-  scrollContainerRef: any;
-  currentPictureButton: any;
+  scrollContainerRef: React.RefObject<HTMLDivElement>;
+  currentPictureButton: number;
   handleCurrentPictureButton: (sectionId: number) => void;
 
 }

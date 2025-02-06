@@ -72,7 +72,6 @@ const router = useRouter();
     <section id="login">
       <Section
         handleLogin={handleLogin}
-        handleVerPanel={handleVerPanel}
         email={email}
         setEmail={setEmail}
         password={password}
@@ -81,9 +80,6 @@ const router = useRouter();
         showPassword={showPassword}
         error={error}
         loadingLogin={loadingLogin}
-        geolocation={geolocation}
-        setGeolocation={setGeolocation}
-        getGeolocation={getGeolocation}
         
       />
     </section>

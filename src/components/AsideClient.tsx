@@ -1,29 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useTheme } from "../context/ThemeContext";
 
-import Image from "next/image";
-import Link from "next/link";
-
-import { FaPersonCircleQuestion } from "react-icons/fa6";
 
 import { PiPowerFill } from "react-icons/pi";
 
-import { FaClipboardList } from "react-icons/fa";
 import { FaFolder } from "react-icons/fa6";
-import { FaRegCalendarDays } from "react-icons/fa6";
-import { IoMdNotifications } from "react-icons/io";
-import { FaEnvelope } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 
 import { FaUserCircle } from "react-icons/fa";
-import { IoSettingsSharp } from "react-icons/io5";
+
 
 import { TiArrowSortedDown } from "react-icons/ti";
 
-import { apiService } from "../services/apiService";
 
 import { signOut } from "next-auth/react";
 
@@ -74,7 +65,6 @@ const Aside: React.FunctionComponent<AsideProps> = ({
   toggleSiteContainer,
   asideSelectedOption,
 }) => {
-  const { theme } = useTheme();
 
   const handleLogout = async () => {
     try {

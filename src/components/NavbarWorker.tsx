@@ -1,5 +1,5 @@
 "use client";
-import { useTheme } from "../context/ThemeContext";
+
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 

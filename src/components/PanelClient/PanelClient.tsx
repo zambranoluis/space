@@ -64,28 +64,20 @@ const PanelClient: React.FC = () => {
   const userId = session?.user?.id;
 
   const [customer, setCustomer] = useState<Customer | null>(null);
-  // const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false);
-  // const [errorCustomer, setErrorCustomer] = useState<string | null>(null);
 
   const [purchases, setPurchases] = useState<Purchase[]>([]);
-  // const [isLoadingPurchases, setIsLoadingPurchases] = useState<boolean>(false);
-  // const [errorPurchases, setErrorPurchases] = useState<string | null>(null);
 
   const getCustomer = useCallback(async () => {
     if (!userId) return; // Si no hay usuario autenticado, salir de la función
-
-    // setIsLoadingCustomer(true);
-    // setErrorCustomer(null);
     try {
       const response = await apiService.getCustomer(userId);
       if (response) {
         setTimeout(() => {
           setCustomer(response);
         }, 300);
-        // setIsLoadingCustomer(false);
+
       }
     } catch (err) {
-      // setErrorCustomer("Error al obtener el cliente.");
     }
   }, [userId]);
 
@@ -95,19 +87,13 @@ const PanelClient: React.FC = () => {
 
   const getPurchasesByCustomer = useCallback(async () => {
     if (!userId) return; // Si no hay usuario autenticado, salir de la función
-
-    // setIsLoadingPurchases(true);
-    // setErrorPurchases(null);
     try {
-      console.log("userId Request:", userId);
       const response = await apiService.getPurchasesByCustomerId(userId);
-      console.log("response purchases:", response);
       if (response) {
         setPurchases(response.data);
-        // setIsLoadingPurchases(false);
+  
       }
     } catch (err) {
-      // setErrorPurchases("Error al obtener el cliente.");
     }
   }, [userId]);
 

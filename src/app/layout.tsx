@@ -2,13 +2,7 @@
 
 import "./globals.css";
 
-import { ReactNode } from "react";
-
-import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
-
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 
 // interface RootLayoutProps {

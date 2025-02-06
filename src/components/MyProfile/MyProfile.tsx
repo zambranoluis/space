@@ -1,11 +1,6 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
-import { area, option } from "framer-motion/client";
+import React, { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { Image } from "@nextui-org/image";
-import { IoMdArrowDropdown } from "react-icons/io";
-
-import AreaCodeSelector from "../AreaCodeSelector";
 
 interface Customer {
   name: string;
@@ -25,40 +20,6 @@ interface Customer {
 const MyProfile = (customer: any) => {
 
   const [customerData, setCustomerData] = useState<Customer>(customer.customer);
-  
-  const [selectedCode, setSelectedCode] = useState<number>(26);
-  const [isListVisible, setIsListVisible] = useState<boolean>(false);
-
-
-  const selectRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node) &&
-          listRef.current && !listRef.current.contains(event.target as Node)) {
-        setIsListVisible(false); // Cerrar la lista si se hace clic fuera
-      }
-    };
-
-    // Agregar el event listener al hacer clic fuera
-    document.addEventListener("mousedown", handleClickOutside);
-
-    // Limpiar el event listener cuando el componente se desmonte
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleShowCodesList = () => {
-    setIsListVisible(!isListVisible);
-  }
-
-  const handleSelectCode = (id: number) => {
-    setSelectedCode(id);
-    setIsListVisible(false);  // Cerrar la lista después de seleccionar
-  }
-  
   
   return (
     <section className="flex flex-col wfull  bgred-500 max-w-[500px] justify-center items-center w-[80%] place-self-center py4 gap6">

@@ -61,8 +61,8 @@ const ProjectsClient = () => {
           </div>
           <div id="projectsContainer" className="flex flex-col gap-2 px-6">
             {
-              projects.map((project, index) => (
-                <div className="flex flex-col   bgred-200" key={index}>
+              projects.map((project) => (
+                <div className="flex flex-col   bgred-200" key={project.id}>
                   <div
                     className="flex max-md:flex-col max-md:gap-2 bg-[#f0f0ef] justify-between px-2 py-2 text-[#67664c]"
                     onClick={() => { toggleProject(project.id) }}
@@ -78,7 +78,7 @@ const ProjectsClient = () => {
                   </div>
                   <div id={`project${project.id}Container`} className="flex flex-col bgrose-500 transition-all ease-out duration-300 max-h-0 overflow-hidden">
                     {
-                      project.steps.map((step, index) => (
+                      project.steps.map((step) => (
                         <div
                           className="p-4 border border-[#e4e0d5] text-[#6b6950] border-t-0"
                           key={step.id}

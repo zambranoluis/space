@@ -8,8 +8,6 @@ import {
 } from "@nextui-org/modal";
 
 
-import { MdOutlineEmail } from "react-icons/md";
-
 
 const EmailSubscription = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -29,7 +27,7 @@ const EmailSubscription = () => {
             onOpenChange={onOpenChange}
           >
             <ModalContent className=''>
-              {(onClose) => (
+              {() => (
                 <div className="flex flex-col p-4 bg-white">
                   <ModalBody>
                     <div className="flex flex-col">

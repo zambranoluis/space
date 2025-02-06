@@ -63,12 +63,12 @@ const CreateAccount = () => {
   };
 
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false); // Estado de carga
-  const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error
+  // const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error}
 
   const handleCreateAccount = async () => {
     try {
       setIsLoadingCustomer(true);
-      setErrorCustomer(null);
+      // setErrorCustomer(null);
 
       // Enviar la contraseña y confirmPassword en texto plano
       const response = await apiService.createCustomer({
@@ -85,9 +85,9 @@ const CreateAccount = () => {
       }
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {
-        setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
+        // setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
       } else {
-        setErrorCustomer("Error: No se pudo crear la cuenta.");
+        // setErrorCustomer("Error: No se pudo crear la cuenta.");
       }
     } finally {
       setIsLoadingCustomer(false);
@@ -98,7 +98,6 @@ const CreateAccount = () => {
   return (
     <section>
       <Section
-        areaCode={areaCode}
         setAreaCode={setAreaCode}
         handleBuildPhone={handleBuildPhone}
         handleCreateAccount={handleCreateAccount}

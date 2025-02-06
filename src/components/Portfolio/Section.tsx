@@ -67,7 +67,7 @@ const Section:React.FC = () => {
             <h1 className="text-5xl md:text-6xl font-bold text-black">Styles Gallery</h1>
           </div>
           <div className="flex max-md:w-full md:w-[50%] bg-green-300 p2">
-            <Image className="rounded-none h-full" src={"https://github.com/BPM94/SCCTMD/raw/main/portfolio/landing.png"} />
+            <Image className="rounded-none h-full" src={"https://github.com/BPM94/SCCTMD/raw/main/portfolio/landing.png"} alt=""/>
           </div>
         </div>
         <div className="grid grid-cols-1 bg-[#f2f2f1] sm:grid-cols-2 py-12 px-8  lg:grid-cols-4 gap-16">

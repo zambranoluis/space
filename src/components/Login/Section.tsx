@@ -8,7 +8,6 @@ import { Spinner } from "@heroui/react";
 
 interface LoginProps {
   handleLogin: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleVerPanel: () => void;
   email: string
   setEmail: React.Dispatch<React.SetStateAction<string>>
   password: string
@@ -17,14 +16,10 @@ interface LoginProps {
   showPassword: boolean
   error: string
   loadingLogin: boolean
-  geolocation: string | null
-  setGeolocation: React.Dispatch<React.SetStateAction<string | null>>
-  getGeolocation: () => Promise<string | null>
 }
 
 const Section: React.FC<LoginProps> = ({
   handleLogin,
-  handleVerPanel,
   email,
   setEmail,
   password,
@@ -32,10 +27,7 @@ const Section: React.FC<LoginProps> = ({
   togglePasswordVisibility,
   showPassword,
   error,
-  loadingLogin,
-  geolocation,
-  setGeolocation,
-  getGeolocation }) => {
+  loadingLogin}) => {
   return (
     <div className='w-full h-[100dvh] flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative'>
       <div id='video' className='max-md:absolute h-full md:w-[60dvw]'>

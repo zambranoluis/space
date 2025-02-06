@@ -1,8 +1,6 @@
 "use client"
 
 import { questionnaire } from "./questionnaire";
-
-import { useEffect, useState, ReactNode } from "react";
 import { Image } from "@nextui-org/image";
 
 import ChatModal from "@/components/ChatModal";

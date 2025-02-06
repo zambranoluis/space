@@ -31,7 +31,6 @@ interface Customer {
 
 
 interface SectionProps {
-  areaCode: string;
   setAreaCode: React.Dispatch<React.SetStateAction<string>>;
   handleBuildPhone: (field:string, value: string) => void;
   handleCreateAccount: () => void;
@@ -42,7 +41,6 @@ interface SectionProps {
 
 
 const Section:React.FC<SectionProps> = ({
-  areaCode,
   setAreaCode,
   handleBuildPhone,
   handleCreateAccount,

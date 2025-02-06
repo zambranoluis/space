@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 
@@ -41,12 +41,8 @@ function PanelWorker() {
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("projects");
 
   const [customer, setCustomer] = useState<Customer | null>(null); // Cliente inicializado como `null`
-    const [isLoading, setIsLoading] = useState<boolean>(false); // Estado de carga
-    const [error, setError] = useState<string | null>(null); // Estado de error
 
   const getCustomer = async () => {
-    setIsLoading(true); // Inicia el indicador de carga
-    setError(null); // Resetea cualquier error previo
     try {
       const res = await axios.get<Customer>(
         'http://localhost:4000/space/customers/6789c1afce8c2f0ad7736d00',
@@ -55,12 +51,12 @@ function PanelWorker() {
     } catch (err: unknown) {
       // Manejo de errores robusto  
       if (axios.isAxiosError(err) && err.response) {
-        setError(`Error: ${err.response.status} - ${err.response.data.message}`);
+        // setError(`Error: ${err.response.status} - ${err.response.data.message}`);
       } else {
-        setError('Error: No se pudo obtener el cliente.');
+        // setError('Error: No se pudo obtener el cliente.');
       }
     } finally {
-      setIsLoading(false); // Finaliza el indicador de carga
+      // setIsLoading(false); // Finaliza el indicador de carga
     }
   };
 
@@ -74,8 +70,6 @@ function PanelWorker() {
   };
 
   const toggleSiteContainer = (tag: string) => {
-    // console.log("tag: ", tag);
-    // console.log("asideSelectedOption: ", asideSelectedOption);
     const container = document.getElementById(`siteContainer`);
     if (tag !== asideSelectedOption) {
       if (container?.classList.contains("togglePanel")) {

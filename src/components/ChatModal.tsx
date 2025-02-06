@@ -1,6 +1,5 @@
 "use client";
 
-import {useState, useEffect} from "react";
 
 import { Image } from "@nextui-org/image";
 
@@ -18,9 +17,9 @@ const handleShowChat = () => {
   chatContainer?.classList.toggle("max-h-0");
 };
 
-const handleCloseChat = () => {
+// const handleCloseChat = () => {
   
-}
+// }
 
 
 const ChatModal = () => {
