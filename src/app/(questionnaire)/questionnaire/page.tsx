@@ -1,15 +1,8 @@
 'use client';
 
-import { useState, useRef } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { useState} from "react";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
-import { TiArrowSortedDown } from "react-icons/ti";
-
-import { IoCloudUploadOutline } from "react-icons/io5";
-
-
-import {Switch} from "@nextui-org/switch";
 
 
 import {
@@ -20,8 +13,6 @@ import {
 
 
 function ShoppingCart() {
-  const containerId: string = "containerFrontyard";
-
 
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
 

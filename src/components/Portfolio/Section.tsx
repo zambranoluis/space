@@ -114,7 +114,7 @@ const Section:React.FC = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4 py-24 ">
-              <div className="text-[#716e70] text-sm px-20 ">
+              <div className="text-[#716e70] text-sm px-20 text-justify">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam assumenda asperiores, id totam debitis hic expedita ut modi repellendus enim repudiandae quaerat? Error quibusdam, est laborum quos corporis animi cumque. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis repudiandae, natus voluptates doloribus esse illo id, deserunt quae tenetur, itaque deleniti laborum repellendus! Quo cum sint omnis repellat mollitia obcaecati! Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquam minima doloribus iste tempora veniam officia, libero odit, suscipit inventore ratione, totam ex tempore eius ea. Soluta quo vel ipsa?
               </div>
               <div className="flex flex-col px-20 py-8 ">
