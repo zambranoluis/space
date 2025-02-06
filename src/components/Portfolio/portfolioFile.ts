@@ -1,4 +1,4 @@
-import { small } from "framer-motion/client"
+
 
 const portfolio = [
   {

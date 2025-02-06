@@ -37,7 +37,7 @@ const FaqsContactUsEmail = () => {
               onOpenChange={onOpenChange}
             >
               <ModalContent className=''>
-                {(onClose) => (
+                {() => (
                   <div className="flex flex-col p-4 bg-white">
                     <ModalBody>
                       <div className="flex flex-col">

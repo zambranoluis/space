@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { apiService } from "@/services/apiService";
 import { Image } from "@nextui-org/image";
 import { GiCheckMark } from "react-icons/gi";
 import { PiTagSimpleFill } from "react-icons/pi";
 import { FaSearch } from "react-icons/fa";
 import { FaTags } from "react-icons/fa6";
-import { FaFileInvoiceDollar } from "react-icons/fa6";
+
 
 import PurchaseDetails from "./PurchaseDetails";
 
@@ -62,7 +62,6 @@ interface PurchasesProps {
 
 export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
 
-  console.log("purchases, ", purchases);
   const [currentPurchases, setCurrentPurchases] = useState<string | null>("All Purchases");
 
   const handlePayment = async (purchaseId: string) => {

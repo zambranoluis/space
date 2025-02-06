@@ -1,4 +1,4 @@
-import { i } from "framer-motion/client"
+
 
 const questionnaire = {
   general: [

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Image } from "@nextui-org/image";
 
 import  {portfolio} from "./portfolioFile"
@@ -40,7 +40,6 @@ const Section:React.FC = () => {
     const modalContainer = document.getElementById("modal");
     if (group === "before"){
       const currentPicture = portfolio[projectNumber].beforePictures.large[pictureNumber].url;
-      console.log("picture before, project:", projectNumber, "image:", pictureNumber,  " url:", currentPicture)
       if(currentPicture){
         setSelectedPicture(currentPicture)
         if ( modalContainer ){
@@ -49,7 +48,6 @@ const Section:React.FC = () => {
       }
     } else if (group === "after"){
       const currentPicture = portfolio[projectNumber].afterPictures.large[pictureNumber].url;
-      console.log("picture after, project:", projectNumber, "image:", pictureNumber,  " url:", currentPicture)
       if(currentPicture){
         setSelectedPicture(currentPicture)
         if ( modalContainer ){

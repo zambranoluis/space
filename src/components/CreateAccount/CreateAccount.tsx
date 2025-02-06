@@ -70,8 +70,6 @@ const CreateAccount = () => {
       setIsLoadingCustomer(true);
       setErrorCustomer(null);
 
-      console.log("Form Data: ", formData);
-
       // Enviar la contraseña y confirmPassword en texto plano
       const response = await apiService.createCustomer({
         ...formData,
@@ -81,7 +79,6 @@ const CreateAccount = () => {
       });
 
       if (response) {
-        console.log("response en create account: ", response);
         if (response.message === "Customer created successfully") { 
           redirect("/login");
         }

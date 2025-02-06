@@ -1,14 +1,13 @@
 "use client";
 
-import { useRef, useCallback, useEffect, useState, useMemo } from "react";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { useEffect, useState} from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { apiService } from "@/services/apiService";
 
 import { Switch } from "@nextui-org/switch";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-// import { select } from "@nextui-org/react";
+
 
 export interface Area {
   nameArea: string;

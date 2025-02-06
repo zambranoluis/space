@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useState, useEffect } from "react";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 

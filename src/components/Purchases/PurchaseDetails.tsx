@@ -6,7 +6,7 @@ import { FaFileInvoiceDollar } from "react-icons/fa";
 
 import {apiService} from "@/services/apiService";
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/modal";
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/modal";
 
 interface PurchaseDetailsProps {
   purchaseId: string;
@@ -22,14 +22,12 @@ interface PurchaseDetails {
 
 
 const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purchaseId }) => {
-  // console.log("purchaseId:", purchaseId);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [purchaseDetails, setPurchaseDetails] = useState<PurchaseDetails | null>(null);
 
   const fetchTransactionDetails = async () => {
     try {
       const response = await apiService.getTransactionByPurchaseId(purchaseId);
-      // console.log("response:", response);
       if (response) {
         const transactionDetails = response.data;
         setPurchaseDetails(transactionDetails);
@@ -62,7 +60,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
       <div className=" ">
         <Modal className="bg-white text-black" isOpen={isOpen} onOpenChange={onOpenChange}>
           <ModalContent>
-            {(onClose) =>
+            {() =>
                 <>
                   <ModalHeader className="flex">Purchase Details</ModalHeader>
                   <ModalBody className="flex">
@@ -77,7 +75,6 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
                       )
                     }
                   </ModalBody>
-                  {/* <ModalFooter className="flex">asdasdsd</ModalFooter> */}
                 </>
             }
           </ModalContent>

@@ -76,10 +76,8 @@ export default function ShoppingCart() {
     const fetchProducts = async () => {
       try {
         const response = await apiService.getProducts();
-        // console.log("ShoppingCart: Products response:", response); // Log the API response
         if (response) {
           setProducts(response.data);
-          // console.log("ShoppingCart: Products data:", response.data); // Log the API response
         }
       } catch (err: unknown) {
         console.error("ShoppingCart: Error fetching products:", err);
@@ -89,10 +87,8 @@ export default function ShoppingCart() {
     const fetchExtras = async () => {
       try {
         const response = await apiService.getExtras();
-        // console.log("ShoppingCart: Extras response:", response); // Log the API response
         if (response) {
           setExtras(response.data);
-          // console.log("ShoppingCart: Extras data:", response.data); // Log the API response
         }
       } catch (err: unknown) {
         console.error("ShoppingCart: Error fetching extras:", err);
@@ -131,7 +127,6 @@ export default function ShoppingCart() {
         address: customer.address,
       };
       setCustomerSelectedInfo(customerInfo);
-      // console.log("xxx Shopping Cart: Customer info:", customerInfo);
     }
   }, [customer]);
 

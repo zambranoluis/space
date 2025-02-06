@@ -62,7 +62,7 @@ const ProjectsClient = () => {
           <div id="projectsContainer" className="flex flex-col gap-2 px-6">
             {
               projects.map((project, index) => (
-                <div className="flex flex-col   bgred-200" key={project.id}>
+                <div className="flex flex-col   bgred-200" key={index}>
                   <div
                     className="flex max-md:flex-col max-md:gap-2 bg-[#f0f0ef] justify-between px-2 py-2 text-[#67664c]"
                     onClick={() => { toggleProject(project.id) }}
