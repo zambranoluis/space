@@ -12,7 +12,7 @@ const protectedEndpoints = [
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
 const apiClient = axios.create({
   baseURL: NEXT_URL_API,
-  withCredentials: false,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },

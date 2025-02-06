@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
     const pathParts = req.nextUrl.pathname.split("/");
     const id = pathParts[pathParts.length - 1];
     // Extraer el token de la sesión NextAuth (el token generado en Node se encuentra en token)
-    const tokenCookies = req.cookies.get("next-auth.session-token");
-    const nodeToken = tokenCookies?.value;
+    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const nodeToken = tokenData?.token;
 
     const response = await axios.get(`${BACKEND_URL}/transaction/${id}`, {
       headers: {

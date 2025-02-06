@@ -29,8 +29,8 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     // Extraemos el token generado en Node desde la sesión NextAuth
-    const tokenCookies = req.cookies.get("next-auth.session-token");
-    const nodeToken = tokenCookies?.value;
+    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const nodeToken = tokenData?.token;
 
     const id = req.nextUrl.searchParams.get("id");
     const body = await req.json();
@@ -38,6 +38,7 @@ export async function PATCH(req: NextRequest) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${nodeToken}`,
+        withCredentials: true,
       },
     });
     return NextResponse.json(response.data);
