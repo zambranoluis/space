@@ -67,7 +67,7 @@ const Section: React.FC<SectionProps> = ({
   return (
     <section
         className='w-full h-full bg-cover bg-no-repeat bg-center '
-        style={{ backgroundImage: `url('/panel-clientBg.jpg')` }}>
+        style={{ backgroundImage: `url('https://github.com/BPM94/SCCTMD/raw/main/panel-client/panel-clientBg.jpg')` }}>
         <div className='relative w-full h-full'>
           <div className='absolute w-full h-full gap-8 flex flex-col'>
             <div

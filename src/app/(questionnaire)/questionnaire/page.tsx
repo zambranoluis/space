@@ -46,7 +46,7 @@ function ShoppingCart() {
         <div className="flex flex-col w-full md:w-[50%] bgred-200 p-2 justify-center gap-4 md:gap-8  py-12">
           <Link className="flex bggreen-300 p-2 min-lg:pl-12 justify-center items-center" href={"/shopping-cart"}>
             <Image className={`w-full bgblue-300 max-w-[250px] dropshadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]`}
-              src="https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png"
+              src="https://github.com/BPM94/SCCTMD/raw/main/logos/logoGreen.png"
               alt=""
             />
           </Link>
@@ -58,7 +58,7 @@ function ShoppingCart() {
             </div>
           </div>
         </div>
-        <div className="flex w-full max-md:h-[500px]  md:w-[50%] bg-top bg-cover bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('/questionnaire/questionnaireBGTop.webp')",}}>
+        <div className="flex w-full max-md:h-[500px]  md:w-[50%] bg-top bg-cover bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireBGTop.webp')",}}>
           
         </div>
       </section>
@@ -742,7 +742,7 @@ function ShoppingCart() {
           <div className="flex  sm:w-[50%] justify-center items-center max-sm:h-[200px] text-[#68664d]">
             <h1 className="text-3xl lg:text-5xl max-sm:text-center">Customer Uploads</h1>
           </div>
-          <div className="bg-[#68664d] sm:w-[50%] max-sm:h-[300px]  h-full w-full bg-cover bg-center bg-no-repeat max-sm:rounded-b-[20px] sm:rounded-r-[20px]" style={{ backgroundImage: "url('/questionnaire/questionnaireBgCostumerUploads.webp')"}}>
+          <div className="bg-[#68664d] sm:w-[50%] max-sm:h-[300px]  h-full w-full bg-cover bg-center bg-no-repeat max-sm:rounded-b-[20px] sm:rounded-r-[20px]" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireBgCostumerUploads.webp')"}}>
 
           </div>
         </div>
@@ -757,17 +757,17 @@ function ShoppingCart() {
               <div className="flex max-sm:w-[40%]  sm:w-[20%] bgblue-300  justify-center items-center">
                 <div className="flex">
                   <label htmlFor="files1" className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer">
-                    <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                    <Image className="w-[40px] aspect-square object-contain" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-13.png" alt="" />
                   </label>
                   <input id="files1" name="files1" className="hidden" type="file" />
                 </div>
               </div>
               <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2">
-                <Image className="h-full   rounded-none " src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-sm:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-md:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-lg:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full  rounded-none max-xl:hidden" src="/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none " src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-sm:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-md:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-lg:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full  rounded-none max-xl:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
               </div>
             </div>
           </div>
@@ -782,17 +782,17 @@ function ShoppingCart() {
               <div className="flex max-sm:w-[40%]  sm:w-[20%] bgblue-300  justify-center items-center">
                 <div className="flex">
                   <label htmlFor="files2" className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer">
-                    <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                    <Image className="w-[40px] aspect-square object-contain" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-13.png" alt="" />
                   </label>
                   <input id="files2" name="files2" className="hidden" type="file" />
                 </div>
               </div>
               <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2">
-                <Image className="h-full   rounded-none " src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-sm:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-md:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-lg:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full  rounded-none max-xl:hidden" src="/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none " src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-sm:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-md:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-lg:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full  rounded-none max-xl:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
               </div>
             </div>
           </div>
@@ -806,17 +806,17 @@ function ShoppingCart() {
               <div className="flex max-sm:w-[40%]  sm:w-[20%] bgblue-300  justify-center items-center">
                 <div className="flex">
                   <label htmlFor="files3" className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer">
-                    <Image className="w-[40px] aspect-square object-contain" src="/questionnaire/elementos-13.png" alt="" />
+                    <Image className="w-[40px] aspect-square object-contain" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-13.png" alt="" />
                   </label>
                   <input id="files3" name="files3" className="hidden" type="file" />
                 </div>
               </div>
               <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2">
-                <Image className="h-full   rounded-none " src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-sm:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-md:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full   rounded-none max-lg:hidden" src="/questionnaire/elementos-12.png" alt="" />
-                <Image className="h-full  rounded-none max-xl:hidden" src="/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none " src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-sm:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-md:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full   rounded-none max-lg:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
+                <Image className="h-full  rounded-none max-xl:hidden" src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png" alt="" />
               </div>
             </div>
           </div>
