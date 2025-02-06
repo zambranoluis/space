@@ -27,7 +27,7 @@ export default function NotFound() {
       <div className='relative flex h-screen w-screen items-center justify-center  bg-[--color-background] text-[--color-text]'>
       <div className='w-full h-full   absolute z-10'>
         <video autoPlay loop muted className='w-full h-full object-cover'>
-          <source src='https://github.com/BPM94/SCCTMD/raw/main/opt/spaceNotFound.webm' type='video/webm' />
+          <source src='https://github.com/BPM94/SCCTMD/raw/main/not-found/spaceNotFound.webm' type='video/webm' />
           Your browser does not support the video tag.
         </video>
       </div>
