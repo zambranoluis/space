@@ -2,13 +2,12 @@
 
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { useState, ReactNode } from "react";
+import { ReactNode } from "react";
 
 import NavbarWorker from "@/components/NavbarWorker";
 
-import AsideWorker from "@/components/AsideWorker";
-
-import ChatModal from "@/components/ChatModal";
+// import AsideWorker from "@/components/AsideWorker";
+// import ChatModal from "@/components/ChatModal";
 
 
 interface WorkerPanelLayout {

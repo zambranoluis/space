@@ -3,7 +3,7 @@
 import { DataProvider } from "@/context/DataContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SessionProvider } from "next-auth/react";
-import { useEffect, useState, ReactNode } from "react";
+import { ReactNode } from "react";
 
 
 

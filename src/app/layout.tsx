@@ -11,9 +11,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 
-interface RootLayoutProps {
-  children: ReactNode;
-}
+// interface RootLayoutProps {
+//   children: ReactNode;
+// }
 
 
 

@@ -1,11 +1,7 @@
 "use client"
 
 import {
-  validateText,
   validateTextWithSpaces,
-  validateNumber,
-  validateEmail,
-  validatePassword,
 } from "@/utils/validation";
 
 import { Image } from "@nextui-org/image";

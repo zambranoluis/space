@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, ReactNode } from "react";
-import { Image } from "@nextui-org/image";
 
 import axios from "axios";
 
@@ -20,8 +19,6 @@ import {ProjectsWorker} from "@/components/Projects/Projects"
 import History from "@/components/History/History";
 import MyProfile from "@/components/MyProfile/MyProfile";
 import WorkCalendar from "@/components/Work-Calendar/WorkCalendar";
-
-// import { projects } from "./steps"
 
 interface Customer {
   id: string;
