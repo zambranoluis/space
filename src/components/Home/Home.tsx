@@ -6,7 +6,7 @@ import Section from "./Section"
 
 
 function HomePage() {
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const [currentPictureButton, setCurrentPictureButton] = useState(0);
 
