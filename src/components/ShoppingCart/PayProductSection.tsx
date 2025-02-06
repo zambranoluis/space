@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { apiService } from "@/services/apiService";
 
 import { Switch } from "@nextui-org/switch";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
 
 export interface Area {
   nameArea: string;
@@ -133,24 +132,26 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   };
 
   const [selectedExtras, setSelectedExtras] = useState<
-  { extra: string; isActive: boolean; price: number }[]
->(extras?.map((extra) => ({
-    extra: extra._id,
-    isActive: false,
-    price: extra.price,
-})) || []);
+    { extra: string; isActive: boolean; price: number }[]
+  >(
+    extras?.map((extra) => ({
+      extra: extra._id,
+      isActive: false,
+      price: extra.price,
+    })) || [],
+  );
 
-const handleSelectedExtras = (index: number) => {
-  if (selectedExtras[index].isActive) {
-    const newSelectedExtras = [...selectedExtras];
-    newSelectedExtras[index].isActive = false;
-    setSelectedExtras(newSelectedExtras);
-  } else {
-    const newSelectedExtras = [...selectedExtras];
-    newSelectedExtras[index].isActive = true;
-    setSelectedExtras(newSelectedExtras);
-  }
-};
+  const handleSelectedExtras = (index: number) => {
+    if (selectedExtras[index].isActive) {
+      const newSelectedExtras = [...selectedExtras];
+      newSelectedExtras[index].isActive = false;
+      setSelectedExtras(newSelectedExtras);
+    } else {
+      const newSelectedExtras = [...selectedExtras];
+      newSelectedExtras[index].isActive = true;
+      setSelectedExtras(newSelectedExtras);
+    }
+  };
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 

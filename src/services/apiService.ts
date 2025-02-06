@@ -1,4 +1,5 @@
 "use client";
+import { Purchase } from "../components/ShoppingCart/PayProductSection";
 import apiClient from "./apiClient";
 
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
@@ -62,7 +63,7 @@ export const apiService = {
     }
   },
 
-  createPurchase: async (purchase: string) => {
+  createPurchase: async (purchase: Purchase) => {
     try {
       const response = await apiClient.post(`${NEXT_URL_API}/purchases`, purchase);
       return response.data;
