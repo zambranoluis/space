@@ -21,7 +21,7 @@ const Section:React.FC<FaqsProps> = ({toggleAnswer}) => {
           </div>
         </div>
         <div className=" w-[50%] flex sm:w-[40%] h-full bg-cover   2xl:bg-contain bg-no-repeat bg-center bgorange-400" >
-          <Image className="h-full w-full object-cover" src="https://github.com/BPM94/SCCTMD/raw/main/opt/mainAvatar.png" alt="" />
+          <Image className="h-full w-full object-cover" src="https://github.com/BPM94/SCCTMD/raw/main/faqs/mainAvatar.png" alt="" />
         </div>
       </section>
 

@@ -20,7 +20,7 @@ export default function Faqs() {
   }
 
   return (
-    <section>
+    <section className="flex max-md:mt-[130px] md:mt-[100px]">
       <Section 
         toggleAnswer={toggleAnswer}
       />

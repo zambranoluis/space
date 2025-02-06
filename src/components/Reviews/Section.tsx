@@ -40,7 +40,7 @@ const Section: React.FC<ReviewsProps> = ({selectedReview1, selectedReview2, hand
             <Card className="w-[70%] h[250px] max-w-[350px] bg-[#dcd6c8] px-8">
               <CardBody className="flex flex-col border-b-1 border-black gap-2">
                 <div className="flex">
-                  <Image className="h-[70px]" src="/quotes.png" alt="" />
+                  <Image className="h-[70px]" src="https://github.com/BPM94/SCCTMD/raw/main/reviews/quotes.png" alt="" />
                 </div>
                 <div className="flex h-[80px] bgred-300 overflow-hidden ">
                   <p className="text-sm text-black">
@@ -81,7 +81,7 @@ const Section: React.FC<ReviewsProps> = ({selectedReview1, selectedReview2, hand
           <Card className="w-[70%] h[250px] max-w-[350px] bg-[#dcd6c8] px-8">
               <CardBody className="flex flex-col border-b-1 border-black gap-2">
                 <div className="flex">
-                  <Image className="h-[70px]" src="/quotes.png" alt="" />
+                  <Image className="h-[70px]" src="https://github.com/BPM94/SCCTMD/raw/main/reviews/quotes.png" alt="" />
                 </div>
                 <div className="flex">
                   <p className="text-sm h-[80px] bgred-300 overflow-hidden text-black">
