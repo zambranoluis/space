@@ -57,8 +57,6 @@ interface SectionProps {
   asideSelectedOption: string;
   customer: Customer | null;
   purchases: Purchase[];
-
-
 }
 
 const Section: React.FC<SectionProps> = ({

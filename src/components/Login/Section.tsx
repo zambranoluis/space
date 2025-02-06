@@ -41,7 +41,7 @@ const Section: React.FC<LoginProps> = ({
       <div id='video' className='max-md:absolute h-full md:w-[60dvw]'>
         <video className='h-full w-full object-cover z-[1]' autoPlay loop muted>
           <source
-            src='/videoLogin.mp4'
+            src='https://github.com/BPM94/SCCTMD/raw/main/login/videoLogin.mp4'
             type='video/mp4'
           />
         </video>
@@ -54,7 +54,7 @@ const Section: React.FC<LoginProps> = ({
             className='flex justify-center items-center px-2 rounded-lg w-full'>
             <Image
               className='w-[250px] max-md:drop-shadow-[0_1.3px_1.3px_rgba(0,0,0,1)]'
-              src='https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png'
+              src='https://github.com/BPM94/SCCTMD/raw/main/logos/logoSpaceCreations.png'
               alt='Logo'
             />
           </Link>

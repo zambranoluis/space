@@ -17,7 +17,7 @@ export default function PortfolioLayout({ children }: Portfolio) {
       <ThemeProvider>
         <main className="flex flex-col w-full">
           <Navbar />
-          <div className="w-full flex mt-[130px] md:mt-[100px] bg-red-400">
+          <div className="w-full flex mt-[130px] md:mt-[100px] bgred-400">
             {children}
           </div>
           <Footer />

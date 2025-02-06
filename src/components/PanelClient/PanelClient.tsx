@@ -57,11 +57,8 @@ interface Customer {
   birthdate: string;
 }
 
-interface PanelClientProps {
-  // setAsideSelectedOption: React.Dispatch<React.SetStateAction<string>>;
-}
 
-const PanelClient: React.FC<PanelClientProps> = () => {
+const PanelClient: React.FC = () => {
   const { data: session } = useSession();
 
   const userId = session?.user?.id;

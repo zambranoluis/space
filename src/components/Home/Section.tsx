@@ -53,7 +53,7 @@ const Section:React.FC<SectionProps> = ({
               {
                 pictures.map((picture, index) => (
                   <div className="bgpurple-400 flex-shrink-0 h-full w-full flex" key={index} id={`${index}`} >
-                    <Image className="w-full  h-full object-cover object-center no-border-radius rounded-none" src={picture.image}
+                    <Image className={`${index === 0 ? "-scale-x-100" : ""} w-full  h-full object-cover object-center no-border-radius rounded-none`} src={picture.image}
                     loading="lazy"
                     alt="" />
                   </div>
@@ -143,7 +143,7 @@ const Section:React.FC<SectionProps> = ({
 
         <section id="subsForm" className="h-[80vh] bg-[#f0f0ef] w-full bgblue-300 flex justify-center items-center bgpink-400 ">
           <div className="w-[65%] h-[70%] max-md:h-full bgred-300  flex max-md:flex-col max-md:w-full bgred-300 shadow-[5px_5px_20px_rgba(0,0,0,0.5)]">
-            <div className="w-[50%] max-md:w-full max-md:h-[50vh] h-full bggreen-300 bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/subsCard.webp')" }}>
+            <div className="w-[50%] max-md:w-full max-md:h-[50vh] h-full bggreen-300 bg-cover bg-no-repeat" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/home/subsCard.webp')" }}>
             </div>
             <div className="w-[50%] max-md:w-full max-md:h-[50vh] h-full bgpurple-300 flex flex-col justify-center items-center  ">
               <div className="w-[75%] h-[80%] flex flex-col gap-4 bgred-300 justify-center items-start text-[#6b776d]">
@@ -161,5 +161,5 @@ const Section:React.FC<SectionProps> = ({
     </div>
   );
 }
- 
+
 export default Section;

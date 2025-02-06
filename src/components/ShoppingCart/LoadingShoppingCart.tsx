@@ -1,21 +1,14 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
-import Link from "next/link";
+import { useState, useRef} from "react";
+import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { TiArrowSortedDown } from "react-icons/ti";
-
-
 import {Switch} from "@nextui-org/switch";
-
 import { products, extras } from "./shopping-cart";
 
 
 
-function ShoppingCart() {
-
-
+function LoadingShoppingCart() {
 
   const scrollContainerRef = useRef(null);
   const [selectedYard, setSelectedYard] = useState("frontyard");
@@ -69,7 +62,7 @@ function ShoppingCart() {
       <section className="bgpurple-500 flex flex-col w-full">
         {
             <div className="flex w-full bgred-500 p2">
-          <div className="w-full h-[650px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito1.webp')" }}>
+          <div className="w-full h-[650px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/carrito1.webp')" }}>
             <div className="flex w-full justify-center items-center sm:justify-start absolute bottom-0 bgred-400 h-[30%] sm:h-[60%] min-[950px]:h-[40%]">
               <div className="bg-white/50 w-[80%]  sm:w-[50%] flex justify-center items-center py4 min-[400px]:py8 h-full ">
                 <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base text-black flex flex-col bgred-300 h-full gap-4 py-4">
@@ -177,12 +170,12 @@ function ShoppingCart() {
                       </p>
                     </div>
                     <div className="flex border border-black rounded-sm px-4">
-                      <p className="font-semibold">100$</p>
+                      <p className="font-semibold">0$</p>
                     </div>
                   </div>
                   <div className="flex justify-center bgpurple-400 relative">
                     <button className="w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1 " >
-                      PAY FOR
+                      PAY
                     </button>
                   </div>
                 </div>
@@ -221,4 +214,4 @@ function ShoppingCart() {
   );
 }
 
-export default ShoppingCart;
+export default LoadingShoppingCart;

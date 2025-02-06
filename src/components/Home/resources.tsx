@@ -6,46 +6,46 @@ import { FaCheck } from "react-icons/fa";
 const pictures = [
   {
     id: 1,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/HomeSlider1.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/HomeSlider1.webp",
   },
   { 
     id: 2,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/HomeSlider2.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/HomeSlider2.webp",
   },
   { 
     id: 3,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/HomeSlider3.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/HomeSlider3.webp",
   },
   { 
     id: 4,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/HomeSlider4.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/HomeSlider4.webp",
   },
   { 
     id: 5,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/HomeSlider5.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/HomeSlider5.webp",
   },
   { 
     id: 6,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/HomeSlider6.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/HomeSlider6.webp",
   }
 ]
 
 const steps = [
   {
     id: 1,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/step1.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/step1.webp",
     title: "Step 1",
     content: ["● Select your package", "● Talk to the experts about your budget", "● Take photos of your property", "● Tell us about your ideal space"]
   },
   {
     id: 2,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/step2.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/step2.webp",
     title: "Step 2",
     content: ["A landscape designer will work on your space to create a design according to your budget and style."]
   },
   {
     id: 3,
-    image: "https://github.com/BPM94/SCCTMD/raw/main/opt/step3.webp",
+    image: "https://github.com/BPM94/SCCTMD/raw/main/home/step3.webp",
     title: "Step 3",
     content: ["You will receive a file with images of your new space, 3d floor plan and the additional plans you have requested."]
   }

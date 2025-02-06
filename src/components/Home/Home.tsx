@@ -1,8 +1,6 @@
 "use client"
 
-import { DataProvider } from "@/context/DataContext";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 import Section from "./Section"
 
