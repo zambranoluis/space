@@ -101,34 +101,7 @@ export default function ShoppingCart() {
     fetchData();
   }, []);
 
-  const [customerSelectedInfo, setCustomerSelectedInfo] = useState<{
-    id: string;
-    name: string;
-    lastname: string;
-    email: string;
-    phone: {
-      areaCode: string;
-      number: string;
-    };
-    address: string;
-  } | null>(null);
 
-  useEffect(() => {
-    if (customer !== null) {
-      const customerInfo = {
-        id: customer._id,
-        name: customer.name,
-        lastname: customer.lastname,
-        email: customer.email,
-        phone: {
-          areaCode: customer.phone[0].areaCode, // Tomamos el primer número
-          number: customer.phone[0].number,
-        },
-        address: customer.address,
-      };
-      setCustomerSelectedInfo(customerInfo);
-    }
-  }, [customer]);
 
   const [selectedPackage, setSelectedPackage] = useState(0);
 

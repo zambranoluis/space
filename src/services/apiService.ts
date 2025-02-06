@@ -19,6 +19,30 @@ interface Customer {
   birthdate: string;
 }
 
+export interface SelectedExtra {
+  extra: string;
+  isActive: boolean;
+}
+
+export interface Purchase {
+  customer: string;
+  product: string;
+  selectedAreas: [
+    {
+      nameArea: string;
+      isActive: boolean;
+    },
+    {
+      nameArea: string;
+      isActive: boolean;
+    },
+  ];
+  extras: SelectedExtra[];
+  price: number;
+  status: string;
+  isActive: boolean;
+}
+
 export const apiService = {
   createCustomer: async (customer: Customer) => {
     try {
