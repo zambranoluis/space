@@ -62,7 +62,7 @@ export const apiService = {
     }
   },
 
-  createPurchase: async (purchase: any) => {
+  createPurchase: async (purchase: string) => {
     try {
       const response = await apiClient.post(`${NEXT_URL_API}/purchases`, purchase);
       return response.data;
