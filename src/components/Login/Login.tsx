@@ -47,12 +47,15 @@ const router = useRouter();
     const location = await getGeolocation();
     setGeolocation(location);
 
+
     const result = await signIn("credentials", {
       email,
       password,
       geolocation: location,
       redirect: false,
     });
+
+    console.log("email:", email, "password:", password, "location:", location);
 
     
     if (result?.error) {
