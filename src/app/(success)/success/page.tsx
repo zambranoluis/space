@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { apiService } from "@/services/apiService";
 
-const SuccessPage: React.FC = () => {
+const SuccessContent: React.FC = () => {
   const searchParams = useSearchParams();
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [transaction, setTransaction] = useState<any>(null);
@@ -81,6 +81,14 @@ const SuccessPage: React.FC = () => {
         Go to Dashboard
       </button>
     </div>
+  );
+};
+
+const SuccessPage: React.FC = () => {
+  return (
+    <Suspense fallback={<div className="flex flex-col items-center justify-center h-screen bg-gray-100"><h1 className="text-2xl">Loading...</h1></div>}>
+      <SuccessContent />
+    </Suspense>
   );
 };
 
