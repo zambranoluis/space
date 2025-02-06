@@ -20,29 +20,19 @@ export function middleware(req: NextRequest) {
     const tokenCookie = req.cookies.get("next-auth.session-token");
     const token = tokenCookie?.value;
 
-    console.log("Middleware ejecutado para la ruta protegida:", pathname);
-    console.log("Token detectado:", token);
-
     // Si no hay token, redirige al login
     if (!token) {
-      console.log("No hay token de sesión, redirigiendo a login...");
       const loginUrl = new URL("/login", req.url);
       loginUrl.searchParams.set("from", pathname); // Guarda la ruta de origen
       return NextResponse.redirect(loginUrl);
     }
-
-    // Si hay token, permite el acceso
-    console.log("Token válido, acceso permitido a la ruta:", pathname);
   }
 
   // Si es una ruta pública, permite el acceso
   if (isPublicRoute) {
-    console.log("Ruta pública detectada:", pathname);
     return NextResponse.next();
   }
 
-  // Para otras rutas no especificadas, permite el acceso por defecto
-  console.log("Ruta no categorizada, acceso permitido por defecto:", pathname);
   return NextResponse.next();
 }
 

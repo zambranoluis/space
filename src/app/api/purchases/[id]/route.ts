@@ -9,8 +9,8 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export async function GET(req: NextRequest) {
   try {
     // Extraemos el token de la sesión de NextAuth (el token generado en Node se encuentra en token)
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-    const nodeToken = tokenData?.token;
+    const tokenCookies = req.cookies.get("next-auth.session-token");
+    const nodeToken = tokenCookies?.value;
 
     const id = req.nextUrl.searchParams.get("id");
     const response = await axios.get(`${BACKEND_URL}/purchases/${id}`, {
@@ -29,8 +29,8 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     // Extraemos el token generado en Node desde la sesión NextAuth
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-    const nodeToken = tokenData?.token;
+    const tokenCookies = req.cookies.get("next-auth.session-token");
+    const nodeToken = tokenCookies?.value;
 
     const id = req.nextUrl.searchParams.get("id");
     const body = await req.json();

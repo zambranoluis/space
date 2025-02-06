@@ -3,7 +3,6 @@ import type { NextRequest } from "next/server";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { cookies } from "next/headers"; // ✅ Corrección: Importación correcta de cookies()
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -17,20 +16,28 @@ export async function POST(req: NextRequest) {
     }
 
     const sessionId = session.user.sessionId;
-    console.log("✅ sessionId:", sessionId);
 
-    // 🔹 Llamar al backend para eliminar la sesión
-    // ✅ 🔹 Obtener cookies correctamente (NO USAR `await cookies()`)
-    const cookieStore = await cookies();
-
-    // ✅ 🔹 Eliminar cookies de sesión de NextAuth
-    cookieStore.delete("next-auth.session-token");
-    cookieStore.delete("next-auth.callback-url");
-    cookieStore.delete("next-auth.csrf-token");
-
+    // Llamar al backend para eliminar la sesión
     await axios.post(`${BACKEND_URL}/customers/logout/${sessionId}`);
 
-    return NextResponse.json({ message: "Logout successful" });
+    // Crear una respuesta que también elimine las cookies en el cliente
+    const response = NextResponse.json({ message: "Logout successful" });
+
+    // Eliminar cookies en el cliente
+    response.cookies.set("next-auth.session-token", "", {
+      expires: new Date(0),
+      path: "/",
+    });
+    response.cookies.set("next-auth.callback-url", "", {
+      expires: new Date(0),
+      path: "/",
+    });
+    response.cookies.set("next-auth.csrf-token", "", {
+      expires: new Date(0),
+      path: "/",
+    });
+
+    return response;
   } catch (error: any) {
     console.error("❌ Error during logout:", error);
     return NextResponse.json(
