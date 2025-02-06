@@ -6,7 +6,6 @@ import Section from "./Section"
 
 export default function Faqs() {
   const toggleAnswer = (id: number) => {
-    const container = document.getElementById(`answerContainer${id}`);
     const answer = document.getElementById(`answer${id}`);
     const arrow = document.getElementById(`arrow${id}`);
 

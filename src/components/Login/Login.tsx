@@ -64,9 +64,6 @@ const router = useRouter();
     }
   };
 
-  const handleVerPanel = () => {
-    router.push("/panel-worker");
-  };
 
   return (
     <section id="login">

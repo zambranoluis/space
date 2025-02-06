@@ -47,16 +47,12 @@ function PanelWorker() {
       const res = await axios.get<Customer>(
         'http://localhost:4000/space/customers/6789c1afce8c2f0ad7736d00',
       );
-      setCustomer(res.data); // Almacena los datos del cliente
-    } catch (err: unknown) {
-      // Manejo de errores robusto  
+      setCustomer(res.data);
+    } catch (err: unknown) { 
       if (axios.isAxiosError(err) && err.response) {
-        // setError(`Error: ${err.response.status} - ${err.response.data.message}`);
       } else {
-        // setError('Error: No se pudo obtener el cliente.');
       }
     } finally {
-      // setIsLoading(false); // Finaliza el indicador de carga
     }
   };
 
