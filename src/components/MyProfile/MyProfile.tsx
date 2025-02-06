@@ -92,7 +92,7 @@ const MyProfile = (customer: any) => {
           </div>
           <div className="flex max-md:flex-col w-full gap-2" id="phone">
             <div>
-              <AreaCodeSelector  />
+              {/* <AreaCodeSelector  /> */}
             </div>
             <div id="number" className="w-full md:w-[calc(100%-120px)] flex">
               <input className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full" type="text" placeholder={customer.customer.phone[0].number} />
