@@ -1,5 +1,4 @@
 "use client";
-import { Purchase } from "../components/ShoppingCart/PayProductSection";
 import apiClient from "./apiClient";
 
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
