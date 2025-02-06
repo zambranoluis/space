@@ -25,7 +25,7 @@ const Navbar: React.FC = ( {  } ) => {
     <nav  className=" flex max-h-[100px]  top-0 bg-black/50 w-full z-[1500] py-4 bgred-300 justify-between items-center  px-4 ">
       <Link id="logoNavbar" className="flex bgred-200" href="/">
         <Image className=" place-self-center max-h-[80px]  drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
-          src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png"
+          src="https://github.com/BPM94/SCCTMD/raw/main/logos/logoSpaceCreations.png"
           alt=""
         />
       </Link>

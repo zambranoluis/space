@@ -36,7 +36,7 @@ const CardsDisplay: React.FC<CardsDisplayProps> = ({
   
   return (
     <div className="flex w-full bgred-500 p2">
-      <div className="w-full h-[650px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/opt/carrito1.webp')" }}>
+      <div className="w-full h-[650px] pt-4 sm:h-[75vh] bg-cover bg-no-repeat relative flex" style={{ backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/carrito1.webp')" }}>
         <div className="flex w-full justify-center items-center sm:justify-start absolute bottom-0 bgred-400 h-[30%] sm:h-[60%] min-[950px]:h-[40%]">
           <div className="bg-white/50 w-[80%]  sm:w-[50%] flex justify-center items-center py4 min-[400px]:py8 h-full ">
             <div className="sm:w-[70%] text-xs px-2 sm:text-sm md:text-base text-black flex flex-col bgred-300 h-full gap-4 py-4">

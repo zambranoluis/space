@@ -43,16 +43,16 @@ const typePurchase = [
   {
     name: "Pending",
     icon: (
-      <Image src={"/purchasePendingSpaceColorsGreen.png"} className='w-[25px] h-[25px]' />
+      <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchasePendingSpaceColorsGreen.png"} className='w-[25px] h-[25px]' />
     ),
   },
   {
     name: "Completed",
-    icon: <Image src={"/purchaseCompletedColorsGreen.png"} className='w-[25px] h-[25px]' />,
+    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCompletedColorsGreen.png"} className='w-[25px] h-[25px]' />,
   },
   {
     name: "Canceled",
-    icon: <Image src={"/purchaseCanceledColorsGreen.png"} className='w-[25px] h-[25px]' />,
+    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCanceledColorsGreen.png"} className='w-[25px] h-[25px]' />,
   },
 ];
 

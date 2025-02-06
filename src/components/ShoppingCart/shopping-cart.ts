@@ -1,7 +1,7 @@
 export const products = [
   {
     "name": "1 Area",
-    "picture": "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito2.webp",
+    "picture": "https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/carrito2.webp",
     "type": "Basic",
     "area": [
       {
@@ -22,7 +22,7 @@ export const products = [
 
   {
     "name": "1 Area",
-    "picture": "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito3.webp",
+    "picture": "https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/carrito3.webp",
     "type": "Pro",
     "area": [
       {
@@ -44,7 +44,7 @@ export const products = [
 
   {
     "name": "2 Area",
-    "picture": "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito4.webp",
+    "picture": "https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/carrito4.webp",
     "type": "Basic",
     "area": [
       {
@@ -71,7 +71,7 @@ export const products = [
 
   {
     "name": "2 Area",
-    "picture": "https://github.com/BPM94/SCCTMD/raw/main/opt/carrito3.webp",
+    "picture": "https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/carrito5.webp",
     "type": "Pro",
     "area": [
       {
