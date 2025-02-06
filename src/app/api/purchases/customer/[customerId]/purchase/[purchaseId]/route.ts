@@ -11,8 +11,8 @@ export async function GET(req: NextRequest) {
     const purchaseId = req.nextUrl.searchParams.get("purchaseId");
 
     // Extraemos el token de la sesión (el token generado en Node se encuentra en token)
-    const tokenCookies = req.cookies.get("next-auth.session-token");
-    const nodeToken = tokenCookies?.value;
+    const getTokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const nodeToken = getTokenData?.token;
 
     const response = await axios.get(
       `${BACKEND_URL}/purchases/customer/${customerId}/purchase/${purchaseId}`,
@@ -20,6 +20,7 @@ export async function GET(req: NextRequest) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${nodeToken}`,
+          withCredentials: true,
         },
       },
     );
