@@ -1,107 +1,154 @@
 "use client";
 
-
+import { useState, useRef, useEffect } from "react";
 import { Image } from "@nextui-org/image";
-import Link from "next/link";
 
 import  {portfolio} from "./portfolioFile"
+
+import { MdCancel } from "react-icons/md";
 
 
 
 
 const Section:React.FC = () => {
+
+
+  const handleScrollToProject = (sectionId: string) => {
+    const targetSection = document.getElementById(sectionId);
+    
+    if (targetSection) {
+      const offset = 180; // Ajusta este valor según el tamaño del header fijo si lo hay
+      const elementPosition = targetSection.getBoundingClientRect().top + window.scrollY - offset;
+  
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleCloseModal = (modal: string) => {
+    const modalContainer = document.getElementById(modal);
+      modalContainer?.classList.add("hidden");
+  };
+
+  const [selectedPicture, setSelectedPicture] = useState("/portfolio/b11.png");
+
+  const handleOpenModal = (project: string, group: string , index:string) => {
+    const projectNumber = Number(project)
+    const pictureNumber = Number(index)
+    const modalContainer = document.getElementById("modal");
+    if (group === "before"){
+      const currentPicture = portfolio[projectNumber].beforePictures.large[pictureNumber].url;
+      console.log("picture before, project:", projectNumber, "image:", pictureNumber,  " url:", currentPicture)
+      if(currentPicture){
+        setSelectedPicture(currentPicture)
+        if ( modalContainer ){
+          modalContainer.classList.remove("hidden");
+        }
+      }
+    } else if (group === "after"){
+      const currentPicture = portfolio[projectNumber].afterPictures.large[pictureNumber].url;
+      console.log("picture after, project:", projectNumber, "image:", pictureNumber,  " url:", currentPicture)
+      if(currentPicture){
+        setSelectedPicture(currentPicture)
+        if ( modalContainer ){
+          modalContainer.classList.remove("hidden");
+        }
+      }
+    }
+    
+  }
+
+
   return (
-    <main className="flex flex-col bgblue-300 w-full overflow-y-scroll noScrollBar">
-      <section>
-        
+    <main className="flex flex-col bgblue-300 w-full gap-8">
+      <section className="bgred-300">
+        <div className="max-md:flex-col flex">
+          <div className="flex max-md:w-full md:w-[50%] max-md:justify-center md:justify-start p-20 items-center bgrose-500 ">
+            <h1 className="text-5xl md:text-6xl font-bold text-black">Styles Gallery</h1>
+          </div>
+          <div className="flex max-md:w-full md:w-[50%] bg-green-300 p2">
+            <Image className="rounded-none h-full" src={"/portfolio/landing.png"} />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 bg-[#f2f2f1] sm:grid-cols-2 py-12 px-8  lg:grid-cols-4 gap-16">
+          {
+            portfolio.map((project, index) => (
+              <button className="flex place-self-center max-sm:w-[70%] sm:w-full h-full" style={{backgroundColor: project.color}}  key={index} onClick={() => handleScrollToProject(`project-${index}`)}>
+                <div className="flex">
+                  <Image className="w-[100px]  " src={project.stylePicture} alt=""/>
+                </div>
+                <div className="flex justify-start pl-6 items-center w-full bgred-300 h-full">
+                  <h1 className="text-left text-sm">{project.style}</h1>
+                </div>
+              </button>
+            ))
+          }
+        </div>
       </section>
-      {
-        portfolio.map((project, index) => (
-          <div className={`${index % 2 === 0 ? "bg-[#322727]" : "bg-[#6d786f]"}`} key={index}>
-            <div className="flex justify-start items-center  w-[150px] pl-2 pt-2">
-              <Link href="/">
-                <Image className="" src="https://github.com/BPM94/SCCTMD/raw/main/logoSpaceCreations.png" />
-              </Link>
+      <section  className="flex flex-col bggreen-300 gap8 pt-24 ">
+        <div id={`modal`} className="bg-black/70 hidden fixed w-full left-0 max-md:h-[calc(100vh-130px)] md:h-[calc(100vh-100px)] top-[130px] md:top-[100px] z-[1000] flex flex-col justify-center items-center gap-4">
+          <div className="flex flex-col w-[80%] h-full bgred-300 ">
+            <div className="w-full bgred-300  justify-end flex p-4 xl:pr-24">
+              <MdCancel className="text-5xl cursor-pointer" onClick={() => handleCloseModal(`modal`)}/>
             </div>
-            <section className={` flex max-md:flex-col  gap-2 p-4`}>
-              <div id="projectName" className="projectName flex justify-center items-center bgrose-500 md:px-12 ">
-                <h1 className={`${index % 2 === 0 ? "text-[#5f5252]" : "text-[#89968b]"}  flex md:-rotate-180   max-md:text-center font-black text-3xl md:text-6xl `}>{project.style}</h1>
+            {selectedPicture ? (
+                <div className="flex h-full justify-center"><Image className="h-[80%]" src={selectedPicture} alt="Selected Image" /></div>
+              ) : (
+                <p className="text-white">No Image Selected</p>
+              )
+            }
+          </div>
+        </div>
+      {
+        portfolio.map((project, indexProject) => (
+          <div  className="py12 flex flex-col bgred-300 py16" id={`project-${indexProject}`} key={indexProject}>
+            <div className="px12 flex max-md:flex-col lg:relative" style={{backgroundColor: project.color}}>
+              <div className="flex max-lg:flex-col md:gap-8 max-lg:p-6 justify-center items-center bgorange-600 md:w-[50%]">
+                <Image className="h-[130px] rounded-none bgyellow-200" src={project.stylePicture} alt=""/>
+                <h1 className="max-md:py-4 text-5xl  ">{project.style}</h1>
               </div>
-              <div id="projectDetails" className="bgslate-800 flex flex-col gap-6" >
-                <div id="media" className="bgblue-400 flex flex-col gap-4">
-                  <div id="beforeAndStyle" className="flex bgblue-300 max-md:flex-col gap-4 ">
-                    <div id="before" className="bggreen-800 gap-2 flex flex-col p2 ">
-                      <div id="">
-                        <h2 className="text-white font-bold">Before</h2>
+              <div className="h-full bgblue-800 md:w-[50%] lg:absolute right-16 top-[-50px] lg:justify-end flex">
+                <Image className=" rounded-none  lg:h-[220px]" src={project.displayPicture} alt=""/>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 py-24 ">
+              <div className="text-[#716e70] text-sm px-20 ">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam assumenda asperiores, id totam debitis hic expedita ut modi repellendus enim repudiandae quaerat? Error quibusdam, est laborum quos corporis animi cumque. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis repudiandae, natus voluptates doloribus esse illo id, deserunt quae tenetur, itaque deleniti laborum repellendus! Quo cum sint omnis repellat mollitia obcaecati! Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium aliquam minima doloribus iste tempora veniam officia, libero odit, suscipit inventore ratione, totam ex tempore eius ea. Soluta quo vel ipsa?
+              </div>
+              <div className="flex flex-col px-20 py-8 ">
+                <h1 className="text-[#6d786f] pb-8 text-3xl">Before</h1>
+                <div className="grid max-w-[800px] place-self-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-12 place-content-center place-items-center">
+                  {
+                    project.beforePictures.small.map((image, indexBeforePicture) => (
+                      <div className="flex cursor-pointer bg-white rounded-3xl p-8 flex-col gap-6 shadow-xl shadow-black/40" key={indexBeforePicture} onClick={() => {handleOpenModal(`${indexProject}`, "before", `${indexBeforePicture}`)}}>
+                        <h2 className="text-[#6d786f] text-sm lg:text-2xl">Picture {indexBeforePicture + 1}</h2>
+                        <Image className="rounded-none w-full max-h-[250px]" src={image.url} alt="" />
                       </div>
-                      <div className={` bgred-300 flex h-full flex-col  border-2  ${index % 2 === 0 ? "border-[#665858]" : "border-[#b6c6b8]"}`}>
-                        <div className="grid max-md:grid-cols-2 h-full place-content-center place-items-center sm:grid-cols-4 bgred-200  py-4 px-6 gap-4">
-                          {
-                            project.beforePictures.map((picture, index) => (
-                              <div className="bgred-300 flex w-full justify-center items-center h-full  items-" key={index}>
-                                <Image className="  object-cover object-center rounded-none border-none outline-none" src={picture.url} alt="" />
-                              </div>
-                            ))
-                          }
-                        </div>
-                      </div>
-                    </div>
-                    <div id="style" className="bgorange-800   flex flex-col  ">
-                      <div className=" ">
-                        <h2 className="text-white font-bold">{project.style} Style</h2>
-                      </div>
-                      <div className={`bgslate-800 justify-center items-center flex border-2   ${index % 2 === 0 ? "border-[#665858]" : "border-[#b6c6b8]"}`}>
-                        <Image className="  object-cover rounded-none border-none outline-none" src={project.stylePicture} alt="" />
-                      </div>
-                    </div>
-                  </div>
-                  <div id="proposal" className=" bgpurple-500 h[400px]  gap-2 flex flex-col ">
-                    <div className=" ">
-                      <h2 className="text-white font-bold">Proposal</h2>
-                    </div>
-                    <div className={`bgslate-800 border-2 flex px-6 py-4  ${index % 2 === 0 ? "border-[#665858]" : "border-[#b6c6b8] "}`}>
-                      <div id="left" className="w-[40%] p-2 flex bgred-300">
-                        <Image className="  object-cover h-full  rounded-none border-none outline-none" src={project.proposalPictures[0].url} alt="" />
-                      </div>
-                      <div id="right" className="flex flex-col w-[60%] bgblue-300">
-                        <div id="first" className="flex">
-                          <div className="p-2">
-                            <Image className="  object-cover   rounded-none border-none outline-none" src={project.proposalPictures[1].url} alt="" />
-                          </div>
-                          <div className="p-2">
-                            <Image className="  object-cover   rounded-none border-none outline-none" src={project.proposalPictures[2].url} alt="" />
-                          </div>
-                        </div>
-                        <div className="flex">
-                          <div id="second" className="flex  bgred-300">
-                            <div className="p-2">
-                              <Image className="  object-cover  rounded-none border-none outline-none" src={project.proposalPictures[3].url} alt="" />
-                            </div>
-                            <div className="p-2">
-                              <Image className="  object-cover  rounded-none border-none outline-none" src={project.proposalPictures[4].url} alt="" />
-                            </div>
-                          </div>
-                          <div id="third" className="flex flex-col  p2 bgred-300 ">
-                            <div className="p-2">
-                              <Image className=" object-cover   rounded-none border-none outline-none" src={project.proposalPictures[5].url} alt="" />
-                            </div>
-                            <div className="p-2">
-                              <Image className=" bgblue-400 object-cover   rounded-none border-none outline-none" src={project.proposalPictures[6].url} alt="" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    ))
+                  }
                 </div>
-                <div id="description" className={`${index % 2 === 0 ? "text-[#636161]" : "text-white"} text-justify text-xs sm:text-sm bgyellow-400 gap-2 p-3`}>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque, dicta deleniti rerum sapiente saepe veritatis harum consectetur totam nesciunt culpa voluptate sequi error tenetur illum at a blanditiis nisi vel! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore veniam ad cupiditate impedit autem odio deserunt recusandae officiis ducimus harum veritatis a, soluta sapiente commodi sunt qui dolorem possimus. Unde? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis vero, omnis, ab voluptas consequatur mollitia sapiente odio laudantium unde temporibus excepturi nobis animi numquam ducimus quod nihil dolorum! Tempore, ipsa?
+                
+              </div>
+              <div className="flex flex-col px-20 py-8" style={{backgroundColor: project.color}}>
+                <h1 className=" pb-8 text-3xl text-white">Now</h1>
+                <div className="grid max-w-[800px] place-self-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-12 place-content-center place-items-center">
+                  {
+                    project.afterPictures.small.map((image, indexAfterPicture) => (
+                      <div className="flex cursor-pointer bg-white rounded-3xl p-8 flex-col gap-6 shadow-xl shadow-black/40" key={indexAfterPicture} onClick={() => {handleOpenModal(`${indexProject}`, "after",  `${indexAfterPicture}`)}}>
+                        <h2 className="text-[#6d786f] text-sm lg:text-2xl">Picture {indexAfterPicture + 1}</h2>
+                        <Image className="rounded-none w-full max-h-[250px]" src={image.url} alt="" />
+                      </div>
+                    ))
+                  }
                 </div>
               </div>
-            </section>
+            </div>
           </div>
         ))
       }
+      </section>
     </main>
   );
 }

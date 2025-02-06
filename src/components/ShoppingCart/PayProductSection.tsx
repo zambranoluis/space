@@ -142,13 +142,15 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 })) || []);
 
 const handleSelectedExtras = (index: number) => {
-  if (!selectedExtras[index]) return; // Prevent error if index is out of bounds
-
-  setSelectedExtras((prevExtras) => {
-    return prevExtras.map((extra, i) =>
-      i === index ? { ...extra, isActive: !extra.isActive } : extra
-    );
-  });
+  if (selectedExtras[index].isActive) {
+    const newSelectedExtras = [...selectedExtras];
+    newSelectedExtras[index].isActive = false;
+    setSelectedExtras(newSelectedExtras);
+  } else {
+    const newSelectedExtras = [...selectedExtras];
+    newSelectedExtras[index].isActive = true;
+    setSelectedExtras(newSelectedExtras);
+  }
 };
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
