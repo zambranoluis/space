@@ -111,3 +111,23 @@ export interface Purchase {
   status: string;
   isActive: boolean;
 }
+
+export interface DetailedPurchase {
+  _id: string;
+  customer: Customer;
+  product: Product;
+  selectedAreas: [
+    {
+      nameArea: string;
+      isActive: boolean;
+    },
+    {
+      nameArea: string;
+      isActive: boolean;
+    },
+  ];
+  extras: Extra[];
+  total: number;
+  status: string;
+  isActive: boolean;
+}

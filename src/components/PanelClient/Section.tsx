@@ -8,14 +8,14 @@ import { IoCloseOutline } from "react-icons/io5";
 
 import {
   Customer,
-  Purchase
+  DetailedPurchase
 } from "@/utils/dataTypes"
 
 interface SectionProps {
   closeSiteContainer: () => void;
   asideSelectedOption: string;
   customer: Customer | null;
-  purchases: Purchase[];
+  purchases: DetailedPurchase[];
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -24,6 +24,7 @@ const Section: React.FC<SectionProps> = ({
   customer,
   purchases,
 }) => {
+  console.log("purchaseszzzzzzz: ", purchases)
   return (
     <section
       className='w-full h-full bg-cover bg-no-repeat bg-center'

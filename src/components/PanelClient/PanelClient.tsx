@@ -12,7 +12,7 @@ import { useSession } from "next-auth/react";
 
 import {
   Customer,
-  Purchase
+  DetailedPurchase
 } from "@/utils/dataTypes"
 
 const PanelClient: React.FC = () => {
@@ -20,7 +20,7 @@ const PanelClient: React.FC = () => {
   const userId = session?.user?.id;
 
   const [customer, setCustomer] = useState<Customer | null>(null);
-  const [purchases, setPurchases] = useState<Purchase[]>([]);
+  const [purchases, setPurchases] = useState<DetailedPurchase[]>([]);
 
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const PanelClient: React.FC = () => {
       const fetchPurchases = async () => {
         try {
           const response = await apiService.getPurchasesByCustomerId(userId);
-          setPurchases(response.data as Purchase[]);
+          setPurchases(response.data as DetailedPurchase[]);
         } catch (err: unknown) {
           console.error("PanelClient: Error fetching purchases:", err);
         } finally {

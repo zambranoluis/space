@@ -7,40 +7,8 @@ import { FaSearch } from "react-icons/fa";
 import { FaTags } from "react-icons/fa6";
 import PurchaseDetails from "./PurchaseDetails";
 
-interface Area {
-  nameArea: string;
-  isActive: boolean;
-}
 
-interface Extra {
-  extra: {
-    name: string;
-  };
-  isActive: boolean;
-}
-
-export interface SelectedExtra {
-  extra: string;
-  isActive: boolean;
-}
-interface Purchase {
-  customer: string;
-    product: string;
-    selectedAreas: [
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-    ];
-    extras: SelectedExtra[];
-    price: number;
-    status: string;
-    isActive: boolean;
-}
+import {DetailedPurchase, Area, Extra} from "@/utils/dataTypes"
 
 const typePurchase = [
   {
@@ -64,11 +32,12 @@ const typePurchase = [
 ];
 
 interface PurchasesProps {
-  purchases: Purchase[];
+  purchases: DetailedPurchase[];
 }
 
 export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
-  const [currentPurchases, setCurrentPurchases] = useState<string | null>("All Purchases");
+  {console.log("purchasesssxxxx: ", purchases)}
+  const [currentPurchases, setCurrentPurchases] = useState<string>("All Purchases");
 
   const handlePayment = async (purchaseId: string) => {
     try {
@@ -84,7 +53,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
     }
   };
 
-  const filteredPurchases = (): Purchase[] => {
+  const filteredPurchases = (): DetailedPurchase[] => {
     if (currentPurchases === "All Purchases") {
       return purchases;
     }
@@ -124,8 +93,9 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
           </div>
         </div>
 
-        {/* <div className=' overflow-y-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
-          {filteredPurchases().map((purchase: Purchase, index: number) => (
+        <div className=' overflow-y-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
+          {filteredPurchases().map((purchase: DetailedPurchase, index: number) => (
+            console.log("filtered:", currentPurchases, " purchase: ", purchase),
             <div key={index} className='flex flex-col p-2 bgred-300 '>
               <div
                 id='purchaseTitle'
@@ -172,7 +142,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
                         extra.isActive && (
                           <p key={i}>
                             <GiCheckMark className='inline-block text-green-600' />{" "}
-                            {extra.extra.name}
+                            {extra.name}
                           </p>
                         ),
                     )
@@ -199,7 +169,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
               </div>
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );

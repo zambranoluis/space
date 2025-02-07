@@ -10,6 +10,7 @@ import {
   Product,
   CreatePurchase,
   Purchase,
+  DetailedPurchase,
   Transaction,
 } from "@/utils/dataTypes";
 
@@ -113,7 +114,7 @@ export const apiService = {
     }
   },
 
-  getPurchasesByCustomerId: async (customerId: string): Promise<ApiResponse<Purchase[]>> => {
+  getPurchasesByCustomerId: async (customerId: string): Promise<ApiResponse<DetailedPurchase[]>> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/purchases/customer/${customerId}`,
