@@ -1,40 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 
-interface Customer {
-  _id: string;
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  skype: string;
-  address: string;
-  birthdate: string;
-}
+import {Customer} from "@/utils/dataTypes"
 
 interface MyProfileProps {
   customer: Customer;
 }
 
 const MyProfile: React.FC<MyProfileProps> = ({ customer }) => {
-  const [customerData, setCustomerData] = useState<Customer>(customer);
-
+  {console.log("customerxxxx: ", customer)}
   return (
-    <section className="flex flex-col w-full bg-red-500 max-w-[500px] justify-center items-center w-[80%] place-self-center py-4 gap-6">
+    <section className="flex flex-col w-full bgred-500 max-w-[500px] justify-center items-center w-[80%] place-self-center py-4 gap-6">
       <div className="text-center text-[#6d786f] bg-white w-full sticky top-0 z-[2000]">
         <div className="flex justify-center items-center">
           <FaUserCircle className="text-[100px]" />
         </div>
-        {customerData ? (
+        {customer ? (
           <div>
-            <h1 className="font-bold">{customerData.email}</h1>
-            <h2 className="">{customerData.name} {customerData.lastname}</h2>
+            <h1 className="font-bold">{customer.email}</h1>
+            <h2 className="">{customer.name} {customer.lastname}</h2>
             <p className="">Client</p>
           </div>
         ) : (
@@ -44,28 +29,28 @@ const MyProfile: React.FC<MyProfileProps> = ({ customer }) => {
         )}
       </div>
 
-      {customerData && (
-        <div className="flex flex-col gap-6 py-6 bg-red-200 w-full">
+      {customer && (
+        <div className="flex flex-col gap-6 py-6 bgred-200 w-full">
           <form className="bg-[#f3f3f3] rounded-3xl flex flex-col w-full justify-center items-center gap-4 p-8">
             <div className="flex w-full" id="firstName">
               <input
                 className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full"
                 type="text"
-                placeholder={customerData.name}
+                placeholder={customer.name}
               />
             </div>
             <div className="flex w-full" id="lastName">
               <input
                 className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full"
                 type="text"
-                placeholder={customerData.lastname}
+                placeholder={customer.lastname}
               />
             </div>
             <div className="flex w-full" id="email">
               <input
                 className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full"
                 type="text"
-                placeholder={customerData.email}
+                placeholder={customer.email}
               />
             </div>
             <div className="flex max-md:flex-col w-full gap-2" id="phone">
@@ -76,7 +61,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ customer }) => {
                 <input
                   className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full"
                   type="text"
-                  placeholder={customerData.phone.number}
+                  placeholder={`${customer.phone.areaCode} ${customer.phone.number}`}
                 />
               </div>
             </div>
@@ -84,7 +69,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ customer }) => {
               <input
                 className="bg-white text-black pl-8 border border-[#6d786f] outline-none h-[50px] rounded-full w-full"
                 type="text"
-                placeholder={customerData.address}
+                placeholder={customer.address}
               />
             </div>
             <div className="flex justify-center items-center">

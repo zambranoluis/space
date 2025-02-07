@@ -6,46 +6,10 @@ import { Purchases } from "@/components/Purchases/Purchases";
 
 import { IoCloseOutline } from "react-icons/io5";
 
-export interface SelectedExtra {
-  extra: string;
-  isActive: boolean;
-}
-interface Purchase {
-  customer: string;
-    product: string;
-    selectedAreas: [
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-    ];
-    extras: SelectedExtra[];
-    price: number;
-    status: string;
-    isActive: boolean;
-}
-
-
-
-interface Customer {
-  _id: string;
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  skype: string;
-  address: string;
-  birthdate: string;
-}
+import {
+  Customer,
+  Purchase
+} from "@/utils/dataTypes"
 
 interface SectionProps {
   closeSiteContainer: () => void;
@@ -69,23 +33,23 @@ const Section: React.FC<SectionProps> = ({
         <div className='absolute w-full h-full gap-8 flex flex-col'>
           <div
             id='siteContainer'
-            className={`bg-red-400 transition-all duration-300 overflow-hidden absolute w-full h-full bg-red-300 flex max-md:pl-12 md:justify-center items-center`}
+            className={` transition-all duration-300 overflow-hidden absolute w-full h-full bgred-300 flex max-md:pl-12 md:justify-center items-center`}
           >
             <div className='max-md:w-[90%] w-[80%] h-[70%] flex bg-white rounded-3xl shadow-md shadow-black'>
               <div className='flex flex-col w-full rounded-t-3xl'>
                 <div className='w-full flex justify-end items-center rounded-t-3xl p-2'>
                   <div
-                    className='bg-rose-400 cursor-pointer'
+                    className='bgrose-400 cursor-pointer'
                     onClick={() => {
                       closeSiteContainer();
                     }}
                   >
-                    <IoCloseOutline className='text-xl bg-blue-300' />
+                    <IoCloseOutline className='text-xl bgblue-300' />
                   </div>
                 </div>
                 <div
                   id='site'
-                  className={`h-full w-full bg-green-300 overflow-y-scroll noScrollBar rounded-b-3xl`}
+                  className={`h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}
                 >
                   {asideSelectedOption === "projects" && <ProjectsClient />}
                   {asideSelectedOption === "myprofile" && customer && (

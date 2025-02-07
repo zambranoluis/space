@@ -5,21 +5,7 @@ import { redirect } from "next/navigation";
 import Section from "./Section";
 import axios from "axios";
 import { apiService } from "@/services/apiService";
-
-interface CreateCustomer {
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  skype: string;
-  address: string;
-  birthdate: string;
-}
+import { CreateCustomer } from "@/utils/dataTypes";
 
 const CreateAccount = () => {
   const [areaCode, setAreaCode] = useState<string>("+1");

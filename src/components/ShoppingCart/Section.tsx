@@ -7,29 +7,11 @@ import PayProductSection from "@/components/ShoppingCart/PayProductSection";
 
 import LoadingShoppingCart from "@/components/ShoppingCart/LoadingShoppingCart";
 
+import {
+  Product,
+  Extra
+} from "@/utils/dataTypes";
 
-export interface Product {
-  _id: string;
-  name: string;
-  type: string;
-  area: number;
-  image: string;
-  include: [];
-  extra: [];
-  cost: number;
-  price: number;
-  picture: string;
-}
-
-export interface Extra {
-  _id: string;
-  name: string;
-  description: string;
-  items: [];
-  cost: number;
-  price: number;
-  isActive: boolean;
-}
 
 interface ShoppingCartProps{
   products: Product[] | null;
@@ -38,7 +20,6 @@ interface ShoppingCartProps{
   handleSelectedPackage: (index: number, direction: "next" | "prev") => void;
   scrollContainerRef: RefObject<HTMLDivElement | null>;
   extras: Extra[] | null;
-  customer: string | null;
 }
 
 const Section: React.FC<ShoppingCartProps> = ({ 
@@ -47,8 +28,8 @@ const Section: React.FC<ShoppingCartProps> = ({
   setSelectedPackage,
   handleSelectedPackage,
   scrollContainerRef,
-  extras,
-  customer}) => {
+  extras}) => {
+
   return (
     <div className='w-full bgrose-400 flex flex-col bgred-400'>
       <section className='bgpurple-500 flex flex-col w-full'>
@@ -83,7 +64,6 @@ const Section: React.FC<ShoppingCartProps> = ({
 
       {products && products.length > 0 ? (
         <PayProductSection
-          customer={customer || null}
           products={products}
           extras={extras}
           selectedPackage={selectedPackage}

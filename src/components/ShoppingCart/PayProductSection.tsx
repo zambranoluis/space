@@ -8,83 +8,16 @@ import { Switch } from "@nextui-org/switch";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export interface Area {
-  nameArea: string;
-  isActive: boolean;
-}
+import {
+  Product,
+  Extra,
+  SelectedExtra,
+  Purchase
+} from "@/utils/dataTypes"
 
-export interface Customer {
-  id: string;
-  name: string;
-  lastname: string;
-  email: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  address: string;
-}
-
-export interface Product {
-  _id: string;
-  name: string;
-  type: string;
-  area: number;
-  image: string;
-  include: [];
-  extra: [];
-  cost: number;
-  price: number;
-  picture: string;
-}
-
-export interface SelectedProduct {
-  id: string;
-  name: string;
-  type: string;
-  area: number;
-  price: number;
-  picture: string;
-  include: [];
-}
-
-export interface Extra {
-  _id: string;
-  name: string;
-  description: string;
-  items: [];
-  cost: number;
-  price: number;
-  isActive: boolean;
-}
-
-export interface SelectedExtra {
-  extra: string;
-  isActive: boolean;
-}
-
-export interface Purchase {
-  customer: string;
-  product: string;
-  selectedAreas: [
-    {
-      nameArea: string;
-      isActive: boolean;
-    },
-    {
-      nameArea: string;
-      isActive: boolean;
-    },
-  ];
-  extras: SelectedExtra[];
-  price: number;
-  status: string;
-  isActive: boolean;
-}
 
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
-  customer: string | null;
   products: Product[];
   extras: Extra[] | null;
   selectedPackage: number;
@@ -92,22 +25,29 @@ interface PayProductSectionProps {
 }
 
 const PayProductSection: React.FC<PayProductSectionProps> = ({
-  customer,
   products,
   selectedPackage,
   handleSelectedPackage,
   extras,
 }) => {
-  const [productSelectedInfo, setProductSelectedInfo] = useState<string>();
+  const [productSelectedId, setProductSelectedId] = useState<string>();
   const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(false);
   const [isProductPro, setIsProductPro] = useState(false);
   const { data: session } = useSession();
+
+  const [customer, setCustomer] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (session) {
+      setCustomer(session.user.id);
+    }
+  }, [session]);
 
   const router = useRouter();
 
   useEffect(() => {
     if (products !== null) {
-      setProductSelectedInfo(products[selectedPackage]._id);
+      setProductSelectedId(products[selectedPackage]._id);
       setIsTwoAreasAllowed(products[selectedPackage].area === 2);
       setIsProductPro(products[selectedPackage].type === "Pro");
     }
@@ -176,17 +116,22 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     }
   }, [selectedPackage, selectedExtras, isProductPro, products]); // Added 'isProductPro' and 'products' dependencies
 
+  
   const handlePurchase = async () => {
+
     if (!session) {
       alert("Debes iniciar sesión para realizar una compra.");
       router.push("/login");
       return;
     }
 
+    
+
     if (!customer || !products[selectedPackage]) {
       alert("No se puede proceder con la compra. Intenta nuevamente.");
       return;
     }
+    
 
     const newPurchase: Purchase = {
       customer: customer,
@@ -211,6 +156,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       status: "pending",
       isActive: true,
     };
+
 
     try {
       const response = await apiService.createPurchase(newPurchase);

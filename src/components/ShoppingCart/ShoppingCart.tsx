@@ -5,68 +5,15 @@ import Section from "./Section";
 import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
 
-interface Customer {
-  _id: string;
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  skype: string;
-  address: string;
-  birthdate: string;
-}
-
-export interface Product {
-  _id: string;
-  name: string;
-  type: string;
-  area: number;
-  image: string;
-  include: [];
-  extra: [];
-  cost: number;
-  price: number;
-  picture: string;
-}
-
-export interface Extra {
-  _id: string;
-  name: string;
-  description: string;
-  items: [];
-  cost: number;
-  price: number;
-  isActive: boolean;
-}
+import {
+  Product,
+  Extra,
+} from "@/utils/dataTypes"
 
 export default function ShoppingCart() {
-  const [customer, setCustomer] = useState<Customer | null>(null);
   const [products, setProducts] = useState<Product[] | null>(null);
   const [extras, setExtras] = useState<Extra[] | null>(null);
-  const { data: session } = useSession();
 
-  useEffect(() => {
-    if (session?.user?.id) {
-      const fetchCustomer = async () => {
-        try {
-          const response = await apiService.getCustomer(session?.user?.id);
-          if (response && response.data) {
-            setCustomer(response.data as Customer); // Cast response.data to Customer type
-          }
-        } catch (err) {
-          console.error("Error fetching customer:", err);
-        }
-      };
-      fetchCustomer();
-    } else {
-      setCustomer(null); // If no session, ensure `customer` is null
-    }
-  }, [session]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -138,8 +85,7 @@ export default function ShoppingCart() {
         setSelectedPackage={setSelectedPackage}
         handleSelectedPackage={handleSelectedPackage}
         scrollContainerRef={scrollContainerRef}
-        extras={extras}
-        customer={customer?._id || null}
+        extras={extras || null}
       />
     </section>
   );

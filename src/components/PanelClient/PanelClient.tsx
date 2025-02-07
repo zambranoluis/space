@@ -10,64 +10,10 @@ import ChatModal from "@/components/ChatModal";
 import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
 
-interface Area {
-  nameArea: string;
-  isActive: boolean;
-}
-
-interface Extra {
-  extra: {
-    name: string;
-  };
-  isActive: boolean;
-}
-
-interface Product {
-  name: string;
-  type: string;
-}
-
-export interface SelectedExtra {
-  extra: string;
-  isActive: boolean;
-}
-
-interface Purchase {
-  customer: string;
-    product: string;
-    selectedAreas: [
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-      {
-        nameArea: string;
-        isActive: boolean;
-      },
-    ];
-    extras: SelectedExtra[];
-    price: number;
-    status: string;
-    isActive: boolean;
-}
-
-
-
-interface Customer {
-  _id: string;
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  skype: string;
-  address: string;
-  birthdate: string;
-}
+import {
+  Customer,
+  Purchase
+} from "@/utils/dataTypes"
 
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
@@ -76,42 +22,38 @@ const PanelClient: React.FC = () => {
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [purchases, setPurchases] = useState<Purchase[]>([]);
 
-  const getCustomer = useCallback(async () => {
-    if (!userId) return; // Si no hay usuario autenticado, salir de la función
-    try {
-      const response = await apiService.getCustomer(userId);
-      if (response && response.data) {
-        setCustomer(response.data as Customer); // Cast the response data to Customer type
-      }
-    } catch (err) {
-      console.error("Error fetching customer:", err);
+
+  useEffect(() => {
+    if (userId) {
+      const fetchPurchases = async () => {
+        try {
+          const response = await apiService.getPurchasesByCustomerId(userId);
+          setPurchases(response.data as Purchase[]);
+        } catch (err: unknown) {
+          console.error("PanelClient: Error fetching purchases:", err);
+        } finally {
+          
+        }
+      };
+      fetchPurchases();
     }
   }, [userId]);
 
   useEffect(() => {
-    getCustomer();
-  }, [getCustomer]);
-
-  const getPurchasesByCustomer = useCallback(async () => {
-    if (!userId) return; // Si no hay usuario autenticado, salir de la función
-    try {
-      const response = await apiService.getPurchasesByCustomerId(userId);
-      if (response?.data && Array.isArray(response.data)) {
-        setPurchases(response.data as Purchase[]); // Cast the response data to Purchase[] type
-      } else {
-        console.warn("Unexpected response format:", response);
-        setPurchases([]); // Evitar que purchases tenga un estado indefinido o nulo
-      }
-    } catch (err) {
-      console.error("Error fetching purchases:", err);
-      setPurchases([]); // En caso de error, asegurar que purchases sea un array vacío
-    }
-  }, [userId]);
+    if (userId) {
+      const fetchCustomer = async () => {
+        try {
+          const response = await apiService.getCustomer(userId);
+          setCustomer(response.data as Customer); // Use the as keyword to assert the type
+        } catch (err: unknown) {
+          console.error("PanelClient: Error fetching customer:", err);
+        } finally {
   
-
-  useEffect(() => {
-    getPurchasesByCustomer();
-  }, [getPurchasesByCustomer]);
+        }
+      };
+      fetchCustomer();
+    }
+  }, [userId]);
 
   const closeSiteContainer = () => {
     const container = document.getElementById(`siteContainer`);

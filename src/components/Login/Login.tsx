@@ -55,8 +55,6 @@ const router = useRouter();
       redirect: false,
     });
 
-    console.log("email:", email, "password:", password, "location:", location);
-
     
     if (result?.error) {
       setLoadingLogin(false);

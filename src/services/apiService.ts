@@ -3,91 +3,16 @@ import apiClient from "./apiClient";
 
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
 
-interface Customer {
-  _id: string;
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  skype: string;
-  address: string;
-  birthdate: string;
-}
+import {
+  CreateCustomer,
+  Customer,
+  Extra,
+  Product,
+  CreatePurchase,
+  Purchase,
+  Transaction,
+} from "@/utils/dataTypes";
 
-interface CreateCustomer {
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phone: {
-    areaCode: string;
-    number: string;
-  };
-  skype: string;
-  address: string;
-  birthdate: string;
-}
-
-export interface SelectedExtra {
-  extra: string;
-  isActive: boolean;
-}
-interface Product {
-  _id: string;
-  name: string;
-  type: string;
-  area: number;
-  image: string;
-  include: string[];
-  extra: string[];
-  cost: number;
-  price: number;
-  picture: string;
-}
-
-interface Extra {
-  _id: string;
-  name: string;
-  description: string;
-  items: string[];
-  cost: number;
-  price: number;
-  isActive: boolean;
-}
-
-interface Transaction {
-  _id: string;
-  purchaseId: string;
-  status: string;
-  amount: number;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Purchase {
-  customer: string;
-  product: string;
-  selectedAreas: [
-    {
-      nameArea: string;
-      isActive: boolean;
-    },
-    {
-      nameArea: string;
-      isActive: boolean;
-    },
-  ];
-  extras: SelectedExtra[];
-  price: number;
-  status: string;
-  isActive: boolean;
-}
 
 interface ApiResponse<T = unknown> {
   data: T;
@@ -121,7 +46,7 @@ export const apiService = {
   getCustomer: async (customerId: string): Promise<ApiResponse<Customer>> => {
     try {
       const response = await apiClient.get(`${NEXT_URL_API}/customers/${customerId}`);
-      return response.data;
+      return response;
     } catch (error: unknown) {
       const err = error as ApiError;
       console.error("Error al obtener el cliente:", err.response?.data || err.message);
@@ -151,7 +76,7 @@ export const apiService = {
     }
   },
 
-  createPurchase: async (purchase: Purchase): Promise<ApiResponse<Purchase>> => {
+  createPurchase: async (purchase: CreatePurchase): Promise<ApiResponse<CreatePurchase>> => {
     try {
       const response = await apiClient.post(`${NEXT_URL_API}/purchases`, purchase);
       return response.data;
