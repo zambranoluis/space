@@ -36,7 +36,6 @@ interface PurchasesProps {
 }
 
 export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
-  {console.log("purchasesssxxxx: ", purchases)}
   const [currentPurchases, setCurrentPurchases] = useState<string>("All Purchases");
 
   const handlePayment = async (purchaseId: string) => {
@@ -95,7 +94,6 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
 
         <div className=' overflow-y-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
           {filteredPurchases().map((purchase: DetailedPurchase, index: number) => (
-            console.log("filtered:", currentPurchases, " purchase: ", purchase),
             <div key={index} className='flex flex-col p-2 bgred-300 '>
               <div
                 id='purchaseTitle'

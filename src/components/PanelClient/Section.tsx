@@ -24,7 +24,6 @@ const Section: React.FC<SectionProps> = ({
   customer,
   purchases,
 }) => {
-  console.log("purchaseszzzzzzz: ", purchases)
   return (
     <section
       className='w-full h-full bg-cover bg-no-repeat bg-center'

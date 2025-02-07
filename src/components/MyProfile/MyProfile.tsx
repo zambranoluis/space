@@ -9,7 +9,6 @@ interface MyProfileProps {
 }
 
 const MyProfile: React.FC<MyProfileProps> = ({ customer }) => {
-  {console.log("customerxxxx: ", customer)}
   return (
     <section className="flex flex-col w-full bgred-500 max-w-[500px] justify-center items-center w-[80%] place-self-center py-4 gap-6">
       <div className="text-center text-[#6d786f] bg-white w-full sticky top-0 z-[2000]">

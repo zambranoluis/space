@@ -4,13 +4,7 @@ import React, { useEffect, useState, Suspense, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { apiService } from "@/services/apiService";
 
-interface Transaction {
-  id: string;
-  sessionId: string;
-  status: string;
-  amount: number;
-  currency: string;
-}
+import { Transaction } from "@/utils/dataTypes";
 
 const SuccessContent: React.FC = () => {
   const searchParams = useSearchParams();
