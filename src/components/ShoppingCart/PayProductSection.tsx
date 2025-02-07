@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { apiService } from "@/services/apiService";
@@ -13,8 +11,7 @@ import {
   Extra,
   SelectedExtra,
   Purchase
-} from "@/utils/dataTypes"
-
+} from "@/utils/dataTypes";
 
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
@@ -82,15 +79,21 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   );
 
   const handleSelectedExtras = (index: number) => {
-    if (selectedExtras[index].isActive) {
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = false;
-      setSelectedExtras(newSelectedExtras);
+    const newSelectedExtras = [...selectedExtras];
+
+    if (isProductPro) {
+      // Ensure that extras with index 1 and 2 are always active for "Pro" products
+      if (index === 1 || index === 2) {
+        newSelectedExtras[index].isActive = true;
+      } else {
+        newSelectedExtras[index].isActive = !newSelectedExtras[index].isActive;
+      }
     } else {
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = true;
-      setSelectedExtras(newSelectedExtras);
+      // If the product is not "Pro", we can toggle any extra
+      newSelectedExtras[index].isActive = !newSelectedExtras[index].isActive;
     }
+
+    setSelectedExtras(newSelectedExtras);
   };
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
@@ -101,37 +104,37 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       const basePrice = selectedProduct.price;
 
       const extrasPrice = selectedExtras.reduce((total, extra, index) => {
-        if (extra && isProductPro) {
-          // Si el tipo de producto es "Pro", solo sumamos los índices 0 y 3
-          return (index === 0 || index === 3) && extra.isActive && extra.price
-            ? total + extra.price
-            : total;
+        if (isProductPro) {
+          // If the product is "Pro", only sum up the extras at index 0 and 3
+          if (index === 0 || index === 3) {
+            return extra.isActive && extra.price ? total + extra.price : total;
+          }
+          // For indexes 1 and 2, always active
+          if ((index === 1 || index === 2) && extra.isActive) {
+            return total + extra.price;
+          }
         } else {
-          // Si no es "Pro", sumamos todos los extras activos
+          // If the product is not "Pro", sum all active extras
           return extra.isActive && extra.price ? total + extra.price : total;
         }
+        return total;
       }, 0);
 
       setFinalPrice(basePrice + extrasPrice);
     }
   }, [selectedPackage, selectedExtras, isProductPro, products]); // Added 'isProductPro' and 'products' dependencies
 
-  
   const handlePurchase = async () => {
-
     if (!session) {
       alert("Debes iniciar sesión para realizar una compra.");
       router.push("/login");
       return;
     }
 
-    
-
     if (!customer || !products[selectedPackage]) {
       alert("No se puede proceder con la compra. Intenta nuevamente.");
       return;
     }
-    
 
     const newPurchase: Purchase = {
       customer: customer,
@@ -156,7 +159,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       status: "pending",
       isActive: true,
     };
-
 
     try {
       const response = await apiService.createPurchase(newPurchase);
