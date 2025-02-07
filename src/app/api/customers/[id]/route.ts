@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { getToken } from "next-auth/jwt";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -26,9 +26,23 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json(response.data);
-  } catch (error: any) {
-    console.error("Error al obtener cliente:", error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error("Error al obtener cliente:", error.response?.data || error.message);
+      return NextResponse.json(
+        { error: error.response?.data || error.message },
+        { status: error.response?.status || 500 }
+      );
+    } else if (error instanceof Error) {
+      console.error("Error al obtener cliente:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      console.error("Error desconocido al obtener cliente");
+      return NextResponse.json(
+        { error: "An unknown error occurred" },
+        { status: 500 }
+      );
+    }
   }
 }
 
@@ -56,8 +70,22 @@ export async function PATCH(req: NextRequest) {
     });
 
     return NextResponse.json(response.data);
-  } catch (error: any) {
-    console.error("Error al actualizar cliente:", error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error("Error al actualizar cliente:", error.response?.data || error.message);
+      return NextResponse.json(
+        { error: error.response?.data || error.message },
+        { status: error.response?.status || 500 }
+      );
+    } else if (error instanceof Error) {
+      console.error("Error al actualizar cliente:", error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      console.error("Error desconocido al actualizar cliente");
+      return NextResponse.json(
+        { error: "An unknown error occurred" },
+        { status: 500 }
+      );
+    }
   }
 }

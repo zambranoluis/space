@@ -4,15 +4,10 @@ import { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Section from "./Section";
-
 import NavbarClient from "@/components/NavbarClient";
-
 import AsideClient from "@/components/AsideClient";
-
 import ChatModal from "@/components/ChatModal";
-
 import { apiService } from "@/services/apiService";
-
 import { useSession } from "next-auth/react";
 
 interface Area {
@@ -32,14 +27,31 @@ interface Product {
   type: string;
 }
 
-interface Purchase {
-  _id: string;
-  product: Product;
-  selectedAreas: Area[];
-  extras: Extra[];
-  total: number;
-  status: string;
+export interface SelectedExtra {
+  extra: string;
+  isActive: boolean;
 }
+
+interface Purchase {
+  customer: string;
+    product: string;
+    selectedAreas: [
+      {
+        nameArea: string;
+        isActive: boolean;
+      },
+      {
+        nameArea: string;
+        isActive: boolean;
+      },
+    ];
+    extras: SelectedExtra[];
+    price: number;
+    status: string;
+    isActive: boolean;
+}
+
+
 
 interface Customer {
   _id: string;
@@ -51,33 +63,28 @@ interface Customer {
   phone: {
     areaCode: string;
     number: string;
-  }[];
+  };
   skype: string;
   address: string;
   birthdate: string;
 }
 
-
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
-
   const userId = session?.user?.id;
 
   const [customer, setCustomer] = useState<Customer | null>(null);
-
   const [purchases, setPurchases] = useState<Purchase[]>([]);
 
   const getCustomer = useCallback(async () => {
     if (!userId) return; // Si no hay usuario autenticado, salir de la función
     try {
       const response = await apiService.getCustomer(userId);
-      if (response) {
-        setTimeout(() => {
-          setCustomer(response);
-        }, 300);
-
+      if (response && response.data) {
+        setCustomer(response.data as Customer); // Cast the response data to Customer type
       }
     } catch (err) {
+      console.error("Error fetching customer:", err);
     }
   }, [userId]);
 
@@ -89,13 +96,18 @@ const PanelClient: React.FC = () => {
     if (!userId) return; // Si no hay usuario autenticado, salir de la función
     try {
       const response = await apiService.getPurchasesByCustomerId(userId);
-      if (response) {
-        setPurchases(response.data);
-  
+      if (response?.data && Array.isArray(response.data)) {
+        setPurchases(response.data as Purchase[]); // Cast the response data to Purchase[] type
+      } else {
+        console.warn("Unexpected response format:", response);
+        setPurchases([]); // Evitar que purchases tenga un estado indefinido o nulo
       }
     } catch (err) {
+      console.error("Error fetching purchases:", err);
+      setPurchases([]); // En caso de error, asegurar que purchases sea un array vacío
     }
   }, [userId]);
+  
 
   useEffect(() => {
     getPurchasesByCustomer();

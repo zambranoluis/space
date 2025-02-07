@@ -5,8 +5,6 @@ import { GiCheckMark } from "react-icons/gi";
 import { PiTagSimpleFill } from "react-icons/pi";
 import { FaSearch } from "react-icons/fa";
 import { FaTags } from "react-icons/fa6";
-
-
 import PurchaseDetails from "./PurchaseDetails";
 
 interface Area {
@@ -21,18 +19,27 @@ interface Extra {
   isActive: boolean;
 }
 
-interface Product {
-  name: string;
-  type: string;
+export interface SelectedExtra {
+  extra: string;
+  isActive: boolean;
 }
-
 interface Purchase {
-  _id: string;
-  product: Product;
-  selectedAreas: Area[];
-  extras: Extra[];
-  total: number;
-  status: string;
+  customer: string;
+    product: string;
+    selectedAreas: [
+      {
+        nameArea: string;
+        isActive: boolean;
+      },
+      {
+        nameArea: string;
+        isActive: boolean;
+      },
+    ];
+    extras: SelectedExtra[];
+    price: number;
+    status: string;
+    isActive: boolean;
 }
 
 const typePurchase = [
@@ -43,16 +50,16 @@ const typePurchase = [
   {
     name: "Pending",
     icon: (
-      <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchasePendingSpaceColorsGreen.png"} className='w-[25px] h-[25px]' />
+      <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchasePendingSpaceColorsGreen.png"} className='w-[25px] h-[25px]' alt="" />
     ),
   },
   {
     name: "Completed",
-    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCompletedColorsGreen.png"} className='w-[25px] h-[25px]' />,
+    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCompletedColorsGreen.png"} className='w-[25px] h-[25px]' alt="" />,
   },
   {
     name: "Canceled",
-    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCanceledColorsGreen.png"} className='w-[25px] h-[25px]' />,
+    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCanceledColorsGreen.png"} className='w-[25px] h-[25px]' alt="" />,
   },
 ];
 
@@ -61,13 +68,12 @@ interface PurchasesProps {
 }
 
 export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
-
   const [currentPurchases, setCurrentPurchases] = useState<string | null>("All Purchases");
 
   const handlePayment = async (purchaseId: string) => {
     try {
       const response = await apiService.processPurchase(purchaseId);
-      if (response?.sessionUrl) {
+      if (response?.sessionUrl) { // Safely access sessionUrl
         window.location.href = response.sessionUrl;
       } else {
         alert("Error al iniciar el proceso de pago. Inténtalo de nuevo.");
@@ -118,7 +124,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
           </div>
         </div>
 
-        <div className=' overflow-y-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
+        {/* <div className=' overflow-y-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
           {filteredPurchases().map((purchase: Purchase, index: number) => (
             <div key={index} className='flex flex-col p-2 bgred-300 '>
               <div
@@ -193,7 +199,7 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

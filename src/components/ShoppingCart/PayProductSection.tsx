@@ -111,7 +111,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       setIsTwoAreasAllowed(products[selectedPackage].area === 2);
       setIsProductPro(products[selectedPackage].type === "Pro");
     }
-  }, [selectedPackage]);
+  }, [selectedPackage, products]); // Added 'products' dependency
 
   const [selectedArea, setSelectedArea] = useState([
     { nameArea: "Frontyard", isActive: true },
@@ -156,8 +156,9 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
   useEffect(() => {
-    if (products[selectedPackage]) {
-      const basePrice = products[selectedPackage].price;
+    const selectedProduct = products[selectedPackage];
+    if (selectedProduct) {
+      const basePrice = selectedProduct.price;
 
       const extrasPrice = selectedExtras.reduce((total, extra, index) => {
         if (extra && isProductPro) {
@@ -173,7 +174,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
       setFinalPrice(basePrice + extrasPrice);
     }
-  }, [selectedPackage, selectedExtras, products[selectedPackage]]);
+  }, [selectedPackage, selectedExtras, isProductPro, products]); // Added 'isProductPro' and 'products' dependencies
 
   const handlePurchase = async () => {
     if (!session) {

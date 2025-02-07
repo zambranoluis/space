@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
+import axios, { AxiosError } from "axios"; // Import AxiosError
 
 declare module "next-auth" {
   interface User {
@@ -58,8 +58,15 @@ export const authOptions: NextAuthOptions = {
           }
 
           throw new Error("Invalid credentials");
-        } catch (error: any) {
-          console.error("Error in authorize:", error.message);
+        } catch (error: unknown) {
+          // Explicitly type the error as AxiosError
+          if (error instanceof AxiosError) {
+            console.error("Error in authorize:", error.response?.data?.message || error.message);
+          } else if (error instanceof Error) {
+            console.error("Error in authorize:", error.message);
+          } else {
+            console.error("Unknown error in authorize:", error);
+          }
           throw new Error("Invalid login credentials");
         }
       },

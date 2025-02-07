@@ -55,7 +55,7 @@ const Section:React.FC<SectionProps> = ({
               className='w-[40%] max-lg:w-full max-lg:absolute h-full bgblue-400 bg-center bg-no-repeat bg-cover'
               style={{
                 backgroundImage:
-                  "url('https://github.com/BPM94/SCCTMD/raw/main/opt/createAccountBG.webp')",
+                  "url('https://github.com/BPM94/SCCTMD/raw/main/create-account/createAccountBG.webp')",
               }}></div>
             <div className='w-[60%] h-full bggreen-400 max-lg:w-full z-[100]'>
               <div className='flex flex-col h-full w-full'>
@@ -63,7 +63,7 @@ const Section:React.FC<SectionProps> = ({
                   <div className='w-full h-[15%] flex justify-center items-center bgred-500'>
                     <Link href='/'>
                       <Image
-                        src='https://github.com/BPM94/SCCTMD/raw/main/logoGreen.png'
+                        src='https://github.com/BPM94/SCCTMD/raw/main/logos/logoGreen.png'
                         alt='logo'
                         className='h-full'
                       />

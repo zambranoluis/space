@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
@@ -38,11 +38,25 @@ export async function POST(req: NextRequest) {
     });
 
     return response;
-  } catch (error: any) {
-    console.error("❌ Error during logout:", error);
-    return NextResponse.json(
-      { error: "Failed to logout", details: error.message },
-      { status: 500 },
-    );
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error("❌ Axios error during logout:", error.response?.data || error.message);
+      return NextResponse.json(
+        { error: "Failed to logout", details: error.response?.data || error.message },
+        { status: error.response?.status || 500 }
+      );
+    } else if (error instanceof Error) {
+      console.error("❌ Error during logout:", error.message);
+      return NextResponse.json(
+        { error: "Failed to logout", details: error.message },
+        { status: 500 }
+      );
+    } else {
+      console.error("❌ Unknown error during logout");
+      return NextResponse.json(
+        { error: "Failed to logout", details: "An unknown error occurred" },
+        { status: 500 }
+      );
+    }
   }
 }

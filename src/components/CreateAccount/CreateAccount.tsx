@@ -1,22 +1,12 @@
 "use client";
 
-
-
-
 import React, { useState } from "react";
 import { redirect } from "next/navigation";
-
-
-
 import Section from "./Section";
-
 import axios from "axios";
 import { apiService } from "@/services/apiService";
 
-
-
-
-interface Customer {
+interface CreateCustomer {
   name: string;
   lastname: string;
   email: string;
@@ -32,10 +22,8 @@ interface Customer {
 }
 
 const CreateAccount = () => {
-
   const [areaCode, setAreaCode] = useState<string>("+1");
-  
-  const [formData, setFormData] = useState<Customer>({
+  const [formData, setFormData] = useState<CreateCustomer>({
     name: "",
     lastname: "",
     email: "",
@@ -50,11 +38,9 @@ const CreateAccount = () => {
     birthdate: "",
   });
 
-  
+  const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false);
 
-
-
-  const handleBuildPhone = (field:string, value: string) => {
+  const handleBuildPhone = (field: string, value: string) => {
     if (field === "areaCode") {
       setFormData({ ...formData, phone: { areaCode: value, number: formData.phone.number } });
     } else if (field === "number") {
@@ -62,36 +48,25 @@ const CreateAccount = () => {
     }
   };
 
-  const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false); // Estado de carga
-  // const [errorCustomer, setErrorCustomer] = useState<string | null>(null); // Estado de error}
-
   const handleCreateAccount = async () => {
     try {
       setIsLoadingCustomer(true);
-      // setErrorCustomer(null);
-
-      // Enviar la contraseña y confirmPassword en texto plano
-      const response = await apiService.createCustomer({
-        ...formData,
-        // Se envían los valores tal cual, sin hash
-        password: formData.password,
-        confirmPassword: formData.confirmPassword,
-      });
-
-      if (response) {
-        if (response.message === "Customer created successfully") { 
-          redirect("/login");
-        }
+  
+      const response = await apiService.createCustomer(formData);
+  
+      if (response.message === "Customer created successfully") {
+        redirect("/login");
+      } else {
+        console.error("Unexpected response:", response);
       }
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {
-        // setErrorCustomer(`Error: ${err.response.status} - ${err.response.data.message}`);
+        console.error("Error creating customer:", err.response.data?.message || "Unknown error");
       } else {
-        // setErrorCustomer("Error: No se pudo crear la cuenta.");
+        console.error("Error creating customer:", err);
       }
     } finally {
       setIsLoadingCustomer(false);
-      
     }
   };
 
@@ -105,7 +80,6 @@ const CreateAccount = () => {
         setFormData={setFormData}
         isLoadingCustomer={isLoadingCustomer}
       />
-      
     </section>
   );
 };

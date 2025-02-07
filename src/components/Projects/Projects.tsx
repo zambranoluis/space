@@ -102,7 +102,7 @@ const ProjectsClient = () => {
                                     <p>{question.title}</p>
                                     {
                                       (question.filled === true) && (
-                                        <Image className="w-[20px] rounded-none bgred-200" src="/spaceStepCheck.png" alt="fliiedChecked" />
+                                        <Image className="w-[20px] rounded-none bgred-200" src="https://github.com/BPM94/SCCTMD/raw/main/panel-client/project/spaceStepCheck.png" alt="fliiedChecked" />
                                       )
                                     }
                                   </div>

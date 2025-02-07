@@ -1,15 +1,11 @@
-"use client"
+"use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-
 import Section from "./Section";
-
-
-
 import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
 
-export interface Customer {
+interface Customer {
   _id: string;
   name: string;
   lastname: string;
@@ -19,7 +15,7 @@ export interface Customer {
   phone: {
     areaCode: string;
     number: string;
-  }[];
+  };
   skype: string;
   address: string;
   birthdate: string;
@@ -59,8 +55,8 @@ export default function ShoppingCart() {
       const fetchCustomer = async () => {
         try {
           const response = await apiService.getCustomer(session?.user?.id);
-          if (response) {
-            setCustomer(response);
+          if (response && response.data) {
+            setCustomer(response.data as Customer); // Cast response.data to Customer type
           }
         } catch (err) {
           console.error("Error fetching customer:", err);
@@ -68,7 +64,7 @@ export default function ShoppingCart() {
       };
       fetchCustomer();
     } else {
-      setCustomer(null); // Si no hay sesión, aseguramos que `customer` sea null
+      setCustomer(null); // If no session, ensure `customer` is null
     }
   }, [session]);
 
@@ -76,8 +72,8 @@ export default function ShoppingCart() {
     const fetchProducts = async () => {
       try {
         const response = await apiService.getProducts();
-        if (response) {
-          setProducts(response.data);
+        if (response && response.data) {
+          setProducts(response.data as Product[]); // Cast response.data to Product[] type
         }
       } catch (err: unknown) {
         console.error("ShoppingCart: Error fetching products:", err);
@@ -87,8 +83,8 @@ export default function ShoppingCart() {
     const fetchExtras = async () => {
       try {
         const response = await apiService.getExtras();
-        if (response) {
-          setExtras(response.data);
+        if (response && response.data) {
+          setExtras(response.data as Extra[]); // Cast response.data to Extra[] type
         }
       } catch (err: unknown) {
         console.error("ShoppingCart: Error fetching extras:", err);
@@ -100,8 +96,6 @@ export default function ShoppingCart() {
     };
     fetchData();
   }, []);
-
-
 
   const [selectedPackage, setSelectedPackage] = useState(0);
 
@@ -115,18 +109,18 @@ export default function ShoppingCart() {
       switch (direction) {
         case "next":
           if (index === products.length - 1) {
-            container.scrollLeft = container.scrollWidth; // Final
+            container.scrollLeft = container.scrollWidth; // Scroll to the end
           } else {
             setSelectedPackage(index + 1);
-            container.scrollLeft += 200; // Avanzar
+            container.scrollLeft += 200; // Scroll forward
           }
           break;
         case "prev":
           if (index === 0) {
-            container.scrollLeft = 0; // Inicio
+            container.scrollLeft = 0; // Scroll to the start
           } else {
             setSelectedPackage(index - 1);
-            container.scrollLeft -= 200; // Retroceder
+            container.scrollLeft -= 200; // Scroll backward
           }
           break;
         default:
@@ -145,9 +139,8 @@ export default function ShoppingCart() {
         handleSelectedPackage={handleSelectedPackage}
         scrollContainerRef={scrollContainerRef}
         extras={extras}
-        customer={customer?._id || null}      
+        customer={customer?._id || null}
       />
     </section>
-  )
-
+  );
 }
