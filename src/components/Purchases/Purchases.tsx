@@ -7,8 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaTags } from "react-icons/fa6";
 import PurchaseDetails from "./PurchaseDetails";
 
-
-import {DetailedPurchase, Area, Extra} from "@/utils/dataTypes"
+import { DetailedPurchase, Area, Extra } from "@/utils/dataTypes";
 
 const typePurchase = [
   {
@@ -18,16 +17,38 @@ const typePurchase = [
   {
     name: "Pending",
     icon: (
-      <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchasePendingSpaceColorsGreen.png"} className='w-[25px] h-[25px]' alt="" />
+      <Image
+        src={
+          "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchasePendingSpaceColorsGreen.png"
+        }
+        className='w-[25px] h-[25px]'
+        alt=''
+      />
     ),
   },
   {
     name: "Completed",
-    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCompletedColorsGreen.png"} className='w-[25px] h-[25px]' alt="" />,
+    icon: (
+      <Image
+        src={
+          "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCompletedColorsGreen.png"
+        }
+        className='w-[25px] h-[25px]'
+        alt=''
+      />
+    ),
   },
   {
     name: "Canceled",
-    icon: <Image src={"https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCanceledColorsGreen.png"} className='w-[25px] h-[25px]' alt="" />,
+    icon: (
+      <Image
+        src={
+          "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCanceledColorsGreen.png"
+        }
+        className='w-[25px] h-[25px]'
+        alt=''
+      />
+    ),
   },
 ];
 
@@ -41,7 +62,8 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
   const handlePayment = async (purchaseId: string) => {
     try {
       const response = await apiService.processPurchase(purchaseId);
-      if (response?.sessionUrl) { // Safely access sessionUrl
+      if (response?.sessionUrl) {
+        // Safely access sessionUrl
         window.location.href = response.sessionUrl;
       } else {
         alert("Error al iniciar el proceso de pago. Inténtalo de nuevo.");
@@ -56,7 +78,9 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
     if (currentPurchases === "All Purchases") {
       return purchases;
     }
-    return purchases.filter((purchase) => purchase.status.toLowerCase() === currentPurchases?.toLowerCase());
+    return purchases.filter(
+      (purchase) => purchase.status.toLowerCase() === currentPurchases?.toLowerCase(),
+    );
   };
 
   return (
@@ -102,14 +126,27 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
                   document.getElementById(`purchase${index}`)?.classList.toggle("hidden")
                 }>
                 <div className='flex max-sm:justify-center items-center'>
-                  <PiTagSimpleFill className={`text-4xl pr-2 ${(purchase.status === "pending") ? "text-[#f5a524]" : "" } ${(purchase.status === "completed") ? "text-[#17c964]" : "" } ${(purchase.status === "canceled") ? "text-[#f31260]" : "" }`} />
+                  <PiTagSimpleFill
+                    className={`text-4xl pr-2 ${
+                      purchase.status === "pending" ? "text-[#f5a524]" : ""
+                    } ${purchase.status === "completed" ? "text-[#17c964]" : ""} ${
+                      purchase.status === "canceled" ? "text-[#f31260]" : ""
+                    }`}
+                  />
                   <h1 className='text-xl sm:text-3xl font-black'>
                     {purchase.product.name} {purchase.product.type}
                   </h1>
                 </div>
                 <div className='flex gap-1'>
                   <p>Status:</p>
-                  <p className={`${(purchase.status === "pending") ? "text-[#f5a524]" : "" } ${(purchase.status === "completed") ? "text-[#17c964]" : "" } ${(purchase.status === "canceled") ? "text-[#f31260]" : "" }`}>{purchase.status}</p>
+                  <p
+                    className={`${
+                      purchase.status === "pending" ? "text-[#f5a524]" : ""
+                    } ${purchase.status === "completed" ? "text-[#17c964]" : ""} ${
+                      purchase.status === "canceled" ? "text-[#f31260]" : ""
+                    }`}>
+                    {purchase.status}
+                  </p>
                 </div>
               </div>
               <div
@@ -158,10 +195,12 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
                         Process Payment
                       </button>
                     )}
-                    {
-                      purchase.status === "completed" && (
-                        <PurchaseDetails purchaseId={purchase._id} />
+                    {purchase.status === "completed" && (
+                      <PurchaseDetails purchaseId={purchase._id} />
                     )}
+                    <button className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-end rounded-tl-3xl rounded-br-3xl'>
+                      Create Questionnaire
+                    </button>
                   </div>
                 </div>
               </div>
