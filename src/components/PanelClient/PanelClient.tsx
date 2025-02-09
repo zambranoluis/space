@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { use, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Section from "./Section";
@@ -9,11 +9,9 @@ import AsideClient from "@/components/AsideClient";
 import ChatModal from "@/components/ChatModal";
 import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
+import { useGeolocation } from "@/context/GeolocationContext";
 
-import {
-  Customer,
-  DetailedPurchase
-} from "@/utils/dataTypes"
+import { Customer, DetailedPurchase } from "@/utils/dataInterfaces";
 
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
@@ -22,6 +20,18 @@ const PanelClient: React.FC = () => {
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [purchases, setPurchases] = useState<DetailedPurchase[]>([]);
 
+  // Usar el contexto de geolocalización
+  const { geolocation, fetchGeolocation } = useGeolocation();
+  
+  useEffect(() => {
+    if (geolocation) {
+      console.log("Geolocation:", geolocation);
+    }
+  }, [geolocation]);
+
+  useEffect(() => {
+    fetchGeolocation();
+  }, []);
 
   useEffect(() => {
     if (userId) {
@@ -31,8 +41,6 @@ const PanelClient: React.FC = () => {
           setPurchases(response.data as DetailedPurchase[]);
         } catch (err: unknown) {
           console.error("PanelClient: Error fetching purchases:", err);
-        } finally {
-          
         }
       };
       fetchPurchases();
@@ -44,11 +52,9 @@ const PanelClient: React.FC = () => {
       const fetchCustomer = async () => {
         try {
           const response = await apiService.getCustomer(userId);
-          setCustomer(response.data as Customer); // Use the as keyword to assert the type
+          setCustomer(response.data as Customer);
         } catch (err: unknown) {
           console.error("PanelClient: Error fetching customer:", err);
-        } finally {
-  
         }
       };
       fetchCustomer();
@@ -65,14 +71,9 @@ const PanelClient: React.FC = () => {
   };
 
   const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
-
   const searchParams = useSearchParams();
   const panel = searchParams.get("panel");
   const isPanelPurchases = panel === "purchases";
-
-  const toggleAside = () => {
-    setIsAsideOpen((prev) => !prev);
-  };
 
   useEffect(() => {
     if (isPanelPurchases) {
@@ -83,6 +84,10 @@ const PanelClient: React.FC = () => {
   }, [isPanelPurchases]);
 
   const [asideSelectedOption, setAsideSelectedOption] = useState<string>("");
+
+  const toggleAside = () => {
+    setIsAsideOpen((prev) => !prev);
+  };
 
   const toggleSiteContainer = (tag: string) => {
     const container = document.getElementById(`siteContainer`);
@@ -107,15 +112,15 @@ const PanelClient: React.FC = () => {
   };
 
   return (
-    <main className='flex flex-col h-full w-full relative'>
-      <NavbarClient />
+    <main className="flex flex-col h-full w-full relative">
+      <NavbarClient geolocation={geolocation} />
       <AsideClient
         toggleAside={toggleAside}
         isAsideOpen={isAsideOpen}
         toggleSiteContainer={toggleSiteContainer}
         asideSelectedOption={asideSelectedOption}
       />
-      <div className='absolute h-screen w-full'>
+      <div className="absolute h-screen w-full">
         <Section
           closeSiteContainer={closeSiteContainer}
           asideSelectedOption={asideSelectedOption}
@@ -123,7 +128,7 @@ const PanelClient: React.FC = () => {
           purchases={purchases}
         />
       </div>
-      <div className='flex bgred-200 absolute bottom-[10px] items-end  right-[10px] z-[3000]'>
+      <div className="flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]">
         <ChatModal />
       </div>
     </main>

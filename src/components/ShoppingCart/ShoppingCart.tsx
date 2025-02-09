@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import {
   Product,
   Extra,
-} from "@/utils/dataTypes"
+} from "@/utils/dataInterfaces"
 
 export default function ShoppingCart() {
   const [products, setProducts] = useState<Product[] | null>(null);

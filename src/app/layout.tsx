@@ -2,12 +2,6 @@
 
 import "./globals.css";
 
-import { ThemeProvider } from "@/context/ThemeContext";
-
-
-// interface RootLayoutProps {
-//   children: ReactNode;
-// }
 
 
 
@@ -25,14 +19,11 @@ export default function RootLayout({
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </head>
       
-      <ThemeProvider>
         <body
           className={`antialiased min-h-[100vh] .noScrollBar bg-white`}
         >
           {children}
         </body>
-      </ThemeProvider>
-
       
     </html>
   );

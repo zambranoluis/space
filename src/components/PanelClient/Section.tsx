@@ -9,7 +9,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import {
   Customer,
   DetailedPurchase
-} from "@/utils/dataTypes"
+} from "@/utils/dataInterfaces"
 
 interface SectionProps {
   closeSiteContainer: () => void;

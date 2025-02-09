@@ -5,28 +5,6 @@ const questionnaire = {
     {
       id: "qg1",
       title: "What you paid for your renovation:",
-      options: [
-        {
-          id: "qg1o1",
-          name: "Backyard",
-          img:""
-        },
-        {
-          id: "qg1o2",
-          name: "Frontyard",
-          img:""
-        },
-        {
-          id: "qg1o3",
-          name: "Both",
-          img:""
-        },
-        {
-          id: "qg1o4",
-          name: "Side Yard",
-          img:""
-        }
-      ]
     },
     {
       id: "qg2",

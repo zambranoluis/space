@@ -12,7 +12,7 @@ import {
   Purchase,
   DetailedPurchase,
   Transaction,
-} from "@/utils/dataTypes";
+} from "@/utils/dataInterfaces";
 
 
 interface ApiResponse<T = unknown> {

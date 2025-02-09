@@ -11,7 +11,7 @@ import {
   Extra,
   SelectedExtra,
   Purchase
-} from "@/utils/dataTypes";
+} from "@/utils/dataInterfaces";
 
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
@@ -27,7 +27,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   handleSelectedPackage,
   extras,
 }) => {
-  const [productSelectedId, setProductSelectedId] = useState<string>();
+  
   const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(false);
   const [isProductPro, setIsProductPro] = useState(false);
   const { data: session } = useSession();
@@ -44,7 +44,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
   useEffect(() => {
     if (products !== null) {
-      setProductSelectedId(products[selectedPackage]._id);
       setIsTwoAreasAllowed(products[selectedPackage].area === 2);
       setIsProductPro(products[selectedPackage].type === "Pro");
     }
@@ -54,6 +53,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     { nameArea: "Frontyard", isActive: true },
     { nameArea: "Backyard", isActive: false },
   ]);
+
 
   const handleSelectedArea = (area: "frontyard" | "backyard") => {
     setSelectedArea((prevArea) =>
@@ -67,62 +67,46 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       ),
     );
   };
-
+  
   const [selectedExtras, setSelectedExtras] = useState<
     { extra: string; isActive: boolean; price: number }[]
-  >(
-    extras?.map((extra) => ({
-      extra: extra._id,
-      isActive: false,
-      price: extra.price,
-    })) || [],
-  );
+  >(extras ? extras.map((extra) => ({ 
+      extra: extra._id, isActive: false, price: extra.price })
+    ) : []);
 
   const handleSelectedExtras = (index: number) => {
-    const newSelectedExtras = [...selectedExtras];
-
-    if (isProductPro) {
-      // Ensure that extras with index 1 and 2 are always active for "Pro" products
-      if (index === 1 || index === 2) {
-        newSelectedExtras[index].isActive = true;
-      } else {
-        newSelectedExtras[index].isActive = !newSelectedExtras[index].isActive;
-      }
+    if (selectedExtras[index].isActive) {
+      const newSelectedExtras = [...selectedExtras];
+      newSelectedExtras[index].isActive = false;
+      setSelectedExtras(newSelectedExtras);
     } else {
-      // If the product is not "Pro", we can toggle any extra
-      newSelectedExtras[index].isActive = !newSelectedExtras[index].isActive;
+      const newSelectedExtras = [...selectedExtras];
+      newSelectedExtras[index].isActive = true;
+      setSelectedExtras(newSelectedExtras);
     }
-
-    setSelectedExtras(newSelectedExtras);
   };
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
-  useEffect(() => {
-    const selectedProduct = products[selectedPackage];
-    if (selectedProduct) {
-      const basePrice = selectedProduct.price;
+useEffect(() => {
+  if (products[selectedPackage]) {
+    const basePrice = products[selectedPackage].price;
 
-      const extrasPrice = selectedExtras.reduce((total, extra, index) => {
-        if (isProductPro) {
-          // If the product is "Pro", only sum up the extras at index 0 and 3
-          if (index === 0 || index === 3) {
-            return extra.isActive && extra.price ? total + extra.price : total;
-          }
-          // For indexes 1 and 2, always active
-          if ((index === 1 || index === 2) && extra.isActive) {
-            return total + extra.price;
-          }
-        } else {
-          // If the product is not "Pro", sum all active extras
-          return extra.isActive && extra.price ? total + extra.price : total;
-        }
-        return total;
-      }, 0);
+    const extrasPrice = selectedExtras.reduce((total, extra, index) => {
+      if (isProductPro) {
+        // If the product is Pro, add the price of all active extras
+        return extra.isActive && extra.price ? total + extra.price : total;
+      } else {
+        // If the product is not Pro, only add the price of extras with indexes 0 and 3
+        return (index === 0 || index === 3) && extra.isActive && extra.price
+          ? total + extra.price
+          : total;
+      }
+    }, 0);
 
-      setFinalPrice(basePrice + extrasPrice);
-    }
-  }, [selectedPackage, selectedExtras, isProductPro, products]); // Added 'isProductPro' and 'products' dependencies
+    setFinalPrice(basePrice + extrasPrice);
+  }
+}, [selectedPackage, selectedExtras, isProductPro]);
 
   const handlePurchase = async () => {
     if (!session) {

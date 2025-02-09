@@ -8,7 +8,7 @@ import { FaTags } from "react-icons/fa6";
 import PurchaseDetails from "./PurchaseDetails";
 
 
-import {DetailedPurchase, Area, Extra} from "@/utils/dataTypes"
+import {DetailedPurchase, Area, Extra} from "@/utils/dataInterfaces"
 
 const typePurchase = [
   {

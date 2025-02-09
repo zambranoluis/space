@@ -1,39 +1,22 @@
-"use client"
-
+"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useGeolocation } from "@/context/GeolocationContext";
 
 import Section from "./Section";
 
 export default function Login() {
-
-const router = useRouter();
+  const router = useRouter();
+  const { fetchGeolocation, geolocation } = useGeolocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [geolocation, setGeolocation] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loadingLogin, setLoadingLogin] = useState(false);
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
-
-  const getGeolocation = async () => {
-    return new Promise<string | null>((resolve) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            resolve(`${latitude},${longitude}`);
-          },
-          () => resolve(null),
-        );
-      } else {
-        resolve(null);
-      }
-    });
-  };
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -44,18 +27,15 @@ const router = useRouter();
     setError("");
     setLoadingLogin(true);
 
-    const location = await getGeolocation();
-    setGeolocation(location);
-
+    await fetchGeolocation();
 
     const result = await signIn("credentials", {
       email,
       password,
-      geolocation: location,
+      geolocation,
       redirect: false,
     });
 
-    
     if (result?.error) {
       setLoadingLogin(false);
       setError(result.error || "Invalid login credentials");
@@ -64,7 +44,6 @@ const router = useRouter();
       router.push("/panel-client");
     }
   };
-
 
   return (
     <section id="login">
@@ -78,8 +57,7 @@ const router = useRouter();
         showPassword={showPassword}
         error={error}
         loadingLogin={loadingLogin}
-        
       />
     </section>
-  )
+  );
 }

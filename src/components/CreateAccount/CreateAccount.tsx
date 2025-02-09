@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import Section from "./Section";
 import axios from "axios";
 import { apiService } from "@/services/apiService";
-import { CreateCustomer } from "@/utils/dataTypes";
+import { CreateCustomer } from "@/utils/dataInterfaces";
 
 const CreateAccount = () => {
   const [areaCode, setAreaCode] = useState<string>("+1");

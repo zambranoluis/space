@@ -2,7 +2,7 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 
-import {Customer} from "@/utils/dataTypes"
+import {Customer} from "@/utils/dataInterfaces"
 
 interface MyProfileProps {
   customer: Customer;

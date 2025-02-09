@@ -1,15 +1,16 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+
+interface ProfileData {
+  name?: string;
+  email?: string;
+}
 
 interface DataContextProps {
   profileData: ProfileData | null;
   setProfileData: (data: ProfileData | null) => void;
+  geolocation: string | null;
+  fetchGeolocation: () => Promise<void>;
   clearData: () => void;
-}
-
-interface ProfileData {
-  // Define aquí la estructura de los datos del perfil
-  name?: string;
-  email?: string;
 }
 
 const DataContext = createContext<DataContextProps | undefined>(undefined);
@@ -28,9 +29,36 @@ interface DataProviderProps {
 
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [geolocation, setGeolocation] = useState<string | null>(null);
+
+  const fetchGeolocation = async () => {
+    if (!geolocation) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const location = `${position.coords.latitude},${position.coords.longitude}`;
+            setGeolocation(location);
+            sessionStorage.setItem("geolocation", location);
+          },
+          () => setGeolocation(null)
+        );
+      } else {
+        setGeolocation(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const storedLocation = sessionStorage.getItem("geolocation");
+    if (storedLocation) {
+      setGeolocation(storedLocation);
+    }
+  }, []);
 
   const clearData = () => {
     setProfileData(null);
+    setGeolocation(null);
+    sessionStorage.removeItem("geolocation");
   };
 
   return (
@@ -38,6 +66,8 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       value={{
         profileData,
         setProfileData,
+        geolocation,
+        fetchGeolocation,
         clearData,
       }}
     >

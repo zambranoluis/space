@@ -1,3 +1,4 @@
+
 export interface CreateCustomer {
   name: string;
   lastname: string;
@@ -44,6 +45,7 @@ export interface Extra {
 export interface SelectedExtra {
   extra: string;
   isActive: boolean;
+  price: number;
 }
 
 export interface Area {

@@ -10,7 +10,7 @@ import LoadingShoppingCart from "@/components/ShoppingCart/LoadingShoppingCart";
 import {
   Product,
   Extra
-} from "@/utils/dataTypes";
+} from "@/utils/dataInterfaces";
 
 
 interface ShoppingCartProps{
