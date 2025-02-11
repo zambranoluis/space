@@ -16,6 +16,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
+    
     <DataProvider>
       <ThemeProvider>
         <section className="flex flex-col bgpurple-500 p2 w-full ">
@@ -32,5 +33,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </section>
       </ThemeProvider>
     </DataProvider>
+    
   );
 }

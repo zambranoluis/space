@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+
 
 
 const handleScrollToSection = (sectionId: string) => {
@@ -17,6 +19,10 @@ const handleScrollToSection = (sectionId: string) => {
 };
 const Navbar: React.FC = ( ) => {
 
+  
+  const { data: session } = useSession();
+
+  console.log("Sesion en el navbar: ", session);
 
   const navOptionsGeneral = [
     {
@@ -92,9 +98,13 @@ const Navbar: React.FC = ( ) => {
                 ? <button className={`${( currentPathProducts || currentPathFaqs || currentPathReviews || currentPathPortfolio) ? "hidden" : ""} flex justify-center items-center text-[#6b776d] whitespace-nowrap text-xs`} key={option.id} onClick={option.onClick} >
                   {option.name}
                 </button>
-                : <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
-                <Link className=" whitespace-nowrap text-xs" href={option.path} >{option.name}</Link>   
-              </div>
+                  : (session && option.name === "Login")
+                    ? <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
+                      <Link className=" whitespace-nowrap text-xs" href="/panel-client" >Panel</Link>
+                    </div>
+                    : <div className="flex justify-center items-center text-[#6b776d] " key={option.id}>
+                        <Link className=" whitespace-nowrap text-xs" href={option.path} >{option.name}</Link>
+                      </div>
               ))
             }
           </div>

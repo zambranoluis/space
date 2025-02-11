@@ -2,6 +2,7 @@
 import { TiArrowSortedDown } from "react-icons/ti";
 
 import { Image } from "@nextui-org/image";
+import Link from "next/link";
 
 import {projects} from "../../app/(panel-client)/panel-client/steps";
 
@@ -31,7 +32,7 @@ const ProjectsClient = () => {
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center">
             <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to schedule a call</button>
-            <button className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base">Click here to complete the questionnaire</button>
+            <Link className="py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base" href="/questionnaire">Click here to complete the questionnaire</Link>
           </div>
           <div className="flex flex-col py-6 gap-8 text-[#6c6c6c]">
             <div className="flex flex-col">
