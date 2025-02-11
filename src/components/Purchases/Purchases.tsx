@@ -7,8 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaTags } from "react-icons/fa6";
 import PurchaseDetails from "./PurchaseDetails";
 
-
-import {DetailedPurchase, Area, Extra} from "@/utils/dataInterfaces"
+import { DetailedPurchase, Area, Extra } from "@/utils/dataInterfaces";
 
 const typePurchase = [
   {
@@ -82,6 +81,22 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
     return purchases.filter(
       (purchase) => purchase.status.toLowerCase() === currentPurchases?.toLowerCase(),
     );
+  };
+
+  const handleCreateProject = async (purchases: DetailedPurchase) => {
+    try {
+      const response = await apiService.createProject({
+        purchaseId: purchases._id,
+      });
+      if (response?.data) {
+        alert("Project created successfully!");
+      } else {
+        alert("Error al crear el proyecto. Inténtalo de nuevo.");
+      }
+    } catch (error) {
+      console.error("Error al iniciar el pago:", error);
+      alert("Hubo un problema al iniciar el proceso de pago.");
+    }
   };
 
   return (
@@ -199,7 +214,9 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
                     {purchase.status === "completed" && (
                       <PurchaseDetails purchaseId={purchase._id} />
                     )}
-                    <button className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-end rounded-tl-3xl rounded-br-3xl'>
+                    <button
+                      className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-end rounded-tl-3xl rounded-br-3xl'
+                      onClick={() => handleCreateProject(purchase)}>
                       Create Questionnaire
                     </button>
                   </div>

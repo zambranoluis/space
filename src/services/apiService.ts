@@ -1,4 +1,5 @@
 "use client";
+import { get } from "http";
 import apiClient from "./apiClient";
 
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
@@ -12,8 +13,9 @@ import {
   Purchase,
   DetailedPurchase,
   Transaction,
+  createQuestionnaires,
+  createProject,
 } from "@/utils/dataInterfaces";
-
 
 interface ApiResponse<T = unknown> {
   data: T;
@@ -77,7 +79,9 @@ export const apiService = {
     }
   },
 
-  createPurchase: async (purchase: CreatePurchase): Promise<ApiResponse<CreatePurchase>> => {
+  createPurchase: async (
+    purchase: CreatePurchase,
+  ): Promise<ApiResponse<CreatePurchase>> => {
     try {
       const response = await apiClient.post(`${NEXT_URL_API}/purchases`, purchase);
       return response.data;
@@ -88,7 +92,10 @@ export const apiService = {
     }
   },
 
-  updatePurchaseStatus: async (purchaseId: string, status: string): Promise<ApiResponse<Purchase>> => {
+  updatePurchaseStatus: async (
+    purchaseId: string,
+    status: string,
+  ): Promise<ApiResponse<Purchase>> => {
     try {
       const response = await apiClient.patch(`${NEXT_URL_API}/purchases/${purchaseId}`, {
         status,
@@ -96,12 +103,17 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al actualizar el estado de la compra:", err.response?.data || err.message);
+      console.error(
+        "Error al actualizar el estado de la compra:",
+        err.response?.data || err.message,
+      );
       throw error;
     }
   },
 
-  processPurchase: async (purchaseId: string): Promise<ApiResponse<{ sessionUrl: string }>> => {
+  processPurchase: async (
+    purchaseId: string,
+  ): Promise<ApiResponse<{ sessionUrl: string }>> => {
     try {
       const response = await apiClient.post(`${NEXT_URL_API}/process-purchase`, {
         purchaseId,
@@ -114,7 +126,9 @@ export const apiService = {
     }
   },
 
-  getPurchasesByCustomerId: async (customerId: string): Promise<ApiResponse<DetailedPurchase[]>> => {
+  getPurchasesByCustomerId: async (
+    customerId: string,
+  ): Promise<ApiResponse<DetailedPurchase[]>> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/purchases/customer/${customerId}`,
@@ -122,12 +136,17 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener compras por cliente:", err.response?.data || err.message);
+      console.error(
+        "Error al obtener compras por cliente:",
+        err.response?.data || err.message,
+      );
       throw error;
     }
   },
 
-  getTransactionByPurchaseId: async (transactionId: string): Promise<ApiResponse<Transaction>> => {
+  getTransactionByPurchaseId: async (
+    transactionId: string,
+  ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/transaction/${transactionId}`,
@@ -140,7 +159,10 @@ export const apiService = {
     }
   },
 
-  updateTransaction: async (transactionId: string, status: string): Promise<ApiResponse<Transaction>> => {
+  updateTransaction: async (
+    transactionId: string,
+    status: string,
+  ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.patch(
         `${NEXT_URL_API}/transaction/${transactionId}`,
@@ -149,7 +171,10 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al actualizar la transacción:", err.response?.data || err.message);
+      console.error(
+        "Error al actualizar la transacción:",
+        err.response?.data || err.message,
+      );
       throw error;
     }
   },
@@ -160,7 +185,105 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener transacción por ID:", err.response?.data || err.message);
+      console.error(
+        "Error al obtener transacción por ID:",
+        err.response?.data || err.message,
+      );
+      throw error;
+    }
+  },
+
+  createQuestionnaire: async (
+    questionnaire: createQuestionnaires,
+  ): Promise<ApiResponse<createQuestionnaires>> => {
+    try {
+      const response = await apiClient.post(
+        `${NEXT_URL_API}/questionnaires`,
+        questionnaire,
+      );
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error("Error al crear el cuestionario:", err.response?.data || err.message);
+      throw error;
+    }
+  },
+
+  getQuestionnairesById: async (
+    questionnaireId: string,
+  ): Promise<ApiResponse<createQuestionnaires>> => {
+    try {
+      const response = await apiClient.get(
+        `${NEXT_URL_API}/questionnaires/${questionnaireId}`,
+      );
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error(
+        "Error al obtener cuestionario por ID:",
+        err.response?.data || err.message,
+      );
+      throw error;
+    }
+  },
+
+  updateQuestionnaire: async (
+    questionnaireId: string,
+    status: string,
+  ): Promise<ApiResponse<createQuestionnaires>> => {
+    try {
+      const response = await apiClient.patch(
+        `${NEXT_URL_API}/questionnaires/${questionnaireId}`,
+        { status },
+      );
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error(
+        "Error al actualizar el cuestionario:",
+        err.response?.data || err.message,
+      );
+      throw error;
+    }
+  },
+
+  createProject: async (project: createProject): Promise<ApiResponse<createProject>> => {
+    try {
+      const response = await apiClient.post(`${NEXT_URL_API}/projects`, project);
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error("Error al crear el proyecto:", err.response?.data || err.message);
+      throw error;
+    }
+  },
+
+  getProjectById: async (projectId: string): Promise<ApiResponse<createProject>> => {
+    try {
+      const response = await apiClient.get(`${NEXT_URL_API}/projects/${projectId}`);
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error("Error al obtener el proyecto:", err.response?.data || err.message);
+      throw error;
+    }
+  },
+
+  updateProject: async (
+    projectId: string,
+    status: string,
+  ): Promise<ApiResponse<createProject>> => {
+    try {
+      const response = await apiClient.patch(`${NEXT_URL_API}/projects/${projectId}`, {
+        status,
+      });
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error(
+        "Error al actualizar el proyecto:",
+        err.response?.data || err.message,
+      );
       throw error;
     }
   },
