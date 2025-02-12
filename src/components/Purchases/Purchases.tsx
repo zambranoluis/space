@@ -88,7 +88,11 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
       const response = await apiService.createProject({
         purchaseId: purchases._id,
       });
-      if (response?.data) {
+
+      console.log("API Response:", response);
+
+      // Asegurar que estamos accediendo a response.data
+      if (response.message === "Project created successfully.") {
         alert("Project created successfully!");
       } else {
         alert("Error al crear el proyecto. Inténtalo de nuevo.");
