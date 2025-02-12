@@ -7,6 +7,7 @@ const protectedEndpoints = [
   "/transaction",
   "/questionnaires",
   "/questions",
+  "/projects",
   "/process-purchase",
 ];
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;

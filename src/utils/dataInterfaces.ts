@@ -1,4 +1,3 @@
-
 export interface CreateCustomer {
   name: string;
   lastname: string;
@@ -40,8 +39,6 @@ export interface Extra {
   isActive: boolean;
 }
 
-
-
 export interface SelectedExtra {
   extra: string;
   isActive: boolean;
@@ -52,7 +49,6 @@ export interface Area {
   nameArea: string;
   isActive: boolean;
 }
-
 
 export interface Product {
   _id: string;
@@ -132,4 +128,16 @@ export interface DetailedPurchase {
   total: number;
   status: string;
   isActive: boolean;
+}
+
+export interface createQuestionnaires {
+  category: string[];
+  questions: [{}];
+  isComplete: boolean;
+  softDelete: boolean;
+  deletedAt: string;
+}
+
+export interface createProject {
+  purchaseId: string;
 }
