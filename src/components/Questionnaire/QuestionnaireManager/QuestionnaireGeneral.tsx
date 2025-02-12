@@ -1,8 +1,7 @@
 
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Image } from "@nextui-org/image";
-// import Link from "next/link";
 
 
 import {
@@ -31,17 +30,85 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
 
   useEffect(() => {
     setIsAnsweredGeneral((prev) => {
-      const updatedIsAnsweredGeneral = questionnaire.general.map((questionObj) =>
-        answersGeneral.some((answerObj) => answerObj.question === questionObj.title)
+      const updatedIsAnsweredGeneral = questionnaire.general.map((questionObj, index) =>
+        index === 0 ? true : answersGeneral.some((answerObj) => answerObj.question === questionObj.title)
       );
   
       return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredGeneral) ? updatedIsAnsweredGeneral : prev;
     });
   }, [answersGeneral, questionnaire.general]);
 
+  useEffect(() => {
+    console.log("General - preguntas respondidas: ", isAnsweredGeneral);
+  }, [isAnsweredGeneral])
+
+
+
+  const containerRefGeneral = useRef<HTMLDivElement>(null);
+
+  const questionRefsGeneral = useRef<Array<HTMLDivElement | null>>(new Array(questionnaire.general.length).fill(null));
+
+  const [questionRefsHeightGeneral, setQuestionRefsHeightGeneral] = useState<number[]>([]);
+
+  const [containerHeightGeneral, setContainerHeightGeneral] = useState(0);
+
+  // useEffect(() => {
+  //   const newHeights = questionRefsGeneral.current.map((el) => el?.offsetHeight || 0);
+  //   setQuestionRefsHeightGeneral(newHeights);
+  // }, [questionRefsGeneral.current.map((el) => el?.offsetHeight).join(",")]);
+  
+
+  
+  useEffect(() => {
+    const calculateContainerHeightGeneral = () => {
+      let newHeight = 0;
+      let nextUnansweredIndex = -1;
+  
+      isAnsweredGeneral.forEach((answered, index) => {
+        const currentElement = questionRefsGeneral.current[index];
+        const nextElement = questionRefsGeneral.current[index + 1];
+  
+        if (answered && currentElement) {
+          // Sumar la altura de la pregunta contestada
+          newHeight += currentElement.offsetHeight || 0;
+          newHeight += 40;
+  
+          // Si no es la primera pregunta, hacer scroll
+          if (index !== 0) {
+            setTimeout(() => {
+              window.scrollBy({ top: currentElement.offsetHeight + 40, behavior: "smooth" });
+            }, 100); // 🔹 Espera un poco para asegurar que el DOM está actualizado
+          }
+  
+          // Si la siguiente pregunta no está respondida, hacer scroll a ella
+          if (index + 1 < isAnsweredGeneral.length && !isAnsweredGeneral[index + 1] && nextElement) {
+            if (nextUnansweredIndex === -1) {
+              nextUnansweredIndex = index + 1;
+            }
+            newHeight += nextElement.offsetHeight || 0;
+            newHeight += 40;
+  
+            setTimeout(() => {
+              window.scrollBy({ top: nextElement.offsetHeight + 40, behavior: "smooth" });
+            }, 100); // 🔹 Pequeña espera adicional para evitar conflictos de renderizado
+          }
+        }
+      });
+  
+      newHeight += 20;
+      setContainerHeightGeneral(newHeight);
+    };
+  
+    // Ejecutar el cálculo solo si los elementos existen
+    if (questionRefsGeneral.current.every((el) => el)) {
+      calculateContainerHeightGeneral();
+    }
+  }, [isAnsweredGeneral, questionRefsGeneral.current.map((el) => el?.offsetHeight).join(",")]);
+  
+  
   return (
-    <section id="generalQuestions" className="flex flex-col bgred-200  w-[90%] gap-12 overflow-hidden">
-      <div id="gq1" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
+    <section ref={containerRefGeneral} id="generalQuestions" className={`bgred-200 flex flex-col bgred-200 w-full gap-12 overflow-hidden`} style={{ height: `${containerHeightGeneral}px`}}>
+      <div id="gq1" ref={(el) => {questionRefsGeneral.current[0] = el;}} className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
         <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
           <h1>{questionnaire["general"][0].title}</h1>
         </div>
@@ -57,10 +124,9 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
               }
             </div>
           </div>
-
         </div>
       </div>
-      <div id="gq2" className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
+      <div id="gq2" ref={(el) => {questionRefsGeneral.current[1] = el;}} className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
         <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
           <h1>What style are you looking for your space?</h1>
         </div>
@@ -101,7 +167,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           </div>
         </div>
       </div>
-      <div id="gq3" className={`${ isAnsweredGeneral[1] === true ? "" : "translate-x-[-110%] opacity-0" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center  transition-all duration-1000`}>
+      <div id="gq3" ref={(el) => {questionRefsGeneral.current[2] = el;}} className={`${ isAnsweredGeneral[1] === true ? "" : "translate-x-[-110%] opacity-0" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center  transition-all duration-1000`}>
         <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
           <div className="w-full bggreen-300 p-2 flex">
             <h1 className="bgred-200">{questionnaire.general[2].title}</h1>
@@ -127,7 +193,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           </button>
         </div>
       </div>
-      <div id="gq4" className={`${ isAnsweredGeneral[2] === true ? "" : "-translate-x-[-110%] opacity-0"} transition-all duration-1000  flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center`}>
+      <div id="gq4" ref={(el) => {questionRefsGeneral.current[3] = el;}} className={`${ isAnsweredGeneral[2] === true ? "" : "-translate-x-[-110%] opacity-0"} transition-all duration-1000  flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center`}>
         <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
           <div className="w-full bggreen-300 p-2 flex">
             <h1 className="bgred-200">{questionnaire["general"][3].title}</h1>
@@ -153,7 +219,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
             </button>
           </div>
       </div>
-      <div id="gq5" className={`${ isAnsweredGeneral[3] === true ? "" : "translate-x-[-110%] opacity-0"} transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center`}>
+      <div id="gq5" ref={(el) => {questionRefsGeneral.current[4] = el;}} className={`${ isAnsweredGeneral[3] === true ? "" : "translate-x-[-110%] opacity-0"} transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b] justify-center items-center`}>
         <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
           <div className="w-full bggreen-300 p-2 flex">
             <h1 className="bgred-200">{questionnaire["general"][4].title}</h1>
