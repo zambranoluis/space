@@ -5,6 +5,7 @@ import QuestionnaireGeneral from "./QuestionnaireGeneral";
 import QuestionnaireBackyard from "./QuestionnaireBackyard";
 import QuestionnaireFrontyard from "./QuestionnaireFrontyard";
 import QuestionnaireExtra from "./QuestionnaireExtra";
+import QuestionnaireMedia from "./QuestionnaireMedia";
 
 import { questionnaire } from "../questionnaireFile";
 
@@ -43,19 +44,6 @@ const QuestionnaireManager: React.FC = () => {
 
   const [isAnsweredBackyard, setIsAnsweredBackyard] = useState<boolean[]>(questionnaire.backyard.map((question) => false));
 
-  const [selectedMaxTwoBackyard, setSelectedMaxTwoBackyard] = useState<number[]>([]);
-
-  const handleMaxTwoBackyard = (index: number) => {
-    if (selectedMaxTwoBackyard.includes(index)) {
-      // Si el índice ya está seleccionado, lo eliminamos
-      setSelectedMaxTwoBackyard(
-        selectedMaxTwoBackyard.filter((option) => option !== index),
-      );
-    } else if (selectedMaxTwoBackyard.length < 2) {
-      // Si aún no hay dos seleccionados, agregamos el índice
-      setSelectedMaxTwoBackyard([...selectedMaxTwoBackyard, index]);
-    }
-  };
 
   const handleSubmitAnswersBackyard = (question: string, answer: string) => {
     if (!answersBackyard.includes({ question: question, answer: answer })) {
@@ -71,19 +59,6 @@ const QuestionnaireManager: React.FC = () => {
     questionnaire.backyard.map((question) => false),
   );
 
-  const [selectedMaxTwoFrontyard, setSelectedMaxTwoFrontyard] = useState<number[]>([]);
-
-  const handleMaxTwoFrontyard = (index: number) => {
-    if (selectedMaxTwoFrontyard.includes(index)) {
-      // Si el índice ya está seleccionado, lo eliminamos
-      setSelectedMaxTwoFrontyard(
-        selectedMaxTwoFrontyard.filter((option) => option !== index),
-      );
-    } else if (selectedMaxTwoFrontyard.length < 2) {
-      // Si aún no hay dos seleccionados, agregamos el índice
-      setSelectedMaxTwoFrontyard([...selectedMaxTwoFrontyard, index]);
-    }
-  };
 
   const handleSubmitAnswersFrontyard = (question: string, answer: string) => {
     if (!answersFrontyard.includes({ question: question, answer: answer })) {
@@ -120,30 +95,26 @@ const QuestionnaireManager: React.FC = () => {
         answersBackyard={answersBackyard}
         isAnsweredBackyard={isAnsweredBackyard}
         setIsAnsweredBackyard={setIsAnsweredBackyard}
-        selectedMaxTwoBackyard={selectedMaxTwoBackyard}
-        handleMaxTwoBackyard={handleMaxTwoBackyard}
         handleSubmitAnswersBackyard={handleSubmitAnswersBackyard}
       />
-      {/* <QuestionnaireFrontyard
+      <QuestionnaireFrontyard
         isAnsweredGeneral={isAnsweredGeneral}
         isAnsweredBackyard={isAnsweredBackyard}
         answersFrontyard={answersFrontyard}
         isAnsweredFrontyard={isAnsweredFrontyard}
         setIsAnsweredFrontyard={setIsAnsweredFrontyard}
-        selectedMaxTwoFrontyard={selectedMaxTwoFrontyard}
-        handleMaxTwoFrontyard={handleMaxTwoFrontyard}
         handleSubmitAnswersFrontyard={handleSubmitAnswersFrontyard}
-      /> */}
-      {/* <QuestionnaireExtra
+      />
+      <QuestionnaireExtra
         isAnsweredGeneral={isAnsweredGeneral}
         isAnsweredBackyard={isAnsweredBackyard}
         isAnsweredFrontyard={isAnsweredFrontyard}
         answersExtra={answersExtra}
-        setAnswersExtra={setAnswersExtra}
         isAnsweredExtra={isAnsweredExtra}
         setIsAnsweredExtra={setIsAnsweredExtra}
         handleSubmitAnswersExtra={handleSubmitAnswersExtra}
-      /> */}
+      />
+      <QuestionnaireMedia isAnsweredExtra={isAnsweredExtra} />
     </div>
   );
 };

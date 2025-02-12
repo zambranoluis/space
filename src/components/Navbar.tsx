@@ -22,8 +22,6 @@ const Navbar: React.FC = ( ) => {
   
   const { data: session } = useSession();
 
-  console.log("Sesion en el navbar: ", session);
-
   const navOptionsGeneral = [
     {
       id: 1,

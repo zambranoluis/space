@@ -38,9 +38,6 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
     });
   }, [answersGeneral, questionnaire.general]);
 
-  useEffect(() => {
-    console.log("General - preguntas respondidas: ", isAnsweredGeneral);
-  }, [isAnsweredGeneral])
 
 
 
@@ -48,16 +45,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
 
   const questionRefsGeneral = useRef<Array<HTMLDivElement | null>>(new Array(questionnaire.general.length).fill(null));
 
-  const [questionRefsHeightGeneral, setQuestionRefsHeightGeneral] = useState<number[]>([]);
-
   const [containerHeightGeneral, setContainerHeightGeneral] = useState(0);
-
-  // useEffect(() => {
-  //   const newHeights = questionRefsGeneral.current.map((el) => el?.offsetHeight || 0);
-  //   setQuestionRefsHeightGeneral(newHeights);
-  // }, [questionRefsGeneral.current.map((el) => el?.offsetHeight).join(",")]);
-  
-
   
   useEffect(() => {
     const calculateContainerHeightGeneral = () => {

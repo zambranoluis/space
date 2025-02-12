@@ -14,8 +14,6 @@ interface QuestionnaireBackyardProps {
   answersBackyard: { question: string; answer: string }[];
   isAnsweredBackyard: boolean[];
   setIsAnsweredBackyard: React.Dispatch<React.SetStateAction<boolean[]>>;
-  selectedMaxTwoBackyard: number[];
-  handleMaxTwoBackyard: (index: number) => void;
   handleSubmitAnswersBackyard: (question: string, answer: string) => void
 }
 
@@ -25,8 +23,6 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
   answersBackyard,
   isAnsweredBackyard,
   setIsAnsweredBackyard,
-  selectedMaxTwoBackyard,
-  handleMaxTwoBackyard,
   handleSubmitAnswersBackyard
 }) => {
 
@@ -34,12 +30,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
 
   useEffect(() => {
     setGeneralAnswersLength(isAnsweredGeneral.length - 1);
-    console.log("Backyard - preguntas respondidas General: ", isAnsweredGeneral);
   }, [isAnsweredGeneral])
-
-  useEffect(() => {
-    console.log("Backyard - preguntas respondidas: ", isAnsweredBackyard);
-  }, [isAnsweredBackyard])
 
   useEffect(() => {
     setIsAnsweredBackyard((prev) => {
@@ -144,7 +135,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           <div className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireBgBackyard.webp"}}></div>
         </div>
         <div ref={containerRefBackyard} className={`flex flex-col w-[90%] gap-12 ${ isAnsweredGeneral[generalAnswersLength] === true ? "" : "" } `} style={{ height: `${containerHeightBackyard}px`}}>
-          <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgblue-400" : "bgyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgblue-400" : "bgwyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][0].title}</h1>
@@ -198,8 +189,8 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                       <input
                         className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
                         type="checkbox"
-                        checked={selectedMaxTwoBackyard.includes(index)}
-                        onChange={() => handleMaxTwoBackyard(index)}
+                        // checked={}
+                        onChange={() => {}}
                       />
                     </div>
                   ))
