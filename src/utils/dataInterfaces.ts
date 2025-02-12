@@ -141,3 +141,26 @@ export interface createQuestionnaires {
 export interface createProject {
   purchaseId: string;
 }
+
+export interface getProjectsByPurchasesId {
+  _id: string;
+  name: string;
+  description: string;
+  steps: [
+    {
+      step: string;
+      information: [{ status: string; isComplete: boolean }];
+      content: [{ file: string; text: string; date: Date }];
+      isActive: boolean;
+    },
+  ];
+  questionnaire: string;
+  purchase: string;
+  team: [string];
+  development: string;
+  isActive: boolean;
+  deletedAt: Date;
+  softDelete: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}

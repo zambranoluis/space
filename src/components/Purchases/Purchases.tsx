@@ -89,8 +89,6 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
         purchaseId: purchases._id,
       });
 
-      console.log("API Response:", response);
-
       // Asegurar que estamos accediendo a response.data
       if (response.message === "Project created successfully.") {
         alert("Project created successfully!");
