@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 import {Customer} from "@/utils/dataInterfaces"
 
 interface MyProfileProps {
-  customer: Customer;
+  customer: Customer | null;
 }
 
 const MyProfile: React.FC<MyProfileProps> = ({ customer }) => {

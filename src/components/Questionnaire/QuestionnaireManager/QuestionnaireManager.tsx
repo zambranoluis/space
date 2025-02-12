@@ -14,7 +14,7 @@ const QuestionnaireManager: React.FC = () => {
   >([]);
 
   const [isAnsweredGeneral, setIsAnsweredGeneral] = useState<boolean[]>(
-    questionnaire.general.map((_, index) => (index === 0 ? true : true)),
+    questionnaire.general.map((_, index) => index === 0 ? true : false)
   );
 
   const [selectedMaxTwoGeneral, setSelectedMaxTwoGeneral] = useState<number[]>([]);
@@ -41,9 +41,7 @@ const QuestionnaireManager: React.FC = () => {
     { question: string; answer: string }[]
   >([]);
 
-  const [isAnsweredBackyard, setIsAnsweredBackyard] = useState<boolean[]>(
-    questionnaire.backyard.map((question) => true),
-  );
+  const [isAnsweredBackyard, setIsAnsweredBackyard] = useState<boolean[]>(questionnaire.backyard.map((question) => false));
 
   const [selectedMaxTwoBackyard, setSelectedMaxTwoBackyard] = useState<number[]>([]);
 
@@ -126,7 +124,7 @@ const QuestionnaireManager: React.FC = () => {
         handleMaxTwoBackyard={handleMaxTwoBackyard}
         handleSubmitAnswersBackyard={handleSubmitAnswersBackyard}
       />
-      <QuestionnaireFrontyard
+      {/* <QuestionnaireFrontyard
         isAnsweredGeneral={isAnsweredGeneral}
         isAnsweredBackyard={isAnsweredBackyard}
         answersFrontyard={answersFrontyard}
@@ -135,8 +133,8 @@ const QuestionnaireManager: React.FC = () => {
         selectedMaxTwoFrontyard={selectedMaxTwoFrontyard}
         handleMaxTwoFrontyard={handleMaxTwoFrontyard}
         handleSubmitAnswersFrontyard={handleSubmitAnswersFrontyard}
-      />
-      <QuestionnaireExtra
+      /> */}
+      {/* <QuestionnaireExtra
         isAnsweredGeneral={isAnsweredGeneral}
         isAnsweredBackyard={isAnsweredBackyard}
         isAnsweredFrontyard={isAnsweredFrontyard}
@@ -145,7 +143,7 @@ const QuestionnaireManager: React.FC = () => {
         isAnsweredExtra={isAnsweredExtra}
         setIsAnsweredExtra={setIsAnsweredExtra}
         handleSubmitAnswersExtra={handleSubmitAnswersExtra}
-      />
+      /> */}
     </div>
   );
 };

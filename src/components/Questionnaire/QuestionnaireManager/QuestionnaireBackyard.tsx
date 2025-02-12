@@ -1,6 +1,6 @@
 
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Image } from "@nextui-org/image";
 // import Link from "next/link";
 
@@ -34,30 +34,117 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
 
   useEffect(() => {
     setGeneralAnswersLength(isAnsweredGeneral.length - 1);
-  }, [isAnsweredGeneral]);
+    console.log("Backyard - preguntas respondidas General: ", isAnsweredGeneral);
+  }, [isAnsweredGeneral])
+
+  useEffect(() => {
+    console.log("Backyard - preguntas respondidas: ", isAnsweredBackyard);
+  }, [isAnsweredBackyard])
 
   useEffect(() => {
     setIsAnsweredBackyard((prev) => {
       const updatedIsAnswered = questionnaire.backyard.map((questionObj) =>
         answersBackyard.some((answerObj) => answerObj.question === questionObj.title)
       );
-  
       // Solo actualiza si el nuevo estado es diferente al anterior
       return JSON.stringify(prev) !== JSON.stringify(updatedIsAnswered) ? updatedIsAnswered : prev;
     });
   }, [answersBackyard, questionnaire.backyard]);
+  
+  const containerRefBackyard = useRef<HTMLDivElement>(null);
+
+  const sectionRefBackyard = useRef<HTMLDivElement>(null);
+
+  const questionRefsBackyard = useRef<Array<HTMLDivElement | null>>(new Array(questionnaire.backyard.length).fill(null));
+
+  const [containerHeightBackyard, setContainerHeightBackyard] = useState(50);
+
+  useEffect(() => {
+    if (
+      isAnsweredGeneral[isAnsweredGeneral.length - 1] &&
+      questionRefsBackyard.current &&
+      questionRefsBackyard.current.length > 0 &&
+      questionRefsBackyard.current[0] &&
+      questionRefsBackyard.current[0].offsetHeight
+    ) {
+      setContainerHeightBackyard((prevHeight) => prevHeight + questionRefsBackyard.current![0]!.offsetHeight || 0);
+      setTimeout(() => {
+        if (sectionRefBackyard.current) {
+          window.scrollBy({ top: sectionRefBackyard.current.offsetHeight, behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [questionRefsBackyard, isAnsweredGeneral]);
+  
+  
+
+
+  useEffect(() => {
+    const calculateContainerHeightBackyard = () => {
+      let newHeight = 0;
+      let nextUnansweredIndex = -1;
+  
+      isAnsweredBackyard.forEach((answered, index) => {
+        const currentElement = questionRefsBackyard.current[index];
+        const nextElement = questionRefsBackyard.current[index + 1];
+  
+        if (answered && currentElement) {
+          // Sumar la altura de la pregunta contestada
+          newHeight += currentElement.offsetHeight || 0;
+          newHeight += 40;
+  
+          // Si no es la primera pregunta, hacer scroll
+          if (index !== 0) {
+            setTimeout(() => {
+              window.scrollBy({ top: currentElement.offsetHeight + 40, behavior: "smooth" });
+            }, 100); // 🔹 Espera un poco para asegurar que el DOM está actualizado
+          }
+  
+          // Si la siguiente pregunta no está respondida, hacer scroll a ella
+          if (index + 1 < isAnsweredBackyard.length && !isAnsweredBackyard[index + 1] && nextElement) {
+            if (nextUnansweredIndex === -1) {
+              nextUnansweredIndex = index + 1;
+            }
+            newHeight += nextElement.offsetHeight || 0;
+            newHeight += 40;
+  
+            setTimeout(() => {
+              window.scrollBy({ top: nextElement.offsetHeight + 40, behavior: "smooth" });
+            }, 100); // 🔹 Pequeña espera adicional para evitar conflictos de renderizado
+          }
+        } else if ( index=== 0 && !answered) {
+          newHeight += questionRefsBackyard.current![0]!.offsetHeight || 0;
+          newHeight += 40;
+        }
+      });
+  
+      newHeight += 40;
+      setContainerHeightBackyard(newHeight);
+    };
+  
+    // Ejecutar el cálculo solo si los elementos existen
+    if (questionRefsBackyard.current.every((el) => el)) {
+      calculateContainerHeightBackyard();
+    }
+  }, [isAnsweredGeneral, isAnsweredBackyard, questionRefsBackyard.current.map((el) => el?.offsetHeight).join(",")]);
+  
+
+  
+
+  
+
 
 
   return (
-    <section id="backyardQuestions" className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "" : "opacity-0 "} flex flex-col w-full justify-center items-center gap-20`}>
-        <div className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "" : "opacity-0 "} transition-all duration-1000 flex max-sm:flex-col bgred-300 sm:h-[300px] w-full`}>
+    <section  id="backyardQuestions"  className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgred-300" : "bggreen-400 hidden"}  flex flex-col w-full justify-center items-center gap-20 overflow-hidden`} >
+        <div ref={sectionRefBackyard}  className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgpink-500" : "bgpurple-400"} flex max-sm:flex-col bgred-300 sm:h-[300px] w-full `}>
           <div className="flex sm:w-[40%] justify-center items-center max-sm:py-24">
             <h1 className="font-black text-3xl text-[#6c786e]">BACKYARD</h1>
           </div>
           <div className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireBgBackyard.webp"}}></div>
         </div>
-        <div className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "" : ""} flex flex-col w-[90%] gap-12`}>
-          <div id="bq1" className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 delay-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+        <div ref={containerRefBackyard} className={`flex flex-col w-[90%] gap-12 ${ isAnsweredGeneral[generalAnswersLength] === true ? "" : "" } `} style={{ height: `${containerHeightBackyard}px`}}>
+          <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgblue-400" : "bgyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][0].title}</h1>
@@ -87,7 +174,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </button>
             </div>
           </div>
-          <div id="bq2" className={`${ isAnsweredBackyard[0] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq2" ref={(el) => {questionRefsBackyard.current[1] = el;}} className={`${ isAnsweredBackyard[0] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][1].title}</h1>
@@ -130,7 +217,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
           </div>
-          <div id="bq3" className={`${ isAnsweredBackyard[1] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq3" ref={(el) => {questionRefsBackyard.current[2] = el;}} className={`${ isAnsweredBackyard[1] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][2].title}</h1>
@@ -160,7 +247,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </button>
             </div>
           </div>
-          <div id="bq4" className={`${ isAnsweredBackyard[2] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq4" ref={(el) => {questionRefsBackyard.current[3] = el;}} className={`${ isAnsweredBackyard[2] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][3].title}</h1>
@@ -190,7 +277,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </button>
             </div>
           </div>
-          <div id="bq5" className={`${ isAnsweredBackyard[3] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq5" ref={(el) => {questionRefsBackyard.current[4] = el;}} className={`${ isAnsweredBackyard[3] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][4].title}</h1>
@@ -232,7 +319,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
           </div>
-          <div id="bq6" className={`${ isAnsweredBackyard[4] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq6" ref={(el) => {questionRefsBackyard.current[5] = el;}} className={`${ isAnsweredBackyard[4] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][5].title}</h1>
@@ -278,7 +365,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           </div>
             </div>
           </div>
-          <div id="bq7" className={`${ isAnsweredBackyard[5] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq7" ref={(el) => {questionRefsBackyard.current[6] = el;}} className={`${ isAnsweredBackyard[5] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][6].title}</h1>
@@ -308,7 +395,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           </div>
             </div>
           </div>
-          <div id="bq8" className={`${ isAnsweredBackyard[6] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq8" ref={(el) => {questionRefsBackyard.current[7] = el;}} className={`${ isAnsweredBackyard[6] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][7].title}</h1>
@@ -338,7 +425,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           </div>
             </div>
           </div>
-          <div id="bq9" className={`${ isAnsweredBackyard[7] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div  id="bq9" ref={(el) => {questionRefsBackyard.current[8] = el;}} className={`${ isAnsweredBackyard[7] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][8].title}</h1>
@@ -368,7 +455,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           </div>
             </div>
           </div>
-          <div id="bq10" className={`${ isAnsweredBackyard[8] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div id="bq10" ref={(el) => {questionRefsBackyard.current[9] = el;}} className={`${ isAnsweredBackyard[8] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][9].title}</h1>
