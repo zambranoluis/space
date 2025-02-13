@@ -8,7 +8,7 @@ interface PurchaseDetailsProps {
 }
 
 interface PurchaseDetails {
-  amount: string;
+  amount: number;
   currency: string;
   status: string;
   createdAt: string;
@@ -23,12 +23,13 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
     const fetchTransactionDetails = async () => {
       try {
         const response = await apiService.getTransactionByPurchaseId(purchaseId);
-        if (response?.data) {
+        if (response.data) {
+          console.log("response data purchase: ", response.data)
           const transaction = response.data; // Tipo Transaction
           
           // Convertimos Transaction a PurchaseDetails
           const details: PurchaseDetails = {
-            amount: transaction.amount.toString(), // Convertir a string si es necesario
+            amount: transaction.amount, // Convertir a string si es necesario
             currency: "USD", // Ajusta la moneda si no está en la respuesta
             status: transaction.status,
             createdAt: transaction.createdAt,
@@ -46,6 +47,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
   }, [purchaseId]);
 
   const handleOpenPurchaseDetails = () => {
+    console.log("purchase ID to show : ", purchaseId);
     onOpen();
   };
 

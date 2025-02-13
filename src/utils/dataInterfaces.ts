@@ -65,7 +65,7 @@ export interface Product {
 
 export interface Transaction {
   _id: string;
-  purchaseId: string;
+  purchase: string;
   status: string;
   amount: number;
   createdAt: string;
