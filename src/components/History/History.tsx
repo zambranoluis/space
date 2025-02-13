@@ -24,7 +24,7 @@ import { RiCalendarScheduleFill } from "react-icons/ri";
 import { FaUserPen } from "react-icons/fa6";
 import { FaBan } from "react-icons/fa";
 
-
+import { projects } from "../../app/(panel-client)/panel-client/steps";
 
 
 const typeClients = [
@@ -51,189 +51,7 @@ const typeClients = [
 ]
 
 
-const clientsTest = [
-  {
-    id: 0,
-    name: "John Doe",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 1,
-    name: "Capi Tanazo",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 2,
-    name: "Cabiz Bajo",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 3,
-    name: "Elza Pato",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 4,
-    name: "Cabe Zota",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 5,
-    name: "Pedro Perez",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 6,
-    name: "Pacha Mama",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 7,
-    name: "Presta Mista",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 8,
-    name: "Membre Sia",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: true,
-    banned: false,
-  },
-  {
-    id: 9,
-    name: "Cala Vera",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: false,
-    banned:false
-  },
-  {
-    id: 10,
-    name: "Maizpi Lao",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: false,
-    banned:false
-  },
-  {
-    id: 11,
-    name: "Cris Tofer",
-    email: "y7h5y@example.com",
-    phone: "+58 412 3456 789",
-    avatar: "https://github.com/BPM94/TTMD/raw/main/AvatarTimeit.webp",
-    status: "Active",
-    lastLogin: "2023-06-01T12:34:56Z",
-    role: "User",
-    suscription: "Personal Trainning",
-    plan: "Monthly",
-    schedules: "Mon-Fri 3pm-5pm",
-    active: false,
-    banned:true
-  },
 
-]
 
 
 const History = () => {
@@ -262,46 +80,139 @@ const History = () => {
           </div>
         </div>
 
-        <div className="grid overflow-y-scroll  h-[90%]  sm:grid-cols-2 lg:grid-cols-3  p-2 py-4 gap-6 w-full   bgred-600">
-          {
-            clientsTest.map((client) => (
-              <Card className='w-full max-w-[350px] h-[250px] p-4 bg-white border border-[#6b776d]' key={client.id}>
-                <CardHeader className='flex gap-4  justify-center  rounded-md p-4 bgred-300'>
-                  <div>
-                    <Avatar src="https://github.com/BPM94/TTMD/raw/main/avatarAang.jpg" className="w-20 h-20 " />
-                  </div>
-                  <div className='flex flex-col w-full font-bold   text-[#6b776d]'>
-                    <h1>{client.name}</h1>
-                    <h2>{client.email}</h2>
-                    <h2>{client.phone}</h2>
-                  </div>
-                </CardHeader>
-                <CardBody className='text-[#6b776d]'>
-                  <h3>Subscription: {client.suscription}</h3>
-                  <h3>Plans: {client.plan}</h3>
-                  <h3>Schedules: {client.schedules}</h3>
-                </CardBody>
-                <CardFooter className='flex justify-end  bgblue-400 gap-2  '>
-                  <Tooltip content="View Assistance Calendar">
-                    <div className='flex hover:text-white  text-[#6b776d]  bggreen-400 cursor-pointer bg[--color-button] hover:bgbg[--color-button-hover] p-2 rounded-md border hover:bg-[#6b776d] border-[#6b776d]'>
-                      <RiCalendarScheduleFill className="text-lg " />
-                    </div>
-                  </Tooltip>
-                  <Tooltip content="Edit Client">
-                    <div className='flex hover:text-white  text-[#6b776d] bggreen-400 cursor-pointer bg[--color-button] hover:bgbg[--color-button-hover] p-2 rounded-md border hover:bg-[#6b776d] border-[#6b776d]'>
-                      <FaUserPen className="text-lg " />
-                    </div>
-                  </Tooltip>
-                  <Tooltip content="Ban Client">
-                    <div className='flex hover:text-white text-[#6b776d]  bggreen-400 cursor-pointer bg[--color-button] hover:bgbg[--color-button-hover] p-2 rounded-md border hover:bg-[#6b776d] border-[#6b776d]'>
-                      <FaBan className="text-lg " />
-                    </div>
-                  </Tooltip>
-                </CardFooter>
-              </Card>
-            ))
-          }
+        <section className='flex flex-col w-full place-self-center bgblue-300 justify-center items-center pt-8 pb-4  '>
+      <div className='flex flex-col bgred-200 w-[90%] p-4 rounded-3xl bg-[#f0f0ef] '>
+        <div className='flex bggreen-200 gap4 text-[#69664c] bgred-300 text-xs sm:text-lg font-bold w-full'>
+          <div className='w-full w[100px] px-6 py-4 bgpurple-300 flex justify-center items-center text-center'>
+            ID
+          </div>
+          <div className='w-full w[150px] px-6 py-4 bgorange-300 flex justify-center items-center text-center'>
+            Package name
+          </div>
+          <div className='w-full w[170px] px-6 py-4 bgyellow-200 flex justify-center items-center text-center'>
+            Project Manager
+          </div>
         </div>
+        <div className='flex flex-col text-xs  overflow-y-auto noScrollBar h-[180px] bgred-200 sm:text-sm md:text-base w-full bgslate-400 gap-4 py-8 '>
+          <div
+            className='flex cursor-pointer bg-[#848d5a] rounded-3xl  w-full h-[90px]'>
+            <div className='w-full w[100px]  flex justify-center items-center'>
+              12345678
+            </div>
+            <div className='flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1'>
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+            </div>
+            <div className='flex w-full w[170px]  justify-center items-center'>
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className='flex cursor-pointer bg[#848d5a] text-black rounded-3xl  w-full h-[90px]'>
+            <div className='w-full w[100px]  flex justify-center items-center'>
+              12345678
+            </div>
+            <div className='flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1'>
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+            </div>
+            <div className='flex w-full w[170px]  justify-center items-center'>
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className='flex cursor-pointer bg-[#6b776d] rounded-3xl  w-full h-[90px]'>
+            <div className='w-full w[100px]  flex justify-center items-center'>
+              12345678
+            </div>
+            <div className='flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1'>
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+            </div>
+            <div className='flex w-full w[170px]  justify-center items-center'>
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className='flex cursor-pointer bg[#848d5a] text-black rounded-3xl  w-full h-[90px]'>
+            <div className='w-full w[100px]  flex justify-center items-center'>
+              12345678
+            </div>
+            <div className='flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1'>
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+            </div>
+            <div className='flex w-full w[170px]  justify-center items-center'>
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className='flex cursor-pointer bg-[#302626] rounded-3xl  w-full h-[90px]'>
+            <div className='w-full w[100px]  flex justify-center items-center'>
+              12345678
+            </div>
+            <div className='flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1'>
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+            </div>
+            <div className='flex w-full w[170px]  justify-center items-center'>
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className='flex cursor-pointer bg[#302626] text-black rounded-3xl  w-full h-[90px]'>
+            <div className='w-full w[100px]  flex justify-center items-center'>
+              12345678
+            </div>
+            <div className='flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1'>
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+            </div>
+            <div className='flex w-full w[170px]  justify-center items-center'>
+              Joao Da Silva
+            </div>
+          </div>
+
+          <div className='flex cursor-pointer bg-[#3b543e]  rounded-3xl  w-full h-[90px]'>
+            <div className='w-full w[100px]  flex justify-center items-center'>
+              12345678
+            </div>
+            <div className='flex w-full overflow-y-auto noScrollBar max-h-[90px] w[150px]  flex-col justifycenter items-center gap-1'>
+              <p>1 Area Pro</p>
+              <p>BACKYARD</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+              <p>Lighting Plan</p>
+            </div>
+            <div className='flex w-full w[170px]  justify-center items-center'>
+              Joao Da Silva
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
       </div>
     </div>
   );

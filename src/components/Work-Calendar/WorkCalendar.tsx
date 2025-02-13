@@ -57,7 +57,7 @@ const WorkCalendar = () => {
           <div id="projectNumber" className="flex w-full gap-2  bgred-200 place-self-center p-2 max-md:flex-col ">
             <div className="max-md:w-full w-[30%] h-[60px] bgblue-300 text-black text-sm p-2 flex justify-center items-center max-sm:text-center">type your project number here</div>
             <div className="max-md:w-full  w-[70%] h-[60px] bggreen-400 p2">
-              <input className="h-full w-full bg-white border-3 border-[#f3f3f3] " type="text" />
+              <input className="h-full w-full text-black bg-white border-3 border-[#f3f3f3] " type="text" />
             </div>
           </div>
           <div className="flex w-full bgred-800 justify-end gap-2 p-2">

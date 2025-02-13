@@ -21,7 +21,7 @@ const typePurchase = [
         src={
           "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchasePendingSpaceColorsGreen.png"
         }
-        className='w-[25px] h-[25px]'
+        className='w-[25px] h-[25px] rounded-none'
         alt=''
       />
     ),
@@ -33,7 +33,7 @@ const typePurchase = [
         src={
           "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCompletedColorsGreen.png"
         }
-        className='w-[25px] h-[25px]'
+        className='w-[25px] h-[25px] rounded-none'
         alt=''
       />
     ),
@@ -45,7 +45,7 @@ const typePurchase = [
         src={
           "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCanceledColorsGreen.png"
         }
-        className='w-[25px] h-[25px]'
+        className='w-[25px] h-[25px] rounded-none'
         alt=''
       />
     ),
@@ -189,20 +189,20 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
                 </div>
                 <div className='flex flex-col'>
                   <h2 className='font-bold text-xl'>Extras:</h2>
-                  {purchase.extras.some((extra: Extra) => extra.isActive) ? (
-                    purchase.extras.map(
-                      (extra: Extra, i: number) =>
-                        extra.isActive && (
-                          <p key={i}>
-                            <GiCheckMark className='inline-block text-green-600' />{" "}
-                            {extra.name}
-                          </p>
-                        ),
+                  {purchase.extras.some((extra) => extra.isActive) ? (
+                    purchase.extras.map((extra, index: number) =>
+                      extra.isActive ? (
+                        <p key={`extra-${index}`}>
+                          <GiCheckMark className='inline-block text-green-600' />{" "}
+                          {extra.extra?.name || "Unnamed Extra"}
+                        </p>
+                      ) : null
                     )
                   ) : (
                     <p>No extra selected</p>
                   )}
                 </div>
+
                 <div className='flex flex-col mt-4'>
                   <h2 className='font-bold text-xl'>Price: ${purchase.total}</h2>
                   <div className='flex gap-2'>
@@ -214,13 +214,15 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
                       </button>
                     )}
                     {purchase.status === "completed" && (
-                      <PurchaseDetails purchaseId={purchase._id} />
+                      <div>
+                        <PurchaseDetails purchaseId={purchase._id} />
+                        <button
+                          className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-end rounded-tl-3xl rounded-br-3xl'
+                          onClick={() => handleCreateProject(purchase)}>
+                          Create Questionnaire
+                        </button>
+                      </div>
                     )}
-                    <button
-                      className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-end rounded-tl-3xl rounded-br-3xl'
-                      onClick={() => handleCreateProject(purchase)}>
-                      Create Questionnaire
-                    </button>
                   </div>
                 </div>
               </div>

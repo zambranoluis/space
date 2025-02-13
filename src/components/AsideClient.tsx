@@ -69,24 +69,47 @@ const Aside: React.FunctionComponent<AsideProps> = ({
     try {
       // 🔹 Llamar a la API de logout en Next.js
       const response = await fetch("/api/auth/logout", { method: "POST" });
-
+  
       if (!response.ok) {
         console.error("❌ Error al cerrar sesión en el backend");
         return;
       }
-
+  
       // 🔹 Luego, cerrar sesión con NextAuth
       await signOut({ callbackUrl: "/" });
-
-      console.log("✅ Sesión cerrada exitosamente");
+  
+      // 🔹 Limpiar LocalStorage y SessionStorage
+      localStorage.clear();
+      sessionStorage.clear();
+  
+      // 🔹 Eliminar todas las cookies
+      document.cookie.split(";").forEach((cookie) => {
+        const [name] = cookie.split("=");
+        document.cookie = `${name.trim()}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+      });
+  
+      // 🔹 Borrar caché del navegador
+      if ("caches" in window) {
+        const cacheKeys = await caches.keys();
+        await Promise.all(cacheKeys.map((key) => caches.delete(key)));
+      }
+  
+      // 🔹 Borrar toda la caché de la sesión en Service Workers (si aplica)
+      if ("serviceWorker" in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations.map((registration) => registration.unregister()));
+      }
+  
+      console.log("✅ Sesión cerrada y memoria limpiada completamente");
     } catch (error) {
-      console.error("❌ Error logging out:", error);
+      console.error("❌ Error al cerrar sesión:", error);
     }
   };
+  
 
   return (
     <aside
-      className={` ${
+      className={`mt-[20px] ${
         isAsideOpen ? "w-[170px]" : "w-[70px]"
       } transitionall duration300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}>
       <div id='asideOptions' className='flex flex-col gap-3  w-full  bgrose-300 '>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { apiService } from "@/services/apiService";
 
@@ -68,45 +68,53 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     );
   };
   
-  const [selectedExtras, setSelectedExtras] = useState<
-    { extra: string; isActive: boolean; price: number }[]
-  >(extras ? extras.map((extra) => ({ 
-      extra: extra._id, isActive: false, price: extra.price })
-    ) : []);
+  const [selectedExtras, setSelectedExtras] = useState<boolean[]>(
+    extras ? Array(extras.length).fill(false) : []
+  );
 
   const handleSelectedExtras = (index: number) => {
-    if (selectedExtras[index].isActive) {
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = false;
-      setSelectedExtras(newSelectedExtras);
-    } else {
-      const newSelectedExtras = [...selectedExtras];
-      newSelectedExtras[index].isActive = true;
-      setSelectedExtras(newSelectedExtras);
-    }
+    setSelectedExtras((prev) => {
+      const newSelectedExtras = [...prev];
+      newSelectedExtras[index] = !newSelectedExtras[index];
+      return newSelectedExtras;
+    });
   };
+
+  useEffect(() => {
+    console.log("selected Extras:", selectedExtras);
+  }, [selectedExtras]);
+
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
-useEffect(() => {
-  if (products[selectedPackage]) {
-    const basePrice = products[selectedPackage].price;
-
-    const extrasPrice = selectedExtras.reduce((total, extra, index) => {
-      if (isProductPro) {
-        // If the product is Pro, add the price of all active extras
-        return extra.isActive && extra.price ? total + extra.price : total;
-      } else {
-        // If the product is not Pro, only add the price of extras with indexes 0 and 3
-        return (index === 0 || index === 3) && extra.isActive && extra.price
-          ? total + extra.price
-          : total;
-      }
-    }, 0);
-
-    setFinalPrice(basePrice + extrasPrice);
-  }
-}, [selectedPackage, selectedExtras, isProductPro]);
+  useEffect(() => {
+    console.log("selectedExtras:", selectedExtras);
+  }, [selectedExtras]);
+  
+  
+  useEffect(() => {
+    if (products[selectedPackage]) {
+      const basePrice = products[selectedPackage].price;
+  
+      // Calcular el precio de los extras seleccionados
+      const extrasPrice = selectedExtras.reduce((total, isActive, index) => {
+        if (isProductPro) {
+          // Si el producto es Pro, ignorar los extras de índice 1 y 2
+          if (index !== 1 && index !== 2 && extras && extras[index]?.price) {
+            return isActive ? total + extras[index].price : total;
+          }
+        } else {
+          // Si el producto no es Pro, considerar todos los extras seleccionados
+          if (extras && extras[index]?.price) {
+            return isActive ? total + extras[index].price : total;
+          }
+        }
+        return total;
+      }, 0);
+  
+      setFinalPrice(basePrice + extrasPrice);
+    }
+  }, [selectedPackage, selectedExtras, isProductPro, extras]);
 
   const handlePurchase = async () => {
     if (!session) {
@@ -132,17 +140,20 @@ useEffect(() => {
             { nameArea: selectedArea[0].nameArea, isActive: selectedArea[0].isActive },
             { nameArea: selectedArea[1].nameArea, isActive: selectedArea[1].isActive },
           ],
-      extras: selectedExtras.map((extra, index) => {
+      extras: extras?.map((extra, index) => {
         if (isProductPro && (index === 1 || index === 2)) {
-          return { extra: extra.extra, isActive: true };
+          // Si es un producto "Pro", los extras con índice 1 y 2 siempre tienen isActive: true
+          return { extra: extra._id, isActive: true };
         } else {
-          return { extra: extra.extra, isActive: extra.isActive };
+          // Si no es un producto "Pro", usar el valor de selectedExtras para determinar isActive
+          return { extra: extra._id, isActive: selectedExtras[index] };
         }
-      }) as SelectedExtra[],
+      }) as SelectedExtra[],  // Asegúrate de que 'extra.name' es el valor adecuado para el extra
       price: finalPrice as number,
       status: "pending",
       isActive: true,
     };
+    
 
     try {
       const response = await apiService.createPurchase(newPurchase);
@@ -247,12 +258,15 @@ useEffect(() => {
                         {products &&
                         products[selectedPackage].type === "Pro" &&
                         (index === 1 || index === 2) ? (
-                          <Switch isSelected isDisabled />
+                          <Switch
+                            isSelected
+                            isDisabled
+
+                          />
                         ) : (
                           <Switch
-                            onChange={() => {
-                              handleSelectedExtras(index);
-                            }}
+                            checked={selectedExtras[index]}
+                            onChange={() => handleSelectedExtras(index)}
                           />
                         )}
                       </div>

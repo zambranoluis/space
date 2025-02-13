@@ -6,8 +6,6 @@ import Link from "next/link";
 
 import { projects } from "../../app/(panel-client)/panel-client/steps";
 
-import { apiService } from "../../services/apiService";
-
 const ProjectsClient = () => {
   const toggleProject = (id: number) => {
     const project = document.getElementById(`project${id}Container`);
@@ -19,8 +17,6 @@ const ProjectsClient = () => {
     arrow?.classList.toggle("rotate-180");
     step?.classList.toggle("max-h-0");
   };
-
-  const handleProject = (id: string) => {};
 
   return (
     <>
