@@ -59,11 +59,12 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
     }
 
-    const id = req.nextUrl.searchParams.get("id");
+    // Extraer el ID directamente desde la URL
+    const id = req.url.split("/").pop();
 
     // Validate the ID
     if (!id) {
-      return NextResponse.json({ error: "Missing purchase ID in query parameters" }, { status: 400 });
+      return NextResponse.json({ error: "Missing purchase ID in URL" }, { status: 400 });
     }
 
     const body = await req.json();
