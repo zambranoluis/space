@@ -134,7 +134,7 @@ export const apiService = {
       const response = await apiClient.get(
         `${NEXT_URL_API}/purchases/customer/${customerId}`,
       );
-      return response.data;
+      return response.data; // Asegúrate de que este `response.data` sea un array de compras
     } catch (error: unknown) {
       const err = error as ApiError;
       console.error(
@@ -289,7 +289,7 @@ export const apiService = {
     }
   },
 
-  getProjectsByPurchasesId: async (
+  getProjectByPurchasesId: async (
     purchaseId: string,
   ): Promise<ApiResponse<getProjectsByPurchasesId>> => {
     try {

@@ -1,4 +1,7 @@
 "use client";
+
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { TiArrowSortedDown } from "react-icons/ti";
 
 import { Image } from "@nextui-org/image";
@@ -6,7 +9,17 @@ import Link from "next/link";
 
 import { projects } from "../../app/(panel-client)/panel-client/steps";
 
+import { apiService } from "../../services/apiService";
+
+import { DetailedPurchase, getProjectsByPurchasesId } from "../../utils/dataInterfaces";
+
 const ProjectsClient = () => {
+  const [purchase, setPurchase] = useState<DetailedPurchase[]>([]);
+
+  const [project, setProject] = useState<getProjectsByPurchasesId[]>([]); // Cambia `DetailedProject[]` con el tipo correcto
+
+  const { data: session } = useSession();
+
   const toggleProject = (id: number) => {
     const project = document.getElementById(`project${id}Container`);
     project?.classList.toggle("max-h-0");
@@ -17,6 +30,54 @@ const ProjectsClient = () => {
     arrow?.classList.toggle("rotate-180");
     step?.classList.toggle("max-h-0");
   };
+
+  const getPurchasesByCustomerId = async (
+    customerId: string,
+  ): Promise<{ data: DetailedPurchase[] }> => {
+    try {
+      const response = await apiService.getPurchasesByCustomerId(customerId);
+      return response; // Asegúrate de que aquí estamos retornando la respuesta correctamente
+    } catch (error) {
+      console.error("Error fetching purchases:", error);
+      throw error; // Lanza el error para poder manejarlo más adelante
+    }
+  };
+
+  const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
+    try {
+      const projectRequests = purchaseList.map(
+        (p) => apiService.getProjectByPurchasesId(p._id), // Asegúrate de que esta función devuelva la respuesta correcta
+      );
+      const responses = await Promise.all(projectRequests);
+      const allProjects = responses.map((res) => res.data).flat(); // Aplanar los resultados si es necesario
+      setProject(allProjects); // Aquí aseguramos que el tipo sea correcto
+    } catch (error) {
+      console.error("Error al obtener proyectos:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      getPurchasesByCustomerId(session.user.id)
+        .then((response) => {
+          if (response.data) {
+            // Aquí debes asegurarte de que response.data es un array de compras
+            setPurchase(response.data);
+          } else {
+            console.error("No se encontraron compras");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al obtener compras:", error);
+        });
+    }
+  }, [session?.user?.id]);
+
+  useEffect(() => {
+    if (purchase.length > 0) {
+      getProjectsByPurchasesId(purchase);
+    }
+  }, [purchase]);
 
   return (
     <>
