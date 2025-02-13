@@ -1,11 +1,12 @@
 "use client";
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import QuestionnaireGeneral from "./QuestionnaireGeneral";
 import QuestionnaireBackyard from "./QuestionnaireBackyard";
 import QuestionnaireFrontyard from "./QuestionnaireFrontyard";
 import QuestionnaireExtra from "./QuestionnaireExtra";
 import QuestionnaireMedia from "./QuestionnaireMedia";
+import QuestionnaireProgress from "@/components/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
 
@@ -81,7 +82,15 @@ const QuestionnaireManager: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col bgblue-300 gap-12'>
+    <div className='flex flex-col bgblue-300 gap-12 relative'>
+      <div className="flex fixed bgred-300 z-[100] top-[50px]">
+        <QuestionnaireProgress
+          isAnsweredGeneral={isAnsweredGeneral}
+          isAnsweredBackyard={isAnsweredBackyard}
+          isAnsweredFrontyard={isAnsweredFrontyard}
+          isAnsweredExtra={isAnsweredExtra}
+        />
+      </div>
       <QuestionnaireGeneral
         answersGeneral={answersGeneral}
         selectedMaxTwoGeneral={selectedMaxTwoGeneral}
