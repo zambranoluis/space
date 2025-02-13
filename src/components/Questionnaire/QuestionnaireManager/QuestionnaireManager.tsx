@@ -81,7 +81,7 @@ const QuestionnaireManager: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col bgblue-300'>
+    <div className='flex flex-col bgblue-300 gap-12'>
       <QuestionnaireGeneral
         answersGeneral={answersGeneral}
         selectedMaxTwoGeneral={selectedMaxTwoGeneral}
