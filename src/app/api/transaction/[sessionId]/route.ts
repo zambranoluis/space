@@ -26,7 +26,10 @@ export async function GET(req: NextRequest) {
 
     // Validar el token
     if (!nodeToken) {
-      return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
+      return NextResponse.json(
+        { error: "Unauthorized: No token provided" },
+        { status: 401 },
+      );
     }
 
     const response = await axios.get(`${BACKEND_URL}/transaction/${id}`, {
@@ -48,7 +51,10 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       // Manejar errores inesperados
-      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unexpected error occurred" },
+        { status: 500 },
+      );
     }
   }
 }
@@ -72,7 +78,10 @@ export async function PATCH(req: NextRequest) {
 
     // Validar el token
     if (!nodeToken) {
-      return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
+      return NextResponse.json(
+        { error: "Unauthorized: No token provided" },
+        { status: 401 },
+      );
     }
 
     const body = await req.json();
@@ -95,7 +104,10 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       // Manejar errores inesperados
-      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unexpected error occurred" },
+        { status: 500 },
+      );
     }
   }
 }

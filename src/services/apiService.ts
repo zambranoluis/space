@@ -150,7 +150,7 @@ export const apiService = {
   ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.get(
-        `${NEXT_URL_API}/transaction/${transactionId}`,
+        `${NEXT_URL_API}/transaction/purchase/${transactionId}`,
       );
       return response.data;
     } catch (error: unknown) {
