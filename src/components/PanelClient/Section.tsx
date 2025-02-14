@@ -51,7 +51,7 @@ const Section: React.FC<SectionProps> = ({
                   id='site'
                   className={`h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}
                 >
-                  {asideSelectedOption === "projects" && <ProjectsClient />}
+                  {asideSelectedOption === "projects" && <ProjectsClient purchase={purchases} />}
                   {asideSelectedOption === "myprofile" && customer && (
                     <MyProfile customer={customer} />
                   )}
