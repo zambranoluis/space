@@ -45,9 +45,10 @@ const ProjectsClient = () => {
 
   const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
     try {
-      const projectRequests = purchaseList.map(
-        (p) => apiService.getProjectByPurchasesId(p._id), // Asegúrate de que esta función devuelva la respuesta correcta
-      );
+      const projectRequests = purchaseList
+        .filter((p) => p._id) // Filtra solo los que tengan _id válido
+        .map((p) => apiService.getProjectByPurchasesId(p._id));
+
       const responses = await Promise.all(projectRequests);
       const allProjects = responses.map((res) => res.data).flat(); // Aplanar los resultados si es necesario
       setProject(allProjects); // Aquí aseguramos que el tipo sea correcto
@@ -63,6 +64,7 @@ const ProjectsClient = () => {
           if (response.data) {
             // Aquí debes asegurarte de que response.data es un array de compras
             setPurchase(response.data);
+            console.log("Compras obtenidas:", response.data);
           } else {
             console.error("No se encontraron compras");
           }
@@ -78,6 +80,8 @@ const ProjectsClient = () => {
       getProjectsByPurchasesId(purchase);
     }
   }, [purchase]);
+
+  console.log("Proyectos obtenidos:", project);
 
   return (
     <>
