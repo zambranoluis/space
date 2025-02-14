@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { FaCheck } from "react-icons/fa6";
+import { MdOutlineExpandLess } from "react-icons/md";
+
 import { questionnaire } from "../components/Questionnaire/questionnaireFile";
 
 interface QuestionnaireProgressProps {
@@ -98,12 +100,45 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
     })
   }, [isAnsweredFrontyard])
 
+  const openGeneral = () => {
+    const openGeneralArrow = document.getElementById("openGeneralArrow");
+    const progressGeneral = document.getElementById("progressGeneral");
+    if (progressGeneral) {
+      progressGeneral.classList.toggle("max-h-0");
+      progressGeneral.classList.toggle("p-2");
+      openGeneralArrow?.classList.toggle("rotate-180");
+    }
+  };
+
+  const openBackyard = () => {
+    const openBackyardArrow = document.getElementById("openBackyardArrow");
+    const progressBackyard = document.getElementById("progressBackyard");
+    if (progressBackyard) {
+      progressBackyard.classList.toggle("max-h-0");
+      progressBackyard.classList.toggle("p-2");
+      openBackyardArrow?.classList.toggle("rotate-180");
+    }
+  };
+
+  const openFrontyard = () => {
+    const openFrontyardArrow = document.getElementById("openFrontyardArrow");
+    const progressFrontyard = document.getElementById("progressFrontyard");
+    if (progressFrontyard) {
+      progressFrontyard.classList.toggle("max-h-0");
+      progressFrontyard.classList.toggle("p-2");
+      openFrontyardArrow?.classList.toggle("rotate-180");
+    }
+  };
+
   return (
-    <div className="bgred-300 flex flex-col w-full p-2 ">
+    <div className="bgred-300 flex flex-col w-full p-2 select-none">
       <div className="flex flex-col gap-2 w-full bgblue-300">
-        <div id="progressGeneral" className="w-full">
-          <h2 className="pl-4">General Questions: <span className="text-xs">( {countedGeneralAnswers} / {questionnaire.general.length} )</span></h2>
-          <div className="flex gap-2 w-full overflow-scroll select-none overflow-y-hidden p-2">
+        <div className="w-full">
+          <div className="flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer" onClick={()=>{openGeneral()}}>
+            <MdOutlineExpandLess id="openGeneralArrow" className="bgred-300 text-lg rotate-180" />
+            <h2 className={`pl4 `}>General Questions: <span className="text-xs">( {countedGeneralAnswers} / {questionnaire.general.length} )</span></h2>
+          </div>
+          <div id="progressGeneral" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-scroll transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.general.map((answer, index) => (
               <div
                 key={index}
@@ -124,9 +159,12 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             ))}
           </div>
         </div>
-        <div id="progressBackyard" className="w-full">
-          <h2 className="pl-4">Backyard Questions: <span className="text-xs">( {countedBackyardAnswers} / {questionnaire.backyard.length} )</span></h2>
-          <div className="flex gap-2 w-full overflow-scroll select-none overflow-y-hidden p-2">
+        <div  className="w-full">
+          <div className={`${isAnsweredGeneral[isAnsweredGeneral.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openBackyard()}}>
+            <MdOutlineExpandLess id="openBackyardArrow" className="bgred-300 text-lg rotate-180 " />
+            <h2 className={` `}>Backyard Questions: <span className="text-xs">( {countedBackyardAnswers} / {questionnaire.backyard.length} )</span></h2>
+          </div>
+          <div id="progressBackyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-scroll transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.backyard.map((answer, index) => (
               <div
                 key={index}
@@ -147,9 +185,12 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             ))}
           </div>
         </div>
-        <div id="progressFrontyard" className="w-full">
-          <h2 className="pl-4">Frontyard Questions: <span className="text-xs">( {countedFrontyardAnswers} / {questionnaire.backyard.length} )</span></h2>
-          <div className="flex gap-2 w-full overflow-scroll select-none overflow-y-hidden p-2">
+        <div  className="w-full bgred-300">
+          <div className={`${isAnsweredBackyard[isAnsweredBackyard.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openFrontyard()}}>
+            <MdOutlineExpandLess id="openFrontyardArrow" className="bgred-300 text-lg rotate-180 " />
+            <h2 className={` `}>Frontyard Questions: <span className="text-xs">( {countedFrontyardAnswers} / {questionnaire.backyard.length} )</span></h2>
+          </div>
+          <div id="progressFrontyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-scroll transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.backyard.map((answer, index) => (
               <div
                 key={index}

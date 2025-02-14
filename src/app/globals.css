@@ -26,6 +26,11 @@ input::placeholder {
 } */
 
 *::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+.questionnaireProgressScroll::-webkit-scrollbar {
   height: 5px;
   width: 5px;
 }

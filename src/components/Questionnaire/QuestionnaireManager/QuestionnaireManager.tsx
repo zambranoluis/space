@@ -10,7 +10,14 @@ import QuestionnaireProgress from "@/components/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
 
-const QuestionnaireManager: React.FC = () => {
+interface QuestionnaireManagerProps {
+  showProgress: boolean;
+
+}
+
+const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
+  showProgress
+}) => {
   const [answersGeneral, setAnswersGeneral] = useState<
     { question: string; answer: string }[]
   >([]);
@@ -45,6 +52,11 @@ const QuestionnaireManager: React.FC = () => {
 
   const [isAnsweredBackyard, setIsAnsweredBackyard] = useState<boolean[]>(questionnaire.backyard.map((question) => false));
 
+  const [selectedBq2, setSelectedBq2] = useState<number | null>(null);
+const handleBq2Change = (index: number) => {
+    setSelectedBq2(index === selectedBq2 ? null : index); // Permitir deseleccionar.
+  };
+
 
   const handleSubmitAnswersBackyard = (question: string, answer: string) => {
     if (!answersBackyard.includes({ question: question, answer: answer })) {
@@ -61,11 +73,19 @@ const QuestionnaireManager: React.FC = () => {
   );
 
 
+  const [selectedFq2, setSelectedFq2] = useState<number | null>(null);
+
+  
+  const handleFq2Change = (index: number) => {
+    setSelectedFq2(index === selectedFq2 ? null : index); // Permitir deseleccionar.
+  };
+
   const handleSubmitAnswersFrontyard = (question: string, answer: string) => {
     if (!answersFrontyard.includes({ question: question, answer: answer })) {
       setAnswersFrontyard([...answersFrontyard, { question: question, answer: answer }]);
     }
   };
+
 
   const [answersExtra, setAnswersExtra] = useState<
     { question: string; answer: string }[]
@@ -82,19 +102,22 @@ const QuestionnaireManager: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col bg-purple-400-300 gap-12 relative'>
-      <div className="flex fixed bg-black/70  rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
-        <QuestionnaireProgress
-          answersGeneral={answersGeneral}
-          isAnsweredGeneral={isAnsweredGeneral}
-          answersBackyard={answersBackyard}
-          isAnsweredBackyard={isAnsweredBackyard}
-          answersFrontyard={answersFrontyard}
-          isAnsweredFrontyard={isAnsweredFrontyard}
-          answersExtra={answersExtra}
-          isAnsweredExtra={isAnsweredExtra}
-        />
-      </div>
+    <div className='flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300'>
+      {
+        showProgress && (<div className="flex fixed bg-black/70  rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
+          <QuestionnaireProgress
+            answersGeneral={answersGeneral}
+            isAnsweredGeneral={isAnsweredGeneral}
+            answersBackyard={answersBackyard}
+            isAnsweredBackyard={isAnsweredBackyard}
+            answersFrontyard={answersFrontyard}
+            isAnsweredFrontyard={isAnsweredFrontyard}
+            answersExtra={answersExtra}
+            isAnsweredExtra={isAnsweredExtra}
+          />
+        </div>
+        )
+      }
       <QuestionnaireGeneral
         answersGeneral={answersGeneral}
         selectedMaxTwoGeneral={selectedMaxTwoGeneral}
@@ -108,6 +131,8 @@ const QuestionnaireManager: React.FC = () => {
         answersBackyard={answersBackyard}
         isAnsweredBackyard={isAnsweredBackyard}
         setIsAnsweredBackyard={setIsAnsweredBackyard}
+        selectedBq2={selectedBq2}
+        handleBq2Change={handleBq2Change}
         handleSubmitAnswersBackyard={handleSubmitAnswersBackyard}
       />
       <QuestionnaireFrontyard
@@ -116,6 +141,8 @@ const QuestionnaireManager: React.FC = () => {
         answersFrontyard={answersFrontyard}
         isAnsweredFrontyard={isAnsweredFrontyard}
         setIsAnsweredFrontyard={setIsAnsweredFrontyard}
+        selectedFq2={selectedFq2}
+        handleFq2Change={handleFq2Change}
         handleSubmitAnswersFrontyard={handleSubmitAnswersFrontyard}
       />
       <QuestionnaireExtra

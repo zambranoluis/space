@@ -62,8 +62,9 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           newHeight += 40;
   
           // Si no es la primera pregunta, hacer scroll
-          if (index !== 0) {
+          if (index > 0) {
             setTimeout(() => {
+              console.log("haciendo scroll en general 1");
               window.scrollBy({ top: currentElement.offsetHeight + 40, behavior: "smooth" });
             }, 100); // 🔹 Espera un poco para asegurar que el DOM está actualizado
           }
@@ -77,8 +78,10 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
             newHeight += 40;
   
             setTimeout(() => {
-              window.scrollBy({ top: nextElement.offsetHeight + 40, behavior: "smooth" });
-            }, 100); // 🔹 Pequeña espera adicional para evitar conflictos de renderizado
+              if (index > 0) {
+                window.scrollBy({ top: nextElement.offsetHeight + 40, behavior: "smooth" });
+              }
+            }, 100);
           }
         }
       });
