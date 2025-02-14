@@ -2,7 +2,6 @@
 
 import React from "react";
 
-
 import { PiPowerFill } from "react-icons/pi";
 
 import { FaFolder } from "react-icons/fa6";
@@ -11,9 +10,7 @@ import { BiSolidPurchaseTag } from "react-icons/bi";
 
 import { FaUserCircle } from "react-icons/fa";
 
-
 import { TiArrowSortedDown } from "react-icons/ti";
-
 
 import { signOut } from "next-auth/react";
 
@@ -64,48 +61,27 @@ const Aside: React.FunctionComponent<AsideProps> = ({
   toggleSiteContainer,
   asideSelectedOption,
 }) => {
-
   const handleLogout = async () => {
     try {
-      // 🔹 Llamar a la API de logout en Next.js
       const response = await fetch("/api/auth/logout", { method: "POST" });
-  
-      if (!response.ok) {
-        console.error("❌ Error al cerrar sesión en el backend");
-        return;
-      }
-  
-      // 🔹 Luego, cerrar sesión con NextAuth
-      await signOut({ callbackUrl: "/" });
-  
-      // 🔹 Limpiar LocalStorage y SessionStorage
+      if (!response.ok) throw new Error("Error al cerrar sesión en el backend");
+
+      await signOut({ callbackUrl: "/" }); // NextAuth maneja las cookies
+
       localStorage.clear();
       sessionStorage.clear();
-  
-      // 🔹 Eliminar todas las cookies
-      document.cookie.split(";").forEach((cookie) => {
-        const [name] = cookie.split("=");
-        document.cookie = `${name.trim()}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
-      });
-  
-      // 🔹 Borrar caché del navegador
+
+      // Opcionalmente limpiar caches
       if ("caches" in window) {
         const cacheKeys = await caches.keys();
         await Promise.all(cacheKeys.map((key) => caches.delete(key)));
       }
-  
-      // 🔹 Borrar toda la caché de la sesión en Service Workers (si aplica)
-      if ("serviceWorker" in navigator) {
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        await Promise.all(registrations.map((registration) => registration.unregister()));
-      }
-  
-      console.log("✅ Sesión cerrada y memoria limpiada completamente");
+
+      console.log("✅ Sesión cerrada y caché limpiada");
     } catch (error) {
       console.error("❌ Error al cerrar sesión:", error);
     }
   };
-  
 
   return (
     <aside
