@@ -68,21 +68,26 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     );
   };
   
-  const [selectedExtras, setSelectedExtras] = useState<boolean[]>(
-    extras ? Array(extras.length).fill(false) : []
+  const [selectedExtras, setSelectedExtras] = useState<boolean[]>(() =>
+    extras ? new Array(extras.length).fill(false) : []
   );
-
+  
+  useEffect(() => {
+    if (extras) {
+      setSelectedExtras((prev) =>
+        prev.length === extras.length ? prev : new Array(extras.length).fill(false)
+      );
+    }
+  }, [extras]); // Se actualiza solo si `extras` cambia
+  
   const handleSelectedExtras = (index: number) => {
     setSelectedExtras((prev) => {
+      if (!prev.length) return new Array(extras?.length || 0).fill(false); // Seguridad en caso de `extras` null
       const newSelectedExtras = [...prev];
       newSelectedExtras[index] = !newSelectedExtras[index];
       return newSelectedExtras;
     });
   };
-
-  useEffect(() => {
-    console.log("selected Extras:", selectedExtras);
-  }, [selectedExtras]);
 
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
@@ -153,6 +158,8 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       status: "pending",
       isActive: true,
     };
+
+    console.log("New purchase:", newPurchase);
     
 
     try {

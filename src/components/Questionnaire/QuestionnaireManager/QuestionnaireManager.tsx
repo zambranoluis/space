@@ -82,12 +82,16 @@ const QuestionnaireManager: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col bgblue-300 gap-12 relative'>
-      <div className="flex fixed bgred-300 z-[100] top-[50px]">
+    <div className='flex flex-col bg-purple-400-300 gap-12 relative'>
+      <div className="flex fixed bg-black/70  rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
         <QuestionnaireProgress
+          answersGeneral={answersGeneral}
           isAnsweredGeneral={isAnsweredGeneral}
+          answersBackyard={answersBackyard}
           isAnsweredBackyard={isAnsweredBackyard}
+          answersFrontyard={answersFrontyard}
           isAnsweredFrontyard={isAnsweredFrontyard}
+          answersExtra={answersExtra}
           isAnsweredExtra={isAnsweredExtra}
         />
       </div>
