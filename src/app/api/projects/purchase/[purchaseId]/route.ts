@@ -17,16 +17,18 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const id = req.nextUrl.searchParams.get("id");
+    const purchaseId = req.nextUrl.pathname.split("/").pop();
 
-    if (!id) {
+    console.log("purchaseId: ", purchaseId);
+
+    if (!purchaseId) {
       return NextResponse.json(
         { error: "Missing project ID in query parameters" },
         { status: 400 },
       );
     }
 
-    const response = await axios.get(`${BACKEND_URL}/projects/purchase/${id}`, {
+    const response = await axios.get(`${BACKEND_URL}/projects/purchase/${purchaseId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${nodeToken}`,

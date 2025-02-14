@@ -312,6 +312,7 @@ export const apiService = {
       const response = await apiClient.get(
         `${NEXT_URL_API}/projects/purchase/${purchaseId}`,
       );
+      console.log(" response.data: ", response.data);
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
