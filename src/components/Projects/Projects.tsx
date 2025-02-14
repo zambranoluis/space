@@ -46,16 +46,17 @@ const ProjectsClient = () => {
   const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
     try {
       const completedPurchases = purchaseList.filter(
-        (p) => p._id && p.status === "completed",
-      ); // Filtra solo las compras completadas
+        (p) => p._id && p.status && p.status.toLowerCase() === "completed",
+      );
 
       const projectRequests = completedPurchases.map((p) =>
         apiService.getProjectByPurchasesId(p._id),
       );
 
       const responses = await Promise.all(projectRequests);
-      const allProjects = responses.map((res) => res.data).flat(); // Aplanar los resultados si es necesario
-      setProject(allProjects); // Aquí aseguramos que el tipo sea correcto
+      console.log("All project responses:", responses); // Debe mostrar un array de proyectos
+
+      setProject(responses); // responses ya es un array de proyectos
     } catch (error) {
       console.error("Error al obtener proyectos:", error);
     }

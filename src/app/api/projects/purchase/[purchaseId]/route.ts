@@ -19,8 +19,6 @@ export async function GET(req: NextRequest) {
 
     const purchaseId = req.nextUrl.pathname.split("/").pop();
 
-    console.log("purchaseId: ", purchaseId);
-
     if (!purchaseId) {
       return NextResponse.json(
         { error: "Missing project ID in query parameters" },

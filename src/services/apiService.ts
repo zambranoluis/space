@@ -165,9 +165,7 @@ export const apiService = {
     purchaseId: string,
   ): Promise<ApiResponse<Transaction>> => {
     try {
-      const response = await apiClient.get(
-        `${NEXT_URL_API}/transaction/${purchaseId}`,
-      );
+      const response = await apiClient.get(`${NEXT_URL_API}/transaction/${purchaseId}`);
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
@@ -307,18 +305,13 @@ export const apiService = {
 
   getProjectByPurchasesId: async (
     purchaseId: string,
-  ): Promise<ApiResponse<getProjectsByPurchasesId>> => {
+  ): Promise<getProjectsByPurchasesId> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/projects/purchase/${purchaseId}`,
       );
-      return response.data;
-    } catch (error: unknown) {
-      const err = error as ApiError;
-      console.error(
-        "Error al obtener proyectos por compra:",
-        err.response?.data || err.message,
-      );
+      return response.data as getProjectsByPurchasesId; // Asegura que TS entienda el tipo
+    } catch (error) {
       throw error;
     }
   },
