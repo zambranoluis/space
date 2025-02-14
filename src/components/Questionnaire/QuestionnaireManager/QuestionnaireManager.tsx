@@ -104,7 +104,7 @@ const handleBq2Change = (index: number) => {
   return (
     <div className='flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300'>
       {
-        showProgress && (<div className="flex fixed bg-black/70  rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
+        showProgress && (<div className="flex fixed bg-black/70 hover:bg-black/85 transition-colors duration-300 rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
           <QuestionnaireProgress
             answersGeneral={answersGeneral}
             isAnsweredGeneral={isAnsweredGeneral}
