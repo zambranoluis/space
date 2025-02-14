@@ -30,6 +30,11 @@ input::placeholder {
   width: 7px;
 }
 
+.questionnaireProgressScroll::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
 *::-webkit-scrollbar-track {
   border-radius: 3px;
   background-color: #e0e0e0;

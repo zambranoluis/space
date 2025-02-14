@@ -15,6 +15,8 @@ interface QuestionnaireFrontyardProps {
   answersFrontyard: { question: string; answer: string }[];
   isAnsweredFrontyard: boolean[];
   setIsAnsweredFrontyard: React.Dispatch<React.SetStateAction<boolean[]>>;
+  selectedFq2: number | null;
+  handleFq2Change: (index: number) => void;
   handleSubmitAnswersFrontyard: (question: string, answer: string) => void
 }
 
@@ -25,6 +27,8 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
   answersFrontyard,
   isAnsweredFrontyard,
   setIsAnsweredFrontyard,
+  selectedFq2,
+  handleFq2Change,
   handleSubmitAnswersFrontyard
 }) => {
 
@@ -190,8 +194,8 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
                       <input
                         className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
                         type="checkbox"
-                        // checked={}
-                        onChange={() => {}}
+                        checked={selectedFq2 === index}
+                        onChange={() => {handleFq2Change(index)}}
                       />
                     </div>
                   ))

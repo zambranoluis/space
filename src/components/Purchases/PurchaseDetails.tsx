@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { FaFileInvoiceDollar } from "react-icons/fa";
 import { apiService } from "@/services/apiService";
 import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from "@nextui-org/modal";
@@ -50,6 +50,34 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
     console.log("purchase ID to show : ", purchaseId);
     onOpen();
   };
+
+  useEffect(() => {
+    const fetchTransactionDetails = async () => {
+      try {
+        const response = await apiService.getTransactionByPurchaseId(purchaseId);
+        if (response.data) {
+          console.log("response data purchase: ", response.data)
+          const transaction = response.data; // Tipo Transaction
+          
+          // Convertimos Transaction a PurchaseDetails
+          const details: PurchaseDetails = {
+            amount: transaction.amount, // Convertir a string si es necesario
+            currency: "USD", // Ajusta la moneda si no está en la respuesta
+            status: transaction.status,
+            createdAt: transaction.createdAt,
+            updatedAt: transaction.updatedAt,
+          };
+
+          setPurchaseDetails(details);
+        }
+      } catch (error) {
+        
+      }
+    }
+
+    fetchTransactionDetails();
+    console.log("transaction found for: ", purchaseId , "Details : ", purchaseDetails);
+  }, [purchaseId]);
 
   return (
     <div>

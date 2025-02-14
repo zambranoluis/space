@@ -146,12 +146,27 @@ export const apiService = {
     }
   },
 
-  getTransactionByPurchaseId: async (
+  getTransactionByTransactionId: async (
     transactionId: string,
   ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/transaction/purchase/${transactionId}`,
+      );
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error("Error al obtener transacción:", err.response?.data || err.message);
+      throw error;
+    }
+  },
+
+  getTransactionByPurchaseId: async (
+    purchaseId: string,
+  ): Promise<ApiResponse<Transaction>> => {
+    try {
+      const response = await apiClient.get(
+        `${NEXT_URL_API}/transaction/${purchaseId}`,
       );
       return response.data;
     } catch (error: unknown) {

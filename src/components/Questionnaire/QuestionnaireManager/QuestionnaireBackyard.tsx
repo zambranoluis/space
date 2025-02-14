@@ -14,6 +14,8 @@ interface QuestionnaireBackyardProps {
   answersBackyard: { question: string; answer: string }[];
   isAnsweredBackyard: boolean[];
   setIsAnsweredBackyard: React.Dispatch<React.SetStateAction<boolean[]>>;
+  selectedBq2: number | null;
+  handleBq2Change: (index: number) => void;
   handleSubmitAnswersBackyard: (question: string, answer: string) => void
 }
 
@@ -23,6 +25,8 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
   answersBackyard,
   isAnsweredBackyard,
   setIsAnsweredBackyard,
+  selectedBq2,
+  handleBq2Change,
   handleSubmitAnswersBackyard
 }) => {
 
@@ -189,8 +193,8 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                       <input
                         className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
                         type="checkbox"
-                        // checked={}
-                        onChange={() => {}}
+                        checked={selectedBq2 === index}
+                        onChange={() => {handleBq2Change(index);}}
                       />
                     </div>
                   ))

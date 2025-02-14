@@ -214,12 +214,13 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
                       </button>
                     )}
                     {purchase.status === "completed" && (
-                      <div>
+                      <div className="flex gap-2
+                      ">
                         <PurchaseDetails purchaseId={purchase._id} />
                         <button
                           className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-end rounded-tl-3xl rounded-br-3xl'
                           onClick={() => handleCreateProject(purchase)}>
-                          Create Questionnaire
+                          Create Project
                         </button>
                       </div>
                     )}
