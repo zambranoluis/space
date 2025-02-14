@@ -87,7 +87,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
     <aside
       className={`mt-[20px] ${
         isAsideOpen ? "w-[170px]" : "w-[70px]"
-      } transitionall duration300 select-none noScrollBar  bg-black/50  z-[2000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}>
+      } transitionall duration300 select-none noScrollBar  bg-black/50  z-[3000]  overflow-auto    flex   rounded-r-3xl justify-around py-6 text-white  text[#6b776d] 2`}>
       <div id='asideOptions' className='flex flex-col gap-3  w-full  bgrose-300 '>
         <div className='flex flex-col'>
           {asideOptions.map((option) => (
