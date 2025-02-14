@@ -16,6 +16,7 @@ import {
   createQuestionnaires,
   createProject,
   getProjectsByPurchasesId,
+  question,
 } from "@/utils/dataInterfaces";
 
 interface ApiResponse<T = unknown> {
@@ -150,7 +151,7 @@ export const apiService = {
   ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.get(
-        `${NEXT_URL_API}/transaction/${transactionId}`,
+        `${NEXT_URL_API}/transaction/purchase/${transactionId}`,
       );
       return response.data;
     } catch (error: unknown) {
@@ -318,6 +319,17 @@ export const apiService = {
         "Error al obtener proyectos por compra:",
         err.response?.data || err.message,
       );
+      throw error;
+    }
+  },
+
+  createQuestion: async (question: question): Promise<ApiResponse<question>> => {
+    try {
+      const response = await apiClient.post(`${NEXT_URL_API}/questions`, question);
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error("Error al crear la pregunta:", err.response?.data || err.message);
       throw error;
     }
   },
