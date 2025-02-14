@@ -11,10 +11,15 @@ import { projects } from "../../app/(panel-client)/panel-client/steps";
 
 import { apiService } from "../../services/apiService";
 
-import { DetailedPurchase, getProjectsByPurchasesId } from "../../utils/dataInterfaces";
+import { DetailedPurchase, getProjectsByPurchasesId, Purchase } from '../../utils/dataInterfaces';
 
-const ProjectsClient = () => {
-  const [purchase, setPurchase] = useState<DetailedPurchase[]>([]);
+interface ProjectsClientProps {
+  purchase: DetailedPurchase[];
+}
+
+const ProjectsClient: React.FC<ProjectsClientProps> = ({
+  purchase,
+}) => {
 
   const [project, setProject] = useState<getProjectsByPurchasesId[]>([]); // Cambia `DetailedProject[]` con el tipo correcto
 
@@ -31,17 +36,6 @@ const ProjectsClient = () => {
     step?.classList.toggle("max-h-0");
   };
 
-  const getPurchasesByCustomerId = async (
-    customerId: string,
-  ): Promise<{ data: DetailedPurchase[] }> => {
-    try {
-      const response = await apiService.getPurchasesByCustomerId(customerId);
-      return response; // Asegúrate de que aquí estamos retornando la respuesta correctamente
-    } catch (error) {
-      console.error("Error fetching purchases:", error);
-      throw error; // Lanza el error para poder manejarlo más adelante
-    }
-  };
 
   const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
     try {
