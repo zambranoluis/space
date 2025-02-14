@@ -60,9 +60,7 @@ function Questionnaire() {
         <div id="landing" className="flex h-full bgred-300 w-full max-md:h-[500px]  md:w-[50%] bg-top bg-cover bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireLanding.webp')",}}>
         </div>
       </section>
-    
       <QuestionnaireManager showProgress={showProgress} />
-
     </main>
   );
 }

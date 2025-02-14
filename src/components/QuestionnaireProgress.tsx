@@ -93,12 +93,38 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   }, [isAnsweredFrontyard]);
 
   const [countedFrontyardAnswers, setCountedFrontyardAnswers] = useState(0);
+  
 
   useEffect(() => {
     isAnsweredFrontyard.map((isAnswered, index) => {
       (isAnswered ? setCountedFrontyardAnswers(countedFrontyardAnswers + 1) : null);
     })
   }, [isAnsweredFrontyard])
+
+
+  const questionRefsExtra = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Detectar la última pregunta respondida y hacer scroll
+  useEffect(() => {
+    const lastAnsweredIndex = isAnsweredExtra.lastIndexOf(true);
+
+    if (lastAnsweredIndex !== -1 && questionRefsExtra.current[lastAnsweredIndex]) {
+      questionRefsExtra.current[lastAnsweredIndex]?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [isAnsweredExtra]);
+
+  const [countedExtraAnswers, setCountedExtraAnswers] = useState(0);
+  
+
+  useEffect(() => {
+    isAnsweredExtra.map((isAnswered, index) => {
+      (isAnswered ? setCountedExtraAnswers(countedExtraAnswers + 1) : null);
+    })
+  }, [isAnsweredExtra])
 
   const openGeneral = () => {
     const openGeneralArrow = document.getElementById("openGeneralArrow");
@@ -130,6 +156,16 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
     }
   };
 
+  const openExtra = () => {
+    const openExtraArrow = document.getElementById("openExtraArrow");
+    const progressExtra = document.getElementById("progressExtra");
+    if (progressExtra) {
+      progressExtra.classList.toggle("max-h-0");
+      progressExtra.classList.toggle("p-2");
+      openExtraArrow?.classList.toggle("rotate-180");
+    }
+  };
+
   return (
     <div className="bgred-300 flex flex-col w-full p-2 select-none">
       <div className="flex flex-col gap-2 w-full bgblue-300">
@@ -138,7 +174,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openGeneralArrow" className="bgred-300 text-lg rotate-180" />
             <h2 className={`pl4 `}>General Questions: <span className="text-xs">( {countedGeneralAnswers} / {questionnaire.general.length} )</span></h2>
           </div>
-          <div id="progressGeneral" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-scroll transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressGeneral" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.general.map((answer, index) => (
               <div
                 key={index}
@@ -164,7 +200,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openBackyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Backyard Questions: <span className="text-xs">( {countedBackyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
-          <div id="progressBackyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-scroll transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressBackyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.backyard.map((answer, index) => (
               <div
                 key={index}
@@ -185,12 +221,12 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             ))}
           </div>
         </div>
-        <div  className="w-full bgred-300">
+        <div  className="w-full">
           <div className={`${isAnsweredBackyard[isAnsweredBackyard.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openFrontyard()}}>
             <MdOutlineExpandLess id="openFrontyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Frontyard Questions: <span className="text-xs">( {countedFrontyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
-          <div id="progressFrontyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-scroll transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressFrontyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.backyard.map((answer, index) => (
               <div
                 key={index}
@@ -211,7 +247,32 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             ))}
           </div>
         </div>
-        
+        <div  className="w-full">
+          <div className={`${isAnsweredFrontyard[isAnsweredFrontyard.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openExtra()}}>
+            <MdOutlineExpandLess id="openExtraArrow" className="bgred-300 text-lg rotate-180 " />
+            <h2 className={` `}>Extra Questions: <span className="text-xs">( {countedExtraAnswers} / {questionnaire.extra.length} )</span></h2>
+          </div>
+          <div id="progressExtra" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
+            {questionnaire.extra.map((answer, index) => (
+              <div
+                key={index}
+                ref={(el) => {
+                  if (el) questionRefsExtra.current[index] = el;
+                }}
+                
+                className={`${isAnsweredExtra[index] ? "bggreen-500" : "bgred-500"} flex gap-2 justify-center items-center px-2 py-1 rounded`}
+              >
+                <p className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-500/50"} text-xs`}>
+                  {index + 1}.
+                </p>
+                <h3 className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-500/50"} text-xs whitespace-nowrap`}>
+                  {answer.title}
+                </h3>
+                <FaCheck className={`${isAnsweredExtra[index] ? "text-green-500" : "text-gray-500/50"}`} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
