@@ -11,16 +11,17 @@ import { projects } from "../../app/(panel-client)/panel-client/steps";
 
 import { apiService } from "../../services/apiService";
 
-import { DetailedPurchase, getProjectsByPurchasesId, Purchase } from '../../utils/dataInterfaces';
+import {
+  DetailedPurchase,
+  getProjectsByPurchasesId,
+  Purchase,
+} from "../../utils/dataInterfaces";
 
 interface ProjectsClientProps {
   purchase: DetailedPurchase[];
 }
 
-const ProjectsClient: React.FC<ProjectsClientProps> = ({
-  purchase,
-}) => {
-
+const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
   const [project, setProject] = useState<getProjectsByPurchasesId[]>([]); // Cambia `DetailedProject[]` con el tipo correcto
 
   const { data: session } = useSession();
@@ -35,7 +36,6 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({
     arrow?.classList.toggle("rotate-180");
     step?.classList.toggle("max-h-0");
   };
-
 
   const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
     try {
@@ -55,24 +55,6 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({
       console.error("Error al obtener proyectos:", error);
     }
   };
-
-  useEffect(() => {
-    if (session?.user?.id) {
-      getPurchasesByCustomerId(session.user.id)
-        .then((response) => {
-          if (response.data) {
-            // Aquí debes asegurarte de que response.data es un array de compras
-            setPurchase(response.data);
-            console.log("Compras obtenidas:", response.data);
-          } else {
-            console.error("No se encontraron compras");
-          }
-        })
-        .catch((error) => {
-          console.error("Error al obtener compras:", error);
-        });
-    }
-  }, [session?.user?.id]);
 
   useEffect(() => {
     if (purchase.length > 0) {
