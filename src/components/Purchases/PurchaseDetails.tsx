@@ -24,7 +24,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
       try {
         const response = await apiService.getTransactionByPurchaseId(purchaseId);
         if (response.data) {
-          console.log("response data purchase: ", response.data)
+          // console.log("response data purchase: ", response.data)
           const transaction = response.data; // Tipo Transaction
           
           // Convertimos Transaction a PurchaseDetails
@@ -47,7 +47,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
   }, [purchaseId]);
 
   const handleOpenPurchaseDetails = () => {
-    console.log("purchase ID to show : ", purchaseId);
+    // console.log("purchase ID to show : ", purchaseId);
     onOpen();
   };
 
@@ -56,7 +56,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
       try {
         const response = await apiService.getTransactionByPurchaseId(purchaseId);
         if (response.data) {
-          console.log("response data purchase: ", response.data)
+          // console.log("response data purchase: ", response.data)
           const transaction = response.data; // Tipo Transaction
           
           // Convertimos Transaction a PurchaseDetails
@@ -76,7 +76,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({ purcha
     }
 
     fetchTransactionDetails();
-    console.log("transaction found for: ", purchaseId , "Details : ", purchaseDetails);
+    // console.log("transaction found for: ", purchaseId , "Details : ", purchaseDetails);
   }, [purchaseId]);
 
   return (

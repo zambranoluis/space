@@ -93,7 +93,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
   useEffect(() => {
-    console.log("selectedExtras:", selectedExtras);
+    // console.log("selectedExtras:", selectedExtras);
   }, [selectedExtras]);
   
   
@@ -159,7 +159,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       isActive: true,
     };
 
-    console.log("New purchase:", newPurchase);
+    // console.log("New purchase:", newPurchase);
     
 
     try {

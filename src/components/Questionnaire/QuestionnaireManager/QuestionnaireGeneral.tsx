@@ -64,7 +64,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           // Si no es la primera pregunta, hacer scroll
           if (index > 0) {
             setTimeout(() => {
-              console.log("haciendo scroll en general 1");
+              // console.log("haciendo scroll en general 1");
               window.scrollBy({ top: currentElement.offsetHeight + 40, behavior: "smooth" });
             }, 100); // 🔹 Espera un poco para asegurar que el DOM está actualizado
           }

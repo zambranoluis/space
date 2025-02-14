@@ -55,7 +55,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
       // Solo actualiza si el nuevo estado es diferente al anterior
       return JSON.stringify(prev) !== JSON.stringify(updatedIsAnswered) ? updatedIsAnswered : prev;
     });
-    console.log("Extra - preguntas respondidas: ", isAnsweredExtra);
+    // console.log("Extra - preguntas respondidas: ", isAnsweredExtra);
   }, [answersExtra, questionnaire.extra]);
 
   const containerRefExtra = useRef<HTMLDivElement>(null);
