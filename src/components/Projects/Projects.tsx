@@ -22,7 +22,7 @@ interface ProjectsClientProps {
 }
 
 const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
-  const [project, setProject] = useState<getProjectsByPurchasesId[]>([]); // Cambia `DetailedProject[]` con el tipo correcto
+  const [projects, setProjects] = useState<getProjectsByPurchasesId[]>([]); // Cambia `DetailedProject[]` con el tipo correcto
 
   const { data: session } = useSession();
 
@@ -50,7 +50,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
       const responses = await Promise.all(projectRequests);
       console.log("All project responses:", responses); // Debe mostrar un array de proyectos
 
-      setProject(responses); // responses ya es un array de proyectos
+      setProjects(responses); // responses ya es un array de proyectos
     } catch (error) {
       console.error("Error al obtener proyectos:", error);
     }
@@ -62,7 +62,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
     }
   }, [purchase]);
 
-  console.log("Proyectos obtenidos:", project);
+  console.log("Proyectos obtenidos:", projects);
 
   return (
     <>
@@ -85,7 +85,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
               Click here to schedule a call
             </button>
             <Link
-              className='py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base'
+              className='py-3 px-4 rounded-2xl bg-gray-500 bg[#848d5a] text-xs md:text-base'
               href='/questionnaire'>
               Click here to complete the questionnaire
             </Link>
@@ -124,55 +124,55 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
             <h1 className='text-2xl font-semibold'>Projects</h1>
           </div>
           <div id='projectsContainer' className='flex flex-col gap-2 px-6'>
-            {projects.map((project) => (
-              <div className='flex flex-col   bgred-200' key={project.id}>
+            {projects.map((project, index) => (
+              <div className='flex flex-col   bgred-200' key={index}>
                 <div
                   className='flex max-md:flex-col max-md:gap-2 bg-[#f0f0ef] justify-between px-2 py-2 text-[#67664c]'
                   onClick={() => {
-                    toggleProject(project.id);
+                    toggleProject(index);
                   }}>
                   <div className='flex text-sm w-full md:w-[35%] justify-start pl-2 items-center'>
-                    Project - {project.id}
+                    Project - {project.name}
                   </div>
                   <div className='flex max-lg:flex-col  w-full md:w-[35%] max-[400px]:flex-col text-white sm:font-bold text-xs justify-center items-center gap-2'>
                     <button className='px-2 rounded-lg py-1 bg-[#6d786f] '>
-                      {project.type}
+                      {/* {project.type} */} Pro
                     </button>
                     <button className='px-2 rounded-lg py-1 bg-[#858e5b] '>
-                      {project.status}
+                      {(project.isActive === true) ? "Pending" : "Completed"}
                     </button>
                   </div>
                   <div className='flex w-full text-xs md:w-[30%] justify-center items-center'>
-                    <p>{project.designer}</p>
+                    <p>{(project.team.designer) ? project.team.designer : "No Designer Assigned"}</p>
                   </div>
                 </div>
                 <div
-                  id={`project${project.id}Container`}
+                  id={`project${index}Container`}
                   className='flex flex-col bgrose-500 transition-all ease-out duration-300 max-h-0 overflow-hidden'>
-                  {project.steps.map((step) => (
+                  {project.steps.map((step, indexStep) => (
                     <div
                       className='p-4 border border-[#e4e0d5] text-[#6b6950] border-t-0'
-                      key={step.id}
-                      onClick={() => {
-                        toggleStep(project.id, step.id);
+                      key={indexStep}
+                      >
+                      <div className='flex bgred-300 items-center p2 gap-2 font-bold cursor-pointer' onClick={() => {
+                        toggleStep(index, indexStep);
                       }}>
-                      <div className='flex bgred-300 items-center p2 gap-2 font-bold'>
                         <TiArrowSortedDown
-                          id={`project${project.id}Arrow${step.id}`}
+                          id={`project${index}Arrow${indexStep}`}
                           className=''
                         />
-                        <h3>{step.title}</h3>
+                        <h3>{step.step}</h3>
                       </div>
                       <div
-                        id={`project${project.id}Step${step.id}Container`}
+                        id={`project${index}Step${indexStep}Container`}
                         className='flex flex-col px-6 transition ease-in-out duration-300 max-h-0 overflow-hidden'>
-                        {step.areaType && (
-                          <div>
-                            <p>
-                              Area Type: <span>{step.areaType}</span>
-                            </p>
-                          </div>
-                        )}
+                        {/* {
+                          project.description.map((description, indexDescription) => (
+                            <div >
+
+                            </div>
+                          ))
+                        }
                         {step.questions &&
                           step.questions.map((question) => (
                             <div
@@ -187,10 +187,10 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                                 />
                               )}
                             </div>
-                          ))}
+                          ))} */}
                         <div className='text-xs max-sm:flex-col max-sm:gap-2 mt-6 flex max-sm:justify-center sm:justify-between max-sm:items-start items-center'>
-                          <p className=''>Status: {step.status}</p>
-                          {step.status === "Completed" && <p>{step.date}</p>}
+                          <p className=''>Status: {(step.isActive === true) ? "Pending" : "Completed"}</p>
+                          {/* {step.status === "Completed" && <p>{step.date}</p>} */}
                         </div>
                       </div>
                     </div>
