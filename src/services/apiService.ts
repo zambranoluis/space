@@ -165,7 +165,10 @@ export const apiService = {
     purchaseId: string,
   ): Promise<ApiResponse<Transaction>> => {
     try {
-      const response = await apiClient.get(`${NEXT_URL_API}/transaction/${purchaseId}`);
+      const response = await apiClient.get(
+        `${NEXT_URL_API}/transaction/purchase/${purchaseId}`,
+      );
+      console.log("response.data: ", response.data);
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;

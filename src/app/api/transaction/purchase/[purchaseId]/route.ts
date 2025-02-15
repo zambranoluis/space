@@ -19,9 +19,17 @@ export async function GET(req: NextRequest) {
         { status: 401 },
       );
     }
+
     // Obtener el ID de la transacción desde la URL
-    const pathParts = req.nextUrl.pathname.split("/");
-    const purchaseId = pathParts[pathParts.length - 1];
+    const purchaseId = req.nextUrl.pathname.split("/").pop();
+
+    if (!purchaseId) {
+      return NextResponse.json(
+        { error: "Missing project ID in query parameters" },
+        { status: 400 },
+      );
+    }
+
     const response = await axios.get(
       `${BACKEND_URL}/transaction/purchase/${purchaseId}`,
       {
@@ -31,6 +39,7 @@ export async function GET(req: NextRequest) {
         },
       },
     );
+    console.log(response);
     return NextResponse.json(response.data);
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
