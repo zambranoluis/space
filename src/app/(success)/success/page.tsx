@@ -25,7 +25,6 @@ const SuccessContent: React.FC = () => {
         const transaction = Array.isArray(transactionData) ? transactionData[0] : transactionData;
         if (transaction.status === "created") {
           setTransaction(transaction);
-          // console.log("transaction en dashboard: ", transaction);
           if (transaction) {
           try {
             await apiService.updatePurchaseStatus(transaction.purchase, "completed");

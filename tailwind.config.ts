@@ -12,6 +12,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        arial: ["Arial", "sans-serif"],
+        brownPro: ["BrownPro", "sans-serif"],
+        mont: ["Mont", "sans-serif"],
+        myriadPro: ["MyriadPro", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
       colors: {
         background: "",
         foreground: "",
@@ -20,5 +27,5 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [nextui(),heroui()],
+  plugins: [heroui()],
 } satisfies Config;

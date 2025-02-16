@@ -52,7 +52,6 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
       );
 
       const responses = await Promise.all(projectRequests);
-      console.log("All project responses:", responses); // Debe mostrar un array de proyectos
 
       setProjects(responses); // responses ya es un array de proyectos
     } catch (error) {
@@ -150,7 +149,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                     </button>
                   </div>
                   <div className='flex w-full text-xs md:w-[30%] justify-center items-center'>
-                    <p>{(project.team.designer) ? project.team.designer : "No Designer Assigned"}</p>
+                    {/* <p>{(project.team.designer) ? project.team.designer : "No Designer Assigned"}</p> */}
                   </div>
                 </div>
                 <div
@@ -189,7 +188,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                                     className='flex gap-6 justifycenter items-center text-sm'
                                     key={indexCategory}>
                                     <p>Questionnaire {category}</p>
-                                    {/* {question.filled === true && (
+                                    {/* {category.isComplete === true && (
                                       <Image
                                         className='w-[20px] rounded-none bgred-200'
                                         src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/project/spaceStepCheck.png'
