@@ -15,9 +15,9 @@ import {
   Transaction,
   createQuestionnaires,
   createProject,
-  getProjectsByPurchasesId,
   question,
-} from "@/utils/dataInterfaces";
+  GetProjectsByPurchasesId,
+} from "@/utils/dataInterfaces.js";
 
 interface ApiResponse<T = unknown> {
   data: T;
@@ -308,12 +308,12 @@ export const apiService = {
 
   getProjectByPurchasesId: async (
     purchaseId: string,
-  ): Promise<getProjectsByPurchasesId> => {
+  ): Promise<ApiResponse<GetProjectsByPurchasesId>> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/projects/purchase/${purchaseId}`,
       );
-      return response.data as getProjectsByPurchasesId; // Asegura que TS entienda el tipo
+      return response.data; // Asegura que TS entienda el tipo
     } catch (error) {
       throw error;
     }
