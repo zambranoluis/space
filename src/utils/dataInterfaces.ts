@@ -142,28 +142,62 @@ export interface createProject {
   purchaseId: string;
 }
 
-export interface getProjectsByPurchasesId {
+export interface GetProjectsByPurchasesId {
   _id: string;
   name: string;
-  description: string;
-  steps: [
-    {
-      step: string;
-      information: [{ status: string; isComplete: boolean }];
-      content: [{ file: string; text: string; date: Date }];
+  description: {
+    name: string;
+    type: string;
+    extras: string[];
+    areas: string[];
+  };
+  steps: {
+    _id: string;
+    step: string;
+    information: { status: string; isComplete: boolean }[];
+    content: { file: string; text: string; date: Date }[];
+    isActive: boolean;
+  }[];
+  questionnaire: {
+    _id: string;
+    category: string[];
+    questions: any[];
+    isComplete: boolean;
+    softDelete: boolean;
+    deletedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  purchase: {
+    _id: string;
+    customer: string;
+    product: string;
+    extras: {
+      extra: string;
       isActive: boolean;
-    },
-  ];
-  questionnaire: string;
-  purchase: string;
-  team: [string];
-  development: string;
+      _id: string;
+    }[];
+    selectedAreas: {
+      nameArea: string;
+      isActive: boolean;
+      _id: string;
+    }[];
+    total: number;
+    status: string;
+    isActive: boolean;
+    softDelete: boolean;
+    deletedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  team: string[];
   isActive: boolean;
-  deletedAt: Date;
   softDelete: boolean;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
+
 
 export interface question {
   quest: string; // Pregunta
