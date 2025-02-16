@@ -2,6 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
+
 import { TiArrowSortedDown } from "react-icons/ti";
 
 import { Image } from "@nextui-org/image";
@@ -13,7 +17,7 @@ import { apiService } from "../../services/apiService";
 
 import {
   DetailedPurchase,
-  getProjectsByPurchasesId,
+  GetProjectsByPurchasesId,
   Purchase,
 } from "../../utils/dataInterfaces";
 
@@ -22,7 +26,7 @@ interface ProjectsClientProps {
 }
 
 const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
-  const [projects, setProjects] = useState<getProjectsByPurchasesId[]>([]); // Cambia `DetailedProject[]` con el tipo correcto
+  const [projects, setProjects] = useState<GetProjectsByPurchasesId[]>([]); // Cambia `DetailedProject[]` con el tipo correcto
 
   const { data: session } = useSession();
 
@@ -63,6 +67,9 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
   }, [purchase]);
 
   console.log("Proyectos obtenidos:", projects);
+
+
+
 
   return (
     <>
@@ -136,7 +143,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                   </div>
                   <div className='flex max-lg:flex-col  w-full md:w-[35%] max-[400px]:flex-col text-white sm:font-bold text-xs justify-center items-center gap-2'>
                     <button className='px-2 rounded-lg py-1 bg-[#6d786f] '>
-                      {/* {project.type} */} Pro
+                      {project.description.type}
                     </button>
                     <button className='px-2 rounded-lg py-1 bg-[#858e5b] '>
                       {(project.isActive === true) ? "Pending" : "Completed"}
@@ -149,12 +156,12 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                 <div
                   id={`project${index}Container`}
                   className='flex flex-col bgrose-500 transition-all ease-out duration-300 max-h-0 overflow-hidden'>
-                  {project.steps.map((step, indexStep) => (
+                  {project.steps.map((step: any, indexStep: number) => (
                     <div
                       className='p-4 border border-[#e4e0d5] text-[#6b6950] border-t-0'
                       key={indexStep}
                       >
-                      <div className='flex bgred-300 items-center p2 gap-2 font-bold cursor-pointer' onClick={() => {
+                      <div className='flex place-self-start bgred-300 items-center p2 gap-2 font-bold cursor-pointer select-none' onClick={() => {
                         toggleStep(index, indexStep);
                       }}>
                         <TiArrowSortedDown
@@ -165,32 +172,58 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                       </div>
                       <div
                         id={`project${index}Step${indexStep}Container`}
-                        className='flex flex-col px-6 transition ease-in-out duration-300 max-h-0 overflow-hidden'>
-                        {/* {
-                          project.description.map((description, indexDescription) => (
-                            <div >
-
+                        className='flex flex-col px-6 max-h-0 overflow-hidden'
+                      >
+                        <div className='text-xs bgblue-300 flex flex-col'>
+                          {(indexStep === 0) && (
+                            <div className="flex w-full justify-between bgred-300 mt-4">
+                              <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
+                              {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
                             </div>
-                          ))
-                        }
-                        {step.questions &&
-                          step.questions.map((question) => (
-                            <div
-                              className='flex gap-6 justifycenter items-center text-sm'
-                              key={question.id}>
-                              <p>{question.title}</p>
-                              {question.filled === true && (
-                                <Image
-                                  className='w-[20px] rounded-none bgred-200'
-                                  src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/project/spaceStepCheck.png'
-                                  alt='fliiedChecked'
-                                />
-                              )}
+                          )}
+                          {(indexStep === 1) && (
+                            <div className="flex flex-col gap-1 py-1">
+                              {
+                                project.questionnaire.category.map((category: string, indexCategory: number) => (
+                                  <div
+                                    className='flex gap-6 justifycenter items-center text-sm'
+                                    key={indexCategory}>
+                                    <p>Questionnaire {category}</p>
+                                    {/* {question.filled === true && (
+                                      <Image
+                                        className='w-[20px] rounded-none bgred-200'
+                                        src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/project/spaceStepCheck.png'
+                                        alt='fliiedChecked'
+                                      />
+                                    )} */}
+                                  </div>
+                                ))
+                              }
+                              <div
+                                className='flex gap-6 justifycenter items-center text-sm'>
+                                <p>Customer Files</p>
+                                {/* {question.filled === true && (
+                                  <Image
+                                    className='w-[20px] rounded-none bgred-200'
+                                    src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/project/spaceStepCheck.png'
+                                    alt='fliiedChecked'
+                                  />
+                                )} */}
+                              </div>
+                              <div className="flex w-full justify-between bgred-300 mt-4">
+                                <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
+                                {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
+                              </div>
                             </div>
-                          ))} */}
-                        <div className='text-xs max-sm:flex-col max-sm:gap-2 mt-6 flex max-sm:justify-center sm:justify-between max-sm:items-start items-center'>
-                          <p className=''>Status: {(step.isActive === true) ? "Pending" : "Completed"}</p>
-                          {/* {step.status === "Completed" && <p>{step.date}</p>} */}
+                          )}
+                          {
+                            (indexStep > 1) && (
+                              <div className="flex w-full justify-between bgred-300">
+                                <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
+                                {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
+                              </div>
+                            )
+                          }
                         </div>
                       </div>
                     </div>
