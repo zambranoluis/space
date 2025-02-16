@@ -17,7 +17,7 @@ import {
   createProject,
   GetProjectsByPurchasesId,
   question,
-} from "@/utils/dataInterfaces";
+} from "@/utils/dataInterfaces.js";
 
 interface ApiResponse<T = unknown> {
   data: T;
