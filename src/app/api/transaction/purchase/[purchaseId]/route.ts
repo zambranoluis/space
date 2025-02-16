@@ -37,6 +37,7 @@ export async function GET(req: NextRequest) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${nodeToken}`,
         },
+        withCredentials: true,
       },
     );
     console.log(response);
