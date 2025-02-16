@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { apiService } from "@/services/apiService";
 import { Image } from "@nextui-org/image";
 import { GiCheckMark } from "react-icons/gi";
@@ -57,6 +57,9 @@ interface PurchasesProps {
 }
 
 export const Purchases: React.FC<PurchasesProps> = ({ purchases }) => {
+  useEffect(() => {
+    console.log("Purchases en componente purchases: ", purchases);
+  }, [purchases]);
   const [currentPurchases, setCurrentPurchases] = useState<string>("All Purchases");
 
   const handlePayment = async (purchaseId: string) => {

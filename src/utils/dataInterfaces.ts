@@ -86,7 +86,7 @@ export interface CreatePurchase {
     },
   ];
   extras: SelectedExtra[];
-  price: number;
+  total: number;
   status: string;
   isActive: boolean;
 }
@@ -105,7 +105,7 @@ export interface Purchase {
     },
   ];
   extras: SelectedExtra[];
-  price: number;
+  total: number;
   status: string;
   isActive: boolean;
 }

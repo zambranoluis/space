@@ -1,6 +1,8 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaFileInvoiceDollar } from "react-icons/fa";
 import { apiService } from "@/services/apiService";
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
 import {
   Modal,
   ModalContent,
@@ -32,10 +34,8 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
       try {
         const response = await apiService.getTransactionByPurchaseId(purchaseId);
         if (response.data) {
-          console.log("response data purchase: ", response.data);
           const transaction = response.data; // Tipo Transaction
 
-          console.log("transaction: ", transaction);
 
           // Convertimos Transaction a PurchaseDetails
           const details: PurchaseDetails = {
@@ -54,11 +54,9 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
     };
 
     fetchTransactionDetails();
-    console.log("transaction found for: ", purchaseId, "Details : ", purchaseDetails);
   }, [purchaseId]);
 
   const handleOpenPurchaseDetails = () => {
-    // console.log("purchase ID to show : ", purchaseId);
     onOpen();
   };
 
@@ -67,7 +65,6 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
       try {
         const response = await apiService.getTransactionByPurchaseId(purchaseId);
         if (response.data) {
-          // console.log("response data purchase: ", response.data)
           const transaction = response.data; // Tipo Transaction
 
           // Convertimos Transaction a PurchaseDetails
@@ -85,7 +82,6 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
     };
 
     fetchTransactionDetails();
-    // console.log("transaction found for: ", purchaseId , "Details : ", purchaseDetails);
   }, [purchaseId]);
 
   return (
@@ -106,8 +102,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
                   <div className='flex flex-col'>
                     <p>Amount: {purchaseDetails.amount}</p>
                     <p>Currency: {purchaseDetails.currency}</p>
-                    <p>Created At: {purchaseDetails.createdAt}</p>
-                    <p>Updated At: {purchaseDetails.updatedAt}</p>
+                    <p>{format(new Date(purchaseDetails.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>
                   </div>
                 ) : (
                   <p>Loading...</p>

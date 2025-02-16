@@ -15,7 +15,7 @@ import {
   Transaction,
   createQuestionnaires,
   createProject,
-  getProjectsByPurchasesId,
+  GetProjectsByPurchasesId,
   question,
 } from "@/utils/dataInterfaces";
 
@@ -168,7 +168,6 @@ export const apiService = {
       const response = await apiClient.get(
         `${NEXT_URL_API}/transaction/purchase/${purchaseId}`,
       );
-      console.log("response.data: ", response.data);
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
@@ -308,12 +307,12 @@ export const apiService = {
 
   getProjectByPurchasesId: async (
     purchaseId: string,
-  ): Promise<getProjectsByPurchasesId> => {
+  ): Promise<GetProjectsByPurchasesId> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/projects/purchase/${purchaseId}`,
       );
-      return response.data as getProjectsByPurchasesId; // Asegura que TS entienda el tipo
+      return response.data as GetProjectsByPurchasesId; // Asegura que TS entienda el tipo
     } catch (error) {
       throw error;
     }

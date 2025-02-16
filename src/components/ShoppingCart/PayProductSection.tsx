@@ -92,10 +92,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
 
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
-  useEffect(() => {
-    // console.log("selectedExtras:", selectedExtras);
-  }, [selectedExtras]);
-  
   
   useEffect(() => {
     if (products[selectedPackage]) {
@@ -154,12 +150,12 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
           return { extra: extra._id, isActive: selectedExtras[index] };
         }
       }) as SelectedExtra[],  // Asegúrate de que 'extra.name' es el valor adecuado para el extra
-      price: finalPrice as number,
+      total: finalPrice as number,
       status: "pending",
       isActive: true,
     };
 
-    // console.log("New purchase:", newPurchase);
+    console.log("New purchase:", newPurchase);
     
 
     try {
