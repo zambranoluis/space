@@ -159,7 +159,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                     <div
                       className='p-4 border border-[#e4e0d5] text-[#6b6950] border-t-0'
                       key={indexStep}
-                      >
+                    >
                       <div className='flex place-self-start bgred-300 items-center p2 gap-2 font-bold cursor-pointer select-none' onClick={() => {
                         toggleStep(index, indexStep);
                       }}>
@@ -173,51 +173,54 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ purchase }) => {
                         id={`project${index}Step${indexStep}Container`}
                         className='flex flex-col px-6 max-h-0 overflow-hidden'
                       >
-                        <div className='text-xs bgblue-300 flex flex-col'>
+                        <div className='bgblue-300 flex flex-col'>
                           {(indexStep === 0) && (
-                            <div className="flex w-full justify-between bgred-300 mt-4">
+                            <div className="flex w-full justify-between bgred-300 mt-4 text-xs">
                               <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
                               {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
                             </div>
                           )}
+                        </div>
+
+                        <div>
                           {(indexStep === 1) && (
                             <div className="flex flex-col gap-1 py-1">
                               {
                                 project.questionnaire.category.map((category: string, indexCategory: number) => (
                                   <div
-                                    className='flex gap-6 justifycenter items-center text-sm'
-                                    key={indexCategory}>
-                                    <p>Questionnaire {category}</p>
-                                    {/* {category.isComplete === true && (
-                                      <Image
-                                        className='w-[20px] rounded-none bgred-200'
-                                        src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/project/spaceStepCheck.png'
-                                        alt='fliiedChecked'
-                                      />
-                                    )} */}
+                                    className='flex gap-2 justify-between items-center text-sm bgred-300 place-self-start'
+                                    key={indexCategory}
+                                  >
+                                    <Image
+                                      className={`${(category.isComplete ? "" : "hidden" )} w-[20px] rounded-none bgred-200`}
+                                      src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/projects/spaceStepCheck.png'
+                                      alt='fliiedChecked'
+                                    />
+                                    <p>Questionnaire {category.type}</p>
                                   </div>
                                 ))
                               }
                               <div
-                                className='flex gap-6 justifycenter items-center text-sm'>
+                                className='flex gap-2 justifycenter items-center text-sm'>
+                                <Image
+                                  className='w-[20px] rounded-none bgred-200 hidden'
+                                  src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/projects/spaceStepCheck.png'
+                                  alt='fliiedChecked'
+                                />
                                 <p>Customer Files</p>
-                                {/* {question.filled === true && (
-                                  <Image
-                                    className='w-[20px] rounded-none bgred-200'
-                                    src='https://github.com/BPM94/SCCTMD/raw/main/panel-client/project/spaceStepCheck.png'
-                                    alt='fliiedChecked'
-                                  />
-                                )} */}
                               </div>
-                              <div className="flex w-full justify-between bgred-300 mt-4">
+                              <div className="flex w-full justify-between bgred-300 mt-4 text-xs">
                                 <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
                                 {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
                               </div>
                             </div>
                           )}
+                        </div>
+
+                        <div>
                           {
                             (indexStep > 1) && (
-                              <div className="flex w-full justify-between bgred-300">
+                              <div className="flex w-full justify-between bgred-300 text-xs">
                                 <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
                                 {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
                               </div>
