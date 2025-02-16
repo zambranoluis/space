@@ -11,7 +11,7 @@ import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
 import { useGeolocation } from "@/context/GeolocationContext";
 
-import { Customer, DetailedPurchase } from "@/utils/dataInterfaces";
+import { Customer, DetailedPurchase, GetProjectsByPurchasesId } from "@/utils/dataInterfaces";
 
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
@@ -19,33 +19,19 @@ const PanelClient: React.FC = () => {
 
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [purchases, setPurchases] = useState<DetailedPurchase[]>([]);
+  const [projects, setProjects] = useState<GetProjectsByPurchasesId[]>([]);
+  const [purchasesWithProject, setPurchasesWithProject] = useState<string[]>([]);
 
   // Usar el contexto de geolocalización
   const { geolocation, fetchGeolocation } = useGeolocation();
-  
-  useEffect(() => {
-    if (geolocation) {
-      console.log("Geolocation:", geolocation);
-    }
-  }, [geolocation]);
+
+
+
 
   useEffect(() => {
     fetchGeolocation();
   }, []);
 
-  useEffect(() => {
-    if (userId) {
-      const fetchPurchases = async () => {
-        try {
-          const response = await apiService.getPurchasesByCustomerId(userId);
-          setPurchases(response.data as DetailedPurchase[]);
-        } catch (err: unknown) {
-          console.error("PanelClient: Error fetching purchases:", err);
-        }
-      };
-      fetchPurchases();
-    }
-  }, [userId]);
 
   useEffect(() => {
     if (userId) {
@@ -60,6 +46,65 @@ const PanelClient: React.FC = () => {
       fetchCustomer();
     }
   }, [userId]);
+
+  useEffect(() => {
+    if (userId) {
+      const fetchPurchases = async () => {
+        try {
+          const response = await apiService.getPurchasesByCustomerId(userId);
+          setPurchases(response.data as DetailedPurchase[]);
+          
+        } catch (err: unknown) {
+          console.error("PanelClient: Error fetching purchases:", err);
+        }
+      };
+      fetchPurchases();
+    }
+  }, [userId]);
+
+  
+
+  useEffect(() => {
+    if (userId) {
+      const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
+        try {
+          const completedPurchases = purchaseList.filter(
+            (p) => p._id && p.status && p.status.toLowerCase() === "completed",
+          );
+    
+          const projectRequests = completedPurchases.map((p) =>
+            apiService.getProjectByPurchasesId(p._id)
+          );
+          const responses = await Promise.all(projectRequests);
+          console.log("PanelClient: Project responses:", responses);
+          setProjects(responses);
+        } catch (error) {
+          // console.error("Error al obtener proyectos:", error);
+        }
+      };
+      getProjectsByPurchasesId(purchases);
+    }
+  }, [userId, purchases]);
+
+  useEffect(() => {
+    console.log("purchases UE", purchases);
+  }, [purchases]);
+  
+  useEffect(() => {
+    console.log("projects UE", projects);
+  }, [projects]);
+
+  useEffect(() => {
+    if (projects.length > 0) {
+      // Filtrar las compras que tienen un proyecto asociado
+      const purchasesWithProjectsIds = projects
+        .filter((project) => project.purchase._id) // Asegurar que el proyecto tiene un purchaseId válido
+        .map((project) => project.purchase._id); // Extraer solo los IDs de compra
+      setPurchasesWithProject(purchasesWithProjectsIds);
+    }
+    console.log("purchasesWithProject UE", purchasesWithProject);
+  }, [projects]);
+  
 
   const closeSiteContainer = () => {
     const container = document.getElementById(`siteContainer`);
@@ -126,6 +171,8 @@ const PanelClient: React.FC = () => {
           asideSelectedOption={asideSelectedOption}
           customer={customer}
           purchases={purchases}
+          projects={projects}
+          purchasesWithProject={purchasesWithProject}
         />
       </div>
       <div className="flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]">

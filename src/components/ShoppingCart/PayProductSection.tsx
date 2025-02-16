@@ -153,9 +153,8 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       total: finalPrice as number,
       status: "pending",
       isActive: true,
+      inProject: false
     };
-
-    console.log("New purchase:", newPurchase);
     
 
     try {

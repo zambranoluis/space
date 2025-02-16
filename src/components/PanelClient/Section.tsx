@@ -8,7 +8,8 @@ import { IoCloseOutline } from "react-icons/io5";
 
 import {
   Customer,
-  DetailedPurchase
+  DetailedPurchase,
+  GetProjectsByPurchasesId
 } from "@/utils/dataInterfaces"
 
 interface SectionProps {
@@ -16,6 +17,8 @@ interface SectionProps {
   asideSelectedOption: string;
   customer: Customer | null;
   purchases: DetailedPurchase[];
+  projects: GetProjectsByPurchasesId[];
+  purchasesWithProject: string[]
 }
 
 const Section: React.FC<SectionProps> = ({
@@ -23,6 +26,8 @@ const Section: React.FC<SectionProps> = ({
   asideSelectedOption,
   customer,
   purchases,
+  projects,
+  purchasesWithProject
 }) => {
   return (
     <section
@@ -51,11 +56,11 @@ const Section: React.FC<SectionProps> = ({
                   id='site'
                   className={`h-full w-full bggreen-300 overflow-y-scroll noScrollBar rounded-b-3xl`}
                 >
-                  {asideSelectedOption === "projects" && <ProjectsClient purchase={purchases} />}
                   {asideSelectedOption === "myprofile" && customer && (
                     <MyProfile customer={customer} />
                   )}
-                  {asideSelectedOption === "purchases" && <Purchases purchases={purchases} />}
+                  {asideSelectedOption === "projects" && <ProjectsClient projects={projects} />}
+                  {asideSelectedOption === "purchases" && <Purchases purchases={purchases} purchasesWithProject={purchasesWithProject} />}
                 </div>
               </div>
             </div>
