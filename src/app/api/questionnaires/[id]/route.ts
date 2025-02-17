@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const id = req.nextUrl.searchParams.get("id");
+    const id = req.nextUrl.pathname.split("/").pop();
 
     if (!id) {
       return NextResponse.json(
