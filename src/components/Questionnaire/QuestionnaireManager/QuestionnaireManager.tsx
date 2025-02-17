@@ -11,7 +11,9 @@ import QuestionnaireProgress from "@/components/QuestionnaireProgress";
 import { questionnaire } from "../questionnaireFile";
 
 import { ProjectInformation, question } from "@/utils/dataInterfaces";
+
 import { apiService } from "@/services/apiService";
+import { use } from 'react';
 
 interface QuestionnaireManagerProps {
   showProgress: boolean;
@@ -23,9 +25,35 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
   showProgress,
   project
 }) => {
-  // useEffect(() => {
-  //   console.log("project en questionnaire manager: ", project);
-  // })
+  useEffect(() => {
+    console.log("project en questionnaire manager: ", project);
+  }, [project]);
+
+  const [questionnaireData, setQuestionnaireData] = useState<any>(null);
+
+  const fetchQuestionnaire = async () => {
+    if (project) {
+      try {
+        const response = await apiService.getQuestionnairesById(project.questionnaire._id);
+        if (response.data) {
+          setQuestionnaireData(response.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchQuestionnaire();
+  }, [project]);
+  
+
+  useEffect(() => {
+    fetchQuestionnaire();
+    console.log("project: ", project, "questionnaireData: ", questionnaireData);
+  }, [project]);
+
   const [answersGeneral, setAnswersGeneral] = useState<
     { question: string; answer: string }[]
   >([]);
@@ -48,28 +76,36 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   };
 
-  const handleSubmitAnswersGeneral = async (question: string, typeQuestion: string) => {
-    const answerSelecteds: question = {
-      quest: question.replace(/\?/g, ""),
+  const handleSubmitAnswersGeneral = (question: string, typeQuestion: string) => {
+    // if (!answersGeneral.includes({ question: question, answer: answer })) {
+    //   setAnswersGeneral([...answersGeneral, { question: question, answer: answer }]);
+    // }
+
+    
+
+    
+
+    const newAnswersGeneral: question = {
+      quest: question.replace("?", ""),
       category: "General",
-      notes: [{ note: "" }], // Lista vacía para notas
-      selecteds: [{ selected: "" }], // Lista vacía para selecciones
-      select: false, // Valor booleano por defecto
-      people: 0, // Número de personas por defecto
-      files: [], // Lista vacía de archivos
-      questionnaireId: project?.questionnaire._id,
+      notes: [{ note: "" }],
+      selecteds: [{ selected: "" }],
+      select: false,
+      people: 0,
+      files: [],
+      questionnaireId: project?.questionnaire._id ?? undefined,
     };
 
-    console.log("Pregunta respondida en General - pregunta respondida: ", question, "Tipo de pregunta: ", typeQuestion);
-  
-    try {
-      const response = await apiService.createQuestion(answerSelecteds);
-      if (response) {
-        console.log("Pregunta creada:", response);
+    const submitNewAnswer = async () => {
+      try {
+        const response =  await apiService.createQuestion(newAnswersGeneral);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error("Error al crear la pregunta:", error);
     }
+
+    submitNewAnswer();
   };
 
   const [answersBackyard, setAnswersBackyard] = useState<
