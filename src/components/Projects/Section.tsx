@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
@@ -27,6 +27,7 @@ const Section: React.FC<SectionProps> = ({
   const handleViewQuestionnaire = (projectId: string) => {
     window.open(`/questionnaire/?projectId=${projectId}`, "_blank");
   };
+
 
   return (
     <div>
@@ -134,9 +135,31 @@ const Section: React.FC<SectionProps> = ({
                         >
                           <div className='bgblue-300 flex flex-col'>
                             {(indexStep === 0) && (
-                              <div className="flex max-sm:flex-col w-full justify-between bgred-300 mt-4 text-xs">
-                                <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
-                                {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
+                              <div className="flex flex-col ">
+                                <div className="flex flex-col pl-2">
+                                  <div className="flex flex-col">
+                                    <h2>{project.description.name} {project.description.type}</h2>
+                                    <div className="flex flex-col gap1 pl-2">
+                                      {
+                                        project.description.areas.map((area: string, indexArea: number) => (
+                                          <h2 className="text-xs " key={indexArea}>{area}</h2>
+                                        ))
+                                      }
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-col">
+                                    <h2 className="text-sm">Extras: </h2>
+                                    <div className="flex flex-col gap2 text-xs">
+                                      {project?.description.extras.flatMap(extra => extra.split(", ")).map((include, index) => (
+                                        <p className="pl-2" key={index}>{include}</p>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="flex max-sm:flex-col w-full justify-between bgred-300 mt-4 text-xs">
+                                  <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
+                                  {project.isActive === true && <p>{format(new Date(project.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>}
+                                </div>
                               </div>
                             )}
                           </div>

@@ -91,14 +91,16 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases, purchasesWithPr
       const response = await apiService.createProject({
         purchaseId: purchase._id,
       });
-
-      // Asegurar que estamos accediendo a response.data
+  
       if (response.message === "Project created successfully.") {
-        // alert("Project created successfully!");
-        router.push("/panel-client?panel=projects");
+        // Redirige a la URL con el panel correcto
+        const newUrl = "/panel-client?panel=projects";
+        router.push(newUrl);
+  
         setTimeout(() => {
+          window.history.replaceState(null, "", newUrl); // Asegura que la URL con panel=projects se mantenga
           window.location.reload();
-        }, 100)
+        }, 100);
       } else {
         alert("Error al crear el proyecto. Inténtalo de nuevo.");
       }

@@ -116,11 +116,10 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           <div className="flex flex-col gap-2">
             <h2>Extras: </h2>
             <div className="flex flex-col gap-2">
-  {project?.description.extras.flatMap(extra => extra.split(", ")).map((include, index) => (
-    <p className="pl2" key={index}>{include}</p>
-  ))}
-</div>
-
+              {project?.description.extras.flatMap(extra => extra.split(", ")).map((include, index) => (
+                <p className="pl2" key={index}>{include}</p>
+              ))}
+            </div>
           </div>
         </div>
       </div>
