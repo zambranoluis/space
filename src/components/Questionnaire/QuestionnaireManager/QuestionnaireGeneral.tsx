@@ -2,13 +2,12 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { Image } from "@nextui-org/image";
-import { ProjectInformation } from '../../../utils/dataInterfaces';
+import { ProjectInformation, question } from '../../../utils/dataInterfaces';
 
 
 
 import {
-  questionnaire,
-  packages
+  questionnaire
 } from "../questionnaireFile";
 
 interface QuestionnaireGeneralProps {
@@ -156,7 +155,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersGeneral(questionnaire["general"][1].title, "Client Answer");
+                handleSubmitAnswersGeneral(questionnaire["general"][1].title, "Style Question");
               }}
             >
               Submit Answer

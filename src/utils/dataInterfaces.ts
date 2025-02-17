@@ -288,5 +288,5 @@ export interface question {
   select: boolean;
   people: number; // Número de personas asociadas
   files: string[]; // Archivos subidos por el cliente
-  questionnaireId: string;
+  questionnaireId: string | undefined;
 }

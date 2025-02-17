@@ -10,7 +10,8 @@ import QuestionnaireProgress from "@/components/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
 
-import { ProjectInformation } from "@/utils/dataInterfaces";
+import { ProjectInformation, question } from "@/utils/dataInterfaces";
+import { apiService } from "@/services/apiService";
 
 interface QuestionnaireManagerProps {
   showProgress: boolean;
@@ -47,9 +48,27 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   };
 
-  const handleSubmitAnswersGeneral = (question: string, answer: string) => {
-    if (!answersGeneral.includes({ question: question, answer: answer })) {
-      setAnswersGeneral([...answersGeneral, { question: question, answer: answer }]);
+  const handleSubmitAnswersGeneral = async (question: string, typeQuestion: string) => {
+    const answerSelecteds: question = {
+      quest: question.replace(/\?/g, ""),
+      category: "General",
+      notes: [{ note: "" }], // Lista vacía para notas
+      selecteds: [{ selected: "" }], // Lista vacía para selecciones
+      select: false, // Valor booleano por defecto
+      people: 0, // Número de personas por defecto
+      files: [], // Lista vacía de archivos
+      questionnaireId: project?.questionnaire._id,
+    };
+
+    console.log("Pregunta respondida en General - pregunta respondida: ", question, "Tipo de pregunta: ", typeQuestion);
+  
+    try {
+      const response = await apiService.createQuestion(answerSelecteds);
+      if (response) {
+        console.log("Pregunta creada:", response);
+      }
+    } catch (error) {
+      console.error("Error al crear la pregunta:", error);
     }
   };
 

@@ -67,7 +67,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
         }
       }, 100);
     }
-  }, [questionRefsFrontyard, isAnsweredBackyard]);
+  }, [questionRefsFrontyard, isAnsweredGeneral, isAnsweredBackyard]);
 
 
   useEffect(() => {

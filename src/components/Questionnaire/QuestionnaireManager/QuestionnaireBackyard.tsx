@@ -30,11 +30,6 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
   handleSubmitAnswersBackyard
 }) => {
 
-  const [generalAnswersLength, setGeneralAnswersLength] = useState<number>(0);
-
-  useEffect(() => {
-    setGeneralAnswersLength(isAnsweredGeneral.length - 1);
-  }, [isAnsweredGeneral])
 
   useEffect(() => {
     setIsAnsweredBackyard((prev) => {
@@ -131,15 +126,15 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
 
 
   return (
-    <section  id="backyardQuestions"  className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgred-300" : "bggreen-400 hidden"}  flex flex-col w-full justify-center items-center gap-20 overflow-hidden`} >
-        <div ref={sectionRefBackyard}  className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgpink-500" : "bgpurple-400"} flex max-sm:flex-col bgred-300 sm:h-[300px] w-full `}>
+    <section  id="backyardQuestions"  className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgred-300" : "bggreen-400 hidden"}  flex flex-col w-full justify-center items-center gap-20 overflow-hidden`} >
+        <div ref={sectionRefBackyard}  className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgpink-500" : "bgpurple-400"} flex max-sm:flex-col bgred-300 sm:h-[300px] w-full `}>
           <div className="flex sm:w-[40%] justify-center items-center max-sm:py-24">
             <h1 className="font-black text-3xl text-[#6c786e]">BACKYARD</h1>
           </div>
           <div className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireBgBackyard.webp"}}></div>
         </div>
-        <div ref={containerRefBackyard} className={`flex flex-col w-[90%] gap-12 ${ isAnsweredGeneral[generalAnswersLength] === true ? "" : "" } `} style={{ height: `${containerHeightBackyard}px`}}>
-          <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[generalAnswersLength] === true ? "bgblue-400" : "bgwyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+        <div ref={containerRefBackyard} className={`flex flex-col w-[90%] gap-12 ${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "" : "" } `} style={{ height: `${containerHeightBackyard}px`}}>
+          <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgblue-400" : "bgwyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][0].title}</h1>
