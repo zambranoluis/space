@@ -60,7 +60,6 @@ const SuccessContent: React.FC = () => {
   }, [sessionId, fetchTransaction]);
 
   const handleGoToDashboard = async () => {
-    
     router.push("/panel-client?panel=purchases");
   };
 

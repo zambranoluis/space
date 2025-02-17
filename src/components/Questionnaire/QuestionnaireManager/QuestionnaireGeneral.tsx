@@ -2,6 +2,8 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { Image } from "@nextui-org/image";
+import { ProjectInformation } from '../../../utils/dataInterfaces';
+
 
 
 import {
@@ -10,6 +12,7 @@ import {
 } from "../questionnaireFile";
 
 interface QuestionnaireGeneralProps {
+  project: ProjectInformation | null;
   answersGeneral: { question: string; answer: string }[];
   selectedMaxTwoGeneral: number[];
   handleMaxTwoGeneral: (index: number) => void;
@@ -20,6 +23,7 @@ interface QuestionnaireGeneralProps {
 
 
 const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
+  project,
   answersGeneral,
   selectedMaxTwoGeneral,
   handleMaxTwoGeneral,
@@ -103,16 +107,20 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           <h1>{questionnaire["general"][0].title}</h1>
         </div>
         <div className="flex flex-col py-12 gap-6  text-black  w-full bgred-300 px-16">
-          <h1 className="text-3xl font-black">{packages[2].title}</h1>
+          <h1 className="text-3xl font-black">{project?.description.name} {project?.description.type}</h1>
+          <div className="flex gap-2 pl2">
+            {project?.description.areas.map((area, index) => (
+              <h2 key={index}>{area}</h2>
+            ))}
+          </div>
           <div className="flex flex-col gap-2">
-            <h2>Includes: </h2>
-            <div className="flex flex-col bgred-300">
-              {
-                packages[2].includes.map((include, index) => (
-                  <p key={index}>{include}</p>
-                ))
-              }
-            </div>
+            <h2>Extras: </h2>
+            <div className="flex flex-col gap-2">
+  {project?.description.extras.flatMap(extra => extra.split(", ")).map((include, index) => (
+    <p className="pl2" key={index}>{include}</p>
+  ))}
+</div>
+
           </div>
         </div>
       </div>

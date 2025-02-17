@@ -10,14 +10,21 @@ import QuestionnaireProgress from "@/components/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
 
+import { ProjectInformation } from "@/utils/dataInterfaces";
+
 interface QuestionnaireManagerProps {
   showProgress: boolean;
+  project: ProjectInformation | null
 
 }
 
 const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
-  showProgress
+  showProgress,
+  project
 }) => {
+  // useEffect(() => {
+  //   console.log("project en questionnaire manager: ", project);
+  // })
   const [answersGeneral, setAnswersGeneral] = useState<
     { question: string; answer: string }[]
   >([]);
@@ -101,11 +108,26 @@ const handleBq2Change = (index: number) => {
     }
   };
 
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (project) {
+      setCategories((prevCategories) => [
+        ...prevCategories,
+        ...project.questionnaire.category.map((category) => category.type).filter(
+          (type) => !prevCategories.includes(type)
+        ),
+      ]);
+    }
+    console.log("categories: ", categories);
+  }, [project]);
+
   return (
     <div className='flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300'>
       {
         showProgress && (<div className="flex fixed bg-black/70 hover:bg-black/85 transition-colors duration-300 rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
           <QuestionnaireProgress
+            categories={categories}
             answersGeneral={answersGeneral}
             isAnsweredGeneral={isAnsweredGeneral}
             answersBackyard={answersBackyard}
@@ -119,6 +141,7 @@ const handleBq2Change = (index: number) => {
         )
       }
       <QuestionnaireGeneral
+        project={project}
         answersGeneral={answersGeneral}
         selectedMaxTwoGeneral={selectedMaxTwoGeneral}
         handleMaxTwoGeneral={handleMaxTwoGeneral}
@@ -126,26 +149,36 @@ const handleBq2Change = (index: number) => {
         setIsAnsweredGeneral={setIsAnsweredGeneral}
         handleSubmitAnswersGeneral={handleSubmitAnswersGeneral}
       />
-      <QuestionnaireBackyard
-        isAnsweredGeneral={isAnsweredGeneral}
-        answersBackyard={answersBackyard}
-        isAnsweredBackyard={isAnsweredBackyard}
-        setIsAnsweredBackyard={setIsAnsweredBackyard}
-        selectedBq2={selectedBq2}
-        handleBq2Change={handleBq2Change}
-        handleSubmitAnswersBackyard={handleSubmitAnswersBackyard}
-      />
-      <QuestionnaireFrontyard
-        isAnsweredGeneral={isAnsweredGeneral}
-        isAnsweredBackyard={isAnsweredBackyard}
-        answersFrontyard={answersFrontyard}
-        isAnsweredFrontyard={isAnsweredFrontyard}
-        setIsAnsweredFrontyard={setIsAnsweredFrontyard}
-        selectedFq2={selectedFq2}
-        handleFq2Change={handleFq2Change}
-        handleSubmitAnswersFrontyard={handleSubmitAnswersFrontyard}
-      />
+      {
+        (categories.includes("Backyard")) && (
+          <QuestionnaireBackyard
+            isAnsweredGeneral={isAnsweredGeneral}
+            answersBackyard={answersBackyard}
+            isAnsweredBackyard={isAnsweredBackyard}
+            setIsAnsweredBackyard={setIsAnsweredBackyard}
+            selectedBq2={selectedBq2}
+            handleBq2Change={handleBq2Change}
+            handleSubmitAnswersBackyard={handleSubmitAnswersBackyard}
+          />
+        )
+      }
+      {
+        (categories.includes("Frontyard")) && (
+          <QuestionnaireFrontyard
+            categories={categories}
+            isAnsweredGeneral={isAnsweredGeneral}
+            isAnsweredBackyard={isAnsweredBackyard}
+            answersFrontyard={answersFrontyard}
+            isAnsweredFrontyard={isAnsweredFrontyard}
+            setIsAnsweredFrontyard={setIsAnsweredFrontyard}
+            selectedFq2={selectedFq2}
+            handleFq2Change={handleFq2Change}
+            handleSubmitAnswersFrontyard={handleSubmitAnswersFrontyard}
+          />
+        )
+      }
       <QuestionnaireExtra
+        categories={categories}
         isAnsweredGeneral={isAnsweredGeneral}
         isAnsweredBackyard={isAnsweredBackyard}
         isAnsweredFrontyard={isAnsweredFrontyard}

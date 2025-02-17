@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
         withCredentials: true,
       },
     );
-    console.log(response);
+    // console.log(response);
     return NextResponse.json(response.data);
   } catch (error: unknown) {
     if (error instanceof AxiosError) {

@@ -14,6 +14,7 @@ import {
   DetailedPurchase,
   Transaction,
   createQuestionnaires,
+  Project,
   createProject,
   GetProjectsByPurchasesId,
   question,
@@ -275,7 +276,7 @@ export const apiService = {
     }
   },
 
-  getProjectById: async (projectId: string): Promise<ApiResponse<createProject>> => {
+  getProjectById: async (projectId: string): Promise<Project> => {
     try {
       const response = await apiClient.get(`${NEXT_URL_API}/projects/${projectId}`);
       return response.data;

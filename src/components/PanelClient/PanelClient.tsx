@@ -69,14 +69,13 @@ const PanelClient: React.FC = () => {
       const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
         try {
           const completedPurchases = purchaseList.filter(
-            (p) => p._id && p.status && p.status.toLowerCase() === "completed",
+            (p) => p._id && p.status && p.status.toLowerCase() === "completed" && p.inProject === true,
           );
     
           const projectRequests = completedPurchases.map((p) =>
             apiService.getProjectByPurchasesId(p._id)
           );
           const responses = await Promise.all(projectRequests);
-          console.log("PanelClient: Project responses:", responses);
           setProjects(responses);
         } catch (error) {
           // console.error("Error al obtener proyectos:", error);
@@ -85,25 +84,6 @@ const PanelClient: React.FC = () => {
       getProjectsByPurchasesId(purchases);
     }
   }, [userId, purchases]);
-
-  useEffect(() => {
-    console.log("purchases UE", purchases);
-  }, [purchases]);
-  
-  useEffect(() => {
-    console.log("projects UE", projects);
-  }, [projects]);
-
-  useEffect(() => {
-    if (projects.length > 0) {
-      // Filtrar las compras que tienen un proyecto asociado
-      const purchasesWithProjectsIds = projects
-        .filter((project) => project.purchase._id) // Asegurar que el proyecto tiene un purchaseId válido
-        .map((project) => project.purchase._id); // Extraer solo los IDs de compra
-      setPurchasesWithProject(purchasesWithProjectsIds);
-    }
-    console.log("purchasesWithProject UE", purchasesWithProject);
-  }, [projects]);
   
 
   const closeSiteContainer = () => {

@@ -1,15 +1,25 @@
 'use client';
 
-import { useEffect, useState, useRef} from "react";
+import { useEffect, useState, useRef, useCallback} from "react";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
 
 import QuestionnaireManager from "./QuestionnaireManager/QuestionnaireManager";
+import { apiService } from "@/services/apiService";
 
+import { ProjectInformation } from "@/utils/dataInterfaces";
 
-function Questionnaire() {
+interface SectionProps {
+  project: ProjectInformation | null;
+}
+
+const Section: React.FC<SectionProps> = ({
+  project
+}) => {
   const landingRef = useRef<HTMLElement | null>(null);
-  const [showProgress, setShowProgress] = useState(false);  
+  const [showProgress, setShowProgress] = useState(false);
+
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,9 +70,9 @@ function Questionnaire() {
         <div id="landing" className="flex h-full bgred-300 w-full max-md:h-[500px]  md:w-[50%] bg-top bg-cover bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireLanding.webp')",}}>
         </div>
       </section>
-      <QuestionnaireManager showProgress={showProgress} />
+      <QuestionnaireManager showProgress={showProgress} project={project} />
     </main>
   );
 }
-
-export default Questionnaire;
+ 
+export default Section;

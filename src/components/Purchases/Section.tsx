@@ -29,39 +29,41 @@ handleCreateProject
 }) => {
   return (
     <div>
-      <div className='flex flex-col w-[90%] h-full place-self-center gap-2'>
-      <div className='flex place-self-center border-[#6b776d] border-2 text-[#6b776d] rounded-md p2 w-[90%] max-w-[405px] h-[80px] overflow-x-scroll scrollbar-hide'>
-        {typePurchase.map((purchase, index) => (
-          <div key={index} className='flex justify-center items-center p-1 w-[100px]'>
-            <div
-              className={`w-full ${
-                currentPurchases === purchase.name
-                  ? "border border-[#6b776d] rounded-md"
-                  : ""
-              } text-xs flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap`}
-              onClick={() => setCurrentPurchases(purchase.name)}>
-              {purchase.icon}
-              {purchase.name}
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className='flex flex-col w-[90%] h-full place-self-center gap-2 p-2'>
 
-      <div className='flex flex-col h-[80%] w-full place-self-center rounded-md border border-[#6b776d]'>
-        <div className='w-full flex justify-center p-2 py6 items-center border-b border-b-[#6b776d] gap-2'>
-          <div className='flex w-full max-w-[400px]'>
-            <input
-              type='text'
-              placeholder='Search purchases'
-              className='w-full border border-[#6b776d] bg-white pl-2 text-[#6b776d] p-1 outline-none rounded-l-md border-r-0'
-            />
-            <div className='flex h-full p-2 justify-center items-center text-[#6b776d] hover:text-white rounded-r-md cursor-pointer hover:bg-[#6b776d] border border-[#6b776d]'>
-              <FaSearch />
+      <div className="flex flex-col bgred-300 p-2">
+        <div className='flex flex-col h-[80%] w-[90%] max-w-[405px] sticky top-2 p-2 bg-white place-self-center rounded-md  border border-[#6b776d] shadow-sm shadow-black'>
+          <div className='flex place-self-center bgpurple-300 borde-[#6b776d] borde-2 text-[#6b776d] rounded-md p2 w-[90%] h-[80px] overflow-x-scroll scrollbar-hide'>
+            {typePurchase.map((purchase, index) => (
+              <div key={index} className='flex justify-center items-center p-1 w-[100px]'>
+                <div
+                  className={`w-full ${
+                    currentPurchases === purchase.name
+                      ? "border border-[#6b776d] rounded-md"
+                      : ""
+                  } text-xs flex flex-col text-center justify-center items-center p-2 cursor-pointer whitespace-nowrap`}
+                  onClick={() => setCurrentPurchases(purchase.name)}>
+                  {purchase.icon}
+                  {purchase.name}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className='w-full flex justify-center p-2 py6 items-center borderb borderb-[#6b776d] gap-2'>
+            <div className='flex w-full max-w-[400px]'>
+              <input
+                type='text'
+                placeholder='Search purchases'
+                className='w-full border border-[#6b776d] bg-white pl-2 text-[#6b776d] p-1 outline-none rounded-l-md border-r-0'
+              />
+              <div className='flex h-full p-2 justify-center items-center text-[#6b776d] hover:text-white rounded-r-md cursor-pointer hover:bg-[#6b776d] border border-[#6b776d]'>
+                <FaSearch />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className=' overflow-y-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
+        <div className=' overflowy-scroll h-[90%] p-2 py-4 gap-2 w-full flex flex-col bgblue-300'>
           {filteredPurchases().map((purchase: DetailedPurchase, index: number) => (
             <div key={index} className='flex flex-col p-2 bgred-300 '>
               <div
@@ -146,7 +148,7 @@ handleCreateProject
                         <PurchaseDetails purchaseId={purchase._id} />
                       </div>
                     )}
-                    {( purchase.status === "completed" && !purchasesWithProject.includes(purchase._id)) && (
+                    {( purchase.status === "completed" && purchase.inProject === false) && (
                       <button
                         onClick={() => handleCreateProject(purchase)}
                         className='mt-2 px-3 py-2 bg-[#858e5b] text-white place-self-start rounded-tl-3xl rounded-br-3xl'>

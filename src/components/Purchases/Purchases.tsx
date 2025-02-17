@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { apiService } from "@/services/apiService";
 import { Image } from "@nextui-org/image";
 import { FaTags } from "react-icons/fa6";
@@ -56,6 +57,8 @@ interface PurchasesProps {
 
 export const Purchases: React.FC<PurchasesProps> = ({ purchases, purchasesWithProject }) => {
 
+  const router = useRouter();
+
   
   const [currentPurchases, setCurrentPurchases] = useState<string>("All Purchases");
 
@@ -91,7 +94,11 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases, purchasesWithPr
 
       // Asegurar que estamos accediendo a response.data
       if (response.message === "Project created successfully.") {
-        alert("Project created successfully!");
+        // alert("Project created successfully!");
+        router.push("/panel-client?panel=projects");
+        setTimeout(() => {
+          window.location.reload();
+        }, 100)
       } else {
         alert("Error al crear el proyecto. Inténtalo de nuevo.");
       }

@@ -130,6 +130,7 @@ export interface DetailedPurchase {
   total: number;
   status: string;
   isActive: boolean;
+  inProject: boolean;
 }
 
 export interface createQuestionnaires {
@@ -142,6 +143,84 @@ export interface createQuestionnaires {
 
 export interface createProject {
   purchaseId: string;
+}
+
+export interface Project {
+  _id: string;
+  name: string;
+  description: {
+    name: string;
+    type: string;
+    extras: string[];
+    areas: string[];
+  };
+  steps: {
+    _id: string;
+    step: string;
+    information: { status: string; isComplete: boolean }[];
+    content: { file: string; text: string; date: Date }[];
+    isActive: boolean;
+  }[];
+  questionnaire: {
+    _id: string;
+    category: string[];
+    questions: any[];
+    isComplete: boolean;
+    softDelete: boolean;
+    deletedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  purchase: {
+    _id: string;
+    customer: string;
+    product: string;
+    extras: {
+      extra: string;
+      isActive: boolean;
+      _id: string;
+    }[];
+    selectedAreas: {
+      nameArea: string;
+      isActive: boolean;
+      _id: string;
+    }[];
+    total: number;
+    status: string;
+    isActive: boolean;
+    softDelete: boolean;
+    deletedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  team: string[];
+  isActive: boolean;
+  softDelete: boolean;
+  deletedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ProjectInformation {
+  _id: string;
+  name: string;
+  description: {
+    name: string;
+    type: string;
+    extras: string[];
+    areas: string[];
+  };
+  questionnaire: {
+    _id: string;
+    category: string[];
+    questions: any[];
+    isComplete: boolean;
+    softDelete: boolean;
+    deletedAt: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  isActive: boolean;
 }
 
 export interface GetProjectsByPurchasesId {

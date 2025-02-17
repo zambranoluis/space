@@ -23,6 +23,11 @@ const Section: React.FC<SectionProps> = ({
   toggleProject,
   toggleStep
 }) => {
+
+  const handleViewQuestionnaire = (projectId: string) => {
+    window.open(`/questionnaire/?projectId=${projectId}`, "_blank");
+  };
+
   return (
     <div>
       <section className='w-[90%] py-8 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center'>
@@ -95,12 +100,12 @@ const Section: React.FC<SectionProps> = ({
                       Project - {project.name}
                     </div>
                     <div className='flex  bgred-200  w-full md:w-[35%]  text-white sm:font-bold text-xs justify-center items-center gap-2'>
-                      <button className='px-2 rounded-lg py-1 bg-[#6d786f] '>
+                      <div className='px-2 rounded-lg py-1 bg-[#6d786f] '>
                         {project.description.type}
-                      </button>
-                      <button className='px-2 rounded-lg py-1 bg-[#858e5b] '>
+                      </div>
+                      <div className='px-2 rounded-lg py-1 bg-[#858e5b] '>
                         {(project.isActive === true) ? "Pending" : "Completed"}
-                      </button>
+                      </div>
                     </div>
                     <div className='flex w-full text-xs md:w-[30%] justify-center items-center'>
                       <p>{(project.team.designer) ? project.team.designer : "No Designer Assigned"}</p>
@@ -162,6 +167,13 @@ const Section: React.FC<SectionProps> = ({
                                     alt='fliiedChecked'
                                   />
                                   <p>Customer Files</p>
+                                </div>
+                                <div className="pt-2n">
+                                  <button
+                                    className="bg-[#858e5b] py-1 px-2 rounded-xl text-sm text-white"
+                                    onClick={() => {handleViewQuestionnaire(project._id);}}
+                                  >
+                                    View Questionnaire</button>
                                 </div>
                                 <div className="flex max-sm:flex-col w-full justify-between bgred-300 mt-4 text-xs">
                                   <p className=''>Status: {(step.isActive === true) ? "Completed" : "Pending"}</p>
