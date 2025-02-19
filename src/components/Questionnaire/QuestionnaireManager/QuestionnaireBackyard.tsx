@@ -136,8 +136,8 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
               <select id="bq1Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
-                <option value="1">Green and Whites</option>
-                <option value="2">Colorful Plants</option>
+                <option value="1">Colorful Plants</option>
+                <option value="2">Green and Whites</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#6c786e]">Note:</p>
