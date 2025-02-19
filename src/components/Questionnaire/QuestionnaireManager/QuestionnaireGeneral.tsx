@@ -15,7 +15,7 @@ interface QuestionnaireGeneralProps {
   selectedMaxTwoGeneral: number[];
   handleMaxTwoGeneral: (index: number) => void;
   isAnsweredGeneral: boolean[];
-  handleSubmitAnswers: (question: string, answer: string, categoryQuestion: string) => void;
+  handleSubmitAnswers: (question: string, answer: string, categoryQuestion: string, htmlElements: string) => void;
 }
 
 
@@ -121,7 +121,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
                 <div className="bgred-300 flex flex-col justify-center items-center p-4" key={option.id}>
                   <Image className="w-[110px] aspect-square object-cover object-center rounded-full" src={option.img} alt="" />
                   <div className="flex justify-center items-center gap-2 p-2">
-                    <p className="text-black flex justify-center items-center gap-1 stylesCheckbox"><span className="text-xl text-[#68664d]">▪ </span>{option.name}</p>
+                    <p className="text-black flex justify-center items-center gap-1 gq2Styles"><span className="text-xl text-[#68664d]">▪ </span>{option.name}</p>
                     <input
                       className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
                       type="checkbox"
@@ -136,13 +136,13 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           <div id="gqOther" className="flex gap-2 place-self-center bgred-200 w-[90%] pb-12 text-black items-end">
             <p className="text-[#68664d]">Other: </p>
             <div className="border border-b-black border-b-2 w-full">
-              <input className="h-[40px] text-xl outline-none border-none bg-white w-full text-black  pl-2" placeholder="" type="text" />
+              <input id="gq2Input" className="h-[40px] text-xl outline-none border-none bg-white w-full text-black  pl-2" placeholder="" type="text" />
             </div>
           </div>
           <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
-              onClick={() => {handleSubmitAnswers(questionnaire.general[1].title.replace("?", ""), "Styles General Question", "General")}}
+              onClick={() => {handleSubmitAnswers(questionnaire.general[1].title.replace("?", ""), "Styles General Question", "General", "gq2")}}
             >
               Submit Answer
             </button>
@@ -159,7 +159,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           </div>
         </div>
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-          <select className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+          <select id="gq3Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
             <option value="1">No</option>
             <option value="2">Yes</option>
           </select>
@@ -167,7 +167,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
-            onClick={() => {handleSubmitAnswers(questionnaire.general[2].title.replace("?", ""), "Yes or No Question", "General")}}
+            onClick={() => {handleSubmitAnswers(questionnaire.general[2].title.replace("?", ""), "Yes or No Question", "General", "gq3Select")}}
           >
             Submit Answer
           </button>
@@ -183,7 +183,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           </div>
         </div>
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-          <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+          <select id="gq4Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
             <option value="1">No</option>
             <option value="2">Yes</option>
           </select>
@@ -191,7 +191,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
-              onClick={() => {handleSubmitAnswers(questionnaire.general[3].title.replace("?", ""), "Yes or No Question", "General")}}
+              onClick={() => {handleSubmitAnswers(questionnaire.general[3].title.replace("?", ""), "Yes or No Question", "General", "gq4Select")}}
             >
               Submit Answer
             </button>
@@ -207,7 +207,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           </div>
         </div>
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-          <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
+          <select id="gq5Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#858e5b] py-2 px-6">
             <option value="1">No</option>
             <option value="2">Yes</option>
           </select>
@@ -215,7 +215,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
-            onClick={() => {handleSubmitAnswers(questionnaire.general[4].title.replace("?", ""), "Yes or No Question", "General")}}
+            onClick={() => {handleSubmitAnswers(questionnaire.general[4].title.replace("?", ""), "Yes or No Question", "General", "gq5Select")}}
           >
             Submit Answer
           </button>

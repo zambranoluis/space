@@ -13,6 +13,7 @@ import { questionnaire } from "../questionnaireFile";
 import { ProjectInformation, question, createQuestionnaires } from "@/utils/dataInterfaces";
 
 import { apiService } from "@/services/apiService";
+import { set } from "date-fns";
 
 interface QuestionnaireManagerProps {
   showProgress: boolean;
@@ -39,13 +40,13 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   }, [project]);
 
-  
+
   // Obtener datos de cuestionario segun proyecto
   const [questionnaireData, setQuestionnaireData] = useState<question[]>([]);
 
   useEffect(() => {
     const fetchQuestionnaireData = async () => {
-      if (project){
+      if (project) {
         try {
           const response = await apiService.getQuestionnaireById(project?.questionnaire._id);
           console.log("response de getQuestionnaireById: ", response);
@@ -69,38 +70,38 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
   useEffect(() => {
     console.log("questionnaireData para ser desglosado: ", questionnaireData);
-  
+
     if (questionnaireData.length > 0) {
       const generalQuestions: question[] = questionnaireData
         .filter((question) => question.question.category === "General")
         .map((question) => question.question);
-  
+
       console.log("todas las preguntas de General: ", generalQuestions);
-  
+
       setAnswersGeneral(generalQuestions);
 
       const backyardQuestions: question[] = questionnaireData
         .filter((question) => question.question.category === "Backyard")
         .map((question) => question.question);
-  
+
       console.log("todas las preguntas de Backyard: ", backyardQuestions);
-  
+
       setAnswersBackyard(backyardQuestions);
 
       const frontyardQuestions: question[] = questionnaireData
         .filter((question) => question.question.category === "Frontyard")
         .map((question) => question.question);
-  
+
       console.log("todas las preguntas de Frontyard: ", frontyardQuestions);
-  
+
       setAnswersFrontyard(frontyardQuestions);
 
       const extraQuestions: question[] = questionnaireData
         .filter((question) => question.question.category === "Extra")
         .map((question) => question.question);
-  
+
       console.log("todas las preguntas de Extra: ", extraQuestions);
-  
+
       setAnswersExtra(extraQuestions);
 
     }
@@ -210,12 +211,12 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
   };
 
   const [selectedBq2, setSelectedBq2] = useState<number | null>(null);
-const handleBq2Change = (index: number) => {
+  const handleBq2Change = (index: number) => {
     setSelectedBq2(index === selectedBq2 ? null : index); // Permitir deseleccionar.
   };
   const [selectedFq2, setSelectedFq2] = useState<number | null>(null);
 
-  
+
   const handleFq2Change = (index: number) => {
     setSelectedFq2(index === selectedFq2 ? null : index); // Permitir deseleccionar.
   };
@@ -223,132 +224,499 @@ const handleBq2Change = (index: number) => {
 
 
   const [questionContainer, setQuestionContainer] = useState<question | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmitAnswers = (question: string, typeQuestion: string, categoryQuestion: string) => {
+  const handleSubmitAnswers = (question: string, typeQuestion: string, categoryQuestion: string, htmlElements: string) => {
     console.log("1. Pregunta accionada:", question);
     console.log("2. Tipo de pregunta:", typeQuestion);
     console.log("3. verificando duplicado...");
-  
+
     const isDuplicate = answersGeneral.some(
       (answer) => answer.quest === question && answer.category === categoryQuestion
     );
-  
+
     if (isDuplicate) {
       console.log("4. La pregunta ya ha sido respondida.");
       return;
     }
-  
+
     console.log("4. Pregunta no duplicada. Creando nueva pregunta...");
 
     switch (typeQuestion) {
       case "Styles General Question":
-  console.log("Question type: ", typeQuestion);
-  const styles = document.getElementsByClassName("stylesCheckbox");
-  console.log("styles: ", styles);
+        console.log("5. Question type: ", typeQuestion);
+        const styles = document.getElementsByClassName(`${htmlElements}Styles`);
+        const inputNote = document.getElementById(`${htmlElements}Input`);
+        const inputNoteText = inputNote?.value;
+        console.log("styles: ", styles);
+        console.log("inputNoteText: ", inputNoteText);
 
-  // Generar el array de `selecteds` asegurando el tipo correcto
-  const selectedsArray: { selected: string }[] = selectedMaxTwoGeneral
-    .map((index) => ({
-      selected: styles[index]?.textContent?.replace("▪ ", "") || "",
-    }))
-    .filter((item) => item.selected.trim() !== ""); // Filtrar valores vacíos
+        // Generar el array de `selecteds` asegurando el tipo correcto
+        const selectedsArray: { selected: string }[] = selectedMaxTwoGeneral
+          .map((index) => ({
+            selected: styles[index]?.textContent?.replace("▪ ", "") || "",
+          }))
+          .filter((item) => item.selected.trim() !== ""); // Filtrar valores vacíos
 
-  // Validar que haya al menos un estilo seleccionado
-  if (selectedsArray.length === 0) {
-    console.log("❌ Debes seleccionar al menos un estilo.");
-    return;
-  }
-
-  console.log("✅ Selected styles: ", selectedsArray);
-
-  const newAnswer: question = {
-    quest: question,
-    category: categoryQuestion,
-    notes: [{ note: "" }],
-    selecteds: selectedsArray,
-    select: false,
-    people: 0,
-    files: [],
-    questionnaireId: project?.questionnaire._id,
-  };
-
-  console.log("5. Pregunta a agregar: ", newAnswer);
-        const submitNewAnswer = async () => {
-        try {
-          const response = await apiService.createQuestion(newAnswer);
-          console.log("✅ Respuesta de la creación de pregunta:", response);
-          if (response) {
-            switch (categoryQuestion) {
-              case "General":
-                setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
-                break;
-              case "Backyard":
-                setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
-                break;
-              case "Frontyard":
-                setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
-                break;
-              case "Extra":
-                setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
-                break;
-              default:
-                break;
-            }
-          }
-        } catch (error) {
-          console.error("❌ Error al crear la pregunta:", error);
+        // Validar que haya al menos un estilo seleccionado
+        if (selectedsArray.length === 0) {
+          setSubmitError("Please select at least 1 style.");
+          console.error("No se ha seleccionado ningun estilo.");
+          return;
         }
-      };
-    
-      submitNewAnswer();
-    }
 
-    // const newAnswerGeneral = {
-    //   quest: question,
-    //   category: categoryQuestion,
-    //   notes: [{ note: "" }],
-    //   selecteds: [{ selected: "" }],
-    //   select: false,
-    //   people: 0,
-    //   files: [],
-    //   questionnaireId: project?.questionnaire._id,
-    // } as question;
+        console.log("✅ Selected styles: ", selectedsArray);
+
+        const newAnswer: question = {
+          quest: question,
+          category: categoryQuestion,
+          notes: [{ note: inputNoteText || "" }],
+          selecteds: selectedsArray,
+          select: false,
+          people: 0,
+          files: [],
+          questionnaireId: project?.questionnaire._id,
+        };
+
+        console.log("6. Pregunta a agregar: ", newAnswer);
+        const submitNewAnswer = async () => {
+          try {
+            const response = await apiService.createQuestion(newAnswer);
+            console.log("✅ Respuesta de la creación de pregunta:", response);
+            if (response) {
+              switch (categoryQuestion) {
+                case "General":
+                  setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                case "Backyard":
+                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                case "Frontyard":
+                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                case "Extra":
+                  setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                default:
+                  break;
+              }
+            }
+          } catch (error) {
+            console.error("❌ Error al crear la pregunta:", error);
+          }
+        };
+
+        submitNewAnswer();
+        break;
+
+      case "Yes or No Question":
+        console.log("5. Question type: ", typeQuestion);
+        const selection = document.getElementById(htmlElements);
+        console.log("select html element: ", selection);
+        const selectedText = selection.options[selection.selectedIndex].text;
+        console.log(selectedText); // Devuelve "No" o "Yes"
+
+        const newAnswerYesOrNo: question = {
+          quest: question,
+          category: categoryQuestion,
+          notes: [{ note: "" }],
+          selecteds: [{ selected: "" }],
+          select: (selectedText === "Yes") ? true : false,
+          people: 0,
+          files: [],
+          questionnaireId: project?.questionnaire._id,
+        };
+
+        console.log("6. Pregunta a agregar: ", newAnswerYesOrNo);
+        const submitNewAnswerYesOrNo = async () => {
+          try {
+            const response = await apiService.createQuestion(newAnswerYesOrNo);
+            console.log("✅ Respuesta de la creación de pregunta:", response);
+            if (response) {
+              switch (categoryQuestion) {
+                case "General":
+                  setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                case "Backyard":
+                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                case "Frontyard":
+                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                case "Extra":
+                  setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                  break;
+                default:
+                  break;
+              }
+            }
+          } catch (error) {
+            console.error("❌ Error al crear la pregunta:", error);
+          }
+        };
+
+        submitNewAnswerYesOrNo();
+        break;
+
+        case "Yes or No With Note Question":
+          console.log("5.  Question type: ", typeQuestion);
+          const selectionWithNote = document.getElementById(`${htmlElements}Select`);
+          const noteElement = document.getElementById(`${htmlElements}Note`);
+          console.log("Select html element: ", selectionWithNote);
+          console.log("Note html element: ", noteElement);
+          const selectedTextWithNote: string = selectionWithNote.options[selectionWithNote.selectedIndex].text;
+          console.log("selectedTextWithNote: ", selectedTextWithNote);
+          const noteText: string = noteElement.value;
+          console.log("noteText: ", noteText);
   
-    // console.log("5. Pregunta a agregar: ", newAnswerGeneral);
+          const newAnswerYesOrNoWithNote: question = {
+            quest: question,
+            category: categoryQuestion,
+            notes: [{ note: selectedTextWithNote }, { note: noteText }] ,
+            selecteds: [{ selected: "" }],
+            select: (selectedTextWithNote === "Colorful Plants" || selectedTextWithNote === "Yes") ? true : false,
+            people: 0,
+            files: [],
+            questionnaireId: project?.questionnaire._id,
+          };
   
-    // const submitNewAnswer = async () => {
-    //   try {
-    //     const response = await apiService.createQuestion(newAnswerGeneral);
-    //     console.log("✅ Respuesta de la creación de pregunta:", response);
-    //     if (response) {
-    //       switch (categoryQuestion) {
-    //         case "General":
-    //           setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
-    //           break;
-    //         case "Backyard":
-    //           setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
-    //           break;
-    //         case "Frontyard":
-    //           setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
-    //           break;
-    //         case "Extra":
-    //           setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
-    //           break;
-    //         default:
-    //           break;
-    //       }
-    //     }
-    //   } catch (error) {
-    //     console.error("❌ Error al crear la pregunta:", error);
-    //   }
-    // };
-  
-    // submitNewAnswer();
+          console.log("6. Pregunta a agregar: ", newAnswerYesOrNoWithNote);
+          const submitNewAnswerYesOrNoWithNote = async () => {
+            try {
+              const response = await apiService.createQuestion(newAnswerYesOrNoWithNote);
+              console.log("✅ Respuesta de la creación de pregunta:", response);
+              if (response) {
+                switch (categoryQuestion) {
+                  case "General":
+                    setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  case "Backyard":
+                    setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  case "Frontyard":
+                    setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  case "Extra":
+                    setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  default:
+                    break;
+                }
+              }
+            } catch (error) {
+              console.error("❌ Error al crear la pregunta:", error);
+            }
+          };
+          submitNewAnswerYesOrNoWithNote();
+          break;
+
+
+          case "How Many Plants Question":
+            console.log("5. Question type: ", typeQuestion);
+            const optionsPlants = document.getElementsByClassName(`${htmlElements}Plants`);
+            console.log("optionsPlants: ", optionsPlants);
+            console.log("selectedFq2: ", selectedFq2)
+            if (selectedFq2 !== null){
+              const selectedTextPlants = optionsPlants[selectedFq2].textContent;
+              console.log("selectedTextPlants: ", selectedTextPlants)
+
+              const newAnswerHowManyPlants: question = {
+              quest: question,
+              category: categoryQuestion,
+              notes: [{ note: "" }] ,
+              selecteds: [{ selected: selectedTextPlants }],
+              select: false,
+              people: 0,
+              files: [],
+              questionnaireId: project?.questionnaire._id,
+            };
+    
+            console.log("6. Pregunta a agregar: ", newAnswerHowManyPlants);
+            const submitNewAnswerHowManyPlants = async () => {
+              try {
+                const response = await apiService.createQuestion(newAnswerHowManyPlants);
+                console.log("✅ Respuesta de la creación de pregunta:", response);
+                if (response) {
+                  switch (categoryQuestion) {
+                    case "General":
+                      setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Backyard":
+                      setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Frontyard":
+                      setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Extra":
+                      setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              } catch (error) {
+                console.error("❌ Error al crear la pregunta:", error);
+              }
+            };
+            submitNewAnswerHowManyPlants();
+            } else {
+              console.error("por favor seleccionar al menos una cantidad")
+            }
+            break;
+
+
+            case "Things to Keep or Remove Question":
+            console.log("5. Question type: ", typeQuestion);
+            const thingsBoxes = document.getElementsByClassName(`${htmlElements}ThingsKeepRemove`)
+            console.log("things Boxes: ", thingsBoxes)
+            const thingsBoxesText = Array.from(thingsBoxes).map((box) => box.value);
+            console.log("thingsBoxesText: ", thingsBoxesText);
+
+              const newAnswerThingsKeepRemove: question = {
+              quest: question,
+              category: categoryQuestion,
+              notes: [{ note: `${thingsBoxesText[0]}` }, {note: `${thingsBoxesText[1]}`}],
+              selecteds: [{ selected: "" }],
+              select: false,
+              people: 0,
+              files: [],
+              questionnaireId: project?.questionnaire._id,
+            };
+    
+            console.log("6. Pregunta a agregar: ", newAnswerThingsKeepRemove);
+
+            const submitNewAnswerThingsKeepRemove = async () => {
+              try {
+                const response = await apiService.createQuestion(newAnswerThingsKeepRemove);
+                console.log("✅ Respuesta de la creación de pregunta:", response);
+                if (response) {
+                  switch (categoryQuestion) {
+                    case "General":
+                      setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Backyard":
+                      setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Frontyard":
+                      setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Extra":
+                      setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              } catch (error) {
+                console.error("❌ Error al crear la pregunta:", error);
+              }
+            };
+            submitNewAnswerThingsKeepRemove();
+            break;
+
+
+
+            case "Water Feature Question":
+              console.log("5. Question type: ", typeQuestion);
+              const waterSelect = document.getElementById(`${htmlElements}Select`)
+              const waterFeatures = document.getElementsByClassName(`${htmlElements}WaterOption`)
+              const waterChecks = document.getElementsByClassName(`${htmlElements}WaterCheckbox`)
+              const waterNote = document.getElementById(`${htmlElements}Note`)
+
+              console.log("waterSelect: ", waterSelect)
+              const waterSelectText = waterSelect.options[waterSelect.selectedIndex].text;
+              console.log("waterSelectText: ", waterSelectText)
+              console.log("waterFeatures: ", waterFeatures)
+              console.log("waterChecks: ", waterChecks)
+              console.log("waterNote: ", waterNote)
+              const waterNoteText = waterNote.value
+              console.log("waterNoteText: ", waterNoteText)
+
+              const selectedWaterFeatures = Array.from(waterChecks)
+                .map((check, index) => check.checked ? waterFeatures[index]?.textContent.replace("▪ ", "") : null) // Tomar solo los seleccionados
+                .filter(feature => feature !== null); // Eliminar los valores nulos
+
+              console.log("selectedWaterFeatures: ", selectedWaterFeatures);
+
+              const formatSelectedWaterFeatures = selectedWaterFeatures.map(feature => ({ selected: feature }));
+
+              console.log(formatSelectedWaterFeatures);
+
+              const newAnswerWaterFeature: question = {
+              quest: question,
+              category: categoryQuestion,
+              notes: [{ note: waterNoteText }],
+              selecteds: formatSelectedWaterFeatures,
+              select: (waterSelectText === "Yes" ? true : false),
+              people: 0,
+              files: [],
+              questionnaireId: project?.questionnaire._id,
+            };
+    
+            console.log("6. Pregunta a agregar: ", newAnswerWaterFeature);
+
+            const submitNewAnswerWaterFeature = async () => {
+              try {
+                const response = await apiService.createQuestion(newAnswerWaterFeature);
+                console.log("✅ Respuesta de la creación de pregunta:", response);
+                if (response) {
+                  switch (categoryQuestion) {
+                    case "General":
+                      setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Backyard":
+                      setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Frontyard":
+                      setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Extra":
+                      setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              } catch (error) {
+                console.error("❌ Error al crear la pregunta:", error);
+              }
+            };
+            submitNewAnswerWaterFeature();
+            break;
+
+
+            case "Fire Feature Question":
+              console.log("5. Question type: ", typeQuestion);
+              const fireSelect = document.getElementById(`${htmlElements}FireSelect`)
+              const fireFeatures = document.getElementsByClassName(`${htmlElements}FireOption`)
+              const fireChecks = document.getElementsByClassName(`${htmlElements}FireCheckbox`)
+              const firePeople = document.getElementById(`${htmlElements}FirePeople`)
+              const fireNote = document.getElementById(`${htmlElements}FireNote`)
+
+              console.log("fireSelect: ", fireSelect)
+              const fireSelectText = fireSelect.options[fireSelect.selectedIndex].text;
+              console.log("fireSelectText: ", fireSelectText)
+              console.log("fireFeatures: ", fireFeatures)
+              console.log("fireChecks: ", fireChecks)
+              console.log("firePeople:", firePeople)
+              const firePeopleNumber = firePeople.value;
+              console.log("firePeopleNumber: ", firePeopleNumber)
+              console.log("fireNote: ", fireNote)
+              const fireNoteText = fireNote.value
+              console.log("fireNoteText: ", fireNoteText)
+
+              const selectedFireFeatures = Array.from(fireChecks)
+                .map((check, index) => check.checked ? fireFeatures[index]?.textContent.replace("▪ ", "") : null) // Tomar solo los seleccionados
+                .filter(feature => feature !== null)
+
+              console.log("selectedFireFeatures: ", selectedFireFeatures);
+
+              const formatSelectedFireFeatures = selectedFireFeatures.map(feature => ({ selected: feature }));
+
+              console.log("formatSelectedFeatures: ", formatSelectedFireFeatures);
+
+              const newAnswerFireFeature: question = {
+              quest: question,
+              category: categoryQuestion,
+              notes: [{ note: fireNoteText }],
+              selecteds: formatSelectedFireFeatures,
+              select: (fireSelectText === "Yes" ? true : false),
+              people: firePeopleNumber,
+              files: [],
+              questionnaireId: project?.questionnaire._id,
+            };
+    
+            console.log("6. Pregunta a agregar: ", newAnswerFireFeature);
+
+            const submitNewAnswerFireFeature = async () => {
+              try {
+                const response = await apiService.createQuestion(newAnswerFireFeature);
+                console.log("✅ Respuesta de la creación de pregunta:", response);
+                if (response) {
+                  switch (categoryQuestion) {
+                    case "General":
+                      setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Backyard":
+                      setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Frontyard":
+                      setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Extra":
+                      setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              } catch (error) {
+                console.error("❌ Error al crear la pregunta:", error);
+              }
+            };
+            submitNewAnswerFireFeature();
+            break;
+
+
+            case "Note Question":
+              console.log("5. Question type: ", typeQuestion);
+              const note = document.getElementById (`${htmlElements}Note`)
+              const noteContain = note.value
+              console.log("note: ", note, "contain: ", noteContain)
+
+              const newAnswerOnlyNote: question = {
+              quest: question,
+              category: categoryQuestion,
+              notes: [{ note: noteContain }],
+              selecteds: [{selected: ""}],
+              select: false,
+              people: 0,
+              files: [],
+              questionnaireId: project?.questionnaire._id,
+            };
+    
+            console.log("6. Pregunta a agregar: ", newAnswerOnlyNote);
+
+
+            const submitNewAnswerOnlyNote = async () => {
+              try {
+                const response = await apiService.createQuestion(newAnswerOnlyNote);
+                console.log("✅ Respuesta de la creación de pregunta:", response);
+                if (response) {
+                  switch (categoryQuestion) {
+                    case "General":
+                      setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Backyard":
+                      setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Frontyard":
+                      setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    case "Extra":
+                      setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              } catch (error) {
+                console.error("❌ Error al crear la pregunta:", error);
+              }
+            };
+            submitNewAnswerOnlyNote();
+            break;
+
+
+
+      default:
+        break;
+    }
   };
 
 
 
-  
+
 
 
   return (

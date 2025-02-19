@@ -16,7 +16,7 @@ interface QuestionnaireExtraProps {
   isAnsweredBackyard: boolean[];
   isAnsweredFrontyard: boolean[];
   isAnsweredExtra: boolean[];
-  handleSubmitAnswers: (question: string, questionType: string, questionCategory: string) => void
+  handleSubmitAnswers: (question: string, questionType: string, questionCategory: string, htmlElements: string) => void
 }
 
 
@@ -134,14 +134,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq1Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire.extra[0].title.replace("?", "").replace(",", ""), "Note Question", "Extra");
+              handleSubmitAnswers(questionnaire.extra[0].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq1");
             }}
           >
             Submit Answer
@@ -160,14 +160,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq2Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["extra"][1].title.replace("?", "").replace(",", ""), "Note Question", "Extra");
+              handleSubmitAnswers(questionnaire["extra"][1].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq2");
             }}
           >
             Submit Answer
@@ -186,14 +186,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq3Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["extra"][2].title.replace("?", "").replace(",", ""), "Note Question", "Extra");
+              handleSubmitAnswers(questionnaire["extra"][2].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq3");
             }}
           >
             Submit Answer
@@ -212,14 +212,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq4Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["extra"][3].title.replace("?", "").replace(",", ""), "Note Question", "Extra");
+              handleSubmitAnswers(questionnaire["extra"][3].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq4");
             }}
           >
             Submit Answer
@@ -242,14 +242,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq1Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["extra"][0].title.replace("?", "").replace(",", ""), "Client Answer", "Extra");
+              handleSubmitAnswers(questionnaire["extra"][0].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq1");
             }}
           >
             Submit Answer
@@ -268,14 +268,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq2Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["extra"][1].title.replace("?", "").replace(",", ""), "Client Answer", "Extra");
+              handleSubmitAnswers(questionnaire["extra"][1].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq2");
             }}
           >
             Submit Answer
@@ -294,14 +294,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq3Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["extra"][2].title.replace("?", "").replace(",", ""), "Client Answer", "Extra");
+              handleSubmitAnswers(questionnaire["extra"][2].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq3");
             }}
           >
             Submit Answer
@@ -320,14 +320,14 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
         <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
           <div className="flex flex-col w-full p-2">
             <p className="text-[#68664d]">Note:</p>
-            <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            <textarea id="eq4Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
           </div>
         </div>
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["extra"][3].title.replace("?", "").replace(",", ""), "Client Answer", "Extra");
+              handleSubmitAnswers(questionnaire["extra"][3].title.replace("?", "").replace(",", ""), "Note Question", "Extra", "eq4");
             }}
           >
             Submit Answer
