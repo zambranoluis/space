@@ -14,12 +14,10 @@ interface QuestionnaireFrontyardProps {
   categories: string[];
   isAnsweredGeneral: boolean[];
   isAnsweredBackyard: boolean[];
-  answersFrontyard: question[];
   isAnsweredFrontyard: boolean[];
-  setIsAnsweredFrontyard: React.Dispatch<React.SetStateAction<boolean[]>>;
   selectedFq2: number | null;
   handleFq2Change: (index: number) => void;
-  handleSubmitAnswersFrontyard: (question: string, answer: string) => void
+  handleSubmitAnswers: (question: string, typeQuestion: string, categoryQuestion: string) => void
 }
 
 
@@ -27,12 +25,10 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
   categories,
   isAnsweredGeneral,
   isAnsweredBackyard,
-  answersFrontyard,
   isAnsweredFrontyard,
-  setIsAnsweredFrontyard,
   selectedFq2,
   handleFq2Change,
-  handleSubmitAnswersFrontyard
+  handleSubmitAnswers
 }) => {
 
   
@@ -161,7 +157,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][0].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][0].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -204,7 +200,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][1].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][1].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -234,7 +230,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][2].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][2].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -264,7 +260,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][3].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -304,7 +300,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][4].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][4].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -351,7 +347,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][5].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][5].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -381,7 +377,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][6].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][6].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -411,7 +407,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][7].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][7].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -441,7 +437,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][8].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][8].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -471,7 +467,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][9].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][9].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -511,7 +507,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][0].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][0].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -554,7 +550,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][1].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][1].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -584,7 +580,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][2].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][2].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -614,7 +610,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][3].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -654,7 +650,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][4].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][4].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -701,7 +697,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][5].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][5].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -731,7 +727,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][6].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][6].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -761,7 +757,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][7].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][7].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -791,7 +787,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][8].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][8].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer
@@ -821,7 +817,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersFrontyard(questionnaire["backyard"][9].title.replace("?", "").replace(",",""), "Client Answer");
+              handleSubmitAnswers(questionnaire["backyard"][9].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
             }}
           >
             Submit Answer

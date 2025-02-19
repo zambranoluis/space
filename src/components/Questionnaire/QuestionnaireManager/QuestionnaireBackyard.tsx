@@ -12,23 +12,21 @@ import {
 
 interface QuestionnaireBackyardProps {
   isAnsweredGeneral: boolean[];
-  answersBackyard: question[];
   isAnsweredBackyard: boolean[];
   setIsAnsweredBackyard: React.Dispatch<React.SetStateAction<boolean[]>>;
   selectedBq2: number | null;
   handleBq2Change: (index: number) => void;
-  handleSubmitAnswersBackyard: (question: string, answer: string) => void
+  handleSubmitAnswers: (question: string, answer: string, categoryQuestion: string) => void
 }
 
 
 const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
   isAnsweredGeneral,
-  answersBackyard,
   isAnsweredBackyard,
   setIsAnsweredBackyard,
   selectedBq2,
   handleBq2Change,
-  handleSubmitAnswersBackyard
+  handleSubmitAnswers
 }) => {
 
 
@@ -150,7 +148,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswersBackyard(questionnaire["backyard"][0].title.replace("?", "").replace(",", ""), "Plant Colors Answer");
+                  handleSubmitAnswers(questionnaire["backyard"][0].title.replace("?", "").replace(",", ""), "Plant Colors Answer", "Backyard");
                 }}
               >
                 Submit Answer
@@ -192,7 +190,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                 <button
                   className="bg-[#858e5b] px-4 py-2 rounded-lg"
                   onClick={() => {
-                    handleSubmitAnswersBackyard(questionnaire["backyard"][1].title.replace("?", "").replace(",", ""), "How Many Plants Question");
+                    handleSubmitAnswers(questionnaire["backyard"][1].title.replace("?", "").replace(",", ""), "How Many Plants Question", "Backyard");
                   }}
                 >
                   Submit Answer
@@ -223,7 +221,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswersBackyard(questionnaire["backyard"][2].title.replace("?", "").replace(",", ""), "Things to Keep and Remove Question");
+                  handleSubmitAnswers(questionnaire["backyard"][2].title.replace("?", "").replace(",", ""), "Things to Keep and Remove Question", "Backyard");
                 }}
               >
                 Submit Answer
@@ -253,7 +251,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswersBackyard(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No Question");
+                  handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
                 }}
               >
                 Submit Answer
@@ -294,7 +292,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                 <button
                   className="bg-[#858e5b] px-4 py-2 rounded-lg"
                   onClick={() => {
-                    handleSubmitAnswersBackyard(questionnaire["backyard"][4].title.replace("?", "").replace(",", ""), "Water Feature Question");
+                    handleSubmitAnswers(questionnaire["backyard"][4].title.replace("?", "").replace(",", ""), "Water Feature Question", "Backyard");
                   }}
                 >
                   Submit Answer
@@ -340,7 +338,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][5].title.replace("?", "").replace(",", ""), "Fire Feature Question");
+                handleSubmitAnswers(questionnaire["backyard"][5].title.replace("?", "").replace(",", ""), "Fire Feature Question", "Backyard");
               }}
             >
               Submit Answer
@@ -370,7 +368,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][6].title.replace("?", "").replace(",", ""), "Yes or No Question");
+                handleSubmitAnswers(questionnaire["backyard"][6].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
               }}
             >
               Submit Answer
@@ -400,7 +398,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][7].title.replace("?", "").replace(",", ""), "Yes or No Question");
+                handleSubmitAnswers(questionnaire["backyard"][7].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
               }}
             >
               Submit Answer
@@ -430,7 +428,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][8].title.replace("?", "").replace(",", ""), "Yes or No Question");
+                handleSubmitAnswers(questionnaire["backyard"][8].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
               }}
             >
               Submit Answer
@@ -460,7 +458,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][9].title.replace("?", "").replace(",", ""), "Yes or No Question");
+                handleSubmitAnswers(questionnaire["backyard"][9].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
               }}
             >
               Submit Answer

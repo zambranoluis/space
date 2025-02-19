@@ -12,23 +12,19 @@ import {
 
 interface QuestionnaireGeneralProps {
   project: ProjectInformation | null;
-  answersGeneral: question[];
   selectedMaxTwoGeneral: number[];
   handleMaxTwoGeneral: (index: number) => void;
   isAnsweredGeneral: boolean[];
-  setIsAnsweredGeneral: React.Dispatch<React.SetStateAction<boolean[]>>;
-  handleSubmitAnswersGeneral: (question: string, answer: string) => void;
+  handleSubmitAnswers: (question: string, answer: string, categoryQuestion: string) => void;
 }
 
 
 const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
   project,
-  answersGeneral,
   selectedMaxTwoGeneral,
   handleMaxTwoGeneral,
   isAnsweredGeneral,
-  setIsAnsweredGeneral,
-  handleSubmitAnswersGeneral
+  handleSubmitAnswers
 }) => {
 
 
@@ -125,7 +121,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
                 <div className="bgred-300 flex flex-col justify-center items-center p-4" key={option.id}>
                   <Image className="w-[110px] aspect-square object-cover object-center rounded-full" src={option.img} alt="" />
                   <div className="flex justify-center items-center gap-2 p-2">
-                    <p className="text-black flex justify-center items-center gap-1"><span className="text-xl text-[#68664d]">▪ </span>{option.name}</p>
+                    <p className="text-black flex justify-center items-center gap-1 stylesCheckbox"><span className="text-xl text-[#68664d]">▪ </span>{option.name}</p>
                     <input
                       className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
                       type="checkbox"
@@ -146,7 +142,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
-              onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[1].title.replace("?", ""), "Style Question")}}
+              onClick={() => {handleSubmitAnswers(questionnaire.general[1].title.replace("?", ""), "Styles General Question", "General")}}
             >
               Submit Answer
             </button>
@@ -171,7 +167,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
-            onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[2].title.replace("?", ""), "Yes or No Question")}}
+            onClick={() => {handleSubmitAnswers(questionnaire.general[2].title.replace("?", ""), "Yes or No Question", "General")}}
           >
             Submit Answer
           </button>
@@ -195,7 +191,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
-              onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[3].title.replace("?", ""), "Yes or No Question")}}
+              onClick={() => {handleSubmitAnswers(questionnaire.general[3].title.replace("?", ""), "Yes or No Question", "General")}}
             >
               Submit Answer
             </button>
@@ -219,7 +215,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
-            onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[4].title.replace("?", ""), "Yes or No Question")}}
+            onClick={() => {handleSubmitAnswers(questionnaire.general[4].title.replace("?", ""), "Yes or No Question", "General")}}
           >
             Submit Answer
           </button>

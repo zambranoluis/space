@@ -77,7 +77,7 @@ const questionnaire = {
   backyard: [
     {
       id: "qb1",
-      title: " Do you prefer colorful plants or simple, green and white ones?",
+      title: "Do you prefer colorful plants or simple, green and white ones?",
       img: "https://github.com/BPM94/SCCTMD/raw/main/questionnaire/nuevo-cuestionario-26.png",
       buttonText: "Colorful / Green and white",
       options: [],
@@ -131,7 +131,7 @@ const questionnaire = {
     },
     {
       id: "qb4",
-      title: " Would you like to add some kind of hardscape?",
+      title: "Would you like to add some kind of hardscape?",
       img: "https://github.com/BPM94/SCCTMD/raw/main/questionnaire/nuevo-cuestionario-29.png",
       buttonText: "Yes/No",
       options: [],
@@ -171,7 +171,7 @@ const questionnaire = {
     },
     {
       id: "qb6",
-      title: " Would you like an area with a fire feature?",
+      title: "Would you like an area with a fire feature?",
       buttonText: "Yes/No",
       options: [
         {
