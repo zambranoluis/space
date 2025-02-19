@@ -415,8 +415,8 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const optionsPlants = document.getElementsByClassName(`${htmlElements}Plants`);
         console.log("optionsPlants: ", optionsPlants);
         console.log("selectedFq2: ", selectedFq2)
-        if (selectedFq2 !== null) {
-          const selectedTextPlants = optionsPlants[selectedFq2].textContent;
+        if ((categoryQuestion === "Frontyard" && selectedFq2 !== null)) {
+          const selectedTextPlants = optionsPlants[selectedFq2].textContent
           console.log("selectedTextPlants: ", selectedTextPlants)
 
           const newAnswerHowManyPlants: question = {
@@ -458,7 +458,51 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
             }
           };
           submitNewAnswerHowManyPlants();
-        } else {
+        } else if ((categoryQuestion === "Backyard" && selectedBq2 !== null)){
+          const selectedTextPlants = optionsPlants[selectedBq2].textContent
+          console.log("selectedTextPlants: ", selectedTextPlants)
+
+          const newAnswerHowManyPlants: question = {
+            quest: question,
+            category: categoryQuestion,
+            notes: [{ note: "" }],
+            selecteds: [{ selected: selectedTextPlants }],
+            select: false,
+            people: 0,
+            files: [],
+            questionnaireId: project?.questionnaire._id,
+          };
+
+          console.log("6. Pregunta a agregar: ", newAnswerHowManyPlants);
+          const submitNewAnswerHowManyPlants = async () => {
+            try {
+              const response = await apiService.createQuestion(newAnswerHowManyPlants);
+              console.log("✅ Respuesta de la creación de pregunta:", response);
+              if (response) {
+                switch (categoryQuestion) {
+                  case "General":
+                    setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  case "Backyard":
+                    setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  case "Frontyard":
+                    setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  case "Extra":
+                    setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+                    break;
+                  default:
+                    break;
+                }
+              }
+            } catch (error) {
+              console.error("❌ Error al crear la pregunta:", error);
+            }
+          };
+          submitNewAnswerHowManyPlants();
+        }
+        else {
           console.error("por favor seleccionar al menos una cantidad")
         }
         break;

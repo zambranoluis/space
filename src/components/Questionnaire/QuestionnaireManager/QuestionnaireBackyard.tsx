@@ -251,7 +251,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No Question With Note Question", "Backyard", "bq4");
+                  handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq4");
                 }}
               >
                 Submit Answer
