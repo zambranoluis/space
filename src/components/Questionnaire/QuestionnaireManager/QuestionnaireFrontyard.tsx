@@ -335,7 +335,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <div className="flex flex-col w-full p-2">
             <div className="flex gap-2">
               <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
-              <input id="fq6FirePeople" className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="text" />
+              <input id="fq6FirePeople" className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="number" />
             </div>
             <div className="flex flex-col">
               <p className="text-[#68664d]">Note:</p>
@@ -550,7 +550,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswers(questionnaire["backyard"][1].title.replace("?", "").replace(",",""), "Client Answer", "Frontyard");
+              handleSubmitAnswers(questionnaire["backyard"][1].title.replace("?", "").replace(",",""), "How Many Plants Question", "Frontyard", "fq2");
             }}
           >
             Submit Answer
@@ -685,7 +685,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
           <div className="flex flex-col w-full p-2">
             <div className="flex gap-2">
               <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
-              <input id="fq6FirePeople" className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="text" />
+              <input id="fq6FirePeople" className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="number" />
             </div>
             <div className="flex flex-col">
               <p className="text-[#68664d]">Note:</p>

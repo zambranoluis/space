@@ -16,7 +16,7 @@ interface QuestionnaireBackyardProps {
   setIsAnsweredBackyard: React.Dispatch<React.SetStateAction<boolean[]>>;
   selectedBq2: number | null;
   handleBq2Change: (index: number) => void;
-  handleSubmitAnswers: (question: string, answer: string, categoryQuestion: string) => void
+  handleSubmitAnswers: (question: string, answer: string, categoryQuestion: string, htmlElements: string) => void
 }
 
 
@@ -135,20 +135,20 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="Green and Whites" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
+              <select id="bq1Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
                 <option value="1">Green and Whites</option>
                 <option value="2">Colorful Plants</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#6c786e]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq1Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
             </div>
             <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswers(questionnaire["backyard"][0].title.replace("?", "").replace(",", ""), "Plant Colors Answer", "Backyard");
+                  handleSubmitAnswers(questionnaire["backyard"][0].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq1");
                 }}
               >
                 Submit Answer
@@ -172,7 +172,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                       <div className="flex  text-black gap-2">
                         <span className="text-xl text-[#68664d]">▪ </span>
                         <div className="flex flex-col bgred-300">
-                          <p className=" gap-1 ">{option.name}</p>
+                          <p className=" gap-1 bq2Plants">{option.name}</p>
                           <p className="text-xs">{option.detail}</p>
                         </div>
                       </div>
@@ -190,7 +190,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                 <button
                   className="bg-[#858e5b] px-4 py-2 rounded-lg"
                   onClick={() => {
-                    handleSubmitAnswers(questionnaire["backyard"][1].title.replace("?", "").replace(",", ""), "How Many Plants Question", "Backyard");
+                    handleSubmitAnswers(questionnaire["backyard"][1].title.replace("?", "").replace(",", ""), "How Many Plants Question", "Backyard", "bq2");
                   }}
                 >
                   Submit Answer
@@ -212,7 +212,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                 questionnaire["backyard"][2].options.map((option, index) => (
                   <div className="flex flex-col w-full " key={index}>
                     <p className="text-[#68664d]">{option.name}</p>
-                    <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]" />
+                    <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px] bq3ThingsKeepRemove" />
                   </div>
                 ))
               }
@@ -221,7 +221,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswers(questionnaire["backyard"][2].title.replace("?", "").replace(",", ""), "Things to Keep and Remove Question", "Backyard");
+                  handleSubmitAnswers(questionnaire["backyard"][2].title.replace("?", "").replace(",", ""), "Things to Keep or Remove Question", "Backyard", "bq3");
                 }}
               >
                 Submit Answer
@@ -238,20 +238,20 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq4Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq4Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
             </div>
             <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
+                  handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No Question With Note Question", "Backyard", "bq4");
                 }}
               >
                 Submit Answer
@@ -265,7 +265,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq5Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
@@ -275,8 +275,8 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                     <div className="flex flex-col gap-6 justify-center items-center text-black w-full" key={index}>
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
-                        <p className="text-xs sm:text-base flex justify-center items-center gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"/>
+                        <p className="text-xs sm:text-base flex justify-center items-center gap-1 bq5WaterOption"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
+                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq5WaterCheckbox"/>
                       </div>
                     </div>
                   ))
@@ -285,14 +285,14 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq5Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
                 
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
                 <button
                   className="bg-[#858e5b] px-4 py-2 rounded-lg"
                   onClick={() => {
-                    handleSubmitAnswers(questionnaire["backyard"][4].title.replace("?", "").replace(",", ""), "Water Feature Question", "Backyard");
+                    handleSubmitAnswers(questionnaire["backyard"][4].title.replace("?", "").replace(",", ""), "Water Feature Question", "Backyard", "bq5");
                   }}
                 >
                   Submit Answer
@@ -307,7 +307,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq6FireSelect" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
@@ -317,8 +317,8 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                     <div className="flex flex-col gap-4  text-black bbqlue-300 " key={index}>
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
-                        <p className="text-xs sm:text-base flex justify-center items-center gap-1 "><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer" />
+                        <p className="text-xs sm:text-base flex justify-center items-center gap-1 bq6FireOption"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
+                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq6FireCheckbox" />
                       </div>
                     </div>
                   ))
@@ -327,18 +327,18 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <div className="flex flex-col w-full p-2">
                 <div className="flex gap-2">
                   <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
-                  <input className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="text" />
+                  <input id="bq6FirePeople" className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="number" />
                 </div>
                 <div className="flex flex-col">
                   <p className="text-[#68664d]">Note:</p>
-                  <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                  <textarea id="bq6FireNote" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
                 </div>
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][5].title.replace("?", "").replace(",", ""), "Fire Feature Question", "Backyard");
+                handleSubmitAnswers(questionnaire["backyard"][5].title.replace("?", "").replace(",", ""), "Fire Feature Question", "Backyard", "bq6");
               }}
             >
               Submit Answer
@@ -356,19 +356,19 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq7Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq7Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][6].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
+                handleSubmitAnswers(questionnaire["backyard"][6].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq7");
               }}
             >
               Submit Answer
@@ -386,19 +386,19 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq8Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq8Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][7].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
+                handleSubmitAnswers(questionnaire["backyard"][7].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq8");
               }}
             >
               Submit Answer
@@ -416,19 +416,19 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq9Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq9Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][8].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
+                handleSubmitAnswers(questionnaire["backyard"][8].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq9");
               }}
             >
               Submit Answer
@@ -446,19 +446,19 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select defaultValue="No" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq10Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq10Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][9].title.replace("?", "").replace(",", ""), "Yes or No Question", "Backyard");
+                handleSubmitAnswers(questionnaire["backyard"][9].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq10");
               }}
             >
               Submit Answer
