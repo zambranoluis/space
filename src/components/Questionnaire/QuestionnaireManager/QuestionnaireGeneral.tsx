@@ -12,7 +12,7 @@ import {
 
 interface QuestionnaireGeneralProps {
   project: ProjectInformation | null;
-  answersGeneral: { question: string; answer: string }[];
+  answersGeneral: question[];
   selectedMaxTwoGeneral: number[];
   handleMaxTwoGeneral: (index: number) => void;
   isAnsweredGeneral: boolean[];
@@ -31,15 +31,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
   handleSubmitAnswersGeneral
 }) => {
 
-  useEffect(() => {
-    setIsAnsweredGeneral((prev) => {
-      const updatedIsAnsweredGeneral = questionnaire.general.map((questionObj, index) =>
-        index === 0 ? true : answersGeneral.some((answerObj) => answerObj.question === questionObj.title)
-      );
-  
-      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredGeneral) ? updatedIsAnsweredGeneral : prev;
-    });
-  }, [answersGeneral, questionnaire.general]);
+
 
 
 
@@ -100,7 +92,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
   
   
   return (
-    <section ref={containerRefGeneral} id="generalQuestions" className={`bgred-200 flex flex-col bgred-200 w-full gap-12 overflow-hidden`} style={{ height: `${containerHeightGeneral}px`}}>
+    <section ref={containerRefGeneral} id="generalQuestions" className={`bgred-200 flex flex-col bgred-200 w-[90%] gap-12 overflow-hidden place-self-center`} style={{ height: `${containerHeightGeneral}px`}}>
       <div id="gq1" ref={(el) => {questionRefsGeneral.current[0] = el;}} className="flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#858e5b]">
         <div className="flex bg-[#858e5b] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
           <h1>{questionnaire["general"][0].title}</h1>
@@ -154,9 +146,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
           <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
-              onClick={() => {
-                handleSubmitAnswersGeneral(questionnaire["general"][1].title, "Style Question");
-              }}
+              onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[1].title.replace("?", ""), "Style Question")}}
             >
               Submit Answer
             </button>
@@ -181,9 +171,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
-            onClick={() => {
-              handleSubmitAnswersGeneral(questionnaire["general"][2].title, "Client Answer");
-            }}
+            onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[2].title.replace("?", ""), "Yes or No Question")}}
           >
             Submit Answer
           </button>
@@ -207,9 +195,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
-              onClick={() => {
-                handleSubmitAnswersGeneral(questionnaire["general"][3].title, "Client Answer");
-              }}
+              onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[3].title.replace("?", ""), "Yes or No Question")}}
             >
               Submit Answer
             </button>
@@ -233,9 +219,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
         <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
-            onClick={() => {
-              handleSubmitAnswersGeneral(questionnaire["general"][4].title, "Client Answer");
-            }}
+            onClick={() => {handleSubmitAnswersGeneral(questionnaire.general[4].title.replace("?", ""), "Yes or No Question")}}
           >
             Submit Answer
           </button>

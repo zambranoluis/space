@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { Image } from "@nextui-org/image";
+import {question} from "@/utils/dataInterfaces";
 
 
 
@@ -15,7 +16,7 @@ interface QuestionnaireExtraProps {
   isAnsweredGeneral: boolean[];
   isAnsweredBackyard: boolean[];
   isAnsweredFrontyard: boolean[];
-  answersExtra: { question: string; answer: string }[];
+  answersExtra: question[];
   isAnsweredExtra: boolean[];
   setIsAnsweredExtra: React.Dispatch<React.SetStateAction<boolean[]>>;
   handleSubmitAnswersExtra: (question: string, answer: string) => void
@@ -33,15 +34,15 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
   handleSubmitAnswersExtra
 }) => {
 
-  useEffect(() => {
-    setIsAnsweredExtra((prev) => {
-      const updatedIsAnswered = questionnaire.extra.map((questionObj) =>
-        answersExtra.some((answerObj) => answerObj.question === questionObj.title)
-      );
-      // Solo actualiza si el nuevo estado es diferente al anterior
-      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnswered) ? updatedIsAnswered : prev;
-    });
-  }, [answersExtra, questionnaire.extra]);
+  // useEffect(() => {
+  //   setIsAnsweredExtra((prev) => {
+  //     const updatedIsAnswered = questionnaire.extra.map((questionObj) =>
+  //       answersExtra.some((answerObj) => answerObj.quest === questionObj.title.replace("?", ""))
+  //     );
+  //     // Solo actualiza si el nuevo estado es diferente al anterior
+  //     return JSON.stringify(prev) !== JSON.stringify(updatedIsAnswered) ? updatedIsAnswered : prev;
+  //   });
+  // }, [answersExtra, questionnaire.extra]);
 
   const containerRefExtra = useRef<HTMLDivElement>(null);
   const questionRefsExtra = useRef<Array<HTMLDivElement | null>>(new Array(questionnaire.extra.length).fill(null));
@@ -56,16 +57,28 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
 
 
   useEffect(() => {
-    if (
-      isAnsweredFrontyard[isAnsweredFrontyard.length - 1] &&
-      questionRefsExtra.current &&
-      questionRefsExtra.current.length > 0 &&
-      questionRefsExtra.current[0] &&
-      questionRefsExtra.current[0].offsetHeight
-    ) {
-      setContainerHeightExtra((prevHeight) => prevHeight + questionRefsExtra.current![0]!.offsetHeight || 0);
+    if (categories.includes("Frontyard")) {
+      if (
+        isAnsweredFrontyard[isAnsweredFrontyard.length - 1] &&
+        questionRefsExtra.current &&
+        questionRefsExtra.current.length > 0 &&
+        questionRefsExtra.current[0] &&
+        questionRefsExtra.current[0].offsetHeight
+      ) {
+        setContainerHeightExtra((prevHeight) => prevHeight + questionRefsExtra.current![0]!.offsetHeight || 0);
+      }
+    } else {
+      if (
+        isAnsweredBackyard[isAnsweredBackyard.length - 1] &&
+        questionRefsExtra.current &&
+        questionRefsExtra.current.length > 0 &&
+        questionRefsExtra.current[0] &&
+        questionRefsExtra.current[0].offsetHeight
+      ) {
+        setContainerHeightExtra((prevHeight) => prevHeight + questionRefsExtra.current![0]!.offsetHeight || 0);
+      }
     }
-  }, [questionRefsExtra, isAnsweredFrontyard]);
+  }, [questionRefsExtra, isAnsweredBackyard, isAnsweredFrontyard]);
 
 
 
@@ -143,7 +156,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][0].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire.extra[0].title.replace("?", "").replace(",", ""), "Note Question");
             }}
           >
             Submit Answer
@@ -169,7 +182,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][1].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire["extra"][1].title.replace("?", "").replace(",", ""), "Note Question");
             }}
           >
             Submit Answer
@@ -195,7 +208,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][2].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire["extra"][2].title.replace("?", "").replace(",", ""), "Note Question");
             }}
           >
             Submit Answer
@@ -221,7 +234,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][3].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire["extra"][3].title.replace("?", "").replace(",", ""), "Note Question");
             }}
           >
             Submit Answer
@@ -251,7 +264,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][0].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire["extra"][0].title.replace("?", "").replace(",", ""), "Client Answer");
             }}
           >
             Submit Answer
@@ -277,7 +290,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][1].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire["extra"][1].title.replace("?", "").replace(",", ""), "Client Answer");
             }}
           >
             Submit Answer
@@ -303,7 +316,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][2].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire["extra"][2].title.replace("?", "").replace(",", ""), "Client Answer");
             }}
           >
             Submit Answer
@@ -329,7 +342,7 @@ const QuestionnaireExtra: React.FC<QuestionnaireExtraProps> = ({
           <button
             className="bg-[#858e5b] px-4 py-2 rounded-lg"
             onClick={() => {
-              handleSubmitAnswersExtra(questionnaire["extra"][3].title, "Client Answer");
+              handleSubmitAnswersExtra(questionnaire["extra"][3].title.replace("?", "").replace(",", ""), "Client Answer");
             }}
           >
             Submit Answer

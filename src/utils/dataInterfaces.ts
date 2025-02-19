@@ -283,10 +283,10 @@ export interface GetProjectsByPurchasesId {
 export interface question {
   quest: string; // Pregunta
   category: string; // Categoría (Frontyard, Backyard, etc.)
-  notes: [{ note: string }]; // Nota adicional
-  selecteds: [{ selected: string }]; // Si es una pregunta con selección
-  select: boolean;
-  people: number; // Número de personas asociadas
-  files: string[]; // Archivos subidos por el cliente
+  notes?: [{ note: string }]; // Nota adicional
+  selecteds?: [{ selected: string }]; // Si es una pregunta con selección
+  select?: boolean;
+  people?: number; // Número de personas asociadas
+  files?: string[]; // Archivos subidos por el cliente
   questionnaireId: string | undefined;
 }

@@ -2,17 +2,19 @@ import { useEffect, useState, useRef } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { MdOutlineExpandLess } from "react-icons/md";
 
+import { question } from "@/utils/dataInterfaces"
+
 import { questionnaire } from "../components/Questionnaire/questionnaireFile";
 
 interface QuestionnaireProgressProps {
   categories: string[];
-  answersGeneral: { question: string; answer: string }[];
+  answersGeneral: question[];
   isAnsweredGeneral: boolean[];
-  answersBackyard: { question: string; answer: string }[];
+  answersBackyard: question[];
   isAnsweredBackyard: boolean[];
-  answersFrontyard: { question: string; answer: string }[];
+  answersFrontyard: question[];
   isAnsweredFrontyard: boolean[];
-  answersExtra: { question: string; answer: string }[];
+  answersExtra: question[];
   isAnsweredExtra: boolean[];
 }
 

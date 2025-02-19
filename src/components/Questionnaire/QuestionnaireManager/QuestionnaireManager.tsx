@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import QuestionnaireGeneral from "./QuestionnaireGeneral";
 import QuestionnaireBackyard from "./QuestionnaireBackyard";
 import QuestionnaireFrontyard from "./QuestionnaireFrontyard";
@@ -10,10 +10,9 @@ import QuestionnaireProgress from "@/components/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
 
-import { ProjectInformation, question } from "@/utils/dataInterfaces";
+import { ProjectInformation, question, createQuestionnaires } from "@/utils/dataInterfaces";
 
 import { apiService } from "@/services/apiService";
-import { use } from 'react';
 
 interface QuestionnaireManagerProps {
   showProgress: boolean;
@@ -25,42 +24,158 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
   showProgress,
   project
 }) => {
+  const [categories, setCategories] = useState<string[]>([]);
+  //Mostrar proyecto y extraer categorias
   useEffect(() => {
-    console.log("project en questionnaire manager: ", project);
-  }, [project]);
-
-  const [questionnaireData, setQuestionnaireData] = useState<any>(null);
-
-  const fetchQuestionnaire = async () => {
     if (project) {
-      try {
-        const response = await apiService.getQuestionnairesById(project.questionnaire._id);
-        if (response.data) {
-          setQuestionnaireData(response.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
+      console.log("project en questionnaire manager: ", project);
+      setCategories((prevCategories) => [
+        ...prevCategories,
+        ...project.questionnaire.category.map((category) => category.type).filter(
+          (type) => !prevCategories.includes(type)
+        ),
+      ]);
+      console.log("categories: ", categories);
     }
-  };
-
-  useEffect(() => {
-    fetchQuestionnaire();
   }, [project]);
+
   
+  // Obtener datos de cuestionario segun proyecto
+  const [questionnaireData, setQuestionnaireData] = useState<question[]>([]);
 
   useEffect(() => {
-    fetchQuestionnaire();
-    console.log("project: ", project, "questionnaireData: ", questionnaireData);
-  }, [project]);
+    const fetchQuestionnaireData = async () => {
+      if (project){
+        try {
+          const response = await apiService.getQuestionnaireById(project?.questionnaire._id);
+          console.log("response de getQuestionnaireById: ", response);
+          setQuestionnaireData(response.questionnaire.questions);
+          console.log("questionnaireData: ", questionnaireData);
 
-  const [answersGeneral, setAnswersGeneral] = useState<
-    { question: string; answer: string }[]
-  >([]);
+        } catch (error) {
+          console.error("Error al obtener los datos del questionnaire:", error);
+        }
+      }
+    };
+    fetchQuestionnaireData();
+  }, [project?.questionnaire._id]);
+
+
+  // Extraer preguntas de categoria General
+  const [answersGeneral, setAnswersGeneral] = useState<question[]>([]);
+  const [answersBackyard, setAnswersBackyard] = useState<question[]>([]);
+  const [answersFrontyard, setAnswersFrontyard] = useState<question[]>([]);
+  const [answersExtra, setAnswersExtra] = useState<question[]>([]);
+
+  useEffect(() => {
+    console.log("questionnaireData para ser desglosado: ", questionnaireData);
+  
+    if (questionnaireData.length > 0) {
+      const generalQuestions: question[] = questionnaireData
+        .filter((question) => question.question.category === "General")
+        .map((question) => question.question);
+  
+      console.log("todas las preguntas de General: ", generalQuestions);
+  
+      setAnswersGeneral(generalQuestions);
+
+      const backyardQuestions: question[] = questionnaireData
+        .filter((question) => question.question.category === "Backyard")
+        .map((question) => question.question);
+  
+      console.log("todas las preguntas de Backyard: ", backyardQuestions);
+  
+      setAnswersBackyard(backyardQuestions);
+
+      const frontyardQuestions: question[] = questionnaireData
+        .filter((question) => question.question.category === "Frontyard")
+        .map((question) => question.question);
+  
+      console.log("todas las preguntas de Frontyard: ", frontyardQuestions);
+  
+      setAnswersFrontyard(frontyardQuestions);
+
+      const extraQuestions: question[] = questionnaireData
+        .filter((question) => question.question.category === "Extra")
+        .map((question) => question.question);
+  
+      console.log("todas las preguntas de Extra: ", extraQuestions);
+  
+      setAnswersExtra(extraQuestions);
+
+    }
+  }, [questionnaireData]);
+
+  useEffect(() => {
+    console.log("answersGeneral actualizado segun su propio valor: ", answersGeneral);
+  }, [answersGeneral]);
+  useEffect(() => {
+    console.log("answersBackyard actualizado segun su propio valor: ", answersBackyard);
+  }, [answersBackyard]);
+  useEffect(() => {
+    console.log("answersFrontyard actualizado segun su propio valor: ", answersFrontyard);
+  }, [answersFrontyard]);
+  useEffect(() => {
+    console.log("answersExtra actualizado segun su propio valor: ", answersExtra);
+  }, [answersExtra]);
 
   const [isAnsweredGeneral, setIsAnsweredGeneral] = useState<boolean[]>(
     questionnaire.general.map((_, index) => index === 0 ? true : false)
   );
+
+  const [isAnsweredBackyard, setIsAnsweredBackyard] = useState<boolean[]>(
+    questionnaire.backyard.map((_, index) => false)
+  );
+
+  const [isAnsweredFrontyard, setIsAnsweredFrontyard] = useState<boolean[]>(
+    questionnaire.backyard.map((_, index) => false)
+  );
+
+  const [isAnsweredExtra, setIsAnsweredExtra] = useState<boolean[]>(
+    questionnaire.extra.map((_, index) => false)
+  );
+
+  useEffect(() => {
+    setIsAnsweredGeneral((prev) => {
+      const updatedIsAnsweredGeneral = questionnaire.general.map((questionObj, index) =>
+        index === 0 ? true : answersGeneral.some((answerObj) => answerObj.quest === questionObj.title.replace("?", ""))
+      );
+
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredGeneral) ? updatedIsAnsweredGeneral : prev;
+    });
+  }, [answersGeneral, questionnaire.general]);
+
+  useEffect(() => {
+    setIsAnsweredBackyard((prev) => {
+      const updatedIsAnsweredBackyard = questionnaire.backyard.map((questionObj) =>
+        answersBackyard.some((answerObj) => answerObj.quest === questionObj.title.replace("?", "").replace(",", ""))
+      );
+      // Solo actualiza si el nuevo estado es diferente al anterior
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredBackyard) ? updatedIsAnsweredBackyard : prev;
+    });
+  }, [answersBackyard, questionnaire.backyard]);
+
+  useEffect(() => {
+    setIsAnsweredFrontyard((prev) => {
+      const updatedIsAnsweredFrontyard = questionnaire.backyard.map((questionObj) =>
+        answersFrontyard.some((answerObj) => answerObj.quest === questionObj.title.replace("?", "").replace(",", ""))
+      );
+      // Solo actualiza si el nuevo estado es diferente al anterior
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredFrontyard) ? updatedIsAnsweredFrontyard : prev;
+    });
+    console.log("isAnsweredFrontyard actualizado: ", isAnsweredFrontyard);
+  }, [answersFrontyard, questionnaire.backyard]);
+
+  useEffect(() => {
+    setIsAnsweredExtra((prev) => {
+      const updatedIsAnsweredExtra = questionnaire.extra.map((questionObj) =>
+        answersExtra.some((answerObj) => answerObj.quest === questionObj.title.replace("?", ""))
+      );
+      // Solo actualiza si el nuevo estado es diferente al anterior
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredExtra) ? updatedIsAnsweredExtra : prev;
+    });
+  }, [answersExtra, questionnaire.extra]);
+
 
   const [selectedMaxTwoGeneral, setSelectedMaxTwoGeneral] = useState<number[]>([]);
 
@@ -76,65 +191,190 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   };
 
+
+
+
   const handleSubmitAnswersGeneral = (question: string, typeQuestion: string) => {
-    // if (!answersGeneral.includes({ question: question, answer: answer })) {
-    //   setAnswersGeneral([...answersGeneral, { question: question, answer: answer }]);
-    // }
-
-    
-
-    
-
-    const newAnswersGeneral: question = {
-      quest: question.replace("?", ""),
+    console.log("1. Pregunta accionada:", question);
+    console.log("2. Tipo de pregunta:", typeQuestion);
+    console.log("3. verificando duplicado...");
+  
+    const isDuplicate = answersGeneral.some(
+      (answer) => answer.quest === question && answer.category === "General"
+    );
+  
+    if (isDuplicate) {
+      console.log("4. La pregunta ya ha sido respondida.");
+      return;
+    }
+  
+    console.log("4. Pregunta no duplicada. Creando nueva pregunta...");
+    const newAnswerGeneral = {
+      quest: question,
       category: "General",
       notes: [{ note: "" }],
       selecteds: [{ selected: "" }],
       select: false,
       people: 0,
       files: [],
-      questionnaireId: project?.questionnaire._id ?? undefined,
-    };
-
+      questionnaireId: project?.questionnaire._id,
+    } as question;
+  
+    console.log("5. Pregunta a agregar: ", newAnswerGeneral);
+  
     const submitNewAnswer = async () => {
       try {
-        const response =  await apiService.createQuestion(newAnswersGeneral);
-        console.log(response);
+        const response = await apiService.createQuestion(newAnswerGeneral);
+        console.log("✅ Respuesta de la creación de pregunta:", response);
+        if (response) {
+          setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+        }
       } catch (error) {
-        console.error(error);
+        console.error("❌ Error al crear la pregunta:", error);
       }
-    }
-
+    };
+  
     submitNewAnswer();
   };
 
-  const [answersBackyard, setAnswersBackyard] = useState<
-    { question: string; answer: string }[]
-  >([]);
 
-  const [isAnsweredBackyard, setIsAnsweredBackyard] = useState<boolean[]>(questionnaire.backyard.map((question) => false));
+
+  const handleSubmitAnswersBackyard = (question: string, typeQuestion: string) => {
+    console.log("1. Pregunta accionada:", question);
+    console.log("2. Tipo de pregunta:", typeQuestion);
+    console.log("3. verificando duplicado...");
+  
+    const isDuplicate = answersBackyard.some(
+      (answer) => answer.quest === question && answer.category === "Backyard"
+    );
+  
+    if (isDuplicate) {
+      console.log("4. La pregunta ya ha sido respondida.");
+      return;
+    }
+  
+    console.log("4. Pregunta no duplicada. Creando nueva pregunta...");
+    const newAnswerBackyard = {
+      quest: question,
+      category: "Backyard",
+      notes: [{ note: "" }],
+      selecteds: [{ selected: "" }],
+      select: false,
+      people: 0,
+      files: [],
+      questionnaireId: project?.questionnaire._id,
+    } as question;
+  
+    console.log("5. Pregunta a agregar: ", newAnswerBackyard);
+  
+    const submitNewAnswer = async () => {
+      try {
+        const response = await apiService.createQuestion(newAnswerBackyard);
+        console.log("✅ Respuesta de la creación de pregunta:", response);
+        if (response) {
+          setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+        }
+      } catch (error) {
+        console.error("❌ Error al crear la pregunta:", error);
+      }
+    };
+  
+    submitNewAnswer();
+  };
+
+  const handleSubmitAnswersFrontyard = (question: string, typeQuestion: string) => {
+    console.log("1. Pregunta accionada:", question);
+    console.log("2. Tipo de pregunta:", typeQuestion);
+    console.log("3. verificando duplicado...");
+  
+    const isDuplicate = answersFrontyard.some(
+      (answer) => answer.quest === question && answer.category === "Frontyard"
+    );
+  
+    if (isDuplicate) {
+      console.log("4. La pregunta ya ha sido respondida.");
+      return;
+    }
+  
+    console.log("4. Pregunta no duplicada. Creando nueva pregunta...");
+    const newAnswerFrontyard = {
+      quest: question,
+      category: "Frontyard",
+      notes: [{ note: "" }],
+      selecteds: [{ selected: "" }],
+      select: false,
+      people: 0,
+      files: [],
+      questionnaireId: project?.questionnaire._id,
+    } as question;
+  
+    console.log("5. Pregunta a agregar: ", newAnswerFrontyard);
+  
+    const submitNewAnswer = async () => {
+      try {
+        const response = await apiService.createQuestion(newAnswerFrontyard);
+        console.log("✅ Respuesta de la creación de pregunta:", response);
+        if (response) {
+          setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+        }
+      } catch (error) {
+        console.error("❌ Error al crear la pregunta:", error);
+      }
+    };
+  
+    submitNewAnswer();
+  };
+
+  const handleSubmitAnswersExtra = (question: string, typeQuestion: string) => {
+    console.log("1. Pregunta accionada:", question);
+    console.log("2. Tipo de pregunta:", typeQuestion);
+    console.log("3. verificando duplicado...");
+  
+    const isDuplicate = answersExtra.some(
+      (answer) => answer.quest === question && answer.category === "Extra"
+    );
+  
+    if (isDuplicate) {
+      console.log("4. La pregunta ya ha sido respondida.");
+      return;
+    }
+  
+    console.log("4. Pregunta no duplicada. Creando nueva pregunta...");
+    const newAnswerExtra = {
+      quest: question,
+      category: "Extra",
+      notes: [{ note: "" }],
+      selecteds: [{ selected: "" }],
+      select: false,
+      people: 0,
+      files: [],
+      questionnaireId: project?.questionnaire._id,
+    } as question;
+  
+    console.log("5. Pregunta a agregar: ", newAnswerExtra);
+  
+    const submitNewAnswer = async () => {
+      try {
+        const response = await apiService.createQuestion(newAnswerExtra);
+        console.log("✅ Respuesta de la creación de pregunta:", response);
+        if (response) {
+          setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
+        }
+      } catch (error) {
+        console.error("❌ Error al crear la pregunta:", error);
+      }
+    };
+  
+    submitNewAnswer();
+  };
+
+
+
 
   const [selectedBq2, setSelectedBq2] = useState<number | null>(null);
 const handleBq2Change = (index: number) => {
     setSelectedBq2(index === selectedBq2 ? null : index); // Permitir deseleccionar.
   };
-
-
-  const handleSubmitAnswersBackyard = (question: string, answer: string) => {
-    if (!answersBackyard.includes({ question: question, answer: answer })) {
-      setAnswersBackyard([...answersBackyard, { question: question, answer: answer }]);
-    }
-  };
-
-  const [answersFrontyard, setAnswersFrontyard] = useState<
-    { question: string; answer: string }[]
-  >([]);
-
-  const [isAnsweredFrontyard, setIsAnsweredFrontyard] = useState<boolean[]>(
-    questionnaire.backyard.map((question) => false),
-  );
-
-
   const [selectedFq2, setSelectedFq2] = useState<number | null>(null);
 
   
@@ -142,43 +382,9 @@ const handleBq2Change = (index: number) => {
     setSelectedFq2(index === selectedFq2 ? null : index); // Permitir deseleccionar.
   };
 
-  const handleSubmitAnswersFrontyard = (question: string, answer: string) => {
-    if (!answersFrontyard.includes({ question: question, answer: answer })) {
-      setAnswersFrontyard([...answersFrontyard, { question: question, answer: answer }]);
-    }
-  };
-
-
-  const [answersExtra, setAnswersExtra] = useState<
-    { question: string; answer: string }[]
-  >([]);
-
-  const [isAnsweredExtra, setIsAnsweredExtra] = useState<boolean[]>(
-    questionnaire.backyard.map((question) => false),
-  );
-
-  const handleSubmitAnswersExtra = (question: string, answer: string) => {
-    if (!answersExtra.includes({ question: question, answer: answer })) {
-      setAnswersExtra([...answersExtra, { question: question, answer: answer }]);
-    }
-  };
-
-  const [categories, setCategories] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (project) {
-      setCategories((prevCategories) => [
-        ...prevCategories,
-        ...project.questionnaire.category.map((category) => category.type).filter(
-          (type) => !prevCategories.includes(type)
-        ),
-      ]);
-    }
-    console.log("categories: ", categories);
-  }, [project]);
 
   return (
-    <div className='flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300'>
+    <div className='flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300 w-full'>
       {
         showProgress && (<div className="flex fixed bg-black/70 hover:bg-black/85 transition-colors duration-300 rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
           <QuestionnaireProgress

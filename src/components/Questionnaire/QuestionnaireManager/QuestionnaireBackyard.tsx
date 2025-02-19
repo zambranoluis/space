@@ -1,8 +1,9 @@
 
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { Image } from "@nextui-org/image";
-// import Link from "next/link";
+import { Image } from "@heroui/image";
+
+import {question} from "@/utils/dataInterfaces";
 
 
 import {
@@ -11,7 +12,7 @@ import {
 
 interface QuestionnaireBackyardProps {
   isAnsweredGeneral: boolean[];
-  answersBackyard: { question: string; answer: string }[];
+  answersBackyard: question[];
   isAnsweredBackyard: boolean[];
   setIsAnsweredBackyard: React.Dispatch<React.SetStateAction<boolean[]>>;
   selectedBq2: number | null;
@@ -31,15 +32,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
 }) => {
 
 
-  useEffect(() => {
-    setIsAnsweredBackyard((prev) => {
-      const updatedIsAnswered = questionnaire.backyard.map((questionObj) =>
-        answersBackyard.some((answerObj) => answerObj.question === questionObj.title)
-      );
-      // Solo actualiza si el nuevo estado es diferente al anterior
-      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnswered) ? updatedIsAnswered : prev;
-    });
-  }, [answersBackyard, questionnaire.backyard]);
+  
   
   const containerRefBackyard = useRef<HTMLDivElement>(null);
 
@@ -47,7 +40,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
 
   const questionRefsBackyard = useRef<Array<HTMLDivElement | null>>(new Array(questionnaire.backyard.length).fill(null));
 
-  const [containerHeightBackyard, setContainerHeightBackyard] = useState(50);
+  const [containerHeightBackyard, setContainerHeightBackyard] = useState(40);
 
   useEffect(() => {
     if (
@@ -126,14 +119,14 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
 
 
   return (
-    <section  id="backyardQuestions"  className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgred-300" : "bggreen-400 hidden"}  flex flex-col w-full justify-center items-center gap-20 overflow-hidden`} >
+    <section  id="backyardQuestions"  className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgred-300" : "bggreen-400 hidden"}  flex flex-col w-full justify-center items-center gap-20 overflow-hidden `} >
         <div ref={sectionRefBackyard}  className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgpink-500" : "bgpurple-400"} flex max-sm:flex-col bgred-300 sm:h-[300px] w-full `}>
           <div className="flex sm:w-[40%] justify-center items-center max-sm:py-24">
             <h1 className="font-black text-3xl text-[#6c786e]">BACKYARD</h1>
           </div>
           <div className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireBgBackyard.webp"}}></div>
         </div>
-        <div ref={containerRefBackyard} className={`flex flex-col w-[90%] gap-12 ${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "" : "" } `} style={{ height: `${containerHeightBackyard}px`}}>
+        <div ref={containerRefBackyard} className={`flex flex-col w-[90%] gap-12 ${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "" : "" } w-[90%] `} style={{ height: `${containerHeightBackyard}px`}}>
           <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgblue-400" : "bgwyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -157,7 +150,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswersBackyard(questionnaire["backyard"][0].title, "Client Answer");
+                  handleSubmitAnswersBackyard(questionnaire["backyard"][0].title.replace("?", "").replace(",", ""), "Plant Colors Answer");
                 }}
               >
                 Submit Answer
@@ -199,7 +192,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                 <button
                   className="bg-[#858e5b] px-4 py-2 rounded-lg"
                   onClick={() => {
-                    handleSubmitAnswersBackyard(questionnaire["backyard"][1].title, "Client Answer");
+                    handleSubmitAnswersBackyard(questionnaire["backyard"][1].title.replace("?", "").replace(",", ""), "How Many Plants Question");
                   }}
                 >
                   Submit Answer
@@ -230,7 +223,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswersBackyard(questionnaire["backyard"][2].title, "Client Answer");
+                  handleSubmitAnswersBackyard(questionnaire["backyard"][2].title.replace("?", "").replace(",", ""), "Things to Keep and Remove Question");
                 }}
               >
                 Submit Answer
@@ -260,7 +253,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswersBackyard(questionnaire["backyard"][3].title, "Client Answer");
+                  handleSubmitAnswersBackyard(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No Question");
                 }}
               >
                 Submit Answer
@@ -301,7 +294,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                 <button
                   className="bg-[#858e5b] px-4 py-2 rounded-lg"
                   onClick={() => {
-                    handleSubmitAnswersBackyard(questionnaire["backyard"][4].title, "Client Answer");
+                    handleSubmitAnswersBackyard(questionnaire["backyard"][4].title.replace("?", "").replace(",", ""), "Water Feature Question");
                   }}
                 >
                   Submit Answer
@@ -347,7 +340,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][5].title, "Client Answer");
+                handleSubmitAnswersBackyard(questionnaire["backyard"][5].title.replace("?", "").replace(",", ""), "Fire Feature Question");
               }}
             >
               Submit Answer
@@ -377,7 +370,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][6].title, "Client Answer");
+                handleSubmitAnswersBackyard(questionnaire["backyard"][6].title.replace("?", "").replace(",", ""), "Yes or No Question");
               }}
             >
               Submit Answer
@@ -407,7 +400,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][7].title, "Client Answer");
+                handleSubmitAnswersBackyard(questionnaire["backyard"][7].title.replace("?", "").replace(",", ""), "Yes or No Question");
               }}
             >
               Submit Answer
@@ -437,7 +430,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][8].title, "Client Answer");
+                handleSubmitAnswersBackyard(questionnaire["backyard"][8].title.replace("?", "").replace(",", ""), "Yes or No Question");
               }}
             >
               Submit Answer
@@ -467,7 +460,7 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswersBackyard(questionnaire["backyard"][9].title, "Client Answer");
+                handleSubmitAnswersBackyard(questionnaire["backyard"][9].title.replace("?", "").replace(",", ""), "Yes or No Question");
               }}
             >
               Submit Answer

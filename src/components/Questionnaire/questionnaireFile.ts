@@ -54,7 +54,7 @@ const questionnaire = {
     },
     {
       id: "qg3",
-      title: "Do you have kids & pets?",
+      title: "Do you have kids and pets?",
       buttonText: "Yes/No",
       img: "https://github.com/BPM94/SCCTMD/raw/main/questionnaire/nuevo-cuestionario-23.png",
       options: []

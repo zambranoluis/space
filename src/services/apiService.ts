@@ -227,7 +227,7 @@ export const apiService = {
     }
   },
 
-  getQuestionnairesById: async (
+  getQuestionnaireById: async (
     questionnaireId: string,
   ): Promise<ApiResponse<createQuestionnaires>> => {
     try {
