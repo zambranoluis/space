@@ -270,7 +270,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswer: question = {
           quest: question,
           category: categoryQuestion,
-          notes: [{ note: inputNoteText || "" }],
+          notes: [{ note: inputNoteText }],
           selecteds: selectedsArray,
           select: false,
           people: 0,
@@ -319,7 +319,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswerYesOrNo: question = {
           quest: question,
           category: categoryQuestion,
-          notes: [{ note: "" }],
+          notes: [{ note: selectedText }],
           selecteds: [{ selected: "" }],
           select: (selectedText === "Yes") ? true : false,
           people: 0,

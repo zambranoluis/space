@@ -9,14 +9,14 @@ import Section from "./Section";
 
 import { apiService } from "../../services/apiService";
 
-import {
-  DetailedPurchase,
-  GetProjectsByPurchasesId
-  
-} from "../../utils/dataInterfaces";
+import { GetProjectsByPurchasesId, ProjectInformation, question } from '../../utils/dataInterfaces';
 
 interface ProjectsClientProps {
   projects: GetProjectsByPurchasesId[]
+}
+
+interface ProjectsWorkerProps {
+
 }
 
 const ProjectsClient: React.FC<ProjectsClientProps> = ({ projects }) => {
@@ -43,7 +43,9 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ projects }) => {
   );
 };
 
-const ProjectsWorker = () => {
+const ProjectsWorker: React.FC<ProjectsWorkerProps> = () => {
+
+
   const handleProjectDevelopment = () => {
     window.open("/project-development?1234", "_blank");
   };
