@@ -146,8 +146,15 @@ const PanelClient: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <main className="flex flex-col h-full w-full relative bg-rose-400">
+    (loading) ? (
+      <div className="bgwhite absolute h-full w-full top-0 z-[1000]">
+        <video autoPlay muted className="object-cover h-full w-full">
+          <source src="https://github.com/BPM94/SCCTMD/raw/main/LoadingAnimationSpaceCreation.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    ) : (
+      <main className="flex flex-col h-full w-full relative rose-400">
         <NavbarClient geolocation={geolocation} />
         <AsideClient
           toggleAside={toggleAside}
@@ -170,15 +177,7 @@ const PanelClient: React.FC = () => {
           <ChatModal />
         </div>
       </main>
-      {(loading) && (
-        <div className="bg-blue-300 absolute h-full w-full top-0 z-[1000]">
-          <video autoPlay muted className="object-cover h-full w-full">
-            <source src="/Comp1.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-          </video>
-        </div>
-      )}
-    </>
+    )
   );
 };
 
