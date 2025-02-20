@@ -11,7 +11,11 @@ import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
 import { useGeolocation } from "@/context/GeolocationContext";
 
-import { Customer, DetailedPurchase, GetProjectsByPurchasesId } from "@/utils/dataInterfaces";
+import {
+  Customer,
+  DetailedPurchase,
+  GetProjectsByPurchasesId,
+} from "@/utils/dataInterfaces";
 
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
@@ -25,13 +29,9 @@ const PanelClient: React.FC = () => {
   // Usar el contexto de geolocalización
   const { geolocation, fetchGeolocation } = useGeolocation();
 
-
-
-
   useEffect(() => {
     fetchGeolocation();
   }, []);
-
 
   useEffect(() => {
     if (userId) {
@@ -40,7 +40,7 @@ const PanelClient: React.FC = () => {
           const response = await apiService.getCustomer(userId);
           setCustomer(response.data as Customer);
         } catch (err: unknown) {
-          console.error("PanelClient: Error fetching customer:", err);
+          console.log("PanelClient: Error fetching customer:", err);
         }
       };
       fetchCustomer();
@@ -53,38 +53,38 @@ const PanelClient: React.FC = () => {
         try {
           const response = await apiService.getPurchasesByCustomerId(userId);
           setPurchases(response.data as DetailedPurchase[]);
-          
         } catch (err: unknown) {
-          console.error("PanelClient: Error fetching purchases:", err);
+          console.log("PanelClient: Error fetching purchases:", err);
         }
       };
       fetchPurchases();
     }
   }, [userId]);
 
-  
-
   useEffect(() => {
     if (userId) {
       const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
         try {
           const completedPurchases = purchaseList.filter(
-            (p) => p._id && p.status && p.status.toLowerCase() === "completed" && p.inProject === true,
+            (p) =>
+              p._id &&
+              p.status &&
+              p.status.toLowerCase() === "completed" &&
+              p.inProject === true,
           );
-    
+
           const projectRequests = completedPurchases.map((p) =>
-            apiService.getProjectByPurchasesId(p._id)
+            apiService.getProjectByPurchasesId(p._id),
           );
           const responses = await Promise.all(projectRequests);
           setProjects(responses);
         } catch (error) {
-          // console.error("Error al obtener proyectos:", error);
+          // console.log("Error al obtener proyectos:", error);
         }
       };
       getProjectsByPurchasesId(purchases);
     }
   }, [userId, purchases]);
-  
 
   const closeSiteContainer = () => {
     const container = document.getElementById(`siteContainer`);
@@ -137,7 +137,7 @@ const PanelClient: React.FC = () => {
   };
 
   return (
-    <main className="flex flex-col h-full w-full relative">
+    <main className='flex flex-col h-full w-full relative'>
       <NavbarClient geolocation={geolocation} />
       <AsideClient
         toggleAside={toggleAside}
@@ -145,7 +145,7 @@ const PanelClient: React.FC = () => {
         toggleSiteContainer={toggleSiteContainer}
         asideSelectedOption={asideSelectedOption}
       />
-      <div className="absolute h-screen w-full">
+      <div className='absolute h-screen w-full'>
         <Section
           closeSiteContainer={closeSiteContainer}
           asideSelectedOption={asideSelectedOption}
@@ -155,7 +155,7 @@ const PanelClient: React.FC = () => {
           purchasesWithProject={purchasesWithProject}
         />
       </div>
-      <div className="flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]">
+      <div className='flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]'>
         <ChatModal />
       </div>
     </main>

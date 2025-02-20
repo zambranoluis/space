@@ -61,11 +61,14 @@ export const authOptions: NextAuthOptions = {
         } catch (error: unknown) {
           // Explicitly type the error as AxiosError
           if (error instanceof AxiosError) {
-            console.error("Error in authorize:", error.response?.data?.message || error.message);
+            console.log(
+              "Error in authorize:",
+              error.response?.data?.message || error.message,
+            );
           } else if (error instanceof Error) {
-            console.error("Error in authorize:", error.message);
+            console.log("Error in authorize:", error.message);
           } else {
-            console.error("Unknown error in authorize:", error);
+            console.log("Unknown error in authorize:", error);
           }
           throw new Error("Invalid login credentials");
         }

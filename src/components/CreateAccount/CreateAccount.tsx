@@ -6,6 +6,7 @@ import Section from "./Section";
 import axios from "axios";
 import { apiService } from "@/services/apiService";
 import { CreateCustomer } from "@/utils/dataInterfaces";
+import Swal from "sweetalert2";
 
 const CreateAccount = () => {
   const [areaCode, setAreaCode] = useState<string>("+1");
@@ -28,28 +29,44 @@ const CreateAccount = () => {
 
   const handleBuildPhone = (field: string, value: string) => {
     if (field === "areaCode") {
-      setFormData({ ...formData, phone: { areaCode: value, number: formData.phone.number } });
+      setFormData({
+        ...formData,
+        phone: { areaCode: value, number: formData.phone.number },
+      });
     } else if (field === "number") {
-      setFormData({ ...formData, phone: { areaCode: formData.phone.areaCode, number: value } });
+      setFormData({
+        ...formData,
+        phone: { areaCode: formData.phone.areaCode, number: value },
+      });
     }
   };
 
   const handleCreateAccount = async () => {
     try {
       setIsLoadingCustomer(true);
-  
+
       const response = await apiService.createCustomer(formData);
-  
+
       if (response.message === "Customer created successfully") {
-        redirect("/login");
+        Swal.fire({
+          title: "Customer created successfully. Redirecting to login...",
+          icon: "success",
+          confirmButtonText: "Close",
+        });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 3000);
       } else {
-        console.error("Unexpected response:", response);
+        console.log("Unexpected response:", response);
       }
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response) {
-        console.error("Error creating customer:", err.response.data?.message || "Unknown error");
+        console.log(
+          "Error creating customer:",
+          err.response.data?.message || "Unknown error",
+        );
       } else {
-        console.error("Error creating customer:", err);
+        console.log("Error creating customer:", err);
       }
     } finally {
       setIsLoadingCustomer(false);

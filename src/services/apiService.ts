@@ -44,7 +44,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al crear el cliente:", err.response?.data || err.message);
+      console.log("Error al crear el cliente:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -55,7 +55,7 @@ export const apiService = {
       return response;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener el cliente:", err.response?.data || err.message);
+      console.log("Error al obtener el cliente:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -66,7 +66,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener productos:", err.response?.data || err.message);
+      console.log("Error al obtener productos:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -77,7 +77,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener extras:", err.response?.data || err.message);
+      console.log("Error al obtener extras:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -90,7 +90,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al crear la compra:", err.response?.data || err.message);
+      console.log("Error al crear la compra:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -106,7 +106,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error(
+      console.log(
         "Error al actualizar el estado de la compra:",
         err.response?.data || err.message,
       );
@@ -124,7 +124,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al procesar la compra:", err.response?.data || err.message);
+      console.log("Error al procesar la compra:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -139,7 +139,7 @@ export const apiService = {
       return response.data; // Asegúrate de que este `response.data` sea un array de compras
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error(
+      console.log(
         "Error al obtener compras por cliente:",
         err.response?.data || err.message,
       );
@@ -157,7 +157,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener transacción:", err.response?.data || err.message);
+      console.log("Error al obtener transacción:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -172,7 +172,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener transacción:", err.response?.data || err.message);
+      console.log("Error al obtener transacción:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -189,7 +189,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error(
+      console.log(
         "Error al actualizar la transacción:",
         err.response?.data || err.message,
       );
@@ -203,7 +203,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error(
+      console.log(
         "Error al obtener transacción por ID:",
         err.response?.data || err.message,
       );
@@ -222,7 +222,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al crear el cuestionario:", err.response?.data || err.message);
+      console.log("Error al crear el cuestionario:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -237,7 +237,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error(
+      console.log(
         "Error al obtener cuestionario por ID:",
         err.response?.data || err.message,
       );
@@ -257,7 +257,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error(
+      console.log(
         "Error al actualizar el cuestionario:",
         err.response?.data || err.message,
       );
@@ -271,7 +271,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al crear el proyecto:", err.response?.data || err.message);
+      console.log("Error al crear el proyecto:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -282,7 +282,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al obtener el proyecto:", err.response?.data || err.message);
+      console.log("Error al obtener el proyecto:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -298,10 +298,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error(
-        "Error al actualizar el proyecto:",
-        err.response?.data || err.message,
-      );
+      console.log("Error al actualizar el proyecto:", err.response?.data || err.message);
       throw error;
     }
   },
@@ -325,7 +322,7 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("Error al crear la pregunta:", err.response?.data || err.message);
+      console.log("Error al crear la pregunta:", err.response?.data || err.message);
       throw error;
     }
   },

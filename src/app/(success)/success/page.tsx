@@ -16,22 +16,27 @@ const SuccessContent: React.FC = () => {
 
   const fetchTransaction = useCallback(async () => {
     if (!sessionId) return;
-  
+
     try {
       const response = await apiService.getTransactionById(sessionId);
       const transactionData = response.data;
-  
-      if (transactionData && (Array.isArray(transactionData) ? transactionData.length > 0 : true)) {
-        const transaction = Array.isArray(transactionData) ? transactionData[0] : transactionData;
+
+      if (
+        transactionData &&
+        (Array.isArray(transactionData) ? transactionData.length > 0 : true)
+      ) {
+        const transaction = Array.isArray(transactionData)
+          ? transactionData[0]
+          : transactionData;
         if (transaction.status === "created") {
           setTransaction(transaction);
           if (transaction) {
-          try {
-            await apiService.updatePurchaseStatus(transaction.purchase, "completed");
-          } catch (error) {
-            console.error("Error updating purchase:", error);
+            try {
+              await apiService.updatePurchaseStatus(transaction.purchase, "completed");
+            } catch (error) {
+              console.log("Error updating purchase:", error);
+            }
           }
-        }
         } else {
           setError("Payment not yet verified. Please refresh after a moment.");
         }
@@ -39,7 +44,7 @@ const SuccessContent: React.FC = () => {
         setError("Transaction not found.");
       }
     } catch (err) {
-      console.error("Error fetching transaction:", err);
+      console.log("Error fetching transaction:", err);
       setError("Failed to fetch transaction.");
     } finally {
       setLoading(false);

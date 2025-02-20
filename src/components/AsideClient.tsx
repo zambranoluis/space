@@ -65,9 +65,7 @@ const Aside: React.FunctionComponent<AsideProps> = ({
     try {
       const response = await fetch("/api/auth/logout", { method: "POST" });
       if (!response.ok) throw new Error("Error al cerrar sesión en el backend");
-  
-      
-  
+
       // Eliminar cookies específicas de NextAuth
       document.cookie =
         "next-auth.callback-url=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -75,10 +73,10 @@ const Aside: React.FunctionComponent<AsideProps> = ({
         "next-auth.csrf-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
       document.cookie =
         "next-auth.session-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-  
+
       localStorage.clear();
       sessionStorage.clear();
-  
+
       // Opcionalmente limpiar caches
       if ("caches" in window) {
         const cacheKeys = await caches.keys();
@@ -86,10 +84,10 @@ const Aside: React.FunctionComponent<AsideProps> = ({
       }
 
       await signOut({ callbackUrl: "/" }); // NextAuth maneja las cookies
-  
+
       console.log("✅ Sesión cerrada, cookies y caché limpiados");
     } catch (error) {
-      console.error("❌ Error al cerrar sesión:", error);
+      console.log("❌ Error al cerrar sesión:", error);
     }
   };
 

@@ -36,7 +36,6 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
         if (response.data) {
           const transaction = response.data; // Tipo Transaction
 
-
           // Convertimos Transaction a PurchaseDetails
           const details: PurchaseDetails = {
             amount: transaction.amount, // Convertir a string si es necesario
@@ -49,7 +48,7 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
           setPurchaseDetails(details);
         }
       } catch (error) {
-        console.error("Error fetching transaction details:", error);
+        console.log("Error fetching transaction details:", error);
       }
     };
 
@@ -102,7 +101,13 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
                   <div className='flex flex-col'>
                     <p>Amount: {purchaseDetails.amount}</p>
                     <p>Currency: {purchaseDetails.currency}</p>
-                    <p>{format(new Date(purchaseDetails.createdAt), "MMMM dd, yyyy. HH:mm:ss z", { locale: enUS })}</p>
+                    <p>
+                      {format(
+                        new Date(purchaseDetails.createdAt),
+                        "MMMM dd, yyyy. HH:mm:ss z",
+                        { locale: enUS },
+                      )}
+                    </p>
                   </div>
                 ) : (
                   <p>Loading...</p>

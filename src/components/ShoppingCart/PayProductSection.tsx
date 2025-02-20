@@ -6,12 +6,8 @@ import { Switch } from "@nextui-org/switch";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-import {
-  Product,
-  Extra,
-  SelectedExtra,
-  Purchase
-} from "@/utils/dataInterfaces";
+import { Product, Extra, SelectedExtra, Purchase } from "@/utils/dataInterfaces";
+import Swal from "sweetalert2";
 
 // Props can be passed to the component for flexibility
 interface PayProductSectionProps {
@@ -27,7 +23,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
   handleSelectedPackage,
   extras,
 }) => {
-  
   const [isTwoAreasAllowed, setIsTwoAreasAllowed] = useState(false);
   const [isProductPro, setIsProductPro] = useState(false);
   const { data: session } = useSession();
@@ -54,7 +49,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     { nameArea: "Backyard", isActive: false },
   ]);
 
-
   const handleSelectedArea = (area: "frontyard" | "backyard") => {
     setSelectedArea((prevArea) =>
       prevArea.map((prevAreaItem) =>
@@ -67,19 +61,19 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       ),
     );
   };
-  
+
   const [selectedExtras, setSelectedExtras] = useState<boolean[]>(() =>
-    extras ? new Array(extras.length).fill(false) : []
+    extras ? new Array(extras.length).fill(false) : [],
   );
-  
+
   useEffect(() => {
     if (extras) {
       setSelectedExtras((prev) =>
-        prev.length === extras.length ? prev : new Array(extras.length).fill(false)
+        prev.length === extras.length ? prev : new Array(extras.length).fill(false),
       );
     }
   }, [extras]); // Se actualiza solo si `extras` cambia
-  
+
   const handleSelectedExtras = (index: number) => {
     setSelectedExtras((prev) => {
       if (!prev.length) return new Array(extras?.length || 0).fill(false); // Seguridad en caso de `extras` null
@@ -89,14 +83,12 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
     });
   };
 
-
   const [finalPrice, setFinalPrice] = useState(products[selectedPackage].price);
 
-  
   useEffect(() => {
     if (products[selectedPackage]) {
       const basePrice = products[selectedPackage].price;
-  
+
       // Calcular el precio de los extras seleccionados
       const extrasPrice = selectedExtras.reduce((total, isActive, index) => {
         if (isProductPro) {
@@ -112,20 +104,28 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
         }
         return total;
       }, 0);
-  
+
       setFinalPrice(basePrice + extrasPrice);
     }
   }, [selectedPackage, selectedExtras, isProductPro, extras]);
 
   const handlePurchase = async () => {
     if (!session) {
-      alert("Debes iniciar sesión para realizar una compra.");
+      Swal.fire({
+        title: "Please log in before making a purchase.",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
       router.push("/login");
       return;
     }
 
     if (!customer || !products[selectedPackage]) {
-      alert("No se puede proceder con la compra. Intenta nuevamente.");
+      Swal.fire({
+        title: "Cannot proceed with the purchase. Try again.",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
       return;
     }
 
@@ -149,26 +149,36 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
           // Si no es un producto "Pro", usar el valor de selectedExtras para determinar isActive
           return { extra: extra._id, isActive: selectedExtras[index] };
         }
-      }) as SelectedExtra[],  // Asegúrate de que 'extra.name' es el valor adecuado para el extra
+      }) as SelectedExtra[], // Asegúrate de que 'extra.name' es el valor adecuado para el extra
       total: finalPrice as number,
       status: "pending",
       isActive: true,
-      inProject: false
+      inProject: false,
     };
-    
 
     try {
       const response = await apiService.createPurchase(newPurchase);
       if (!response) {
-        alert("Error al crear la compra. Por favor, inténtalo de nuevo.");
+        Swal.fire({
+          title: "Error to create the purchase, please try again",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
         return;
       }
-
-      alert("Compra creada correctamente. Redirigiendo al panel...");
+      Swal.fire({
+        title: "Purchase created successfully. Redirecting to panel...",
+        icon: "success",
+        confirmButtonText: "Cerrar",
+      });
       router.push("/panel-client?panel=purchases");
     } catch (err) {
-      console.error("Error creating purchase:", err);
-      alert("Hubo un problema con la compra. Inténtalo más tarde.");
+      console.log("Error creating purchase:", err);
+      Swal.fire({
+        title: "There was a problem with the purchase. Try again later.",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
     }
   };
 
@@ -260,11 +270,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
                         {products &&
                         products[selectedPackage].type === "Pro" &&
                         (index === 1 || index === 2) ? (
-                          <Switch
-                            isSelected
-                            isDisabled
-
-                          />
+                          <Switch isSelected isDisabled />
                         ) : (
                           <Switch
                             checked={selectedExtras[index]}
@@ -288,7 +294,12 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
                     className='w-[70%] justify-center flex items-center bg-[#302626] rounded-md text-[#e9e8e8] text-sm top-[25px] absolute py-1'
                     onClick={() => {
                       if (!session) {
-                        alert("Debes iniciar sesión para continuar con la compra.");
+                        Swal.fire({
+                          icon: "warning",
+                          title: "Please Log In to continue with the purchase.",
+                          text: "You will be redirected to the login page.",
+                          confirmButtonText: "Close",
+                        });
                         router.push("/login");
                       } else {
                         handlePurchase();

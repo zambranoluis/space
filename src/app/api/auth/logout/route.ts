@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.sessionId) {
-      console.error("❌ sessionId is missing in logout");
+      console.log("❌ sessionId is missing in logout");
       return NextResponse.json({ error: "No active session found" }, { status: 401 });
     }
 
@@ -40,22 +40,19 @@ export async function POST(req: NextRequest) {
     return response;
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      console.error(
-        "❌ Axios error during logout:",
-        error.response?.data || error.message,
-      );
+      console.log("❌ Axios error during logout:", error.response?.data || error.message);
       return NextResponse.json(
         { error: "Failed to logout", details: error.response?.data || error.message },
         { status: error.response?.status || 500 },
       );
     } else if (error instanceof Error) {
-      console.error("❌ Error during logout:", error.message);
+      console.log("❌ Error during logout:", error.message);
       return NextResponse.json(
         { error: "Failed to logout", details: error.message },
         { status: 500 },
       );
     } else {
-      console.error("❌ Unknown error during logout");
+      console.log("❌ Unknown error during logout");
       return NextResponse.json(
         { error: "Failed to logout", details: "An unknown error occurred" },
         { status: 500 },

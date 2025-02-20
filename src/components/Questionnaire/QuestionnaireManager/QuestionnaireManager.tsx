@@ -10,20 +10,22 @@ import QuestionnaireProgress from "@/components/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
 
-import { ProjectInformation, question, createQuestionnaires } from "@/utils/dataInterfaces";
+import {
+  ProjectInformation,
+  question,
+  createQuestionnaires,
+} from "@/utils/dataInterfaces";
 
 import { apiService } from "@/services/apiService";
 
-
 interface QuestionnaireManagerProps {
   showProgress: boolean;
-  project: ProjectInformation | null
-
+  project: ProjectInformation | null;
 }
 
 const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
   showProgress,
-  project
+  project,
 }) => {
   const [categories, setCategories] = useState<string[]>([]);
   //Mostrar proyecto y extraer categorias
@@ -32,14 +34,13 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
       // console.log("project en questionnaire manager: ", project);
       setCategories((prevCategories) => [
         ...prevCategories,
-        ...project.questionnaire.category.map((category) => category.type).filter(
-          (type) => !prevCategories.includes(type)
-        ),
+        ...project.questionnaire.category
+          .map((category) => category.type)
+          .filter((type) => !prevCategories.includes(type)),
       ]);
       // console.log("categories: ", categories);
     }
   }, [project]);
-
 
   // Obtener datos de cuestionario segun proyecto
   const [questionnaireData, setQuestionnaireData] = useState<question[]>([]);
@@ -48,19 +49,19 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     const fetchQuestionnaireData = async () => {
       if (project) {
         try {
-          const response = await apiService.getQuestionnaireById(project?.questionnaire._id);
+          const response = await apiService.getQuestionnaireById(
+            project?.questionnaire._id,
+          );
           console.log("response de getQuestionnaireById: ", response);
           setQuestionnaireData(response.questionnaire.questions);
           // console.log("questionnaireData: ", questionnaireData);
-
         } catch (error) {
-          console.error("Error al obtener los datos del questionnaire:", error);
+          console.log("Error al obtener los datos del questionnaire:", error);
         }
       }
     };
     fetchQuestionnaireData();
   }, [project?.questionnaire._id]);
-
 
   // Extraer preguntas por categorias
   const [answersGeneral, setAnswersGeneral] = useState<question[]>([]);
@@ -103,7 +104,6 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
       console.log("todas las preguntas de Extra: ", extraQuestions);
 
       setAnswersExtra(extraQuestions);
-
     }
   }, [questionnaireData]);
 
@@ -120,81 +120,105 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     console.log("answersExtra actualizado segun su propio valor: ", answersExtra);
   }, [answersExtra]);
 
-
   // Definir que respuestas estan respondidas
 
   const [isAnsweredGeneral, setIsAnsweredGeneral] = useState<boolean[]>(
-    questionnaire.general.map((_, index) => index === 0 ? true : false)
+    questionnaire.general.map((_, index) => (index === 0 ? true : false)),
   );
 
   const [isAnsweredBackyard, setIsAnsweredBackyard] = useState<boolean[]>(
-    questionnaire.backyard.map((_, index) => false)
+    questionnaire.backyard.map((_, index) => false),
   );
 
   const [isAnsweredFrontyard, setIsAnsweredFrontyard] = useState<boolean[]>(
-    questionnaire.backyard.map((_, index) => false)
+    questionnaire.backyard.map((_, index) => false),
   );
 
   const [isAnsweredExtra, setIsAnsweredExtra] = useState<boolean[]>(
-    questionnaire.extra.map((_, index) => false)
+    questionnaire.extra.map((_, index) => false),
   );
 
   useEffect(() => {
     setIsAnsweredGeneral((prev) => {
       const updatedIsAnsweredGeneral = questionnaire.general.map((questionObj, index) =>
-        index === 0 ? true : answersGeneral.some((answerObj) => answerObj.quest === questionObj.title.replace("?", ""))
+        index === 0
+          ? true
+          : answersGeneral.some(
+              (answerObj) => answerObj.quest === questionObj.title.replace("?", ""),
+            ),
       );
 
-      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredGeneral) ? updatedIsAnsweredGeneral : prev;
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredGeneral)
+        ? updatedIsAnsweredGeneral
+        : prev;
     });
   }, [answersGeneral, questionnaire.general]);
 
   useEffect(() => {
     setIsAnsweredBackyard((prev) => {
       const updatedIsAnsweredBackyard = questionnaire.backyard.map((questionObj) =>
-        answersBackyard.some((answerObj) => answerObj.quest === questionObj.title.replace("?", "").replace(",", ""))
+        answersBackyard.some(
+          (answerObj) =>
+            answerObj.quest === questionObj.title.replace("?", "").replace(",", ""),
+        ),
       );
-      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredBackyard) ? updatedIsAnsweredBackyard : prev;
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredBackyard)
+        ? updatedIsAnsweredBackyard
+        : prev;
     });
   }, [answersBackyard, questionnaire.backyard]);
 
   useEffect(() => {
     setIsAnsweredFrontyard((prev) => {
       const updatedIsAnsweredFrontyard = questionnaire.backyard.map((questionObj) =>
-        answersFrontyard.some((answerObj) => answerObj.quest === questionObj.title.replace("?", "").replace(",", ""))
+        answersFrontyard.some(
+          (answerObj) =>
+            answerObj.quest === questionObj.title.replace("?", "").replace(",", ""),
+        ),
       );
-      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredFrontyard) ? updatedIsAnsweredFrontyard : prev;
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredFrontyard)
+        ? updatedIsAnsweredFrontyard
+        : prev;
     });
   }, [answersFrontyard, questionnaire.backyard]);
 
   useEffect(() => {
     setIsAnsweredExtra((prev) => {
       const updatedIsAnsweredExtra = questionnaire.extra.map((questionObj) =>
-        answersExtra.some((answerObj) => answerObj.quest === questionObj.title.replace("?", ""))
+        answersExtra.some(
+          (answerObj) => answerObj.quest === questionObj.title.replace("?", ""),
+        ),
       );
-      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredExtra) ? updatedIsAnsweredExtra : prev;
+      return JSON.stringify(prev) !== JSON.stringify(updatedIsAnsweredExtra)
+        ? updatedIsAnsweredExtra
+        : prev;
     });
   }, [answersExtra, questionnaire.extra]);
 
   useEffect(() => {
-    console.log("isAnsweredGeneral actualizado segun su propio valor: ", isAnsweredGeneral);
+    console.log(
+      "isAnsweredGeneral actualizado segun su propio valor: ",
+      isAnsweredGeneral,
+    );
   }, [isAnsweredGeneral]);
 
   useEffect(() => {
-    console.log("isAnsweredBackyard actualizado segun su propio valor: ", isAnsweredBackyard);
+    console.log(
+      "isAnsweredBackyard actualizado segun su propio valor: ",
+      isAnsweredBackyard,
+    );
   }, [isAnsweredBackyard]);
 
   useEffect(() => {
-    console.log("isAnsweredFrontyard actualizado segun su propio valor: ", isAnsweredFrontyard);
+    console.log(
+      "isAnsweredFrontyard actualizado segun su propio valor: ",
+      isAnsweredFrontyard,
+    );
   }, [isAnsweredFrontyard]);
 
   useEffect(() => {
     console.log("isAnsweredExtra actualizado segun su propio valor: ", isAnsweredExtra);
   }, [isAnsweredExtra]);
-
-
-
-
 
   const [selectedMaxTwoGeneral, setSelectedMaxTwoGeneral] = useState<number[]>([]);
 
@@ -216,23 +240,25 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
   };
   const [selectedFq2, setSelectedFq2] = useState<number | null>(null);
 
-
   const handleFq2Change = (index: number) => {
     setSelectedFq2(index === selectedFq2 ? null : index); // Permitir deseleccionar.
   };
 
-
-
   const [questionContainer, setQuestionContainer] = useState<question | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmitAnswers = (question: string, typeQuestion: string, categoryQuestion: string, htmlElements: string) => {
+  const handleSubmitAnswers = (
+    question: string,
+    typeQuestion: string,
+    categoryQuestion: string,
+    htmlElements: string,
+  ) => {
     console.log("1. Pregunta accionada:", question);
     console.log("2. Tipo de pregunta:", typeQuestion);
     console.log("3. verificando duplicado...");
 
     const isDuplicate = answersGeneral.some(
-      (answer) => answer.quest === question && answer.category === categoryQuestion
+      (answer) => answer.quest === question && answer.category === categoryQuestion,
     );
 
     if (isDuplicate) {
@@ -261,7 +287,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         // Validar que haya al menos un estilo seleccionado
         if (selectedsArray.length === 0) {
           setSubmitError("Please select at least 1 style.");
-          console.error("No se ha seleccionado ningun estilo.");
+          console.log("No se ha seleccionado ningun estilo.");
           return;
         }
 
@@ -289,10 +315,16 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                   setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
                   break;
                 case "Backyard":
-                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersBackyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Frontyard":
-                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersFrontyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Extra":
                   setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -302,7 +334,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               }
             }
           } catch (error) {
-            console.error("❌ Error al crear la pregunta:", error);
+            console.log("❌ Error al crear la pregunta:", error);
           }
         };
 
@@ -321,7 +353,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
           category: categoryQuestion,
           notes: [{ note: "" }],
           selecteds: [{ selected: "" }],
-          select: (selectedText === "Yes") ? true : false,
+          select: selectedText === "Yes" ? true : false,
           people: 0,
           files: [],
           questionnaireId: project?.questionnaire._id,
@@ -338,10 +370,16 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                   setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
                   break;
                 case "Backyard":
-                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersBackyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Frontyard":
-                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersFrontyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Extra":
                   setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -351,7 +389,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               }
             }
           } catch (error) {
-            console.error("❌ Error al crear la pregunta:", error);
+            console.log("❌ Error al crear la pregunta:", error);
           }
         };
 
@@ -364,7 +402,8 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const noteElement = document.getElementById(`${htmlElements}Note`);
         console.log("Select html element: ", selectionWithNote);
         console.log("Note html element: ", noteElement);
-        const selectedTextWithNote: string = selectionWithNote.options[selectionWithNote.selectedIndex].text;
+        const selectedTextWithNote: string =
+          selectionWithNote.options[selectionWithNote.selectedIndex].text;
         console.log("selectedTextWithNote: ", selectedTextWithNote);
         const noteText: string = noteElement.value;
         console.log("noteText: ", noteText);
@@ -374,7 +413,10 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
           category: categoryQuestion,
           notes: [{ note: selectedTextWithNote }, { note: noteText }],
           selecteds: [{ selected: "" }],
-          select: (selectedTextWithNote === "Colorful Plants" || selectedTextWithNote === "Yes") ? true : false,
+          select:
+            selectedTextWithNote === "Colorful Plants" || selectedTextWithNote === "Yes"
+              ? true
+              : false,
           people: 0,
           files: [],
           questionnaireId: project?.questionnaire._id,
@@ -391,10 +433,16 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                   setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
                   break;
                 case "Backyard":
-                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersBackyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Frontyard":
-                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersFrontyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Extra":
                   setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -404,7 +452,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               }
             }
           } catch (error) {
-            console.error("❌ Error al crear la pregunta:", error);
+            console.log("❌ Error al crear la pregunta:", error);
           }
         };
         submitNewAnswerYesOrNoWithNote();
@@ -414,10 +462,10 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         console.log("5. Question type: ", typeQuestion);
         const optionsPlants = document.getElementsByClassName(`${htmlElements}Plants`);
         console.log("optionsPlants: ", optionsPlants);
-        console.log("selectedFq2: ", selectedFq2)
-        if ((categoryQuestion === "Frontyard" && selectedFq2 !== null)) {
-          const selectedTextPlants = optionsPlants[selectedFq2].textContent
-          console.log("selectedTextPlants: ", selectedTextPlants)
+        console.log("selectedFq2: ", selectedFq2);
+        if (categoryQuestion === "Frontyard" && selectedFq2 !== null) {
+          const selectedTextPlants = optionsPlants[selectedFq2].textContent;
+          console.log("selectedTextPlants: ", selectedTextPlants);
 
           const newAnswerHowManyPlants: question = {
             quest: question,
@@ -438,13 +486,22 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               if (response) {
                 switch (categoryQuestion) {
                   case "General":
-                    setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                    setAnswersGeneral((prevAnswers) => [
+                      ...prevAnswers,
+                      response.question,
+                    ]);
                     break;
                   case "Backyard":
-                    setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                    setAnswersBackyard((prevAnswers) => [
+                      ...prevAnswers,
+                      response.question,
+                    ]);
                     break;
                   case "Frontyard":
-                    setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                    setAnswersFrontyard((prevAnswers) => [
+                      ...prevAnswers,
+                      response.question,
+                    ]);
                     break;
                   case "Extra":
                     setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -454,13 +511,13 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                 }
               }
             } catch (error) {
-              console.error("❌ Error al crear la pregunta:", error);
+              console.log("❌ Error al crear la pregunta:", error);
             }
           };
           submitNewAnswerHowManyPlants();
-        } else if ((categoryQuestion === "Backyard" && selectedBq2 !== null)){
-          const selectedTextPlants = optionsPlants[selectedBq2].textContent
-          console.log("selectedTextPlants: ", selectedTextPlants)
+        } else if (categoryQuestion === "Backyard" && selectedBq2 !== null) {
+          const selectedTextPlants = optionsPlants[selectedBq2].textContent;
+          console.log("selectedTextPlants: ", selectedTextPlants);
 
           const newAnswerHowManyPlants: question = {
             quest: question,
@@ -481,13 +538,22 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               if (response) {
                 switch (categoryQuestion) {
                   case "General":
-                    setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
+                    setAnswersGeneral((prevAnswers) => [
+                      ...prevAnswers,
+                      response.question,
+                    ]);
                     break;
                   case "Backyard":
-                    setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                    setAnswersBackyard((prevAnswers) => [
+                      ...prevAnswers,
+                      response.question,
+                    ]);
                     break;
                   case "Frontyard":
-                    setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                    setAnswersFrontyard((prevAnswers) => [
+                      ...prevAnswers,
+                      response.question,
+                    ]);
                     break;
                   case "Extra":
                     setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -497,20 +563,21 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                 }
               }
             } catch (error) {
-              console.error("❌ Error al crear la pregunta:", error);
+              console.log("❌ Error al crear la pregunta:", error);
             }
           };
           submitNewAnswerHowManyPlants();
-        }
-        else {
-          console.error("por favor seleccionar al menos una cantidad")
+        } else {
+          console.log("por favor seleccionar al menos una cantidad");
         }
         break;
 
       case "Things to Keep or Remove Question":
         console.log("5. Question type: ", typeQuestion);
-        const thingsBoxes = document.getElementsByClassName(`${htmlElements}ThingsKeepRemove`)
-        console.log("things Boxes: ", thingsBoxes)
+        const thingsBoxes = document.getElementsByClassName(
+          `${htmlElements}ThingsKeepRemove`,
+        );
+        console.log("things Boxes: ", thingsBoxes);
         const thingsBoxesText = Array.from(thingsBoxes).map((box) => box.value);
         console.log("thingsBoxesText: ", thingsBoxesText);
 
@@ -537,10 +604,16 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                   setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
                   break;
                 case "Backyard":
-                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersBackyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Frontyard":
-                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersFrontyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Extra":
                   setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -550,7 +623,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               }
             }
           } catch (error) {
-            console.error("❌ Error al crear la pregunta:", error);
+            console.log("❌ Error al crear la pregunta:", error);
           }
         };
         submitNewAnswerThingsKeepRemove();
@@ -558,27 +631,35 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
       case "Water Feature Question":
         console.log("5. Question type: ", typeQuestion);
-        const waterSelect = document.getElementById(`${htmlElements}Select`)
-        const waterFeatures = document.getElementsByClassName(`${htmlElements}WaterOption`)
-        const waterChecks = document.getElementsByClassName(`${htmlElements}WaterCheckbox`)
-        const waterNote = document.getElementById(`${htmlElements}Note`)
+        const waterSelect = document.getElementById(`${htmlElements}Select`);
+        const waterFeatures = document.getElementsByClassName(
+          `${htmlElements}WaterOption`,
+        );
+        const waterChecks = document.getElementsByClassName(
+          `${htmlElements}WaterCheckbox`,
+        );
+        const waterNote = document.getElementById(`${htmlElements}Note`);
 
-        console.log("waterSelect: ", waterSelect)
+        console.log("waterSelect: ", waterSelect);
         const waterSelectText = waterSelect.options[waterSelect.selectedIndex].text;
-        console.log("waterSelectText: ", waterSelectText)
-        console.log("waterFeatures: ", waterFeatures)
-        console.log("waterChecks: ", waterChecks)
-        console.log("waterNote: ", waterNote)
-        const waterNoteText = waterNote.value
-        console.log("waterNoteText: ", waterNoteText)
+        console.log("waterSelectText: ", waterSelectText);
+        console.log("waterFeatures: ", waterFeatures);
+        console.log("waterChecks: ", waterChecks);
+        console.log("waterNote: ", waterNote);
+        const waterNoteText = waterNote.value;
+        console.log("waterNoteText: ", waterNoteText);
 
         const selectedWaterFeatures = Array.from(waterChecks)
-          .map((check, index) => check.checked ? waterFeatures[index]?.textContent.replace("▪ ", "") : null) // Tomar solo los seleccionados
-          .filter(feature => feature !== null); // Eliminar los valores nulos
+          .map((check, index) =>
+            check.checked ? waterFeatures[index]?.textContent.replace("▪ ", "") : null,
+          ) // Tomar solo los seleccionados
+          .filter((feature) => feature !== null); // Eliminar los valores nulos
 
         console.log("selectedWaterFeatures: ", selectedWaterFeatures);
 
-        const formatSelectedWaterFeatures = selectedWaterFeatures.map(feature => ({ selected: feature }));
+        const formatSelectedWaterFeatures = selectedWaterFeatures.map((feature) => ({
+          selected: feature,
+        }));
 
         console.log(formatSelectedWaterFeatures);
 
@@ -587,7 +668,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
           category: categoryQuestion,
           notes: [{ note: waterNoteText }],
           selecteds: formatSelectedWaterFeatures,
-          select: (waterSelectText === "Yes" ? true : false),
+          select: waterSelectText === "Yes" ? true : false,
           people: 0,
           files: [],
           questionnaireId: project?.questionnaire._id,
@@ -605,10 +686,16 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                   setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
                   break;
                 case "Backyard":
-                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersBackyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Frontyard":
-                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersFrontyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Extra":
                   setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -618,7 +705,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               }
             }
           } catch (error) {
-            console.error("❌ Error al crear la pregunta:", error);
+            console.log("❌ Error al crear la pregunta:", error);
           }
         };
         submitNewAnswerWaterFeature();
@@ -626,31 +713,35 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
       case "Fire Feature Question":
         console.log("5. Question type: ", typeQuestion);
-        const fireSelect = document.getElementById(`${htmlElements}FireSelect`)
-        const fireFeatures = document.getElementsByClassName(`${htmlElements}FireOption`)
-        const fireChecks = document.getElementsByClassName(`${htmlElements}FireCheckbox`)
-        const firePeople = document.getElementById(`${htmlElements}FirePeople`)
-        const fireNote = document.getElementById(`${htmlElements}FireNote`)
+        const fireSelect = document.getElementById(`${htmlElements}FireSelect`);
+        const fireFeatures = document.getElementsByClassName(`${htmlElements}FireOption`);
+        const fireChecks = document.getElementsByClassName(`${htmlElements}FireCheckbox`);
+        const firePeople = document.getElementById(`${htmlElements}FirePeople`);
+        const fireNote = document.getElementById(`${htmlElements}FireNote`);
 
-        console.log("fireSelect: ", fireSelect)
+        console.log("fireSelect: ", fireSelect);
         const fireSelectText = fireSelect.options[fireSelect.selectedIndex].text;
-        console.log("fireSelectText: ", fireSelectText)
-        console.log("fireFeatures: ", fireFeatures)
-        console.log("fireChecks: ", fireChecks)
-        console.log("firePeople:", firePeople)
+        console.log("fireSelectText: ", fireSelectText);
+        console.log("fireFeatures: ", fireFeatures);
+        console.log("fireChecks: ", fireChecks);
+        console.log("firePeople:", firePeople);
         const firePeopleNumber = firePeople.value;
-        console.log("firePeopleNumber: ", firePeopleNumber)
-        console.log("fireNote: ", fireNote)
-        const fireNoteText = fireNote.value
-        console.log("fireNoteText: ", fireNoteText)
+        console.log("firePeopleNumber: ", firePeopleNumber);
+        console.log("fireNote: ", fireNote);
+        const fireNoteText = fireNote.value;
+        console.log("fireNoteText: ", fireNoteText);
 
         const selectedFireFeatures = Array.from(fireChecks)
-          .map((check, index) => check.checked ? fireFeatures[index]?.textContent.replace("▪ ", "") : null) // Tomar solo los seleccionados
-          .filter(feature => feature !== null)
+          .map((check, index) =>
+            check.checked ? fireFeatures[index]?.textContent.replace("▪ ", "") : null,
+          ) // Tomar solo los seleccionados
+          .filter((feature) => feature !== null);
 
         console.log("selectedFireFeatures: ", selectedFireFeatures);
 
-        const formatSelectedFireFeatures = selectedFireFeatures.map(feature => ({ selected: feature }));
+        const formatSelectedFireFeatures = selectedFireFeatures.map((feature) => ({
+          selected: feature,
+        }));
 
         console.log("formatSelectedFeatures: ", formatSelectedFireFeatures);
 
@@ -659,7 +750,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
           category: categoryQuestion,
           notes: [{ note: fireNoteText }],
           selecteds: formatSelectedFireFeatures,
-          select: (fireSelectText === "Yes" ? true : false),
+          select: fireSelectText === "Yes" ? true : false,
           people: firePeopleNumber,
           files: [],
           questionnaireId: project?.questionnaire._id,
@@ -677,10 +768,16 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                   setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
                   break;
                 case "Backyard":
-                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersBackyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Frontyard":
-                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersFrontyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Extra":
                   setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -690,7 +787,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               }
             }
           } catch (error) {
-            console.error("❌ Error al crear la pregunta:", error);
+            console.log("❌ Error al crear la pregunta:", error);
           }
         };
         submitNewAnswerFireFeature();
@@ -698,9 +795,9 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
       case "Note Question":
         console.log("5. Question type: ", typeQuestion);
-        const note = document.getElementById(`${htmlElements}Note`)
-        const noteContain = note.value
-        console.log("note: ", note, "contain: ", noteContain)
+        const note = document.getElementById(`${htmlElements}Note`);
+        const noteContain = note.value;
+        console.log("note: ", note, "contain: ", noteContain);
 
         const newAnswerOnlyNote: question = {
           quest: question,
@@ -715,7 +812,6 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
         console.log("6. Pregunta a agregar: ", newAnswerOnlyNote);
 
-
         const submitNewAnswerOnlyNote = async () => {
           try {
             const response = await apiService.createQuestion(newAnswerOnlyNote);
@@ -726,10 +822,16 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
                   setAnswersGeneral((prevAnswers) => [...prevAnswers, response.question]);
                   break;
                 case "Backyard":
-                  setAnswersBackyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersBackyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Frontyard":
-                  setAnswersFrontyard((prevAnswers) => [...prevAnswers, response.question]);
+                  setAnswersFrontyard((prevAnswers) => [
+                    ...prevAnswers,
+                    response.question,
+                  ]);
                   break;
                 case "Extra":
                   setAnswersExtra((prevAnswers) => [...prevAnswers, response.question]);
@@ -739,7 +841,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
               }
             }
           } catch (error) {
-            console.error("❌ Error al crear la pregunta:", error);
+            console.log("❌ Error al crear la pregunta:", error);
           }
         };
         submitNewAnswerOnlyNote();
@@ -750,15 +852,10 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   };
 
-
-
-
-
-
   return (
     <div className='flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300 w-full'>
-      {
-        showProgress && (<div className="flex fixed bg-black/70 hover:bg-black/85 transition-colors duration-300 rounded-lg z-[100] left-[5%] top-[50px] w-[90%] ">
+      {showProgress && (
+        <div className='flex fixed bg-black/70 hover:bg-black/85 transition-colors duration-300 rounded-lg z-[100] left-[5%] top-[50px] w-[90%] '>
           <QuestionnaireProgress
             categories={categories}
             answersGeneral={answersGeneral}
@@ -771,8 +868,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
             isAnsweredExtra={isAnsweredExtra}
           />
         </div>
-        )
-      }
+      )}
       <QuestionnaireGeneral
         project={project}
         selectedMaxTwoGeneral={selectedMaxTwoGeneral}
@@ -780,31 +876,27 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         isAnsweredGeneral={isAnsweredGeneral}
         handleSubmitAnswers={handleSubmitAnswers}
       />
-      {
-        (categories.includes("Backyard")) && (
-          <QuestionnaireBackyard
-            isAnsweredGeneral={isAnsweredGeneral}
-            isAnsweredBackyard={isAnsweredBackyard}
-            setIsAnsweredBackyard={setIsAnsweredBackyard}
-            selectedBq2={selectedBq2}
-            handleBq2Change={handleBq2Change}
-            handleSubmitAnswers={handleSubmitAnswers}
-          />
-        )
-      }
-      {
-        (categories.includes("Frontyard")) && (
-          <QuestionnaireFrontyard
-            categories={categories}
-            isAnsweredGeneral={isAnsweredGeneral}
-            isAnsweredBackyard={isAnsweredBackyard}
-            isAnsweredFrontyard={isAnsweredFrontyard}
-            selectedFq2={selectedFq2}
-            handleFq2Change={handleFq2Change}
-            handleSubmitAnswers={handleSubmitAnswers}
-          />
-        )
-      }
+      {categories.includes("Backyard") && (
+        <QuestionnaireBackyard
+          isAnsweredGeneral={isAnsweredGeneral}
+          isAnsweredBackyard={isAnsweredBackyard}
+          setIsAnsweredBackyard={setIsAnsweredBackyard}
+          selectedBq2={selectedBq2}
+          handleBq2Change={handleBq2Change}
+          handleSubmitAnswers={handleSubmitAnswers}
+        />
+      )}
+      {categories.includes("Frontyard") && (
+        <QuestionnaireFrontyard
+          categories={categories}
+          isAnsweredGeneral={isAnsweredGeneral}
+          isAnsweredBackyard={isAnsweredBackyard}
+          isAnsweredFrontyard={isAnsweredFrontyard}
+          selectedFq2={selectedFq2}
+          handleFq2Change={handleFq2Change}
+          handleSubmitAnswers={handleSubmitAnswers}
+        />
+      )}
       <QuestionnaireExtra
         categories={categories}
         isAnsweredBackyard={isAnsweredBackyard}

@@ -5,15 +5,11 @@ import Section from "./Section";
 import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
 
-import {
-  Product,
-  Extra,
-} from "@/utils/dataInterfaces"
+import { Product, Extra } from "@/utils/dataInterfaces";
 
 export default function ShoppingCart() {
   const [products, setProducts] = useState<Product[] | null>(null);
   const [extras, setExtras] = useState<Extra[] | null>(null);
-
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,7 +19,7 @@ export default function ShoppingCart() {
           setProducts(response.data as Product[]); // Cast response.data to Product[] type
         }
       } catch (err: unknown) {
-        console.error("ShoppingCart: Error fetching products:", err);
+        console.log("ShoppingCart: Error fetching products:", err);
       }
     };
 
@@ -34,7 +30,7 @@ export default function ShoppingCart() {
           setExtras(response.data as Extra[]); // Cast response.data to Extra[] type
         }
       } catch (err: unknown) {
-        console.error("ShoppingCart: Error fetching extras:", err);
+        console.log("ShoppingCart: Error fetching extras:", err);
       }
     };
 

@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     const nodeToken = tokenData?.token;
 
     // Extraer ID correctamente desde la URL
-    const id = req.nextUrl.pathname.split("/").pop(); 
+    const id = req.nextUrl.pathname.split("/").pop();
 
     if (!id) {
       return NextResponse.json({ error: "ID no proporcionado" }, { status: 400 });
@@ -28,20 +28,17 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(response.data);
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      console.error("Error al obtener cliente:", error.response?.data || error.message);
+      console.log("Error al obtener cliente:", error.response?.data || error.message);
       return NextResponse.json(
         { error: error.response?.data || error.message },
-        { status: error.response?.status || 500 }
+        { status: error.response?.status || 500 },
       );
     } else if (error instanceof Error) {
-      console.error("Error al obtener cliente:", error.message);
+      console.log("Error al obtener cliente:", error.message);
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
-      console.error("Error desconocido al obtener cliente");
-      return NextResponse.json(
-        { error: "An unknown error occurred" },
-        { status: 500 }
-      );
+      console.log("Error desconocido al obtener cliente");
+      return NextResponse.json({ error: "An unknown error occurred" }, { status: 500 });
     }
   }
 }
@@ -53,7 +50,7 @@ export async function PATCH(req: NextRequest) {
     const nodeToken = tokenData?.token;
 
     // Extraer ID correctamente desde la URL
-    const id = req.nextUrl.pathname.split("/").pop(); 
+    const id = req.nextUrl.pathname.split("/").pop();
 
     if (!id) {
       return NextResponse.json({ error: "ID no proporcionado" }, { status: 400 });
@@ -72,20 +69,17 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json(response.data);
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      console.error("Error al actualizar cliente:", error.response?.data || error.message);
+      console.log("Error al actualizar cliente:", error.response?.data || error.message);
       return NextResponse.json(
         { error: error.response?.data || error.message },
-        { status: error.response?.status || 500 }
+        { status: error.response?.status || 500 },
       );
     } else if (error instanceof Error) {
-      console.error("Error al actualizar cliente:", error.message);
+      console.log("Error al actualizar cliente:", error.message);
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
-      console.error("Error desconocido al actualizar cliente");
-      return NextResponse.json(
-        { error: "An unknown error occurred" },
-        { status: 500 }
-      );
+      console.log("Error desconocido al actualizar cliente");
+      return NextResponse.json({ error: "An unknown error occurred" }, { status: 500 });
     }
   }
 }
