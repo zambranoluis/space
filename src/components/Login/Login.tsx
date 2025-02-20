@@ -37,7 +37,7 @@ export default function Login() {
     });
 
     if (result?.error) {
-      setLoadingLogin(false);
+      // setLoadingLogin(false);
       setError(result.error || "Invalid login credentials");
     } else if (result?.ok) {
       setLoadingLogin(false);
@@ -46,7 +46,7 @@ export default function Login() {
   };
 
   return (
-    <section id="login">
+    <section id="login" className="bgred-300 p2">
       <Section
         handleLogin={handleLogin}
         email={email}

@@ -16,6 +16,7 @@ import {
   DetailedPurchase,
   GetProjectsByPurchasesId,
 } from "@/utils/dataInterfaces";
+import { set } from "date-fns";
 
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
@@ -28,6 +29,8 @@ const PanelClient: React.FC = () => {
 
   // Usar el contexto de geolocalización
   const { geolocation, fetchGeolocation } = useGeolocation();
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchGeolocation();
@@ -136,8 +139,26 @@ const PanelClient: React.FC = () => {
     }
   };
 
-  return (
-    <main className='flex flex-col h-full w-full relative'>
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timeoutId); // Limpia el timeout si el componente se desmonta
+  }, []);
+
+  return loading ? (
+    <div className='bgwhite absolute h-full w-full top-0 z-[1000]'>
+      <video autoPlay muted className='object-cover h-full w-full'>
+        <source
+          src='https://github.com/BPM94/SCCTMD/raw/main/LoadingAnimationSpaceCreation.mp4'
+          type='video/mp4'
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  ) : (
+    <main className='flex flex-col h-full w-full relative rose-400'>
       <NavbarClient geolocation={geolocation} />
       <AsideClient
         toggleAside={toggleAside}
@@ -152,6 +173,7 @@ const PanelClient: React.FC = () => {
           customer={customer}
           purchases={purchases}
           projects={projects}
+          setProjects={setProjects}
           purchasesWithProject={purchasesWithProject}
         />
       </div>

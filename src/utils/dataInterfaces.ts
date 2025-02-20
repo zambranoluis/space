@@ -164,7 +164,7 @@ export interface Project {
   questionnaire: {
     _id: string;
     category: string[];
-    questions: any[];
+    questions: question[];
     isComplete: boolean;
     softDelete: boolean;
     deletedAt: Date | null;
@@ -213,7 +213,7 @@ export interface ProjectInformation {
   questionnaire: {
     _id: string;
     category: string[];
-    questions: any[];
+    questions: question[];
     isComplete: boolean;
     softDelete: boolean;
     deletedAt: Date | null;
@@ -242,7 +242,7 @@ export interface GetProjectsByPurchasesId {
   questionnaire: {
     _id: string;
     category: string[];
-    questions: any[];
+    questions: question[];
     isComplete: boolean;
     softDelete: boolean;
     deletedAt: Date | null;

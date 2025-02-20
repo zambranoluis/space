@@ -85,7 +85,7 @@ function PanelWorker() {
     <main className='flex flex-col h-full w-full'>
       <section
         className='w-full h-full bg-cover bg-no-repeat bg-center '
-        style={{ backgroundImage: `url('/spacePanelBackground.webp')` }}>
+        style={{ backgroundImage: `url('https://github.com/BPM94/SCCTMD/raw/main/panel-worker/spacePanelBackground.webp')` }}>
         <div className='relative w-full h-full'>
           <div className='absolute w-full h-full gap-8 flex flex-col'>
             <NavbarWorker />

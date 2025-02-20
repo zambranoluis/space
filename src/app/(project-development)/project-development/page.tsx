@@ -1,13 +1,100 @@
 "use client"
 
+import React, { useEffect, useState } from "react";
+
 import { questionnaire } from "./questionnaire";
 import { Image } from "@nextui-org/image";
 
 import ChatModal from "@/components/ChatModal";
 
+import { apiService } from "@/services/apiService";
+
 
 
 const ProjectDevelopment: React.FC = () => {
+
+  const questionnaireId = "67b6afcb24f48b0ebdd8efd6"
+
+  const [questionnaireData, setQuestionnaireData] = useState<any | null>(null);
+  
+  const fetchQuestionnaireData = async () => {
+    try {
+      const response = await apiService.getQuestionnaireById(questionnaireId);
+      console.log("response de getQuestionnaireById: ", response);
+      if (response) {
+        setQuestionnaireData(response.questionnaire.questions);
+      }
+
+    } catch (error) {
+      console.error("Error al obtener los datos del questionnaire:", error);
+    }
+  };
+      
+
+    useEffect(() => {
+      fetchQuestionnaireData();
+    }, [questionnaireId]);
+
+    useEffect(() => {
+      console.log("questionnaireData: ", questionnaireData);
+    }, [questionnaireData]);
+
+    const [answersGeneral, setAnswersGeneral] = useState<question[]>([]);
+      const [answersBackyard, setAnswersBackyard] = useState<question[]>([]);
+      const [answersFrontyard, setAnswersFrontyard] = useState<question[]>([]);
+      const [answersExtra, setAnswersExtra] = useState<question[]>([]);
+    
+      useEffect(() => {
+        console.log("questionnaireData para ser desglosado: ", questionnaireData);
+        if (questionnaireData && questionnaireData.length > 0) {
+          const generalQuestions: question[] = questionnaireData
+            .filter((question) => question.question.category === "General")
+            .map((question) => question.question);
+    
+          console.log("todas las preguntas de General: ", generalQuestions);
+    
+          setAnswersGeneral(generalQuestions);
+    
+          const backyardQuestions: question[] = questionnaireData
+            .filter((question) => question.question.category === "Backyard")
+            .map((question) => question.question);
+    
+          console.log("todas las preguntas de Backyard: ", backyardQuestions);
+    
+          setAnswersBackyard(backyardQuestions);
+    
+          const frontyardQuestions: question[] = questionnaireData
+            .filter((question) => question.question.category === "Frontyard")
+            .map((question) => question.question);
+    
+          console.log("todas las preguntas de Frontyard: ", frontyardQuestions);
+    
+          setAnswersFrontyard(frontyardQuestions);
+    
+          const extraQuestions: question[] = questionnaireData
+            .filter((question) => question.question.category === "Extra")
+            .map((question) => question.question);
+    
+          console.log("todas las preguntas de Extra: ", extraQuestions);
+    
+          setAnswersExtra(extraQuestions);
+    
+        }
+      }, [questionnaireData]);
+      
+      useEffect(() => {
+        console.log("answersGeneral actualizado segun su propio valor: ", answersGeneral);
+      }, [answersGeneral]);
+      useEffect(() => {
+        console.log("answersBackyard actualizado segun su propio valor: ", answersBackyard);
+      }, [answersBackyard]);
+      useEffect(() => {
+        console.log("answersFrontyard actualizado segun su propio valor: ", answersFrontyard);
+      }, [answersFrontyard]);
+      useEffect(() => {
+        console.log("answersExtra actualizado segun su propio valor: ", answersExtra);
+      }, [answersExtra]);
+
   return (
     <main className="flex flex-col w-full bggreen-400 relative">
       <section id="developmentContainer" className="min-h-[calc(100vh-100px)] bgblue-300">
@@ -54,6 +141,37 @@ const ProjectDevelopment: React.FC = () => {
                     <h2 className="font-bold text-xl  text-[#6d786f]">General Questions</h2>
                     <div className="flex flex-col gap-1">
                       {
+                        answersGeneral.map((question, index) => (
+                          <div className="flex flex-col gap-2" key={index}>
+                            <h2 className="text-black font-bold">{question.quest}?</h2>
+                            {(index === 0 ) && (
+                              <div className="flex text-black gap-2 pl-2">
+                                {
+                                  question.selecteds.map((selected, indexSelected) => (
+                                    (selected.selected !== "") && (
+                                      <p key={indexSelected}>{selected.selected}</p>
+                                    )
+                                  ))
+                                }
+                              </div>
+                            )
+                            }
+                            {(question.notes) && (
+                              <div className="">
+                                {question.notes.map((note, indexQuestion) => (
+                                  (note.note !== "") && (
+                                    <div className="bg-white rounded-2xl border border-black text-black p-4 w-full" key={indexQuestion}>
+                                      <p className="text-[#b5b5b5]">{note.note}</p>
+                                    </div>
+                                  )
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))
+                      }
+                      
+                      {/* {
                         questionnaire.general.map((question, index) => (
                           <div id="question" className="flex flex-col gap-2" key={index}>
                             <h3 className="font-bold text-black">{question.title}<span className="font-normal"> Choise</span></h3>
@@ -64,7 +182,7 @@ const ProjectDevelopment: React.FC = () => {
                             )}
                           </div>
                         ))
-                      }
+                      } */}
                     </div>
                     <h2 className="font-bold text-xl  text-[#6d786f]">Backyard Questions</h2>
                     <div className="flex flex-col gap-1">
