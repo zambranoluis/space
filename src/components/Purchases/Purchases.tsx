@@ -5,7 +5,8 @@ import { Image } from "@nextui-org/image";
 import { FaTags } from "react-icons/fa6";
 import Section from "./Section";
 
-import { DetailedPurchase} from "@/utils/dataInterfaces";
+import { DetailedPurchase, GetProjectsByPurchasesId} from "@/utils/dataInterfaces";
+import { set } from "date-fns";
 
 const typePurchase = [
   {
@@ -52,10 +53,12 @@ const typePurchase = [
 
 interface PurchasesProps {
   purchases: DetailedPurchase[];
-  purchasesWithProject: string[]
+  purchasesWithProject: string[];
+  projects: GetProjectsByPurchasesId[];
+  setProjects: React.Dispatch<React.SetStateAction<GetProjectsByPurchasesId[]>>;
 }
 
-export const Purchases: React.FC<PurchasesProps> = ({ purchases, purchasesWithProject }) => {
+export const Purchases: React.FC<PurchasesProps> = ({ purchases, purchasesWithProject, projects, setProjects }) => {
 
   const router = useRouter();
 
@@ -87,20 +90,28 @@ export const Purchases: React.FC<PurchasesProps> = ({ purchases, purchasesWithPr
   };
 
   const handleCreateProject = async (purchase: DetailedPurchase) => {
+    console.log("old projects variable: ", projects);
+    console.log("---------------- creating project");
+  
     try {
       const response = await apiService.createProject({
         purchaseId: purchase._id,
       });
   
       if (response.message === "Project created successfully.") {
-        // Redirige a la URL con el panel correcto
-        const newUrl = "/panel-client?panel=projects";
-        router.push(newUrl);
+        console.log("respuesta de la creación de proyecto: ", response);
   
+        setProjects((prevProjects) => {
+          const updatedProjects = [...prevProjects, response.projectPopulated];
+          console.log("new projects variable: ", updatedProjects); // Aquí sí refleja el cambio
+          return updatedProjects;
+        });
+  
+        // Redirige a la URL con el panel correcto
         setTimeout(() => {
-          window.history.replaceState(null, "", newUrl); // Asegura que la URL con panel=projects se mantenga
-          window.location.reload();
-        }, 100);
+          const newUrl = "/panel-client?panel=projects";
+          router.push(newUrl);
+        }, 200);
       } else {
         alert("Error al crear el proyecto. Inténtalo de nuevo.");
       }

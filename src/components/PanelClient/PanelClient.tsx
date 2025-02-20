@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { useGeolocation } from "@/context/GeolocationContext";
 
 import { Customer, DetailedPurchase, GetProjectsByPurchasesId } from "@/utils/dataInterfaces";
+import { set } from "date-fns";
 
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
@@ -26,7 +27,7 @@ const PanelClient: React.FC = () => {
   const { geolocation, fetchGeolocation } = useGeolocation();
 
 
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchGeolocation();
@@ -136,29 +137,48 @@ const PanelClient: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+  
+    return () => clearTimeout(timeoutId); // Limpia el timeout si el componente se desmonta
+  }, []);
+
   return (
-    <main className="flex flex-col h-full w-full relative">
-      <NavbarClient geolocation={geolocation} />
-      <AsideClient
-        toggleAside={toggleAside}
-        isAsideOpen={isAsideOpen}
-        toggleSiteContainer={toggleSiteContainer}
-        asideSelectedOption={asideSelectedOption}
-      />
-      <div className="absolute h-screen w-full">
-        <Section
-          closeSiteContainer={closeSiteContainer}
+    <>
+      <main className="flex flex-col h-full w-full relative bg-rose-400">
+        <NavbarClient geolocation={geolocation} />
+        <AsideClient
+          toggleAside={toggleAside}
+          isAsideOpen={isAsideOpen}
+          toggleSiteContainer={toggleSiteContainer}
           asideSelectedOption={asideSelectedOption}
-          customer={customer}
-          purchases={purchases}
-          projects={projects}
-          purchasesWithProject={purchasesWithProject}
         />
-      </div>
-      <div className="flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]">
-        <ChatModal />
-      </div>
-    </main>
+        <div className="absolute h-screen w-full">
+          <Section
+            closeSiteContainer={closeSiteContainer}
+            asideSelectedOption={asideSelectedOption}
+            customer={customer}
+            purchases={purchases}
+            projects={projects}
+            setProjects={setProjects}
+            purchasesWithProject={purchasesWithProject}
+          />
+        </div>
+        <div className="flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]">
+          <ChatModal />
+        </div>
+      </main>
+      {(loading) && (
+        <div className="bg-blue-300 absolute h-full w-full top-0 z-[1000]">
+          <video autoPlay muted className="object-cover h-full w-full">
+            <source src="/Comp1.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
+    </>
   );
 };
 

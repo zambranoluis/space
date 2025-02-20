@@ -18,6 +18,7 @@ interface SectionProps {
   customer: Customer | null;
   purchases: DetailedPurchase[];
   projects: GetProjectsByPurchasesId[];
+  setProjects: React.Dispatch<React.SetStateAction<GetProjectsByPurchasesId[]>>
   purchasesWithProject: string[]
 }
 
@@ -27,6 +28,7 @@ const Section: React.FC<SectionProps> = ({
   customer,
   purchases,
   projects,
+  setProjects,
   purchasesWithProject
 }) => {
   return (
@@ -60,7 +62,7 @@ const Section: React.FC<SectionProps> = ({
                     <MyProfile customer={customer} />
                   )}
                   {asideSelectedOption === "projects" && <ProjectsClient projects={projects} />}
-                  {asideSelectedOption === "purchases" && <Purchases purchases={purchases} purchasesWithProject={purchasesWithProject} />}
+                  {asideSelectedOption === "purchases" && <Purchases purchases={purchases} purchasesWithProject={purchasesWithProject} projects={projects} setProjects={setProjects} />}
                 </div>
               </div>
             </div>

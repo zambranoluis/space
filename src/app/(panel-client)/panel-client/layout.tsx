@@ -11,12 +11,15 @@ interface ClientPanelLayoutProps {
 }
 
 export default function PanelClientLayout({ children }: ClientPanelLayoutProps) {
+  
   return (
     <SessionProvider>
       <DataProvider>
         <ThemeProvider>
           <GeolocationProvider>
-            <section className="flex w-full bg-blue300 h-screen">{children}</section>
+            <section className="flex w-full bg-blue300 h-screen">
+              {children}
+            </section>
           </GeolocationProvider>
         </ThemeProvider>
       </DataProvider>
