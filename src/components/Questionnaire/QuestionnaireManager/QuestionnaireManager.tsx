@@ -222,6 +222,28 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
   const [selectedMaxTwoGeneral, setSelectedMaxTwoGeneral] = useState<number[]>([]);
 
+  useEffect(() => {
+    console.log("XXX UE GQ2")
+    if (answersGeneral[0]) {
+      console.log("XXX UE GQ2 EXISTE")
+      const styles = Array.from(document.getElementsByClassName("gq2Styles")) as HTMLElement[];
+      const stylesText = styles.map((style) => style.textContent.replace("▪ ", ""));
+      console.log("stylesText: ", stylesText);
+      const selectedIndices: number[] = [];
+      answersGeneral[0].selecteds.forEach((selected, index) => {
+        console.log("selected: ", index, " - ",  selected);
+        stylesText.forEach((style, indexStyle) => {
+          console.log("style: ", indexStyle, " - ", style);
+          if (style === selected.selected) {
+            console.log("estilo conseguido: ", style);
+            selectedIndices.push(indexStyle);
+          }
+        });
+      });
+      setSelectedMaxTwoGeneral(selectedIndices.slice(0, 2));
+    }
+  }, [answersGeneral[0]]);
+
   const handleMaxTwoGeneral = (index: number) => {
     if (selectedMaxTwoGeneral.includes(index)) {
       // Si el índice ya está seleccionado, lo eliminamos
@@ -234,17 +256,160 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   };
 
+
+
   const [selectedBq2, setSelectedBq2] = useState<number | null>(null);
+  useEffect(() => {
+    if (answersBackyard[1]) {
+      console.log("XXX UE BQ2")
+      const plants = Array.from(document.getElementsByClassName("bq2Plants")) as HTMLElement[];
+      const plantsText = plants.map((plant) => plant.textContent);
+      console.log("plantsText: ", plantsText);
+      const selectedIndices: number[] = [];
+      answersBackyard[1].selecteds.forEach((selected, index) => {
+        console.log("selected: ", index, " - ",  selected);
+        plantsText.forEach((plant, indexPlant) => {
+          console.log("plant: ", indexPlant, " - ", plant);
+          if (plant === selected.selected) {
+            console.log("plant conseguido: ", plant);
+            selectedIndices.push(indexPlant);
+          }
+        });
+      });
+      setSelectedBq2(selectedIndices[0]);
+    }
+  }, [answersBackyard[1]])
+
+
   const handleBq2Change = (index: number) => {
     setSelectedBq2(index === selectedBq2 ? null : index); // Permitir deseleccionar.
   };
-  const [selectedFq2, setSelectedFq2] = useState<number | null>(null);
 
+  const [selectedFq2, setSelectedFq2] = useState<number | null>(null);
+  useEffect(() => {
+    if (answersFrontyard[1]) {
+      console.log("XXX UE FQ2")
+      const plants = Array.from(document.getElementsByClassName("fq2Plants")) as HTMLElement[];
+      const plantsText = plants.map((plant) => plant.textContent);
+      console.log("plantsText: ", plantsText);
+      const selectedIndices: number[] = [];
+      answersFrontyard[1].selecteds.forEach((selected, index) => {
+        console.log("selected: ", index, " - ",  selected);
+        plantsText.forEach((plant, indexPlant) => {
+          console.log("plant: ", indexPlant, " - ", plant);
+          if (plant === selected.selected) {
+            console.log("plant conseguido: ", plant);
+            selectedIndices.push(indexPlant);
+          }
+        });
+      });
+      setSelectedFq2(selectedIndices[0]);
+    }
+  }, [answersFrontyard[1]])
   const handleFq2Change = (index: number) => {
     setSelectedFq2(index === selectedFq2 ? null : index); // Permitir deseleccionar.
   };
 
-  const [questionContainer, setQuestionContainer] = useState<question | null>(null);
+  
+
+  const [selectedWaterBackyard, setSelectedWaterBackyard] = useState<number[]>([]);
+  useEffect(() => {
+    if (answersBackyard[4]) {
+      console.log("XXX UE Water Front")
+      const water = Array.from(document.getElementsByClassName("bq5WaterOption")) as HTMLElement[];
+      const waterText = water.map((w) => w.textContent?.replace("▪ ", ""));
+      console.log("waterText: ", waterText);
+      const selectedIndices: number[] = [];
+      answersBackyard[4].selecteds.forEach((selected, index) => {
+        console.log("selected: ", index, " - ",  selected);
+        waterText.forEach((water, indexWater) => {
+          console.log("water: ", indexWater, " - ", water);
+          if (water === selected.selected) {
+            console.log("water conseguido: ", water);
+            selectedIndices.push(indexWater);
+          }
+        });
+      });
+      setSelectedWaterBackyard(selectedIndices);
+      // console.log("indices seleccionados para water: ", selectedWaterBackyard);
+    }
+  }, [answersBackyard[4]])
+
+  const [selectedFireBackyard, setSelectedFireBackyard] = useState<number[]>([]);
+  useEffect(() => {
+    if (answersBackyard[5]) {
+      console.log("XXX UE Fire Front")
+      const fire = Array.from(document.getElementsByClassName("bq6FireOption")) as HTMLElement[];
+      const fireText = fire.map((f) => f.textContent?.replace("▪ ", ""));
+      console.log("fireText: ", fireText);
+      const selectedIndices: number[] = [];
+      answersBackyard[5].selecteds.forEach((selected, index) => {
+        console.log("selected: ", index, " - ",  selected);
+        fireText.forEach((fire, indexFire) => {
+          console.log("water: ", indexFire, " - ", fire);
+          if (fire === selected.selected) {
+            console.log("water conseguido: ", fire);
+            selectedIndices.push(indexFire);
+          }
+        });
+      });
+      setSelectedFireBackyard(selectedIndices);
+      // console.log("indices seleccionados para water: ", selectedWaterBackyard);
+    }
+  }, [answersBackyard[5]])
+
+
+  const [selectedWaterFrontyard, setSelectedWaterFrontyard] = useState<number[]>([]);
+  
+
+  useEffect(() => {
+    if (answersFrontyard[4]) {
+      console.log("XXX UE Water Front")
+      const water = Array.from(document.getElementsByClassName("fq5WaterOption")) as HTMLElement[];
+      const waterText = water.map((w) => w.textContent?.replace("▪ ", ""));
+      console.log("waterText: ", waterText);
+      const selectedIndices: number[] = [];
+      answersFrontyard[4].selecteds.forEach((selected, index) => {
+        console.log("selected: ", index, " - ",  selected);
+        waterText.forEach((water, indexWater) => {
+          console.log("water: ", indexWater, " - ", water);
+          if (water === selected.selected) {
+            console.log("water conseguido: ", water);
+            selectedIndices.push(indexWater);
+          }
+        });
+      });
+      setSelectedWaterFrontyard(selectedIndices);
+      // console.log("indices seleccionados para water: ", selectedWaterFrontyard);
+    }
+  }, [answersFrontyard[4]])
+
+  const [selectedFireFrontyard, setSelectedFireFrontyard] = useState<number[]>([]);
+  useEffect(() => {
+    if (answersFrontyard[5]) {
+      console.log("XXX UE Fire Front")
+      const fire = Array.from(document.getElementsByClassName("fq6FireOption")) as HTMLElement[];
+      const fireText = fire.map((f) => f.textContent?.replace("▪ ", ""));
+      console.log("fireText: ", fireText);
+      const selectedIndices: number[] = [];
+      answersFrontyard[5].selecteds.forEach((selected, index) => {
+        console.log("selected: ", index, " - ",  selected);
+        fireText.forEach((fire, indexFire) => {
+          console.log("water: ", indexFire, " - ", fire);
+          if (fire === selected.selected) {
+            console.log("water conseguido: ", fire);
+            selectedIndices.push(indexFire);
+          }
+        });
+      });
+      setSelectedFireFrontyard(selectedIndices);
+      // console.log("indices seleccionados para water: ", selectedWaterFrontyard);
+    }
+  }, [answersFrontyard[5]])
+
+  
+
+
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmitAnswers = (
@@ -269,6 +434,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     console.log("4. Pregunta no duplicada. Creando nueva pregunta...");
 
     switch (typeQuestion) {
+
       case "Styles General Question":
         console.log("5. Question type: ", typeQuestion);
         const styles = document.getElementsByClassName(`${htmlElements}Styles`);
@@ -849,6 +1015,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
       default:
         break;
+
     }
   };
 
@@ -873,32 +1040,44 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         project={project}
         selectedMaxTwoGeneral={selectedMaxTwoGeneral}
         handleMaxTwoGeneral={handleMaxTwoGeneral}
+        answersGeneral={answersGeneral}
         isAnsweredGeneral={isAnsweredGeneral}
         handleSubmitAnswers={handleSubmitAnswers}
       />
       {categories.includes("Backyard") && (
         <QuestionnaireBackyard
+          answersBackyard={answersBackyard}
           isAnsweredGeneral={isAnsweredGeneral}
           isAnsweredBackyard={isAnsweredBackyard}
           setIsAnsweredBackyard={setIsAnsweredBackyard}
           selectedBq2={selectedBq2}
           handleBq2Change={handleBq2Change}
+          selectedWaterBackyard={selectedWaterBackyard}
+          setSelectedWaterBackyard={setSelectedWaterBackyard}
+          selectedFireBackyard={selectedFireBackyard}
+          setSelectedFireBackyard={setSelectedFireBackyard}
           handleSubmitAnswers={handleSubmitAnswers}
         />
       )}
       {categories.includes("Frontyard") && (
         <QuestionnaireFrontyard
           categories={categories}
+          answersFrontyard={answersFrontyard}
           isAnsweredGeneral={isAnsweredGeneral}
           isAnsweredBackyard={isAnsweredBackyard}
           isAnsweredFrontyard={isAnsweredFrontyard}
           selectedFq2={selectedFq2}
           handleFq2Change={handleFq2Change}
+          selectedWaterFrontyard={selectedWaterFrontyard}
+          setSelectedWaterFrontyard={setSelectedWaterFrontyard}
+          selectedFireFrontyard={selectedFireFrontyard}
+          setSelectedFireFrontyard={setSelectedFireFrontyard}
           handleSubmitAnswers={handleSubmitAnswers}
         />
       )}
       <QuestionnaireExtra
         categories={categories}
+        answersExtra={answersExtra}
         isAnsweredBackyard={isAnsweredBackyard}
         isAnsweredFrontyard={isAnsweredFrontyard}
         isAnsweredExtra={isAnsweredExtra}

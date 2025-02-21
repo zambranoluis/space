@@ -166,11 +166,6 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
         });
         return;
       }
-      Swal.fire({
-        title: "Purchase created successfully. Redirecting to panel...",
-        icon: "success",
-        confirmButtonText: "Cerrar",
-      });
       router.push("/panel-client?panel=purchases");
     } catch (err) {
       console.log("Error creating purchase:", err);

@@ -11,21 +11,31 @@ import {
 } from "../questionnaireFile";
 
 interface QuestionnaireBackyardProps {
+  answersBackyard: question[];
   isAnsweredGeneral: boolean[];
   isAnsweredBackyard: boolean[];
   setIsAnsweredBackyard: React.Dispatch<React.SetStateAction<boolean[]>>;
   selectedBq2: number | null;
   handleBq2Change: (index: number) => void;
+  selectedWaterBackyard: number[];
+  setSelectedWaterBackyard: React.Dispatch<React.SetStateAction<number[]>>;
+  selectedFireBackyard: number[];
+  setSelectedFireBackyard: React.Dispatch<React.SetStateAction<number[]>>;
   handleSubmitAnswers: (question: string, answer: string, categoryQuestion: string, htmlElements: string) => void
 }
 
 
 const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
+  answersBackyard,
   isAnsweredGeneral,
   isAnsweredBackyard,
   setIsAnsweredBackyard,
   selectedBq2,
   handleBq2Change,
+  selectedWaterBackyard,
+  setSelectedWaterBackyard,
+  selectedFireBackyard,
+  setSelectedFireBackyard,
   handleSubmitAnswers
 }) => {
 
@@ -125,7 +135,9 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           <div className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]" style={{backgroundImage: "url('https://github.com/BPM94/SCCTMD/raw/main/questionnaire/questionnaireBgBackyard.webp"}}></div>
         </div>
         <div ref={containerRefBackyard} className={`flex flex-col w-[90%] gap-12 ${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "" : "" } w-[90%] `} style={{ height: `${containerHeightBackyard}px`}}>
-          <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgblue-400" : "bgwyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          
+          {(answersBackyard && isAnsweredBackyard[0] === true)
+            ? <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgblue-400" : "bgwyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][0].title}</h1>
@@ -135,26 +147,58 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select id="bq1Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
+              <select id="bq1Select" value={answersBackyard[0].select === true ? "1" : "2"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
                 <option value="1">Colorful Plants</option>
                 <option value="2">Green and Whites</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#6c786e]">Note:</p>
-                <textarea id="bq1Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq1Note" placeholder={answersBackyard[0].notes[1].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
             </div>
             <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswers(questionnaire["backyard"][0].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq1");
+                  alert("Update Answer logic");
                 }}
               >
-                Submit Answer
+                Update Answer
               </button>
             </div>
           </div>
+          : <div id="bq1" ref={(el) => {questionRefsBackyard.current[0] = el;}} className={`${ isAnsweredGeneral[isAnsweredGeneral.length - 1] === true ? "bgblue-400" : "bgwyellow-200" } flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["backyard"][0].title}</h1>
+            </div>
+            <div className="flex absolute right-[20px] top-[55px]">
+              <Image className="w-[120px] aspect-square object-cover rounded-full" src={questionnaire["backyard"][0].img} alt="" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+            <select id="bq1Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6">
+              <option value="1">Colorful Plants</option>
+              <option value="2">Green and Whites</option>
+            </select>
+            <div className="flex flex-col w-full p-2">
+              <p className="text-[#6c786e]">Note:</p>
+              <textarea id="bq1Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            </div>
+          </div>
+          <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+            <button
+              className="bg-[#858e5b] px-4 py-2 rounded-lg"
+              onClick={() => {
+                handleSubmitAnswers(questionnaire["backyard"][0].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq1");
+              }}
+            >
+              Submit Answer
+            </button>
+          </div>
+        </div>
+          }
+
           <div id="bq2" ref={(el) => {questionRefsBackyard.current[1] = el;}} className={`${ isAnsweredBackyard[0] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
@@ -198,7 +242,40 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
           </div>
-          <div id="bq3" ref={(el) => {questionRefsBackyard.current[2] = el;}} className={`${ isAnsweredBackyard[1] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+
+          
+          {(answersBackyard && isAnsweredBackyard[2] === true)
+            ? <div id="bq3" ref={(el) => {questionRefsBackyard.current[2] = el;}} className={`${ isAnsweredBackyard[1] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][2].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][2].img} alt="" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-center p-8 py-20" >
+              {
+                questionnaire["backyard"][2].options.map((option, index) => (
+                  <div className="flex flex-col w-full " key={index}>
+                    <p className="text-[#68664d]">{option.name}</p>
+                    <textarea placeholder={answersBackyard[2].notes[index].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px] bq3ThingsKeepRemove" />
+                  </div>
+                ))
+              }
+            </div>
+            <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+              <button
+                className="bg-[#858e5b] px-4 py-2 rounded-lg"
+                onClick={() => {
+                  alert("Update Answer logic");
+                }}
+              >
+                Update Answer
+              </button>
+            </div>
+          </div>
+            : <div id="bq3" ref={(el) => {questionRefsBackyard.current[2] = el;}} className={`${ isAnsweredBackyard[1] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][2].title}</h1>
@@ -228,7 +305,11 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </button>
             </div>
           </div>
-          <div id="bq4" ref={(el) => {questionRefsBackyard.current[3] = el;}} className={`${ isAnsweredBackyard[2] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          }
+
+
+          {(answersBackyard && isAnsweredBackyard[3] === true)
+            ? <div id="bq4" ref={(el) => {questionRefsBackyard.current[3] = el;}} className={`${ isAnsweredBackyard[2] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][3].title}</h1>
@@ -238,34 +319,68 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select id="bq4Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq4Select" value={answersBackyard[3].select === true ? "2" : "1"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea id="bq4Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq4Note" placeholder={answersBackyard[3].notes[1].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
             </div>
             <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"
                 onClick={() => {
-                  handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq4");
+                  alert("Update Answer logic");
                 }}
               >
-                Submit Answer
+                Update Answer
               </button>
             </div>
           </div>
-          <div id="bq5" ref={(el) => {questionRefsBackyard.current[4] = el;}} className={`${ isAnsweredBackyard[3] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          : <div id="bq4" ref={(el) => {questionRefsBackyard.current[3] = el;}} className={`${ isAnsweredBackyard[2] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["backyard"][3].title}</h1>
+            </div>
+            <div className="flex absolute right-[20px] top-[55px]">
+              <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][3].img} alt="" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+            <select id="bq4Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <option value="1">No</option>
+              <option value="2">Yes</option>
+            </select>
+            <div className="flex flex-col w-full p-2">
+              <p className="text-[#68664d]">Note:</p>
+              <textarea id="bq4Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            </div>
+          </div>
+          <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+            <button
+              className="bg-[#858e5b] px-4 py-2 rounded-lg"
+              onClick={() => {
+                handleSubmitAnswers(questionnaire["backyard"][3].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq4");
+              }}
+            >
+              Submit Answer
+            </button>
+          </div>
+        </div>
+          }
+
+
+          {(answersBackyard && isAnsweredBackyard[4] === true)
+            ? <div id="bq5" ref={(el) => {questionRefsBackyard.current[4] = el;}} className={`${ isAnsweredBackyard[3] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][4].title}</h1>
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select id="bq5Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq5Select" value={answersBackyard[4].select === true ? "2" : "1"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
@@ -276,7 +391,13 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
                       <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
                       <div className="flex gap-6">
                         <p className="text-xs sm:text-base flex justify-center items-center gap-1 bq5WaterOption"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq5WaterCheckbox"/>
+                        <input type="checkbox" checked={selectedWaterBackyard.includes(index)}
+                        onChange={() => {
+                          setSelectedWaterBackyard((prev) =>
+                            prev.includes(index) ? prev.filter((item) => item !== index) : [...prev, index]
+                          );
+                        }}
+                        className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq5WaterCheckbox"/>
                       </div>
                     </div>
                   ))
@@ -285,68 +406,171 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea id="bq5Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq5Note" placeholder={answersBackyard[4].notes[0].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
                 
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
                 <button
                   className="bg-[#858e5b] px-4 py-2 rounded-lg"
                   onClick={() => {
-                    handleSubmitAnswers(questionnaire["backyard"][4].title.replace("?", "").replace(",", ""), "Water Feature Question", "Backyard", "bq5");
+                    alert("Update Answer logic");
                   }}
                 >
-                  Submit Answer
+                  Update Answer
                 </button>
               </div>
             </div>
           </div>
-          <div id="bq6" ref={(el) => {questionRefsBackyard.current[5] = el;}} className={`${ isAnsweredBackyard[4] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
-              <div className="w-full bggreen-300 p-2 flex">
-                <h1 className="bgred-200">{questionnaire["backyard"][5].title}</h1>
-              </div>
+          : <div id="bq5" ref={(el) => {questionRefsBackyard.current[4] = el;}} className={`${ isAnsweredBackyard[3] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["backyard"][4].title}</h1>
             </div>
-            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select id="bq6FireSelect" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
-                <option value="1">No</option>
-                <option value="2">Yes</option>
-              </select>
-              <div className="grid sm:grid-cols-2 w-full place-items-center max-sm:gap-8 place-content-center bgred-300 max-w-[500px] place-self-center">
-                {
-                  questionnaire["backyard"][5].options.map((option, index) => (
-                    <div className="flex flex-col gap-4  text-black bbqlue-300 " key={index}>
-                      <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
-                      <div className="flex gap-6">
-                        <p className="text-xs sm:text-base flex justify-center items-center gap-1 bq6FireOption"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
-                        <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq6FireCheckbox" />
-                      </div>
+          </div>
+          <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+            <select id="bq5Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <option value="1">No</option>
+              <option value="2">Yes</option>
+            </select>
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 w-full gap-12">
+              {
+                questionnaire["backyard"][4].options.map((option, index) => (
+                  <div className="flex flex-col gap-6 justify-center items-center text-black w-full" key={index}>
+                    <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
+                    <div className="flex gap-6">
+                      <p className="text-xs sm:text-base flex justify-center items-center gap-1 bq5WaterOption"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
+                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq5WaterCheckbox"/>
                     </div>
-                  ))
-                }
-              </div>
-              <div className="flex flex-col w-full p-2">
-                <div className="flex gap-2">
-                  <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
-                  <input id="bq6FirePeople" className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="number" />
-                </div>
-                <div className="flex flex-col">
-                  <p className="text-[#68664d]">Note:</p>
-                  <textarea id="bq6FireNote" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
-                </div>
-              </div>
-              <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
-            <button
-              className="bg-[#858e5b] px-4 py-2 rounded-lg"
-              onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][5].title.replace("?", "").replace(",", ""), "Fire Feature Question", "Backyard", "bq6");
-              }}
-            >
-              Submit Answer
-            </button>
-          </div>
+                  </div>
+                ))
+
+              }
+            </div>
+            <div className="flex flex-col w-full p-2">
+              <p className="text-[#68664d]">Note:</p>
+              <textarea id="bq5Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+              
+            </div>
+            <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+              <button
+                className="bg-[#858e5b] px-4 py-2 rounded-lg"
+                onClick={() => {
+                  handleSubmitAnswers(questionnaire["backyard"][4].title.replace("?", "").replace(",", ""), "Water Feature Question", "Backyard", "bq5");
+                }}
+              >
+                Submit Answer
+              </button>
             </div>
           </div>
-          <div id="bq7" ref={(el) => {questionRefsBackyard.current[6] = el;}} className={`${ isAnsweredBackyard[5] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+        </div>
+          }
+
+
+          {(answersBackyard && isAnsweredBackyard[5] === true)
+          ? <div id="bq6" ref={(el) => {questionRefsBackyard.current[5] = el;}} className={`${ isAnsweredBackyard[4] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["backyard"][5].title}</h1>
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+            <select id="bq6FireSelect" value={answersBackyard[5].select === true ? "2" : "1"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <option value="1">No</option>
+              <option value="2">Yes</option>
+            </select>
+            <div className="grid sm:grid-cols-2 w-full place-items-center max-sm:gap-8 place-content-center bgred-300 max-w-[500px] place-self-center">
+              {
+                questionnaire["backyard"][5].options.map((option, index) => (
+                  <div className="flex flex-col gap-4  text-black bbqlue-300 " key={index}>
+                    <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
+                    <div className="flex gap-6">
+                      <p className="text-xs sm:text-base flex justify-center items-center gap-1 bq6FireOption"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
+                      <input type="checkbox" checked={selectedFireBackyard.includes(index)}
+                      onChange={() => {
+                        setSelectedFireBackyard((prev) =>
+                          prev.includes(index) ? prev.filter((item) => item !== index) : [...prev, index]
+                        );
+                      }}
+                      className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq6FireCheckbox" />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+            <div className="flex flex-col w-full p-2">
+              <div className="flex gap-2">
+                <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
+                <input id="bq6FirePeople" placeholder={`${answersBackyard[5].people}`} className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="number" />
+              </div>
+              <div className="flex flex-col">
+                <p className="text-[#68664d]">Note:</p>
+                <textarea id="bq6FireNote" placeholder={`${answersBackyard[5].notes[0].note}`} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+              </div>
+            </div>
+            <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+          <button
+            className="bg-[#858e5b] px-4 py-2 rounded-lg"
+            onClick={() => {
+              alert("Update Answer logic");
+            }}
+          >
+            Update Answer
+          </button>
+        </div>
+          </div>
+        </div>
+          : <div id="bq6" ref={(el) => {questionRefsBackyard.current[5] = el;}} className={`${ isAnsweredBackyard[4] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["backyard"][5].title}</h1>
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+            <select id="bq6FireSelect" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <option value="1">No</option>
+              <option value="2">Yes</option>
+            </select>
+            <div className="grid sm:grid-cols-2 w-full place-items-center max-sm:gap-8 place-content-center bgred-300 max-w-[500px] place-self-center">
+              {
+                questionnaire["backyard"][5].options.map((option, index) => (
+                  <div className="flex flex-col gap-4  text-black bbqlue-300 " key={index}>
+                    <Image className="w-[100px] aspect-square object-cover" src={option.img} alt="" />
+                    <div className="flex gap-6">
+                      <p className="text-xs sm:text-base flex justify-center items-center gap-1 bq6FireOption"><span className="text-xl  text-[#68664d]">▪ </span>{option.name}</p>
+                      <input type="checkbox" className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer bq6FireCheckbox" />
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+            <div className="flex flex-col w-full p-2">
+              <div className="flex gap-2">
+                <p className="text-[#68664d]">{questionnaire["backyard"][5].question}</p>
+                <input id="bq6FirePeople" className="outline-none border-none bg-[#ebebeb] w-10 text-black pl-2" type="number" />
+              </div>
+              <div className="flex flex-col">
+                <p className="text-[#68664d]">Note:</p>
+                <textarea id="bq6FireNote" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+              </div>
+            </div>
+            <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+          <button
+            className="bg-[#858e5b] px-4 py-2 rounded-lg"
+            onClick={() => {
+              handleSubmitAnswers(questionnaire["backyard"][5].title.replace("?", "").replace(",", ""), "Fire Feature Question", "Backyard", "bq6");
+            }}
+          >
+            Submit Answer
+          </button>
+        </div>
+          </div>
+        </div>
+
+          }
+
+
+          {(answersBackyard && isAnsweredBackyard[6])
+            ? <div id="bq7" ref={(el) => {questionRefsBackyard.current[6] = el;}} className={`${ isAnsweredBackyard[5] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][6].title}</h1>
@@ -356,27 +580,61 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select id="bq7Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq7Select" value={answersBackyard[6].select === true ? "2" : "1"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea id="bq7Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq7Note" placeholder={answersBackyard[6].notes[1].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][6].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq7");
+                alert("Update Answer logic");
               }}
             >
-              Submit Answer
+              Update Answer
             </button>
           </div>
             </div>
           </div>
-          <div id="bq8" ref={(el) => {questionRefsBackyard.current[7] = el;}} className={`${ isAnsweredBackyard[6] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          : <div id="bq7" ref={(el) => {questionRefsBackyard.current[6] = el;}} className={`${ isAnsweredBackyard[5] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["backyard"][6].title}</h1>
+            </div>
+            <div className="flex absolute right-[20px] top-[55px]">
+              <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][6].img} alt="" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+            <select id="bq7Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <option value="1">No</option>
+              <option value="2">Yes</option>
+            </select>
+            <div className="flex flex-col w-full p-2">
+              <p className="text-[#68664d]">Note:</p>
+              <textarea id="bq7Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            </div>
+            <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+          <button
+            className="bg-[#858e5b] px-4 py-2 rounded-lg"
+            onClick={() => {
+              handleSubmitAnswers(questionnaire["backyard"][6].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq7");
+            }}
+          >
+            Submit Answer
+          </button>
+        </div>
+          </div>
+        </div>
+          }
+
+
+          {(answersBackyard && isAnsweredBackyard[7])
+            ? <div id="bq8" ref={(el) => {questionRefsBackyard.current[7] = el;}} className={`${ isAnsweredBackyard[6] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][7].title}</h1>
@@ -386,27 +644,91 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
               </div>
             </div>
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
-              <select id="bq8Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <select id="bq8Select" value={answersBackyard[7].select === true ? "2" : "1"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
                 <option value="1">No</option>
                 <option value="2">Yes</option>
               </select>
               <div className="flex flex-col w-full p-2">
                 <p className="text-[#68664d]">Note:</p>
-                <textarea id="bq8Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+                <textarea id="bq8Note" placeholder={answersBackyard[7].notes[1].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
               </div>
               <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg"
               onClick={() => {
-                handleSubmitAnswers(questionnaire["backyard"][7].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq8");
+                alert("Update Answer logic");
               }}
             >
-              Submit Answer
+              Update Answer
             </button>
           </div>
             </div>
           </div>
-          <div  id="bq9" ref={(el) => {questionRefsBackyard.current[8] = el;}} className={`${ isAnsweredBackyard[7] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          : <div id="bq8" ref={(el) => {questionRefsBackyard.current[7] = el;}} className={`${ isAnsweredBackyard[6] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+          <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="w-full bggreen-300 p-2 flex">
+              <h1 className="bgred-200">{questionnaire["backyard"][7].title}</h1>
+            </div>
+            <div className="flex absolute right-[20px] top-[55px]">
+              <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][7].img} alt="" />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+            <select id="bq8Select" className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+              <option value="1">No</option>
+              <option value="2">Yes</option>
+            </select>
+            <div className="flex flex-col w-full p-2">
+              <p className="text-[#68664d]">Note:</p>
+              <textarea id="bq8Note" className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+            </div>
+            <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+          <button
+            className="bg-[#858e5b] px-4 py-2 rounded-lg"
+            onClick={() => {
+              handleSubmitAnswers(questionnaire["backyard"][7].title.replace("?", "").replace(",", ""), "Yes or No With Note Question", "Backyard", "bq8");
+            }}
+          >
+            Submit Answer
+          </button>
+        </div>
+          </div>
+        </div>
+          }
+
+
+          {(answersBackyard && isAnsweredBackyard[8])
+            ? <div  id="bq9" ref={(el) => {questionRefsBackyard.current[8] = el;}} className={`${ isAnsweredBackyard[7] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][8].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][8].img} alt="" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <select id="bq9Select" value={answersBackyard[8].select === true ? "2" : "1"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+              </select>
+              <div className="flex flex-col w-full p-2">
+                <p className="text-[#68664d]">Note:</p>
+                <textarea id="bq9Note" placeholder={answersBackyard[8].notes[1].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+              </div>
+              <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+            <button
+              className="bg-[#858e5b] px-4 py-2 rounded-lg"
+              onClick={() => {
+                alert("Update Answer logic");
+              }}
+            >
+              Update Answer
+            </button>
+          </div>
+            </div>
+          </div>
+            : <div  id="bq9" ref={(el) => {questionRefsBackyard.current[8] = el;}} className={`${ isAnsweredBackyard[7] === true ? "" : "translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][8].title}</h1>
@@ -436,7 +758,42 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           </div>
             </div>
           </div>
-          <div id="bq10" ref={(el) => {questionRefsBackyard.current[9] = el;}} className={`${ isAnsweredBackyard[8] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+
+          }
+
+
+          {(answersBackyard && isAnsweredBackyard[9])
+            ? <div id="bq10" ref={(el) => {questionRefsBackyard.current[9] = el;}} className={`${ isAnsweredBackyard[8] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
+            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+              <div className="w-full bggreen-300 p-2 flex">
+                <h1 className="bgred-200">{questionnaire["backyard"][9].title}</h1>
+              </div>
+              <div className="flex absolute right-[20px] top-[55px]">
+                <Image className="w-[120px] aspect-square object-cover" src={questionnaire["backyard"][9].img} alt="" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20" >
+              <select id="bq10Select" value={answersBackyard[9].select === true ? "2" : "1"} className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6">
+                <option value="1">No</option>
+                <option value="2">Yes</option>
+              </select>
+              <div className="flex flex-col w-full p-2">
+                <p className="text-[#68664d]">Note:</p>
+                <textarea id="bq10Note" placeholder={answersBackyard[9].notes[1].note} className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"></textarea>
+              </div>
+              <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
+            <button
+              className="bg-[#858e5b] px-4 py-2 rounded-lg"
+              onClick={() => {
+                alert("Update Answer logic");
+              }}
+            >
+              Update Answer
+            </button>
+          </div>
+            </div>
+          </div>
+            : <div id="bq10" ref={(el) => {questionRefsBackyard.current[9] = el;}} className={`${ isAnsweredBackyard[8] === true ? "" : "-translate-x-[-110%] opacity-0 " } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}>
             <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">{questionnaire["backyard"][9].title}</h1>
@@ -466,6 +823,10 @@ const QuestionnaireBackyard: React.FC<QuestionnaireBackyardProps> = ({
           </div>
             </div>
           </div>
+
+          }
+
+
         </div>
       </section>
   );
