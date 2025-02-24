@@ -7,7 +7,7 @@ import { enUS } from "date-fns/locale";
 
 import { TiArrowSortedDown } from "react-icons/ti";
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 import Link from "next/link";
 
 import { GetProjectsByPurchasesId } from "../../utils/dataInterfaces";

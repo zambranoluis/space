@@ -1,7 +1,7 @@
 
 "use client";
 import { useEffect, useState } from "react";
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 
 
 

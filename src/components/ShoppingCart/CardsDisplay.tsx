@@ -2,7 +2,7 @@
 "use client"
 
 import { RefObject } from "react";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { Card, CardHeader, CardBody } from "@heroui/card";
 
 import { TiArrowSortedDown } from "react-icons/ti";
 

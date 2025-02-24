@@ -1,9 +1,9 @@
 "use client"
 
-import { Card, CardBody, CardFooter } from "@nextui-org/card";
+import { Card, CardBody, CardFooter } from "@heroui/card";
 
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 
 import { TiArrowSortedDown } from "react-icons/ti";
 

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import {Image} from "@nextui-org/image";
+import {Image} from "@heroui/image";
 
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";

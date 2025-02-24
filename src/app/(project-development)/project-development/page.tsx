@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import { questionnaire } from "./questionnaire";
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 
 import ChatModal from "@/components/ChatModal";
 

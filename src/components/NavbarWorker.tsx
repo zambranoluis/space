@@ -1,9 +1,9 @@
 "use client";
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 import Link from "next/link";
 
-import {Avatar} from "@nextui-org/avatar";
+import {Avatar} from "@heroui/avatar";
 
 
 const Navbar: React.FC = ( {  } ) => {
