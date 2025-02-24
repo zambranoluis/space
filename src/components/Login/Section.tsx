@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import {Image} from "@nextui-org/image"
+import {Image} from "@heroui/image"
 import Link from 'next/link'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Spinner } from "@heroui/react";

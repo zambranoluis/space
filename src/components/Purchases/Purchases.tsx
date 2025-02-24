@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiService } from "@/services/apiService";
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 import { FaTags } from "react-icons/fa6";
 import Section from "./Section";
 import Swal from "sweetalert2";

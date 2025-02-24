@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 

@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalBody,
   useDisclosure,
-} from "@nextui-org/modal";
+} from "@heroui/modal";
 
 
 import { MdOutlineEmail } from "react-icons/md";

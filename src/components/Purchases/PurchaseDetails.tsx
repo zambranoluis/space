@@ -9,7 +9,7 @@ import {
   ModalHeader,
   ModalBody,
   useDisclosure,
-} from "@nextui-org/modal";
+} from "@heroui/modal";
 
 interface PurchaseDetailsProps {
   purchaseId: string;

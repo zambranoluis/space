@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { apiService } from "@/services/apiService";
 
-import { Switch } from "@nextui-org/switch";
+import { Switch } from "@heroui/switch";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 

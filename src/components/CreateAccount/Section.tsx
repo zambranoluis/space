@@ -4,7 +4,7 @@ import {
   validateTextWithSpaces,
 } from "@/utils/validation";
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 import Link from "next/link";
 
 import { GrSkype } from "react-icons/gr";

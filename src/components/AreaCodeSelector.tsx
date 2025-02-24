@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 
 const areaCodes = [
   {

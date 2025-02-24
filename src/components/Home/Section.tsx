@@ -2,7 +2,7 @@
 
 import EmailSubscription from "@/components/EmailSubscription";
 
-import {Image} from "@nextui-org/image";
+import {Image} from "@heroui/image";
 
 import Link from "next/link";
 

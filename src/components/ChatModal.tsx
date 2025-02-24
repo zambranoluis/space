@@ -1,7 +1,7 @@
 "use client";
 
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 
 
 import { IoCloseOutline } from "react-icons/io5";

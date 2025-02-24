@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useRef } from "react";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { Card, CardHeader, CardBody } from "@heroui/card";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { Switch } from "@nextui-org/switch";
+import { Switch } from "@heroui/switch";
 import { products, extras } from "./shopping-cart";
 
 

@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 
-import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
+import {Card, CardHeader, CardBody, CardFooter} from "@heroui/card";
 
-import {Avatar} from "@nextui-org/avatar";
+import {Avatar} from "@heroui/avatar";
 
-import {Tooltip} from "@nextui-org/tooltip";
+import {Tooltip} from "@heroui/tooltip";
 
 import { FaSearch } from "react-icons/fa";
 

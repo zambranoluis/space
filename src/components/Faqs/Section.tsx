@@ -2,7 +2,7 @@
 
 import {faqs} from "./faqsAll"
 
-import { Image } from "@nextui-org/image";
+import { Image } from "@heroui/image";
 
 import { SlArrowDown } from "react-icons/sl";
 
