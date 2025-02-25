@@ -42,6 +42,10 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   }, [project]);
 
+  useEffect(() => {
+    console.log("project en questionnaire manager: ", project);
+  }, [project]);
+
   // Obtener datos de cuestionario segun proyecto
   const [questionnaireData, setQuestionnaireData] = useState<question[]>([]);
 

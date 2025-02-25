@@ -31,7 +31,9 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
 
 
 
-
+  useEffect(() => {
+    console.log("project en QuestionnaireGeneral: ", project);
+  }, [project]);
 
 
   const containerRefGeneral = useRef<HTMLDivElement>(null);
