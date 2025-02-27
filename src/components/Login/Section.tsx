@@ -29,8 +29,8 @@ const Section: React.FC<LoginProps> = ({
   error,
   loadingLogin}) => {
   return (
-    <div className='w-full h-[100dvh] flex flex-row-reverse max-md:flex-col justify-center items-center max-md:relative'>
-      <div id='video' className='max-md:absolute h-full md:w-[60dvw]'>
+    <div className='w-full h-[100vh] flex max-md:flex-col md:flex-row-reverse justify-center items-center max-md:relative'>
+      <div id='video' className='max-md:absolute bgred-300 w-full h-full md:w-[60dvw]'>
         <video className='h-full w-full object-cover z-[1]' autoPlay loop muted>
           <source
             src='https://github.com/BPM94/SCCTMD/raw/main/login/videoLogin.mp4'

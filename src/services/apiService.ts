@@ -326,4 +326,16 @@ export const apiService = {
       throw error;
     }
   },
+
+  updateQuestion: async (questionId: string | undefined, question: question): Promise<ApiResponse<question>> => {
+    console.log("pregunta a actualizar: ", questionId)
+    try {
+      const response = await apiClient.patch(`${NEXT_URL_API}/questions/${questionId}`, question);
+      return response.data;
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.log("Error al actualizar la pregunta:", err.response?.data || err.message);
+      throw error;
+    }
+  },
 };

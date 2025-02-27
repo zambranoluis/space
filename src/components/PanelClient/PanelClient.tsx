@@ -148,8 +148,8 @@ const PanelClient: React.FC = () => {
   }, []);
 
   return loading ? (
-    <div className='bgwhite absolute h-full w-full top-0 z-[1000]'>
-      <video autoPlay muted className='objectcover h-full w-full'>
+    <div className='bgwhite absolute h-full w-full top-0 z-[1000] bgred-300 flex justify-center items-center'>
+      <video autoPlay muted className='objectcover h-full w-full max-w-[650px]'>
         <source
           src='https://github.com/BPM94/SCCTMD/raw/main/LoadingAnimationSpaceCreation.mp4'
           type='video/mp4'

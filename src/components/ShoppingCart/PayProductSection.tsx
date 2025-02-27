@@ -114,7 +114,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       Swal.fire({
         title: "Please log in before making a purchase.",
         icon: "warning",
-        confirmButtonText: "Cerrar",
+        confirmButtonText: "Close",
       });
       router.push("/login");
       return;
@@ -124,7 +124,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       Swal.fire({
         title: "Cannot proceed with the purchase. Try again.",
         icon: "warning",
-        confirmButtonText: "Cerrar",
+        confirmButtonText: "Close",
       });
       return;
     }
@@ -162,7 +162,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
         Swal.fire({
           title: "Error to create the purchase, please try again",
           icon: "error",
-          confirmButtonText: "Cerrar",
+          confirmButtonText: "Close",
         });
         return;
       }
@@ -172,7 +172,7 @@ const PayProductSection: React.FC<PayProductSectionProps> = ({
       Swal.fire({
         title: "There was a problem with the purchase. Try again later.",
         icon: "error",
-        confirmButtonText: "Cerrar",
+        confirmButtonText: "Close",
       });
     }
   };

@@ -61,7 +61,7 @@ const Section: React.FC<SectionProps> = ({
                   {asideSelectedOption === "myprofile" && customer && (
                     <MyProfile customer={customer} />
                   )}
-                  {asideSelectedOption === "projects" && <ProjectsClient projects={projects} />}
+                  {asideSelectedOption === "projects" && <ProjectsClient projects={projects} customer={customer} />}
                   {asideSelectedOption === "purchases" && <Purchases purchases={purchases} purchasesWithProject={purchasesWithProject} projects={projects} setProjects={setProjects} />}
                 </div>
               </div>

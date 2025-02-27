@@ -64,7 +64,8 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    const id = req.nextUrl.searchParams.get("id");
+    const id = req.nextUrl.pathname.split("/").pop();
+    console.log("ID recibido en API:", id);
 
     if (!id) {
       return NextResponse.json(

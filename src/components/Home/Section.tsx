@@ -48,12 +48,12 @@ const Section:React.FC<SectionProps> = ({
               <p>Create your Account <Link className="text-[#6b776d] underline" href="/create-account" >here.</Link></p>
             </div>
           </div>
-          <div className="flex flex-col  w-full max-sm:h-[50vh]   sm:w-[60vw] lg:w-[55vw] bgblue-400 ">
-            <div className="flex w-full bgred-400 h-full overflow-x-auto noScrollBar" ref={scrollContainerRef}>
+          <div className="flex flex-col w-full max-sm:h[50vh]   sm:w-[60vw] lg:w-[55vw] bgblue-400 ">
+            <div className="flex w-full p2 bgred-400 h-full overflow-x-auto noScrollBar" ref={scrollContainerRef}>
               {
                 pictures.map((picture, index) => (
                   <div className="bgpurple-400 flex-shrink-0 h-full w-full flex" key={index} id={`${index}`} >
-                    <Image className={`${index === 0 ? "-scale-x-100" : ""} w-full  h-full object-cover object-center no-border-radius rounded-none`} src={picture.image}
+                    <Image className={`${index === 0 ? "-scale-x-100" : ""} w-full h-full object-cover object-center rounded-none`} src={picture.image}
                     loading="lazy"
                     alt="" />
                   </div>

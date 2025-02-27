@@ -47,10 +47,8 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   const [countedGeneralAnswers, setCountedGeneralAnswers] = useState(0);
 
   useEffect(() => {
-    isAnsweredGeneral.map((isAnswered, index) => {
-      (isAnswered ? setCountedGeneralAnswers(countedGeneralAnswers + 1) : null);
-      })
-  }, [isAnsweredGeneral])
+    setCountedGeneralAnswers(isAnsweredGeneral.filter((isAnswered) => isAnswered).length);
+  }, [isAnsweredGeneral]);
 
 
   
@@ -73,10 +71,8 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   const [countedBackyardAnswers, setCountedBackyardAnswers] = useState(0);
 
   useEffect(() => {
-    isAnsweredBackyard.map((isAnswered, index) => {
-      (isAnswered ? setCountedBackyardAnswers(countedBackyardAnswers + 1) : null);
-    })
-  }, [isAnsweredBackyard])
+    setCountedBackyardAnswers(isAnsweredBackyard.filter((isAnswered) => isAnswered).length);
+  }, [isAnsweredBackyard]);
 
 
 
@@ -100,10 +96,8 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   
 
   useEffect(() => {
-    isAnsweredFrontyard.map((isAnswered, index) => {
-      (isAnswered ? setCountedFrontyardAnswers(countedFrontyardAnswers + 1) : null);
-    })
-  }, [isAnsweredFrontyard])
+    setCountedFrontyardAnswers(isAnsweredFrontyard.filter((isAnswered) => isAnswered).length);
+  }, [isAnsweredFrontyard]);
 
 
   const questionRefsExtra = useRef<(HTMLDivElement | null)[]>([]);
@@ -125,10 +119,9 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   
 
   useEffect(() => {
-    isAnsweredExtra.map((isAnswered, index) => {
-      (isAnswered ? setCountedExtraAnswers(countedExtraAnswers + 1) : null);
-    })
-  }, [isAnsweredExtra])
+    setCountedExtraAnswers(isAnsweredExtra.filter((isAnswered) => isAnswered).length);
+  }, [isAnsweredExtra]);
+  
 
   const openProgress = (arrow: string, container: string) => {
     const openArrow = document.getElementById(arrow);
@@ -148,7 +141,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openGeneralArrow" className="bgred-300 text-lg rotate-180" />
             <h2 className={`pl4 `}>General Questions: <span className="text-xs">( {countedGeneralAnswers} / {questionnaire.general.length} )</span></h2>
           </div>
-          <div id="progressGeneral" className="flex gap-2 w-full p-2 select-none overflow-y-hidden overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressGeneral" className="flex gap-2 w-full max-h-0 select-none overflow-y-hidden overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.general.map((answer, index) => (
               <div
                 key={index}
@@ -176,7 +169,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openBackyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Backyard Questions: <span className="text-xs">( {countedBackyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
-          <div id="progressBackyard" className="flex gap-2 w-full select-none overflow-y-hidden p-2 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressBackyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.backyard.map((answer, index) => (
               <div
                 key={index}
@@ -206,7 +199,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openFrontyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Frontyard Questions: <span className="text-xs">( {countedFrontyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
-          <div id="progressFrontyard" className="flex gap-2 w-full select-none overflow-y-hidden p-2 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressFrontyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.backyard.map((answer, index) => (
               <div
                 key={index}
@@ -236,7 +229,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openFrontyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Frontyard Questions: <span className="text-xs">( {countedFrontyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
-          <div id="progressFrontyard" className="flex gap-2 w-full select-none overflow-y-hidden p-2 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressFrontyard" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.backyard.map((answer, index) => (
               <div
                 key={index}
@@ -266,7 +259,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openExtraArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Extra Questions: <span className="text-xs">( {countedExtraAnswers} / {questionnaire.extra.length} )</span></h2>
           </div>
-          <div id="progressExtra" className="flex gap-2 w-full select-none overflow-y-hidden p-2 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressExtra" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.extra.map((answer, index) => (
               <div
                 key={index}
@@ -296,7 +289,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
             <MdOutlineExpandLess id="openExtraArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Extra Questions: <span className="text-xs">( {countedExtraAnswers} / {questionnaire.extra.length} )</span></h2>
           </div>
-          <div id="progressExtra" className="flex gap-2 w-full select-none overflow-y-hidden p-2 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
+          <div id="progressExtra" className="flex gap-2 w-full select-none overflow-y-hidden max-h-0 overflow-x-auto transition-all duration-100 questionnaireProgressScroll">
             {questionnaire.extra.map((answer, index) => (
               <div
                 key={index}

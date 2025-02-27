@@ -9,17 +9,18 @@ import Section from "./Section";
 
 import { apiService } from "../../services/apiService";
 
-import { GetProjectsByPurchasesId, ProjectInformation, question } from '../../utils/dataInterfaces';
+import { GetProjectsByPurchasesId, Customer } from '../../utils/dataInterfaces';
 
 interface ProjectsClientProps {
-  projects: GetProjectsByPurchasesId[]
+  projects: GetProjectsByPurchasesId[];
+  customer: Customer | null;
 }
 
 interface ProjectsWorkerProps {
 
 }
 
-const ProjectsClient: React.FC<ProjectsClientProps> = ({ projects }) => {
+const ProjectsClient: React.FC<ProjectsClientProps> = ({ projects, customer }) => {
 
   const toggleProject = (id: number) => {
     const project = document.getElementById(`project${id}Container`);
@@ -36,6 +37,7 @@ const ProjectsClient: React.FC<ProjectsClientProps> = ({ projects }) => {
     <section>
       <Section
         projects={projects}
+        customer={customer}
         toggleProject={toggleProject}
         toggleStep={toggleStep}
       />

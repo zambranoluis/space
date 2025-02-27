@@ -10,15 +10,17 @@ import { TiArrowSortedDown } from "react-icons/ti";
 import { Image } from "@heroui/image";
 import Link from "next/link";
 
-import { GetProjectsByPurchasesId } from "../../utils/dataInterfaces";
+import { GetProjectsByPurchasesId, Customer } from "../../utils/dataInterfaces";
 
 interface SectionProps {
+  customer: Customer | null;
   projects: GetProjectsByPurchasesId[];
   toggleProject: (id: number) => void;
   toggleStep: (projectId: number, stepId: number) => void;
 }
 
 const Section: React.FC<SectionProps> = ({
+  customer,
   projects,
   toggleProject,
   toggleStep
@@ -33,19 +35,17 @@ const Section: React.FC<SectionProps> = ({
     <div>
       <section className='w-[90%] py-8 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center'>
         <div className='flex flex-col justify-center items-center text-[#6b776d]'>
-          <h1 className='font-black text-center'>Hello, Claudia Alves!</h1>
+          <h1 className='font-black text-center'>Hello, {customer?.name} {customer?.lastname}!</h1>
           <p className='text-center text-sm'>
             Welcome to your Space Creations account, here you can share photos of
             yourspace, your inspiration and the measurements of your home.
           </p>
-        </div>
-        <div className='flex flex-col justify-center items-center'>
-          <div className='flex p-4'>
-            <h1 className='font-bold text-[#6b776d] text-center'>
+          <h1 className='font-bold mt-2 text-[#6b776d] text-center'>
               Let&apos;s start designing together!
             </h1>
-          </div>
-          <div className='flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center'>
+        </div>
+        <div className='flex flex-col justify-center items-center'>
+          {/* <div className='flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center items-center'>
             <button className='py-3 px-4 rounded-2xl bg-[#848d5a] text-xs md:text-base'>
               Click here to schedule a call
             </button>
@@ -54,7 +54,7 @@ const Section: React.FC<SectionProps> = ({
               href='/questionnaire'>
               Click here to complete the questionnaire
             </Link>
-          </div>
+          </div> */}
           <div className='flex flex-col py-6 gap-8 text-[#6c6c6c]'>
             <div className='flex flex-col'>
               <div className='flex p-2 font-bold bggreen-300 border-b border-b-[#6c6c6c] min-[350px]:w-[80%]'>

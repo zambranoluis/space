@@ -6,13 +6,16 @@ import { FaTags } from "react-icons/fa6";
 import Section from "./Section";
 import Swal from "sweetalert2";
 
-import { DetailedPurchase, GetProjectsByPurchasesId } from "@/utils/dataInterfaces";
+import {
+  DetailedPurchase,
+  GetProjectsByPurchasesId,
+} from "@/utils/dataInterfaces";
 import { set } from "date-fns";
 
 const typePurchase = [
   {
     name: "All Purchases",
-    icon: <FaTags className='text-2xl' />,
+    icon: <FaTags className="text-2xl" />,
   },
   {
     name: "Pending",
@@ -21,8 +24,8 @@ const typePurchase = [
         src={
           "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchasePendingSpaceColorsGreen.png"
         }
-        className='w-[25px] h-[25px] rounded-none'
-        alt=''
+        className="w-[25px] h-[25px] rounded-none"
+        alt=""
       />
     ),
   },
@@ -33,8 +36,8 @@ const typePurchase = [
         src={
           "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCompletedColorsGreen.png"
         }
-        className='w-[25px] h-[25px] rounded-none'
-        alt=''
+        className="w-[25px] h-[25px] rounded-none"
+        alt=""
       />
     ),
   },
@@ -45,8 +48,8 @@ const typePurchase = [
         src={
           "https://github.com/BPM94/SCCTMD/raw/main/purchases/purchaseCanceledColorsGreen.png"
         }
-        className='w-[25px] h-[25px] rounded-none'
-        alt=''
+        className="w-[25px] h-[25px] rounded-none"
+        alt=""
       />
     ),
   },
@@ -67,7 +70,8 @@ export const Purchases: React.FC<PurchasesProps> = ({
 }) => {
   const router = useRouter();
 
-  const [currentPurchases, setCurrentPurchases] = useState<string>("All Purchases");
+  const [currentPurchases, setCurrentPurchases] =
+    useState<string>("All Purchases");
 
   const handlePayment = async (purchaseId: string) => {
     try {
@@ -100,25 +104,20 @@ export const Purchases: React.FC<PurchasesProps> = ({
       return purchases;
     }
     return purchases.filter(
-      (purchase) => purchase.status.toLowerCase() === currentPurchases?.toLowerCase(),
+      (purchase) =>
+        purchase.status.toLowerCase() === currentPurchases?.toLowerCase()
     );
   };
 
   const handleCreateProject = async (purchase: DetailedPurchase) => {
-    console.log("old projects variable: ", projects);
-    console.log("---------------- creating project");
-
     try {
       const response = await apiService.createProject({
         purchaseId: purchase._id,
       });
 
       if (response.message === "Project created successfully.") {
-        console.log("respuesta de la creación de proyecto: ", response);
-
         setProjects((prevProjects) => {
           const updatedProjects = [...prevProjects, response.projectPopulated];
-          console.log("new projects variable: ", updatedProjects); // Aquí sí refleja el cambio
           return updatedProjects;
         });
 

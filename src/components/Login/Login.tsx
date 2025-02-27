@@ -37,8 +37,8 @@ export default function Login() {
     });
 
     if (result?.error) {
-      // setLoadingLogin(false);
       setError(result.error || "Invalid login credentials");
+      setLoadingLogin(false);
     } else if (result?.ok) {
       setLoadingLogin(false);
       router.push("/panel-client");
@@ -46,7 +46,7 @@ export default function Login() {
   };
 
   return (
-    <section id="login" className="bgred-300 p2">
+    <section id="login" className="bgred-300 p2 w-full">
       <Section
         handleLogin={handleLogin}
         email={email}

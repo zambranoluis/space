@@ -289,4 +289,5 @@ export interface question {
   people?: number; // Número de personas asociadas
   files?: string[]; // Archivos subidos por el cliente
   questionnaireId: string | undefined;
+  _id?: string | undefined;
 }
