@@ -1652,8 +1652,8 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
   return (
     <div className="flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300 w-full">
-      {/* {showProgress && (
-        <div className='flex fixed bg-black/70 hover:bg-black/85 transition-colors duration-300 rounded-lg z-[100] left-[5%] top-[50px] w-[90%] '>
+      {showProgress && (
+        <div className='flex fixed sm:max-w-[500px]  bg-[#6c786e]/70 hover:bg-[#6c786e]/85 transition-colors duration-300 rounded-lg z-[100] max-sm:left-[5%] top-[50px] sm:right-[5%] w-[90%] '>
           <QuestionnaireProgress
             categories={categories}
             answersGeneral={answersGeneral}
@@ -1666,7 +1666,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
             isAnsweredExtra={isAnsweredExtra}
           />
         </div>
-      )} */}
+      )}
       <QuestionnaireGeneral
         project={project}
         selectedMaxTwoGeneral={selectedMaxTwoGeneral}

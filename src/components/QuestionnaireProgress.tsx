@@ -134,7 +134,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   };
 
   return (
-    <div className="bgred-300 flex flex-col w-full p-2 select-none">
+    <div className="maxw-[600px] bgred-300 flex flex-col w-full p-2 select-none">
       <div className="flex flex-col gap-2 w-full bgblue-300">
         <div className="w-full">
           <div className="flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer" onClick={()=>{openProgress("openGeneralArrow", "progressGeneral")}}>
@@ -151,13 +151,13 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
                 
                 className={`${isAnsweredGeneral[index] ? "bggreen-500" : "bgred-500"} flex gap-2 justify-center items-center px-2 py-1 rounded`}
               >
-                <p className={`${isAnsweredGeneral[index] ? "text-white" : "text-gray-500/50"} text-xs`}>
+                <p className={`${isAnsweredGeneral[index] ? "text-white" : "text-gray-200/50"} text-xs`}>
                   {index + 1}.
                 </p>
-                <h3 className={`${isAnsweredGeneral[index] ? "text-white" : "text-gray-500/50"} text-xs whitespace-nowrap`}>
+                <h3 className={`${isAnsweredGeneral[index] ? "text-white" : "text-gray-200/50"} text-xs whitespace-nowrap`}>
                   {answer.title}
                 </h3>
-                <FaCheck className={`${isAnsweredGeneral[index] ? "text-green-500" : "text-gray-500/50"}`} />
+                <FaCheck className={`${isAnsweredGeneral[index] ? "text-green-500" : "text-gray-200/50"}`} />
               </div>
             ))}
           </div>
@@ -165,7 +165,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
         {
           (categories.includes("Backyard")) && (
             <div  className="w-full">
-          <div className={`${isAnsweredGeneral[isAnsweredGeneral.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openBackyardArrow", "progressBackyard")}}>
+          <div className={`${isAnsweredGeneral[isAnsweredGeneral.length - 1] ? "text-white" : "text-gray-200/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openBackyardArrow", "progressBackyard")}}>
             <MdOutlineExpandLess id="openBackyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Backyard Questions: <span className="text-xs">( {countedBackyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
@@ -179,13 +179,13 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
                 
                 className={`${isAnsweredBackyard[index] ? "bggreen-500" : "bgred-500"} flex gap-2 justify-center items-center px-2 py-1 rounded`}
               >
-                <p className={`${isAnsweredBackyard[index] ? "text-white" : "text-gray-500/50"} text-xs`}>
+                <p className={`${isAnsweredBackyard[index] ? "text-white" : "text-gray-200/50"} text-xs`}>
                   {index + 1}.
                 </p>
-                <h3 className={`${isAnsweredBackyard[index] ? "text-white" : "text-gray-500/50"} text-xs whitespace-nowrap`}>
+                <h3 className={`${isAnsweredBackyard[index] ? "text-white" : "text-gray-200/50"} text-xs whitespace-nowrap`}>
                   {answer.title}
                 </h3>
-                <FaCheck className={`${isAnsweredBackyard[index] ? "text-green-500" : "text-gray-500/50"}`} />
+                <FaCheck className={`${isAnsweredBackyard[index] ? "text-green-500" : "text-gray-200/50"}`} />
               </div>
             ))}
           </div>
@@ -195,7 +195,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
         {
           (categories.includes("Backyard") && categories.includes("Frontyard")) && (
             <div  className="w-full">
-          <div className={`${isAnsweredBackyard[isAnsweredBackyard.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openFrontyardArrow", "progressFrontyard")}}>
+          <div className={`${isAnsweredBackyard[isAnsweredBackyard.length - 1] ? "text-white" : "text-gray-200/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openFrontyardArrow", "progressFrontyard")}}>
             <MdOutlineExpandLess id="openFrontyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Frontyard Questions: <span className="text-xs">( {countedFrontyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
@@ -209,13 +209,13 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
                 
                 className={`${isAnsweredFrontyard[index] ? "bggreen-500" : "bgred-500"} flex gap-2 justify-center items-center px-2 py-1 rounded`}
               >
-                <p className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-500/50"} text-xs`}>
+                <p className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-200/50"} text-xs`}>
                   {index + 1}.
                 </p>
-                <h3 className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-500/50"} text-xs whitespace-nowrap`}>
+                <h3 className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-200/50"} text-xs whitespace-nowrap`}>
                   {answer.title}
                 </h3>
-                <FaCheck className={`${isAnsweredFrontyard[index] ? "text-green-500" : "text-gray-500/50"}`} />
+                <FaCheck className={`${isAnsweredFrontyard[index] ? "text-green-500" : "text-gray-200/50"}`} />
               </div>
             ))}
           </div>
@@ -225,7 +225,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
         {
           (!categories.includes("Backyard") && categories.includes("Frontyard")) && (
             <div  className="w-full">
-          <div className={`${isAnsweredGeneral[isAnsweredGeneral.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openFrontyardArrow", "progressFrontyard")}}>
+          <div className={`${isAnsweredGeneral[isAnsweredGeneral.length - 1] ? "text-white" : "text-gray-200/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openFrontyardArrow", "progressFrontyard")}}>
             <MdOutlineExpandLess id="openFrontyardArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Frontyard Questions: <span className="text-xs">( {countedFrontyardAnswers} / {questionnaire.backyard.length} )</span></h2>
           </div>
@@ -239,13 +239,13 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
                 
                 className={`${isAnsweredFrontyard[index] ? "bggreen-500" : "bgred-500"} flex gap-2 justify-center items-center px-2 py-1 rounded`}
               >
-                <p className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-500/50"} text-xs`}>
+                <p className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-200/50"} text-xs`}>
                   {index + 1}.
                 </p>
-                <h3 className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-500/50"} text-xs whitespace-nowrap`}>
+                <h3 className={`${isAnsweredFrontyard[index] ? "text-white" : "text-gray-200/50"} text-xs whitespace-nowrap`}>
                   {answer.title}
                 </h3>
-                <FaCheck className={`${isAnsweredFrontyard[index] ? "text-green-500" : "text-gray-500/50"}`} />
+                <FaCheck className={`${isAnsweredFrontyard[index] ? "text-green-500" : "text-gray-200/50"}`} />
               </div>
             ))}
           </div>
@@ -255,7 +255,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
         {
           (!categories.includes("Frontyard")) && (
             <div  className="w-full">
-          <div className={`${isAnsweredBackyard[isAnsweredBackyard.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openExtraArrow", "progressExtra")}}>
+          <div className={`${isAnsweredBackyard[isAnsweredBackyard.length - 1] ? "text-white" : "text-gray-200/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openExtraArrow", "progressExtra")}}>
             <MdOutlineExpandLess id="openExtraArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Extra Questions: <span className="text-xs">( {countedExtraAnswers} / {questionnaire.extra.length} )</span></h2>
           </div>
@@ -269,13 +269,13 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
                 
                 className={`${isAnsweredExtra[index] ? "bggreen-500" : "bgred-500"} flex gap-2 justify-center items-center px-2 py-1 rounded`}
               >
-                <p className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-500/50"} text-xs`}>
+                <p className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-200/50"} text-xs`}>
                   {index + 1}.
                 </p>
-                <h3 className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-500/50"} text-xs whitespace-nowrap`}>
+                <h3 className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-200/50"} text-xs whitespace-nowrap`}>
                   {answer.title}
                 </h3>
-                <FaCheck className={`${isAnsweredExtra[index] ? "text-green-500" : "text-gray-500/50"}`} />
+                <FaCheck className={`${isAnsweredExtra[index] ? "text-green-500" : "text-gray-200/50"}`} />
               </div>
             ))}
           </div>
@@ -285,7 +285,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
         {
           (categories.includes("Frontyard")) && (
             <div  className="w-full">
-          <div className={`${isAnsweredFrontyard[isAnsweredFrontyard.length - 1] ? "text-white" : "text-gray-500/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openExtraArrow", "progressExtra")}}>
+          <div className={`${isAnsweredFrontyard[isAnsweredFrontyard.length - 1] ? "text-white" : "text-gray-200/50"} flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer`} onClick={()=>{openProgress("openExtraArrow", "progressExtra")}}>
             <MdOutlineExpandLess id="openExtraArrow" className="bgred-300 text-lg rotate-180 " />
             <h2 className={` `}>Extra Questions: <span className="text-xs">( {countedExtraAnswers} / {questionnaire.extra.length} )</span></h2>
           </div>
@@ -299,13 +299,13 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
                 
                 className={`${isAnsweredExtra[index] ? "bggreen-500" : "bgred-500"} flex gap-2 justify-center items-center px-2 py-1 rounded`}
               >
-                <p className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-500/50"} text-xs`}>
+                <p className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-200/50"} text-xs`}>
                   {index + 1}.
                 </p>
-                <h3 className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-500/50"} text-xs whitespace-nowrap`}>
+                <h3 className={`${isAnsweredExtra[index] ? "text-white" : "text-gray-200/50"} text-xs whitespace-nowrap`}>
                   {answer.title}
                 </h3>
-                <FaCheck className={`${isAnsweredExtra[index] ? "text-green-500" : "text-gray-500/50"}`} />
+                <FaCheck className={`${isAnsweredExtra[index] ? "text-green-500" : "text-gray-200/50"}`} />
               </div>
             ))}
           </div>
