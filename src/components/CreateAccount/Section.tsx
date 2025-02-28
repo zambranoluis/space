@@ -8,6 +8,9 @@ import { Image } from "@heroui/image";
 import Link from "next/link";
 
 import { GrSkype } from "react-icons/gr";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+
 
 import AreaCodeSelector from "@/components/AreaCodeSelector";
 
@@ -36,7 +39,10 @@ interface SectionProps {
   handleCreateAccount: () => void;
   formData: Customer;
   setFormData: React.Dispatch<React.SetStateAction<Customer>>;
-  isLoadingCustomer: boolean
+  isLoadingCustomer: boolean;
+  togglePassword: (source: string) => void;
+  showPassword: boolean;
+  showConfirmPassword: boolean;
 }
 
 
@@ -46,7 +52,10 @@ const Section:React.FC<SectionProps> = ({
   handleCreateAccount,
   formData,
   setFormData,
-  isLoadingCustomer
+  isLoadingCustomer,
+  togglePassword,
+  showPassword,
+  showConfirmPassword
 }) => {
   return (
     <main className='flex w-full min-h-screen bgred-500'>
@@ -57,7 +66,7 @@ const Section:React.FC<SectionProps> = ({
                 backgroundImage:
                   "url('https://github.com/BPM94/SCCTMD/raw/main/create-account/createAccountBG.webp')",
               }}></div>
-            <div className='w-[60%] h-full bggreen-400 max-lg:w-full z-[100]'>
+            <div className='w-[60%] h-full bggreen-400 max-lg:w-full z-[100] select-none'>
               <div className='flex flex-col h-full w-full'>
                 <div className='flex flex-col lg:h-full lg:bg-white'>
                   <div className='w-full h-[15%] flex justify-center items-center bgred-500'>
@@ -111,31 +120,59 @@ const Section:React.FC<SectionProps> = ({
                           />
                         </div>
                         <div id='password' className='flex flex-col w-full'>
-                          <div id='createPassword' className='flex w-full p-2'>
+                          <div id='createPassword' className='flex w-full p-2 relative'>
                             <input
                               id='fieldPassword'
                               className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
-                              type='text'
+                              type={`${showPassword ? "text" : "password"}`}
                               placeholder='Create Password'
                               onChange={(e) =>
                                 setFormData({ ...formData, password: e.target.value })
                               }
                             />
+                            <div className="flex bgred-200 justify-center items-center p-2 absolute right-4 top-3">
+                              {showPassword ? (
+                                <FaEye
+                                  className="text-gray-700 text-2xl cursor-pointer"
+                                  onClick={() => togglePassword("password")}
+                                />
+                              ) : (
+                                <FaEyeSlash
+                                  className="text-gray-700 text-2xl cursor-pointer"
+                                  onClick={() => togglePassword("password")}
+                                />
+                              )}
+                            </div>
                           </div>
-                          <div id='confirmPassword' className='flex w-full p-2'>
+                          <div id='confirmPassword' className='flex w-full p-2 relative'>
                             <input
                               id='fieldConfirmPassword'
                               className='bg-white w-full p-3 text-[#828282] border border-[#828282] rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]'
-                              type='text'
+                              type={`${showConfirmPassword ? "text" : "password"}`}
                               placeholder='Confirm Password'
                               onChange={(e) =>
                                 setFormData({ ...formData, confirmPassword: e.target.value })
                               }
                             />
+                            <div className="flex bgred-200 justify-center items-center p-2 absolute right-4 top-3">
+                              {
+                                showConfirmPassword ? (
+                                  <FaEye
+                                    className="text-gray-700 text-2xl cursor-pointer "
+                                    onClick={() => togglePassword("confirmPassword")}
+                                  />
+                                ) : (
+                                  <FaEyeSlash
+                                    className="text-gray-700 text-2xl cursor-pointer "
+                                    onClick={() => togglePassword("confirmPassword")}
+                                  />
+                                )
+                              }
+                            </div>
                           </div>
                         </div>
                         <div id='phone' className='flex max-sm:flex-col w-full p-2 gap-2'>
-                          <div className="h-full bgred-300 max-sm:h-[50px]">
+                          <div className="h-full bgred-300 max-sm:h-[50px] ">
                             <AreaCodeSelector
                             setAreaCode={setAreaCode}
                             handleBuildPhone={handleBuildPhone}

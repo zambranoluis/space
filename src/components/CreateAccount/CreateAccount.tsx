@@ -73,6 +73,17 @@ const CreateAccount = () => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePassword = (source: string) => {
+    if (source === "password") {
+      setShowPassword(!showPassword);
+    } else if (source === "confirmPassword") {
+      setShowConfirmPassword(!showConfirmPassword);
+    }
+  };
+
   return (
     <section>
       <Section
@@ -82,6 +93,9 @@ const CreateAccount = () => {
         formData={formData}
         setFormData={setFormData}
         isLoadingCustomer={isLoadingCustomer}
+        togglePassword={togglePassword}
+        showPassword={showPassword}
+        showConfirmPassword={showConfirmPassword}
       />
     </section>
   );
