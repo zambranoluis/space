@@ -16,7 +16,7 @@ import {
   DetailedPurchase,
   GetProjectsByPurchasesId,
 } from "@/utils/dataInterfaces";
-import { set } from "date-fns";
+
 
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
@@ -147,6 +147,14 @@ const PanelClient: React.FC = () => {
     return () => clearTimeout(timeoutId); // Limpia el timeout si el componente se desmonta
   }, []);
 
+  const [clientName, setClientName] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (customer) {
+      setClientName(customer.name + " " + customer.lastname);
+    }
+  }, [customer]);
+
   return loading ? (
     <div className='bgwhite absolute h-full w-full top-0 z-[1000] bgred-300 flex justify-center items-center'>
       <video autoPlay muted className='objectcover h-full w-full max-w-[650px]'>
@@ -159,7 +167,7 @@ const PanelClient: React.FC = () => {
     </div>
   ) : (
     <main className='flex flex-col h-full w-full relative rose-400'>
-      <NavbarClient geolocation={geolocation} />
+      <NavbarClient geolocation={geolocation} clientName={clientName} />
       <AsideClient
         toggleAside={toggleAside}
         isAsideOpen={isAsideOpen}
