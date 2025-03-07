@@ -27,12 +27,15 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
   purchaseId,
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [purchaseDetails, setPurchaseDetails] = useState<PurchaseDetails | null>(null);
+  const [purchaseDetails, setPurchaseDetails] =
+    useState<PurchaseDetails | null>(null);
 
   useEffect(() => {
     const fetchTransactionDetails = async () => {
       try {
-        const response = await apiService.getTransactionByPurchaseId(purchaseId);
+        const response = await apiService.getTransactionByPurchaseId(
+          purchaseId
+        );
         if (response.data) {
           const transaction = response.data; // Tipo Transaction
 
@@ -62,7 +65,9 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
   useEffect(() => {
     const fetchTransactionDetails = async () => {
       try {
-        const response = await apiService.getTransactionByPurchaseId(purchaseId);
+        const response = await apiService.getTransactionByPurchaseId(
+          purchaseId
+        );
         if (response.data) {
           const transaction = response.data; // Tipo Transaction
 
@@ -87,25 +92,30 @@ const PurchaseDetails: React.FunctionComponent<PurchaseDetailsProps> = ({
     <div>
       <button
         onClick={handleOpenPurchaseDetails}
-        className='mt-2 bg-blue-600 text-white rounded-md p-2'>
-        <FaFileInvoiceDollar className='text-2xl' />
+        className="mt-2 bg-blue-600 text-white rounded-md p-2"
+      >
+        <FaFileInvoiceDollar className="text-2xl" />
       </button>
 
-      <Modal className='bg-white text-black' isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        className="bg-white text-black  max-sm:absolute max-sm:bottom-24"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {() => (
             <>
-              <ModalHeader className='flex'>Purchase Details</ModalHeader>
-              <ModalBody className='flex'>
+              <ModalHeader className="flex">Purchase Details</ModalHeader>
+              <ModalBody className="flex">
                 {purchaseDetails ? (
-                  <div className='flex flex-col'>
+                  <div className="flex flex-col">
                     <p>Amount: {purchaseDetails.amount}</p>
                     <p>Currency: {purchaseDetails.currency}</p>
                     <p>
                       {format(
                         new Date(purchaseDetails.createdAt),
                         "MMMM dd, yyyy. HH:mm:ss z",
-                        { locale: enUS },
+                        { locale: enUS }
                       )}
                     </p>
                   </div>

@@ -80,7 +80,6 @@ useEffect(() => {
         <div className="flex flex-col max-[350px]:hidden justify-center items-end bggreen-300 ">
           <p className="textcenter text-sm min-[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">{clientName}</p>
           <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">You current Location is: <br className="sm:hidden" /> {currentLocation}</p>
-          {/* <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">Client</p> */}
         </div>
       </div>
     </nav>
