@@ -1723,7 +1723,10 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         handleSubmitAnswers={handleSubmitAnswers}
         handleUpdateAnswers={handleUpdateAnswers}
       />
-      <QuestionnaireMedia isAnsweredExtra={isAnsweredExtra} />
+      <QuestionnaireMedia
+        isAnsweredExtra={isAnsweredExtra}
+        projectId={project?._id}
+      />
     </div>
   );
 };

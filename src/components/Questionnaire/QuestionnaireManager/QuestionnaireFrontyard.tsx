@@ -270,7 +270,7 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
         } transition-all duration-1000 flex max-sm:flex-col bgred-300 sm:h-[300px] w-full`}
       >
         <div className="flex sm:w-[40%] justify-center items-center max-sm:py-24">
-          <h1 className="font-black text-3xl text-[#6c786e]">FRONTYARD</h1>
+          <h1 className="font-black text-3xl text-[#68664d]">FRONTYARD</h1>
         </div>
         <div
           className="sm:w-[60%] max-sm:h-[300px] h-full bg-cover bg-center bg-no-repeat scale-x-[-1]"
@@ -307,9 +307,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
                 : isAnsweredBackyard[isAnsweredBackyard.length - 1] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 delay-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 delay-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][0].title}
@@ -330,13 +330,13 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
                 onChange={(e) => {
                   handleControlSelect(e.target.value, 0);
                 }}
-                className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6"
+                className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6"
               >
                 <option value="1">Green and Whites</option>
                 <option value="2">Colorful Plants</option>
               </select>
               <div className="flex flex-col w-full p-2">
-                <p className="text-[#6c786e]">Note:</p>
+                <p className="text-[#68664d]">Note:</p>
                 <textarea
                   id="fq1Note"
                   value={answersFrontyard[0].notes[1].note}
@@ -376,9 +376,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredGeneral[isAnsweredGeneral.length - 1] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 delay-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 delay-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][0].title}
@@ -395,13 +395,13 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
             <div className="flex flex-col gap-6 w-full justify-center items-start p-12 py-20">
               <select
                 id="fq1Select"
-                className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#6c786e] py-2 px-6"
+                className="bg-[#ebebeb] rounded-tl-3xl rounded-br-3xl text-[#68664d] py-2 px-6"
               >
                 <option value="1">Green and Whites</option>
                 <option value="2">Colorful Plants</option>
               </select>
               <div className="flex flex-col w-full p-2">
-                <p className="text-[#6c786e]">Note:</p>
+                <p className="text-[#68664d]">Note:</p>
                 <textarea
                   id="fq1Note"
                   className="bg-[#ebebeb] p-2 text-black outline-none h-[100px]"
@@ -438,9 +438,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[0] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][1].title}
@@ -509,9 +509,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[0] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][1].title}
@@ -581,9 +581,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[1] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][2].title}
@@ -642,9 +642,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[1] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][2].title}
@@ -696,9 +696,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[2] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][3].title}
@@ -765,9 +765,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[2] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][3].title}
@@ -827,9 +827,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[3] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][4].title}
@@ -923,9 +923,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[3] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][4].title}
@@ -1004,9 +1004,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[4] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][5].title}
@@ -1114,9 +1114,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[4] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][5].title}
@@ -1205,9 +1205,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[5] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][6].title}
@@ -1274,9 +1274,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[5] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][6].title}
@@ -1336,9 +1336,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[6] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][7].title}
@@ -1405,9 +1405,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[6] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][7].title}
@@ -1467,9 +1467,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[7] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][8].title}
@@ -1536,9 +1536,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[7] === true
                 ? ""
                 : "translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][8].title}
@@ -1598,9 +1598,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[8] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][9].title}
@@ -1667,9 +1667,9 @@ const QuestionnaireFrontyard: React.FC<QuestionnaireFrontyardProps> = ({
               isAnsweredFrontyard[8] === true
                 ? ""
                 : "-translate-x-[-110%] opacity-0"
-            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#6c786e] justify-center items-center`}
+            } transition-all duration-1000 flex flex-col bgred-300 rounded-t-[28px] border-2 border-[#68664d] justify-center items-center`}
           >
-            <div className="flex bg-[#6c786e] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
+            <div className="flex bg-[#68664d] relative pt-4 pl-6 pb-6 text-xl font-black rounded-t-3xl w-full">
               <div className="w-full bggreen-300 p-2 flex">
                 <h1 className="bgred-200">
                   {questionnaire["backyard"][9].title}

@@ -220,7 +220,12 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
             <h1>What style are you looking for your space?</h1>
           </div>
           <div className="w-full bgblue-300  flex flex-col">
-            <div className="grid   gap-2 py-12 min-[400px]:grid-cols-2 md:grid-cols-4 bggreen-300">
+            <div className="">
+              <p className="text-sm text-black pl-8 py-2 font-bold">
+                Please select up to 2 styles.
+              </p>
+            </div>
+            <div className="grid gap-2 py-12 min-[400px]:grid-cols-2 md:grid-cols-4 bggreen-300">
               {questionnaire["general"][1].options?.map((option, index) => (
                 <div
                   className="bgred-300 flex flex-col justify-center items-center p-4"
