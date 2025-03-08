@@ -4,6 +4,8 @@ import { Image } from "@heroui/image";
 
 import { apiService } from "@/services/apiService";
 
+import { Files } from "@/utils/dataInterfaces";
+
 interface QuestionnaireMediaProps {
   isAnsweredExtra: boolean[];
   projectId: string | undefined;
@@ -30,35 +32,38 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
     console.log("images1: ", images1);
   }, [images1]);
 
-  const handleSubmitFiles1 = async () => {
+  const handleSubmitFiles1 = async (event: React.FormEvent) => {
+    // event.preventDefault();
+
     console.log("preparing to upload images1: ", images1);
+
     if (images1.length === 0) {
       console.error("No images selected");
       return;
     }
 
     const formData = new FormData();
-    formData.append("project", projectId); // Asegúrate de pasar el ID correcto
+    formData.append("project", projectId || "");
 
-    // Convertir cada URL blob en un archivo real y agregarlo al FormData
-    for (let i = 0; i < images1.length; i++) {
-      const blob = await fetch(images1[i]).then((res) => res.blob());
-      const mimeType = blob.type; // Obtener el tipo de archivo
-      const ext = mimeType.split("/")[1] || "jpg"; // Extraer la extensión (por defecto jpg)
-
-      const file = new File([blob], `image_${i}.${ext}`, { type: mimeType });
+    for (const [index, imageBlob] of images1.entries()) {
+      const response = await fetch(imageBlob); // Descargar el blob
+      const blob = await response.blob(); // Convertirlo a Blob
+      const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
+      const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
+      const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
       formData.append("files", file);
     }
 
+    console.log("FormData content:");
     for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]); // Muestra cada campo del FormData
+      console.log(pair[0], pair[1]); // Muestra cada clave y su valor
     }
 
     try {
-      const response = await apiService.uploadFiles(formData);
-      console.log("response: ", response);
+      await apiService.uploadFiles(formData);
+      console.log("Images uploaded successfully");
     } catch (error) {
-      console.error("Error al subir archivos:", error);
+      console.error("Error uploading images:", error);
     }
   };
 

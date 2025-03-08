@@ -18,7 +18,7 @@ import {
   createProject,
   GetProjectsByPurchasesId,
   question,
-  files,
+  Files,
 } from "@/utils/dataInterfaces.js";
 
 interface ApiResponse<T = unknown> {
@@ -39,24 +39,37 @@ interface ApiError {
 }
 
 export const apiService = {
-  createCustomer: async (customer: CreateCustomer): Promise<ApiResponse<Customer>> => {
+  createCustomer: async (
+    customer: CreateCustomer
+  ): Promise<ApiResponse<Customer>> => {
     try {
-      const response = await apiClient.post(`${NEXT_URL_API}/customers`, customer);
+      const response = await apiClient.post(
+        `${NEXT_URL_API}/customers`,
+        customer
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al crear el cliente:", err.response?.data || err.message);
+      console.log(
+        "Error al crear el cliente:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   getCustomer: async (customerId: string): Promise<ApiResponse<Customer>> => {
     try {
-      const response = await apiClient.get(`${NEXT_URL_API}/customers/${customerId}`);
+      const response = await apiClient.get(
+        `${NEXT_URL_API}/customers/${customerId}`
+      );
       return response;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al obtener el cliente:", err.response?.data || err.message);
+      console.log(
+        "Error al obtener el cliente:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
@@ -67,7 +80,10 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al obtener productos:", err.response?.data || err.message);
+      console.log(
+        "Error al obtener productos:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
@@ -78,169 +94,200 @@ export const apiService = {
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al obtener extras:", err.response?.data || err.message);
+      console.log(
+        "Error al obtener extras:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   createPurchase: async (
-    purchase: CreatePurchase,
+    purchase: CreatePurchase
   ): Promise<ApiResponse<CreatePurchase>> => {
     try {
-      const response = await apiClient.post(`${NEXT_URL_API}/purchases`, purchase);
+      const response = await apiClient.post(
+        `${NEXT_URL_API}/purchases`,
+        purchase
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al crear la compra:", err.response?.data || err.message);
+      console.log(
+        "Error al crear la compra:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   updatePurchaseStatus: async (
     purchaseId: string,
-    status: string,
+    status: string
   ): Promise<ApiResponse<Purchase>> => {
     try {
-      const response = await apiClient.patch(`${NEXT_URL_API}/purchases/${purchaseId}`, {
-        status,
-      });
+      const response = await apiClient.patch(
+        `${NEXT_URL_API}/purchases/${purchaseId}`,
+        {
+          status,
+        }
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
       console.log(
         "Error al actualizar el estado de la compra:",
-        err.response?.data || err.message,
+        err.response?.data || err.message
       );
       throw error;
     }
   },
 
   processPurchase: async (
-    purchaseId: string,
+    purchaseId: string
   ): Promise<ApiResponse<{ sessionUrl: string }>> => {
     try {
-      const response = await apiClient.post(`${NEXT_URL_API}/process-purchase`, {
-        purchaseId,
-      });
+      const response = await apiClient.post(
+        `${NEXT_URL_API}/process-purchase`,
+        {
+          purchaseId,
+        }
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al procesar la compra:", err.response?.data || err.message);
+      console.log(
+        "Error al procesar la compra:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   getPurchasesByCustomerId: async (
-    customerId: string,
+    customerId: string
   ): Promise<ApiResponse<DetailedPurchase[]>> => {
     try {
       const response = await apiClient.get(
-        `${NEXT_URL_API}/purchases/customer/${customerId}`,
+        `${NEXT_URL_API}/purchases/customer/${customerId}`
       );
       return response.data; // Asegúrate de que este `response.data` sea un array de compras
     } catch (error: unknown) {
       const err = error as ApiError;
       console.log(
         "Error al obtener compras por cliente:",
-        err.response?.data || err.message,
+        err.response?.data || err.message
       );
       throw error;
     }
   },
 
   getTransactionByTransactionId: async (
-    transactionId: string,
+    transactionId: string
   ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.get(
-        `${NEXT_URL_API}/transaction/purchase/${transactionId}`,
+        `${NEXT_URL_API}/transaction/purchase/${transactionId}`
       );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al obtener transacción:", err.response?.data || err.message);
+      console.log(
+        "Error al obtener transacción:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   getTransactionByPurchaseId: async (
-    purchaseId: string,
+    purchaseId: string
   ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.get(
-        `${NEXT_URL_API}/transaction/purchase/${purchaseId}`,
+        `${NEXT_URL_API}/transaction/purchase/${purchaseId}`
       );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al obtener transacción:", err.response?.data || err.message);
+      console.log(
+        "Error al obtener transacción:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   updateTransaction: async (
     transactionId: string,
-    status: string,
+    status: string
   ): Promise<ApiResponse<Transaction>> => {
     try {
       const response = await apiClient.patch(
         `${NEXT_URL_API}/transaction/${transactionId}`,
-        { status },
+        { status }
       );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
       console.log(
         "Error al actualizar la transacción:",
-        err.response?.data || err.message,
+        err.response?.data || err.message
       );
       throw error;
     }
   },
 
-  getTransactionById: async (sessionId: string): Promise<ApiResponse<Transaction>> => {
+  getTransactionById: async (
+    sessionId: string
+  ): Promise<ApiResponse<Transaction>> => {
     try {
-      const response = await apiClient.get(`${NEXT_URL_API}/transaction/${sessionId}`);
+      const response = await apiClient.get(
+        `${NEXT_URL_API}/transaction/${sessionId}`
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
       console.log(
         "Error al obtener transacción por ID:",
-        err.response?.data || err.message,
+        err.response?.data || err.message
       );
       throw error;
     }
   },
 
   createQuestionnaire: async (
-    questionnaire: createQuestionnaires,
+    questionnaire: createQuestionnaires
   ): Promise<ApiResponse<createQuestionnaires>> => {
     try {
       const response = await apiClient.post(
         `${NEXT_URL_API}/questionnaires`,
-        questionnaire,
+        questionnaire
       );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al crear el cuestionario:", err.response?.data || err.message);
+      console.log(
+        "Error al crear el cuestionario:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   getQuestionnaireById: async (
-    questionnaireId: string,
+    questionnaireId: string
   ): Promise<ApiResponse<createQuestionnaires>> => {
     try {
       const response = await apiClient.get(
-        `${NEXT_URL_API}/questionnaires/${questionnaireId}`,
+        `${NEXT_URL_API}/questionnaires/${questionnaireId}`
       );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
       console.log(
         "Error al obtener cuestionario por ID:",
-        err.response?.data || err.message,
+        err.response?.data || err.message
       );
       throw error;
     }
@@ -248,68 +295,87 @@ export const apiService = {
 
   updateQuestionnaire: async (
     questionnaireId: string,
-    status: string,
+    status: string
   ): Promise<ApiResponse<createQuestionnaires>> => {
     try {
       const response = await apiClient.patch(
         `${NEXT_URL_API}/questionnaires/${questionnaireId}`,
-        { status },
+        { status }
       );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
       console.log(
         "Error al actualizar el cuestionario:",
-        err.response?.data || err.message,
+        err.response?.data || err.message
       );
       throw error;
     }
   },
 
-  createProject: async (project: createProject): Promise<ApiResponse<createProject>> => {
+  createProject: async (
+    project: createProject
+  ): Promise<ApiResponse<createProject>> => {
     try {
-      const response = await apiClient.post(`${NEXT_URL_API}/projects`, project);
+      const response = await apiClient.post(
+        `${NEXT_URL_API}/projects`,
+        project
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al crear el proyecto:", err.response?.data || err.message);
+      console.log(
+        "Error al crear el proyecto:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   getProjectById: async (projectId: string): Promise<Project> => {
     try {
-      const response = await apiClient.get(`${NEXT_URL_API}/projects/${projectId}`);
+      const response = await apiClient.get(
+        `${NEXT_URL_API}/projects/${projectId}`
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al obtener el proyecto:", err.response?.data || err.message);
+      console.log(
+        "Error al obtener el proyecto:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   updateProject: async (
     projectId: string,
-    status: string,
+    status: string
   ): Promise<ApiResponse<createProject>> => {
     try {
-      const response = await apiClient.patch(`${NEXT_URL_API}/projects/${projectId}`, {
-        status,
-      });
+      const response = await apiClient.patch(
+        `${NEXT_URL_API}/projects/${projectId}`,
+        {
+          status,
+        }
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al actualizar el proyecto:", err.response?.data || err.message);
+      console.log(
+        "Error al actualizar el proyecto:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   getProjectByPurchasesId: async (
-    purchaseId: string,
+    purchaseId: string
   ): Promise<GetProjectsByPurchasesId> => {
     try {
       const response = await apiClient.get(
-        `${NEXT_URL_API}/projects/purchase/${purchaseId}`,
+        `${NEXT_URL_API}/projects/purchase/${purchaseId}`
       );
       return response.data as GetProjectsByPurchasesId; // Asegura que TS entienda el tipo
     } catch (error) {
@@ -317,49 +383,64 @@ export const apiService = {
     }
   },
 
-  createQuestion: async (question: question): Promise<ApiResponse<question>> => {
+  createQuestion: async (
+    question: question
+  ): Promise<ApiResponse<question>> => {
     try {
-      const response = await apiClient.post(`${NEXT_URL_API}/questions`, question);
+      const response = await apiClient.post(
+        `${NEXT_URL_API}/questions`,
+        question
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al crear la pregunta:", err.response?.data || err.message);
+      console.log(
+        "Error al crear la pregunta:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
   updateQuestion: async (
     questionId: string | undefined,
-    question: question,
+    question: question
   ): Promise<ApiResponse<question>> => {
     console.log("pregunta a actualizar: ", questionId);
     try {
       const response = await apiClient.patch(
         `${NEXT_URL_API}/questions/${questionId}`,
-        question,
+        question
       );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.log("Error al actualizar la pregunta:", err.response?.data || err.message);
+      console.log(
+        "Error al actualizar la pregunta:",
+        err.response?.data || err.message
+      );
       throw error;
     }
   },
 
-  uploadFiles: async (files: File[]): Promise<any> => {
+  uploadFiles: async (files: FormData): Promise<FormData> => {
     try {
-      const formData = new FormData();
+      // const formData = new FormData();
 
-      // Asegurar que los archivos se agregan con el mismo nombre que Multer espera ("files")
-      files.forEach((file) => {
-        formData.append("files", file); // "files" debe coincidir con Multer en el backend
-      });
+      // files.forEach((file) => {
+      //   formData.append("project", file.project);
+      //   formData.append("files", file.files);
+      // });
 
-      const response = await apiClient.post(`${NEXT_URL_API}/upload`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await apiClient.post<FormData>(
+        `${NEXT_URL_API}/upload`,
+        files,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       return response.data;
     } catch (error) {

@@ -83,7 +83,7 @@ export interface CreatePurchase {
     {
       nameArea: string;
       isActive: boolean;
-    },
+    }
   ];
   extras: SelectedExtra[];
   total: number;
@@ -103,7 +103,7 @@ export interface Purchase {
     {
       nameArea: string;
       isActive: boolean;
-    },
+    }
   ];
   extras: SelectedExtra[];
   total: number;
@@ -124,7 +124,7 @@ export interface DetailedPurchase {
     {
       nameArea: string;
       isActive: boolean;
-    },
+    }
   ];
   extras: Extra[];
   total: number;
@@ -291,7 +291,7 @@ export interface question {
   _id?: string | undefined;
 }
 
-export interface files {
+export interface Files {
   project: string;
   files: string;
 }
