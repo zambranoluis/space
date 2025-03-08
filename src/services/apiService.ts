@@ -18,6 +18,7 @@ import {
   createProject,
   GetProjectsByPurchasesId,
   question,
+  files,
 } from "@/utils/dataInterfaces.js";
 
 interface ApiResponse<T = unknown> {
@@ -327,14 +328,42 @@ export const apiService = {
     }
   },
 
-  updateQuestion: async (questionId: string | undefined, question: question): Promise<ApiResponse<question>> => {
-    console.log("pregunta a actualizar: ", questionId)
+  updateQuestion: async (
+    questionId: string | undefined,
+    question: question,
+  ): Promise<ApiResponse<question>> => {
+    console.log("pregunta a actualizar: ", questionId);
     try {
-      const response = await apiClient.patch(`${NEXT_URL_API}/questions/${questionId}`, question);
+      const response = await apiClient.patch(
+        `${NEXT_URL_API}/questions/${questionId}`,
+        question,
+      );
       return response.data;
     } catch (error: unknown) {
       const err = error as ApiError;
       console.log("Error al actualizar la pregunta:", err.response?.data || err.message);
+      throw error;
+    }
+  },
+
+  uploadFiles: async (files: File[]): Promise<any> => {
+    try {
+      const formData = new FormData();
+
+      // Asegurar que los archivos se agregan con el mismo nombre que Multer espera ("files")
+      files.forEach((file) => {
+        formData.append("files", file); // "files" debe coincidir con Multer en el backend
+      });
+
+      const response = await apiClient.post(`${NEXT_URL_API}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error("Error al subir archivos:", error);
       throw error;
     }
   },
