@@ -279,7 +279,6 @@ export interface GetProjectsByPurchasesId {
   updatedAt: Date;
 }
 
-
 export interface question {
   quest: string; // Pregunta
   category: string; // Categoría (Frontyard, Backyard, etc.)
@@ -290,4 +289,9 @@ export interface question {
   files?: string[]; // Archivos subidos por el cliente
   questionnaireId: string | undefined;
   _id?: string | undefined;
+}
+
+export interface files {
+  project: string;
+  files: string;
 }
