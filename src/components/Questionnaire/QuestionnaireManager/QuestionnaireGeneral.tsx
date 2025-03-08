@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef, use } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Image } from "@heroui/image";
 import { ProjectInformation, question } from "../../../utils/dataInterfaces";
 
@@ -9,6 +9,7 @@ import { RiContactsBookLine } from "react-icons/ri";
 interface QuestionnaireGeneralProps {
   project: ProjectInformation | null;
   selectedMaxTwoGeneral: number[];
+  setSelectedMaxTwoGeneral: React.Dispatch<React.SetStateAction<number[]>>;
   handleMaxTwoGeneral: (index: number) => void;
   answersGeneral: question[];
   setAnswersGeneral: React.Dispatch<React.SetStateAction<question[]>>;
@@ -31,6 +32,7 @@ interface QuestionnaireGeneralProps {
 const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
   project,
   selectedMaxTwoGeneral,
+  setSelectedMaxTwoGeneral,
   handleMaxTwoGeneral,
   answersGeneral,
   setAnswersGeneral,
@@ -132,6 +134,39 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
     );
   };
 
+  const [selectedIncluded, setSelectedIncluded] = useState<boolean>(false);
+
+  const handleControlMaxTwo = (style: string, index: number) => {
+    console.log("estilo accionado: ", style, "- indice: ", index);
+    // Manejo de selectedMaxTwoGeneral
+    setSelectedMaxTwoGeneral((prev) => {
+      if (prev.includes(index)) {
+        return prev.filter((option) => option !== index);
+      } else if (prev.length < 2) {
+        return [...prev, index];
+      }
+      return prev;
+    });
+
+    // Manejo de answersGeneral[0].selecteds
+    setAnswersGeneral((prev) => {
+      const updatedAnswers = [...prev];
+      const selecteds = updatedAnswers[0].selecteds || [];
+
+      if (selecteds.some((item) => item.selected === style)) {
+        // Si el estilo ya está seleccionado, lo eliminamos
+        updatedAnswers[0].selecteds = selecteds.filter(
+          (item) => item.selected !== style
+        );
+      } else if (selecteds.length < 2) {
+        // Si hay menos de 2 seleccionados, lo agregamos
+        updatedAnswers[0].selecteds = [...selecteds, { selected: style }];
+      }
+
+      return updatedAnswers;
+    });
+  };
+
   return (
     <section
       ref={containerRefGeneral}
@@ -205,7 +240,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
                       className="w-6 h-6 bg-[#ebebeb] appearance-none checked:bg-[#858e5b] checked:border-2 checked:rounded checked:border-[#484e2c] disabled:bg-black  disabled:cursor-not-allowed cursor-pointer"
                       type="checkbox"
                       checked={selectedMaxTwoGeneral.includes(index)}
-                      onChange={() => handleMaxTwoGeneral(index)}
+                      onChange={() => handleControlMaxTwo(option.name, index)}
                     />
                   </div>
                 </div>

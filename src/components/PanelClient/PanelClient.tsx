@@ -1,7 +1,8 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useGeolocation } from "@/context/GeolocationContext";
 
 import Section from "./Section";
 import NavbarClient from "@/components/NavbarClient";
@@ -9,7 +10,6 @@ import AsideClient from "@/components/AsideClient";
 import ChatModal from "@/components/ChatModal";
 import { apiService } from "@/services/apiService";
 import { useSession } from "next-auth/react";
-import { useGeolocation } from "@/context/GeolocationContext";
 
 import {
   Customer,
@@ -17,24 +17,20 @@ import {
   GetProjectsByPurchasesId,
 } from "@/utils/dataInterfaces";
 
-
 const PanelClient: React.FC = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-  const [customer, setCustomer] = useState<Customer | null>(null);
-  const [purchases, setPurchases] = useState<DetailedPurchase[]>([]);
-  const [projects, setProjects] = useState<GetProjectsByPurchasesId[]>([]);
-  const [purchasesWithProject, setPurchasesWithProject] = useState<string[]>([]);
-
-  // Usar el contexto de geolocalización
   const { geolocation, fetchGeolocation } = useGeolocation();
 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchGeolocation();
-  }, []);
+  const [customer, setCustomer] = useState<Customer | null>(null);
+  const [purchases, setPurchases] = useState<DetailedPurchase[]>([]);
+  const [projects, setProjects] = useState<GetProjectsByPurchasesId[]>([]);
+  const [purchasesWithProject, setPurchasesWithProject] = useState<string[]>(
+    []
+  );
 
   useEffect(() => {
     if (userId) {
@@ -66,18 +62,20 @@ const PanelClient: React.FC = () => {
 
   useEffect(() => {
     if (userId) {
-      const getProjectsByPurchasesId = async (purchaseList: DetailedPurchase[]) => {
+      const getProjectsByPurchasesId = async (
+        purchaseList: DetailedPurchase[]
+      ) => {
         try {
           const completedPurchases = purchaseList.filter(
             (p) =>
               p._id &&
               p.status &&
               p.status.toLowerCase() === "completed" &&
-              p.inProject === true,
+              p.inProject === true
           );
 
           const projectRequests = completedPurchases.map((p) =>
-            apiService.getProjectByPurchasesId(p._id),
+            apiService.getProjectByPurchasesId(p._id)
           );
           const responses = await Promise.all(projectRequests);
           setProjects(responses);
@@ -156,17 +154,17 @@ const PanelClient: React.FC = () => {
   }, [customer]);
 
   return loading ? (
-    <div className='bgwhite absolute h-full w-full top-0 z-[1000] bgred-300 flex justify-center items-center'>
-      <video autoPlay muted className='objectcover h-full w-full max-w-[650px]'>
+    <div className="bgwhite absolute h-full w-full top-0 z-[1000] bgred-300 flex justify-center items-center">
+      <video autoPlay muted className="objectcover h-full w-full max-w-[650px]">
         <source
-          src='https://github.com/BPM94/SCCTMD/raw/main/LoadingAnimationSpaceCreation.mp4'
-          type='video/mp4'
+          src="https://github.com/BPM94/SCCTMD/raw/main/LoadingAnimationSpaceCreation.mp4"
+          type="video/mp4"
         />
         Your browser does not support the video tag.
       </video>
     </div>
   ) : (
-    <main className='flex flex-col h-full w-full relative rose-400'>
+    <main className="flex flex-col h-full w-full relative rose-400">
       <NavbarClient geolocation={geolocation} clientName={clientName} />
       <AsideClient
         toggleAside={toggleAside}
@@ -174,7 +172,7 @@ const PanelClient: React.FC = () => {
         toggleSiteContainer={toggleSiteContainer}
         asideSelectedOption={asideSelectedOption}
       />
-      <div className='absolute h-screen w-full'>
+      <div className="absolute h-screen w-full">
         <Section
           closeSiteContainer={closeSiteContainer}
           asideSelectedOption={asideSelectedOption}
@@ -185,7 +183,7 @@ const PanelClient: React.FC = () => {
           purchasesWithProject={purchasesWithProject}
         />
       </div>
-      <div className='flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]'>
+      <div className="flex bgred-200 absolute bottom-[10px] items-end right-[10px] z-[3000]">
         <ChatModal />
       </div>
     </main>

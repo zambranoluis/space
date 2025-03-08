@@ -10,8 +10,9 @@ interface ClientPanelLayoutProps {
   children: React.ReactNode;
 }
 
-export default function PanelClientLayout({ children }: ClientPanelLayoutProps) {
-  
+export default function PanelClientLayout({
+  children,
+}: ClientPanelLayoutProps) {
   return (
     <SessionProvider>
       <DataProvider>
