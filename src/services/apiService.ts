@@ -19,6 +19,7 @@ import {
   GetProjectsByPurchasesId,
   question,
   files,
+  ViewFiles,
 } from "@/utils/dataInterfaces.js";
 
 interface ApiResponse<T = unknown> {
@@ -364,6 +365,16 @@ export const apiService = {
       return response.data;
     } catch (error) {
       console.error("Error al subir archivos:", error);
+      throw error;
+    }
+  },
+
+  getFilesByProjectId: async (projectId: string): Promise<ViewFiles[]> => {
+    try {
+      const response = await apiClient.get(`${NEXT_URL_API}/files/${projectId}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error al obtener archivos por ID de proyecto:", error);
       throw error;
     }
   },

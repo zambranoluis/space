@@ -295,3 +295,15 @@ export interface files {
   project: string;
   files: string;
 }
+
+export interface ViewFiles {
+  _id: string;
+  project: string;
+  filename: string;
+  path: string;
+  category: string;
+  softDelete: boolean;
+  deleteAt: Date | null;
+  createAt: Date;
+  updateAt: Date;
+}
