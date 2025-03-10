@@ -10,7 +10,8 @@ export async function GET(request: NextRequest) {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
-  const id = request.nextUrl.pathname.split("/")[2];
+
+  const id = request.nextUrl.pathname.split("/").pop() || "";
   const url = `${BACKEND_URL}/files/${id}`;
   const config = {
     headers: {
