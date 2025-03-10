@@ -424,13 +424,6 @@ export const apiService = {
 
   uploadFiles: async (files: FormData): Promise<FormData> => {
     try {
-      // const formData = new FormData();
-
-      // files.forEach((file) => {
-      //   formData.append("project", file.project);
-      //   formData.append("files", file.files);
-      // });
-
       const response = await apiClient.post<FormData>(
         `${NEXT_URL_API}/upload`,
         files,
