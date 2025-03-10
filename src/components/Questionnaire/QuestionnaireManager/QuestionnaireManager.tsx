@@ -7,7 +7,7 @@ import QuestionnaireBackyard from "./QuestionnaireBackyard";
 import QuestionnaireFrontyard from "./QuestionnaireFrontyard";
 import QuestionnaireExtra from "./QuestionnaireExtra";
 import QuestionnaireMedia from "./QuestionnaireMedia";
-import QuestionnaireProgress from "@/components/QuestionnaireProgress";
+import QuestionnaireProgress from "@/components/Questionnaire/QuestionnaireManager/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
 

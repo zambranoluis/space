@@ -347,16 +347,9 @@ export const apiService = {
     }
   },
 
-  uploadFiles: async (files: File[]): Promise<any> => {
+  uploadFiles: async (files: FormData): Promise<FormData> => {
     try {
-      const formData = new FormData();
-
-      // Asegurar que los archivos se agregan con el mismo nombre que Multer espera ("files")
-      files.forEach((file) => {
-        formData.append("files", file); // "files" debe coincidir con Multer en el backend
-      });
-
-      const response = await apiClient.post(`${NEXT_URL_API}/upload`, formData, {
+      const response = await apiClient.post<FormData>(`${NEXT_URL_API}/upload`, files, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
