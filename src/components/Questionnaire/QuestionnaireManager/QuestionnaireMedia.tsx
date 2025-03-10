@@ -4,8 +4,6 @@ import { Image } from "@heroui/image";
 
 import { apiService } from "@/services/apiService";
 
-import { Files } from "@/utils/dataInterfaces";
-
 interface QuestionnaireMediaProps {
   isAnsweredExtra: boolean[];
   projectId: string | undefined;
@@ -15,9 +13,13 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
   isAnsweredExtra,
   projectId,
 }) => {
-  const [images1, setImages1] = useState<string[]>([]);
+  const [imagesData, setImagesData] = useState<string[]>([]);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [images1, setImages1] = useState<string[]>([]);
+  const [images2, setImages2] = useState<string[]>([]);
+  const [images3, setImages3] = useState<string[]>([]);
+
+  const handleFileChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files) return;
 
@@ -28,13 +30,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
     setImages1((prevImages) => [...prevImages, ...newImages]);
   };
 
-  useEffect(() => {
-    console.log("images1: ", images1);
-  }, [images1]);
-
-  const handleSubmitFiles1 = async (event: React.FormEvent) => {
-    // event.preventDefault();
-
+  const handleSubmitFiles1 = async (category: string) => {
     console.log("preparing to upload images1: ", images1);
 
     if (images1.length === 0) {
@@ -44,8 +40,99 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
 
     const formData = new FormData();
     formData.append("project", projectId || "");
+    formData.append("category", category);
 
     for (const [index, imageBlob] of images1.entries()) {
+      const response = await fetch(imageBlob); // Descargar el blob
+      const blob = await response.blob(); // Convertirlo a Blob
+      const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
+      const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
+      const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
+      formData.append("files", file);
+    }
+
+    console.log("FormData content:");
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]); // Muestra cada clave y su valor
+    }
+
+    try {
+      await apiService.uploadFiles(formData);
+      console.log("Images uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    }
+  };
+
+  const handleFileChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files) return;
+
+    const newImages = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+
+    setImages2((prevImages) => [...prevImages, ...newImages]);
+  };
+
+  const handleSubmitFiles2 = async (category: string) => {
+    console.log("preparing to upload images2: ", images2);
+
+    if (images2.length === 0) {
+      console.error("No images selected");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("project", projectId || "");
+    formData.append("category", category);
+
+    for (const [index, imageBlob] of images2.entries()) {
+      const response = await fetch(imageBlob); // Descargar el blob
+      const blob = await response.blob(); // Convertirlo a Blob
+      const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
+      const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
+      const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
+      formData.append("files", file);
+    }
+
+    console.log("FormData content:");
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]); // Muestra cada clave y su valor
+    }
+
+    try {
+      await apiService.uploadFiles(formData);
+      console.log("Images uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    }
+  };
+
+  const handleFileChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files) return;
+
+    const newImages = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+
+    setImages3((prevImages) => [...prevImages, ...newImages]);
+  };
+
+  const handleSubmitFiles3 = async (category: string) => {
+    console.log("preparing to upload images3: ", images3);
+
+    if (images3.length === 0) {
+      console.error("No images selected");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("project", projectId || "");
+    formData.append("category", category);
+
+    for (const [index, imageBlob] of images3.entries()) {
       const response = await fetch(imageBlob); // Descargar el blob
       const blob = await response.blob(); // Convertirlo a Blob
       const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
@@ -108,7 +195,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
               <div className="flex">
                 <label
                   htmlFor="files1"
-                  className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer"
+                  className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer shadow-black shadow-sm"
                 >
                   <Image
                     className="w-[40px] aspect-square object-contain"
@@ -123,7 +210,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   type="file"
                   multiple
                   accept="image/*"
-                  onChange={handleFileChange}
+                  onChange={(event) => handleFileChange1(event)}
                 />
               </div>
             </div>
@@ -137,7 +224,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                 images1.map((src, index) => (
                   <Image
                     key={index}
-                    className="rounded-none min-w-[150px] max-w-[150px] aspect-square object-cover"
+                    className="roundednone shadow-black shadow-sm min-w-[150px] max-w-[150px] aspect-square object-cover"
                     src={src}
                     alt={`Uploaded preview ${index + 1}`}
                   />
@@ -176,9 +263,9 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
           </div>
           <div className="flex w-full justify-end items-center p-4">
             <button
-              className="bg-[#858e5b] px-4 py-2 rounded-lg cursor-pointer"
+              className="bg-[#858e5b] px-4 py-2 rounded-lg cursor-pointer shadow-black shadow-sm"
               onClick={() => {
-                handleSubmitFiles1();
+                handleSubmitFiles1("rawArea");
               }}
             >
               Submit files
@@ -201,7 +288,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
               <div className="flex">
                 <label
                   htmlFor="files2"
-                  className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer"
+                  className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer shadow-black shadow-sm"
                 >
                   <Image
                     className="w-[40px] aspect-square object-contain"
@@ -214,36 +301,67 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   name="files2"
                   className="hidden"
                   type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(event) => handleFileChange2(event)}
                 />
               </div>
             </div>
-            <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2 ">
-              <Image
-                className="h-full   rounded-none "
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full   rounded-none max-sm:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full   rounded-none max-md:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full   rounded-none max-lg:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full  rounded-none max-xl:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
+            <div
+              className={`flex max-sm:w-[60%] sm:w-[80%] bgred-300 gap-6 ${
+                images2.length === 0 ? "justify-center" : ""
+              } items-center p-2 overflow-x-auto whitespace-nowrap flex-nowrap`}
+            >
+              {images2.length > 0 ? (
+                images2.map((src, index) => (
+                  <Image
+                    key={index}
+                    className="roundednone shadow-black shadow-sm min-w-[150px] max-w-[150px] aspect-square object-cover"
+                    src={src}
+                    alt={`Uploaded preview ${index + 1}`}
+                  />
+                ))
+              ) : (
+                // Placeholder si no hay imágenes subidas
+                <>
+                  <Image
+                    className="h-full   rounded-none "
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full   rounded-none max-sm:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full   rounded-none max-md:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full   rounded-none max-lg:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full  rounded-none max-xl:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                </>
+              )}
             </div>
+          </div>
+          <div className="flex w-full justify-end items-center p-4">
+            <button
+              className="bg-[#858e5b] px-4 py-2 rounded-lg cursor-pointer shadow-black shadow-sm"
+              onClick={() => {
+                handleSubmitFiles2("sketchs");
+              }}
+            >
+              Submit files
+            </button>
           </div>
         </div>
         <div
@@ -263,10 +381,10 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
               <div className="flex">
                 <label
                   htmlFor="files3"
-                  className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer"
+                  className="flex bg-[#6c786e] p-3 rounded-full cursor-pointer shadow-black shadow-sm"
                 >
                   <Image
-                    className="w-[40px] aspect-square object-contain"
+                    className="w-[40px] aspect-square object-contain "
                     src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-13.png"
                     alt=""
                   />
@@ -276,36 +394,67 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   name="files3"
                   className="hidden"
                   type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(event) => handleFileChange3(event)}
                 />
               </div>
             </div>
-            <div className="flex max-sm:w-[60%] sm:w-[80%]  bgred-300  sm:gap-6 justify-center items-center p-2">
-              <Image
-                className="h-full   rounded-none "
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full   rounded-none max-sm:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full   rounded-none max-md:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full   rounded-none max-lg:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
-              <Image
-                className="h-full  rounded-none max-xl:hidden"
-                src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
-                alt=""
-              />
+            <div
+              className={`flex max-sm:w-[60%] sm:w-[80%] bgred-300 gap-6 ${
+                images3.length === 0 ? "justify-center" : ""
+              } items-center p-2 overflow-x-auto whitespace-nowrap flex-nowrap`}
+            >
+              {images3.length > 0 ? (
+                images3.map((src, index) => (
+                  <Image
+                    key={index}
+                    className="roundednone shadow-black shadow-sm min-w-[150px] max-w-[150px] aspect-square object-cover"
+                    src={src}
+                    alt={`Uploaded preview ${index + 1}`}
+                  />
+                ))
+              ) : (
+                // Placeholder si no hay imágenes subidas
+                <>
+                  <Image
+                    className="h-full   rounded-none "
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full   rounded-none max-sm:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full   rounded-none max-md:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full   rounded-none max-lg:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                  <Image
+                    className="h-full  rounded-none max-xl:hidden"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/questionnaire/elementos-12.png"
+                    alt=""
+                  />
+                </>
+              )}
             </div>
+          </div>
+          <div className="flex w-full justify-end items-center p-4">
+            <button
+              className="bg-[#858e5b] px-4 py-2 rounded-lg cursor-pointer shadow-black shadow-sm"
+              onClick={() => {
+                handleSubmitFiles3("extras");
+              }}
+            >
+              Submit files
+            </button>
           </div>
         </div>
       </div>

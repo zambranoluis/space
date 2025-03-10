@@ -290,8 +290,3 @@ export interface question {
   questionnaireId: string | undefined;
   _id?: string | undefined;
 }
-
-export interface Files {
-  project: string;
-  files: string;
-}
