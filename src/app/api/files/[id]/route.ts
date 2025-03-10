@@ -11,7 +11,11 @@ export async function GET(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  const id = request.nextUrl.pathname.split("/").pop() || "";
+  const id = request.nextUrl.pathname.split("/").pop();
+
+  if (!id) {
+    return NextResponse.json({ error: "ID no proporcionado" }, { status: 400 });
+  }
   const url = `${BACKEND_URL}/files/${id}`;
   const config = {
     headers: {
