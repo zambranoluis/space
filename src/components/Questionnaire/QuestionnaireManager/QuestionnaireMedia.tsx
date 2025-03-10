@@ -13,7 +13,13 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
   isAnsweredExtra,
   projectId,
 }) => {
-  const [imagesData, setImagesData] = useState<string[]>([]);
+  const [imagesData, setImagesData] = useState({
+    rawArea: [],
+    sketchs: [],
+    extras: [],
+  });
+
+  console.log("imagesData initialized: ", imagesData);
 
   const [images1, setImages1] = useState<string[]>([]);
   const [images2, setImages2] = useState<string[]>([]);
