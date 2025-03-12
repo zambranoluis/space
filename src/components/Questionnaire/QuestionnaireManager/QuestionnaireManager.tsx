@@ -381,6 +381,60 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   }, [answersFrontyard[5]]);
 
+  const [imagesRaw, setImagesRaw] = useState<ViewFiles[]>([]);
+  const [imagesData, setImagesData] = useState({
+    rawArea: [] as string[],
+    sketchs: [] as string[],
+    extras: [] as string[],
+  });
+
+  useEffect(() => {
+    console.log("imagesData: ", imagesData);
+  }, [imagesData]);
+
+  const [isMediaUploaded, setIsMediaUploaded] = useState({
+    rawArea: false,
+    sketchs: false,
+    extras: false,
+  });
+
+  useEffect(() => {
+    setIsMediaUploaded((prev) => ({
+      rawArea: imagesData.rawArea.length > 0 ? true : prev.rawArea,
+      sketchs: imagesData.sketchs.length > 0 ? true : prev.sketchs,
+      extras: imagesData.extras.length > 0 ? true : prev.extras,
+    }));
+  }, [imagesData]);
+
+  useEffect(() => {
+    if (project?._id) {
+      apiService
+        .getFilesByProjectId(project?._id)
+        .then((response) => {
+          setImagesRaw(response.files);
+        })
+        .catch((error) => {
+          console.error("Error fetching images:", error);
+        });
+    }
+  }, [project?._id]);
+
+  useEffect(() => {
+    if (imagesRaw.length > 0) {
+      setImagesData({
+        rawArea: imagesRaw
+          .filter((image) => image.category === "rawArea")
+          .map((image) => image.path),
+        sketchs: imagesRaw
+          .filter((image) => image.category === "sketchs")
+          .map((image) => image.path),
+        extras: imagesRaw
+          .filter((image) => image.category === "extras")
+          .map((image) => image.path),
+      });
+    }
+  }, [imagesRaw]);
+
   const handleSubmitAnswers = (
     question: string,
     typeQuestion: string,
@@ -1664,6 +1718,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
             isAnsweredFrontyard={isAnsweredFrontyard}
             answersExtra={answersExtra}
             isAnsweredExtra={isAnsweredExtra}
+            isMediaUploaded={isMediaUploaded}
           />
         </div>
       )}
@@ -1726,6 +1781,8 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
       <QuestionnaireMedia
         isAnsweredExtra={isAnsweredExtra}
         projectId={project?._id}
+        imagesData={imagesData}
+        setIsMediaUploaded={setIsMediaUploaded}
       />
     </div>
   );

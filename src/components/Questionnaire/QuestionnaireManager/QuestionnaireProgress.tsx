@@ -16,6 +16,9 @@ interface QuestionnaireProgressProps {
   isAnsweredFrontyard: boolean[];
   answersExtra: question[];
   isAnsweredExtra: boolean[];
+  isMediaUploaded: {
+    [key: string]: boolean;
+  };
 }
 
 const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
@@ -28,6 +31,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   isAnsweredFrontyard,
   answersExtra,
   isAnsweredExtra,
+  isMediaUploaded,
 }) => {
   const questionRefsGeneral = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -142,6 +146,24 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
       openArrow?.classList.toggle("rotate-180");
     }
   };
+
+  useEffect(() => {
+    console.log("isMediaUploaded: ", isMediaUploaded);
+  }, [isMediaUploaded]);
+
+  const [mediaCounter, setMediaCounter] = useState(0);
+
+  useEffect(() => {
+    const count = Object.values(isMediaUploaded).reduce(
+      (acc, value) => acc + (value ? 1 : 0),
+      0
+    );
+    setMediaCounter(count);
+  }, [isMediaUploaded]);
+
+  useEffect(() => {
+    console.log("mediaCounter: ", mediaCounter);
+  }, [mediaCounter]);
 
   return (
     <div className="maxw-[600px] bgred-300 flex flex-col w-full p-2 select-none">
@@ -546,46 +568,43 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
               className="bgred-300 text-lg rotate-180"
             />
             <h2 className={`pl4 `}>
-              Media Files: <span className="text-xs">( 1 / 3 )</span>
+              Media Files:{" "}
+              <span className="text-xs">( {mediaCounter} / 3 )</span>
             </h2>
           </div>
           <div
             id="progressMedia"
             className="flex gap-2 w-full p-2 select-none overflow-y-hidden overflow-x-auto transition-all duration-100 questionnaireProgressScroll"
           >
-            {/* {questionnaire.general.map((answer, index) => (
-              <div
-                key={index}
-                ref={(el) => {
-                  if (el) questionRefsGeneral.current[index] = el;
-                }}
-                className={`${
-                  isAnsweredGeneral[index] ? "bggreen-500" : "bgred-500"
-                } flex gap-2 justify-center items-center px-2 py-1 rounded`}
-              >
-                <p
-                  className={`${
-                    isAnsweredGeneral[index] ? "text-white" : "text-gray-200/50"
-                  } text-xs`}
-                >
-                  {index + 1}.
-                </p>
-                <h3
-                  className={`${
-                    isAnsweredGeneral[index] ? "text-white" : "text-gray-200/50"
-                  } text-xs whitespace-nowrap`}
-                >
-                  {answer.title}
-                </h3>
-                <FaCheck
-                  className={`${
-                    isAnsweredGeneral[index]
-                      ? "text-green-500"
-                      : "text-gray-200/50"
-                  }`}
-                />
-              </div>
-            ))} */}
+            <p className="flex text-xs justify-center items-center gap-1">
+              1. Raw Area Images{" "}
+              <FaCheck
+                className={`text-base ${
+                  isMediaUploaded.rawArea
+                    ? "text-green-500"
+                    : "text-gray-200/50"
+                }`}
+              />
+            </p>
+            <p className="flex text-xs justify-center items-center gap-1">
+              2. Sketches Images{" "}
+              <FaCheck
+                className={`text-base ${
+                  isMediaUploaded.sketchs
+                    ? "text-green-500"
+                    : "text-gray-200/50"
+                }`}
+              />
+            </p>
+            <p className="flex text-xs justify-center items-center gap-1">
+              3. Extra Images{" "}
+              <FaCheck
+                className={`text-base ${
+                  isMediaUploaded.extras ? "text-green-500" : "text-gray-200/50"
+                }`}
+              />
+            </p>
+            <p></p>
           </div>
         </div>
       </div>
