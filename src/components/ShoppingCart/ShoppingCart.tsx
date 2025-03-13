@@ -78,7 +78,7 @@ export default function ShoppingCart() {
   useEffect(() => {
     setTimeout(() => {
       setLoadingSholoadingShoppingCart(false);
-    }, 3000);
+    }, 3500);
   }, []);
 
   return (
@@ -88,7 +88,7 @@ export default function ShoppingCart() {
           <video
             autoPlay
             muted
-            className="w-full min-h-[600px] max-h-[1200px] object-cover max-sm:object-[20%] "
+            className="w-full min-h-[400px]  object-cover max-sm:object-[20%] "
             src="https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/shoppingCartLoaderClean.mp4"
           >
             Your browser does not support the video tag.
