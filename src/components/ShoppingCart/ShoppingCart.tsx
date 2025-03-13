@@ -10,6 +10,8 @@ import { Product, Extra } from "@/utils/dataInterfaces";
 export default function ShoppingCart() {
   const [products, setProducts] = useState<Product[] | null>(null);
   const [extras, setExtras] = useState<Extra[] | null>(null);
+  const [loadingShoppingCart, setLoadingSholoadingShoppingCart] =
+    useState<boolean>(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -70,19 +72,39 @@ export default function ShoppingCart() {
           break;
       }
     },
-    [products],
+    [products]
   );
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingSholoadingShoppingCart(false);
+    }, 3000);
+  }, []);
+
   return (
-    <section>
-      <Section
-        products={products}
-        selectedPackage={selectedPackage}
-        setSelectedPackage={setSelectedPackage}
-        handleSelectedPackage={handleSelectedPackage}
-        scrollContainerRef={scrollContainerRef}
-        extras={extras || null}
-      />
+    <section className="">
+      {loadingShoppingCart ? (
+        <div className="w-full h-full flex justify-center items-center bgred-300">
+          <video
+            autoPlay
+            muted
+            className="w-full min-h-[600px] max-h-[1200px] object-cover max-sm:object-[20%] "
+            src="https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/shoppingCartLoaderClean.mp4"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ) : (
+        <Section
+          products={products}
+          selectedPackage={selectedPackage}
+          setSelectedPackage={setSelectedPackage}
+          handleSelectedPackage={handleSelectedPackage}
+          scrollContainerRef={scrollContainerRef}
+          extras={extras || null}
+          loadingShoppingCart={loadingShoppingCart}
+        />
+      )}
     </section>
   );
 }
