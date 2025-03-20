@@ -71,6 +71,16 @@ const CreateAccount = () => {
         return;
       }
 
+      if (formData.password !== formData.confirmPassword) {
+        Swal.fire({
+          title: "Passwords do not match. Please try again.",
+          icon: "error",
+          confirmButtonText: "Close",
+        });
+        setIsLoadingCustomer(false);
+        return;
+      }
+
       const response = await apiService.createCustomer(formData);
 
       if (response.message === "Customer created successfully") {

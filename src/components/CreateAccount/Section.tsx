@@ -92,6 +92,7 @@ const Section: React.FC<SectionProps> = ({
         "Password must be minimum 8 characters long and contain numbers, at least one capital letter and only the special caracters _ . $ *",
       valid: "Password is valid",
       empty: "Password cannot be empty",
+      match: "Passwords do not match",
       isMatch: false,
       isError: false,
       isEmpty: false,
@@ -102,6 +103,7 @@ const Section: React.FC<SectionProps> = ({
         "Password must be minimum 8 characters long and contain numbers, at least one capital letter and only the special caracters _ . $ *",
       valid: "Password is valid",
       empty: "Password Confirmation cannot be empty",
+      match: "Passwords do not match",
       isMatch: false,
       isError: false,
       isEmpty: false,
@@ -349,22 +351,36 @@ const Section: React.FC<SectionProps> = ({
               isError: false,
               isEmpty: true,
               isValid: false,
+              isMatch: false,
             },
           });
         } else if (validatePassword(e.target.value)) {
-          setErrorMessages({
-            ...errorMessages,
-            confirmPassword: {
-              ...errorMessages.confirmPassword,
-              isError: false,
-              isEmpty: false,
-              isValid: true,
-            },
-          });
-          setFormData({
-            ...formData,
-            confirmPassword: e.target.value,
-          });
+          if (e.target.value === formData.password) {
+            setErrorMessages({
+              ...errorMessages,
+              confirmPassword: {
+                ...errorMessages.confirmPassword,
+                isError: false,
+                isEmpty: false,
+                isValid: true,
+                isMatch: true,
+              },
+            });
+            setFormData({
+              ...formData,
+              confirmPassword: e.target.value,
+            });
+          } else {
+            setErrorMessages({
+              ...errorMessages,
+              confirmPassword: {
+                ...errorMessages.confirmPassword,
+                isEmpty: false,
+                isValid: false,
+                isMatch: false,
+              },
+            });
+          }
         } else {
           setErrorMessages({
             ...errorMessages,
@@ -373,6 +389,7 @@ const Section: React.FC<SectionProps> = ({
               isError: true,
               isEmpty: false,
               isValid: false,
+              isMatch: false,
             },
           });
         }
@@ -621,7 +638,9 @@ const Section: React.FC<SectionProps> = ({
                             errorMessages.password.isEmpty
                               ? "border-red-500"
                               : errorMessages.password.isValid
-                              ? "border-green-500"
+                              ? errorMessages.confirmPassword.isMatch
+                                ? "border-green-500"
+                                : "border-red-500"
                               : "border-[#828282]"
                           } outline-none rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]`}
                           type={`${showPassword ? "text" : "password"}`}
@@ -667,7 +686,9 @@ const Section: React.FC<SectionProps> = ({
                             errorMessages.confirmPassword.isEmpty
                               ? "border-red-500"
                               : errorMessages.confirmPassword.isValid
-                              ? "border-green-500"
+                              ? errorMessages.confirmPassword.isMatch
+                                ? "border-green-500"
+                                : "border-red-500"
                               : "border-[#828282]"
                           } outline-none rounded-full max-lg:drop-shadow-[0px_1.8px_1.8px_rgba(0,0,0,1)]`}
                           type={`${showConfirmPassword ? "text" : "password"}`}
@@ -698,6 +719,11 @@ const Section: React.FC<SectionProps> = ({
                           {errorMessages.confirmPassword.isEmpty && (
                             <p className="max-lg:bg-white/80 p-1 rounded-md">
                               {errorMessages.confirmPassword.empty}
+                            </p>
+                          )}
+                          {!errorMessages.confirmPassword.isMatch && (
+                            <p className="max-lg:bg-white/80 p-1 rounded-md">
+                              {errorMessages.confirmPassword.match}
                             </p>
                           )}
                         </div>
