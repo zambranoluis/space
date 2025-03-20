@@ -8,15 +8,18 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export async function POST(req: NextRequest) {
   try {
     // Extraer token JWT de NextAuth
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const tokenData = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
     const nodeToken = tokenData?.token;
 
-    if (!nodeToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
-        { status: 401 },
-      );
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 },
+    //   );
+    // }
 
     // Leer el `FormData` directamente
     const formData = await req.formData();
@@ -33,6 +36,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(response.data);
   } catch (error) {
     console.error("Error en subida de archivos:", error);
-    return NextResponse.json({ error: "Error al subir archivos" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error al subir archivos" },
+      { status: 500 }
+    );
   }
 }

@@ -8,12 +8,15 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export async function POST(req: NextRequest) {
   try {
     // Extraemos el token del JWT de NextAuth (el token generado en Node se almacena en la propiedad "token")
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const tokenData = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
     const nodeToken = tokenData?.token;
 
-    if (!nodeToken) {
-      return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
+    // }
 
     const body = await req.json();
     const response = await axios.post(`${BACKEND_URL}/process-purchase`, body, {
@@ -36,7 +39,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       // Handle unexpected errors
-      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unexpected error occurred" },
+        { status: 500 }
+      );
     }
   }
 }

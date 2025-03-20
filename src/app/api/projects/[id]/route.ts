@@ -10,19 +10,19 @@ export async function GET(req: NextRequest) {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = token?.token;
 
-    if (!nodeToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
-        { status: 401 },
-      );
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 },
+    //   );
+    // }
 
     const id = req.nextUrl.pathname.split("/").pop();
 
     if (!id) {
       return NextResponse.json(
         { error: "Missing project ID in query parameters" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -38,14 +38,14 @@ export async function GET(req: NextRequest) {
     if (error instanceof AxiosError) {
       return NextResponse.json(
         { error: error.response?.data || error.message },
-        { status: error.response?.status || 500 },
+        { status: error.response?.status || 500 }
       );
     } else if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       return NextResponse.json(
         { error: "An unexpected error occurred" },
-        { status: 500 },
+        { status: 500 }
       );
     }
   }
@@ -56,19 +56,19 @@ export async function PATCH(req: NextRequest) {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = token?.token;
 
-    if (!nodeToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
-        { status: 401 },
-      );
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 }
+    //   );
+    // }
 
     const id = req.nextUrl.searchParams.get("id");
 
     if (!id) {
       return NextResponse.json(
         { error: "Missing project ID in query parameters" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -85,14 +85,14 @@ export async function PATCH(req: NextRequest) {
     if (error instanceof AxiosError) {
       return NextResponse.json(
         { error: error.response?.data || error.message },
-        { status: error.response?.status || 500 },
+        { status: error.response?.status || 500 }
       );
     } else if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       return NextResponse.json(
         { error: "An unexpected error occurred" },
-        { status: 500 },
+        { status: 500 }
       );
     }
   }

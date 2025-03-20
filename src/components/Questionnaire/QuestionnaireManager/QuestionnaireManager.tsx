@@ -10,6 +10,7 @@ import QuestionnaireMedia from "./QuestionnaireMedia";
 import QuestionnaireProgress from "@/components/Questionnaire/QuestionnaireManager/QuestionnaireProgress";
 
 import { questionnaire } from "../questionnaireFile";
+import { RiCollapseDiagonal2Line } from "react-icons/ri";
 
 import {
   ProjectInformation,
@@ -1704,22 +1705,42 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   };
 
+  const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false);
+
+  const toggleQuestionnaireShow = () => {
+    setIsQuestionnaireOpen((prev) => !prev);
+  };
+
   return (
     <div className="flex flex-col bg-purple-400-300 gap-12 relative transition-all duration-300 w-full">
       {showProgress && (
-        <div className="flex fixed sm:max-w-[500px]  bg-[#6c786e]/70 hover:bg-[#6c786e]/85 transition-colors duration-300 rounded-lg z-[100] max-sm:left-[5%] top-[50px] sm:right-[5%] w-[90%] ">
-          <QuestionnaireProgress
-            categories={categories}
-            answersGeneral={answersGeneral}
-            isAnsweredGeneral={isAnsweredGeneral}
-            answersBackyard={answersBackyard}
-            isAnsweredBackyard={isAnsweredBackyard}
-            answersFrontyard={answersFrontyard}
-            isAnsweredFrontyard={isAnsweredFrontyard}
-            answersExtra={answersExtra}
-            isAnsweredExtra={isAnsweredExtra}
-            isMediaUploaded={isMediaUploaded}
-          />
+        <div className="flex flex-col fixed sm:max-w-[500px]  bg-[#6c786e]/70 hover:bg-[#6c786e]/85 transition-colors duration-300 rounded-lg z-[100] max-sm:left-[5%] top-[50px] sm:right-[5%] w-[90%] ">
+          <div
+            className={` p-2 flex justify-start items-center gap-1 select-none place-self-start cursor-pointer`}
+            onClick={toggleQuestionnaireShow}
+          >
+            <RiCollapseDiagonal2Line className="text-2xl " />
+            <p className="text-xl font-bold">Questionnaire Progress</p>
+          </div>
+          <div
+            className={`flex  ${
+              isQuestionnaireOpen ? "" : "max-h-0"
+            } transition-all duration-1000`}
+          >
+            <QuestionnaireProgress
+              isQuestionnaireOpen={isQuestionnaireOpen}
+              categories={categories}
+              answersGeneral={answersGeneral}
+              isAnsweredGeneral={isAnsweredGeneral}
+              answersBackyard={answersBackyard}
+              isAnsweredBackyard={isAnsweredBackyard}
+              answersFrontyard={answersFrontyard}
+              isAnsweredFrontyard={isAnsweredFrontyard}
+              answersExtra={answersExtra}
+              isAnsweredExtra={isAnsweredExtra}
+              isMediaUploaded={isMediaUploaded}
+            />
+          </div>
         </div>
       )}
       <QuestionnaireGeneral

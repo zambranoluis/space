@@ -10,12 +10,12 @@ export async function POST(req: NextRequest) {
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
     const nodeToken = token?.token;
 
-    if (!nodeToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
-        { status: 401 },
-      );
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 }
+    //   );
+    // }
 
     const body = await req.json();
     const response = await axios.post(`${BACKEND_URL}/projects`, body, {
@@ -30,12 +30,15 @@ export async function POST(req: NextRequest) {
     if (error instanceof AxiosError) {
       return NextResponse.json(
         { error: error.response?.data || error.message },
-        { status: error.response?.status || 500 },
+        { status: error.response?.status || 500 }
       );
     } else if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
-      return NextResponse.json({ error: "An unknown error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unknown error occurred" },
+        { status: 500 }
+      );
     }
   }
 }

@@ -1,12 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { redirect } from "next/navigation";
 import Section from "./Section";
 import axios from "axios";
 import { apiService } from "@/services/apiService";
 import { CreateCustomer } from "@/utils/dataInterfaces";
 import Swal from "sweetalert2";
+
+import {
+  validateText,
+  validateTextWithNumbers,
+  validateTextWithSpaces,
+  validateTextWithNumbersSpaces,
+  validateNumber,
+  validateEmail,
+  validatePassword,
+  validateSkype,
+  validateDate,
+} from "@/utils/validation";
 
 const CreateAccount = () => {
   const [areaCode, setAreaCode] = useState<string>("+1");
@@ -27,23 +38,38 @@ const CreateAccount = () => {
 
   const [isLoadingCustomer, setIsLoadingCustomer] = useState<boolean>(false);
 
-  const handleBuildPhone = (field: string, value: string) => {
-    if (field === "areaCode") {
-      setFormData({
-        ...formData,
-        phone: { areaCode: value, number: formData.phone.number },
-      });
-    } else if (field === "number") {
-      setFormData({
-        ...formData,
-        phone: { areaCode: formData.phone.areaCode, number: value },
-      });
-    }
-  };
-
   const handleCreateAccount = async () => {
     try {
       setIsLoadingCustomer(true);
+      console.log("formData to Create User: ", formData);
+
+      if (
+        validateTextWithSpaces(formData.name) === "empty" ||
+        !validateTextWithSpaces(formData.name) ||
+        validateTextWithSpaces(formData.lastname) === "empty" ||
+        !validateTextWithSpaces(formData.lastname) ||
+        validateEmail(formData.email) === "empty" ||
+        !validateEmail(formData.email) ||
+        validatePassword(formData.password) === "empty" ||
+        !validatePassword(formData.password) ||
+        validatePassword(formData.confirmPassword) === "empty" ||
+        !validatePassword(formData.confirmPassword) ||
+        validateNumber(formData.phone.number) === "empty" ||
+        !validateNumber(formData.phone.number) ||
+        validateSkype(formData.skype) === "empty" ||
+        !validateSkype(formData.skype) ||
+        validateTextWithSpaces(formData.address) === "empty" ||
+        !validateTextWithSpaces(formData.address) ||
+        !validateDate(formData.birthdate)
+      ) {
+        Swal.fire({
+          title: "Please check all the fields and try again.",
+          icon: "error",
+          confirmButtonText: "Close",
+        });
+        setIsLoadingCustomer(false);
+        return;
+      }
 
       const response = await apiService.createCustomer(formData);
 
@@ -53,9 +79,10 @@ const CreateAccount = () => {
           icon: "success",
           confirmButtonText: "Close",
         });
+        setIsLoadingCustomer(false);
         setTimeout(() => {
           window.location.href = "/login";
-        }, 3000);
+        }, 1500);
       } else {
         console.log("Unexpected response:", response);
       }
@@ -63,13 +90,11 @@ const CreateAccount = () => {
       if (axios.isAxiosError(err) && err.response) {
         console.log(
           "Error creating customer:",
-          err.response.data?.message || "Unknown error",
+          err.response.data?.message || "Unknown error"
         );
       } else {
         console.log("Error creating customer:", err);
       }
-    } finally {
-      setIsLoadingCustomer(false);
     }
   };
 
@@ -88,7 +113,6 @@ const CreateAccount = () => {
     <section>
       <Section
         setAreaCode={setAreaCode}
-        handleBuildPhone={handleBuildPhone}
         handleCreateAccount={handleCreateAccount}
         formData={formData}
         setFormData={setFormData}

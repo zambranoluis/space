@@ -9,16 +9,19 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 export async function GET(req: NextRequest) {
   try {
     // Extraer el token de la sesión NextAuth (el token generado en Node se encuentra en token)
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const tokenData = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
     const nodeToken = tokenData?.token;
 
     // Validar el token
-    if (!nodeToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
-        { status: 401 },
-      );
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 },
+    //   );
+    // }
 
     // Obtener el ID de la transacción desde la URL
     const purchaseId = req.nextUrl.pathname.split("/").pop();
@@ -26,7 +29,7 @@ export async function GET(req: NextRequest) {
     if (!purchaseId) {
       return NextResponse.json(
         { error: "Missing project ID in query parameters" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -38,7 +41,7 @@ export async function GET(req: NextRequest) {
           Authorization: `Bearer ${nodeToken}`,
         },
         withCredentials: true,
-      },
+      }
     );
     // console.log(response);
     return NextResponse.json(response.data);
@@ -46,12 +49,15 @@ export async function GET(req: NextRequest) {
     if (error instanceof AxiosError) {
       return NextResponse.json(
         { error: error.response?.data },
-        { status: error.response?.status },
+        { status: error.response?.status }
       );
     } else if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
-      return NextResponse.json({ error: "An unknown error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unknown error occurred" },
+        { status: 500 }
+      );
     }
   }
 }

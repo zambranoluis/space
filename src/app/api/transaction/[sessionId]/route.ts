@@ -16,21 +16,24 @@ export async function GET(req: NextRequest) {
     if (!id) {
       return NextResponse.json(
         { error: "Missing transaction ID in the URL path" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     // Extraer el token de la sesión NextAuth (el token generado en Node se encuentra en token)
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const tokenData = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
     const nodeToken = tokenData?.token;
 
     // Validar el token
-    if (!nodeToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
-        { status: 401 },
-      );
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 },
+    //   );
+    // }
 
     const response = await axios.get(`${BACKEND_URL}/transaction/${id}`, {
       headers: {
@@ -53,7 +56,7 @@ export async function GET(req: NextRequest) {
       // Manejar errores inesperados
       return NextResponse.json(
         { error: "An unexpected error occurred" },
-        { status: 500 },
+        { status: 500 }
       );
     }
   }
@@ -68,29 +71,36 @@ export async function PATCH(req: NextRequest) {
     if (!id) {
       return NextResponse.json(
         { error: "Missing transaction ID in query parameters" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     // Extraer el token de la sesión NextAuth
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const tokenData = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
     const nodeToken = tokenData?.token;
 
     // Validar el token
-    if (!nodeToken) {
-      return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
-        { status: 401 },
-      );
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 }
+    //   );
+    // }
 
     const body = await req.json();
-    const response = await axios.patch(`${BACKEND_URL}/transactions/${id}`, body, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${nodeToken}`,
-      },
-    });
+    const response = await axios.patch(
+      `${BACKEND_URL}/transactions/${id}`,
+      body,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${nodeToken}`,
+        },
+      }
+    );
 
     return NextResponse.json(response.data);
   } catch (error: unknown) {
@@ -106,7 +116,7 @@ export async function PATCH(req: NextRequest) {
       // Manejar errores inesperados
       return NextResponse.json(
         { error: "An unexpected error occurred" },
-        { status: 500 },
+        { status: 500 }
       );
     }
   }

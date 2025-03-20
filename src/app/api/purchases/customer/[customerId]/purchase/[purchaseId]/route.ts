@@ -14,18 +14,24 @@ export async function GET(req: NextRequest) {
     if (!customerId || !purchaseId) {
       return NextResponse.json(
         { error: "Missing customerId or purchaseId in query parameters" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     // Extract the token from the session (the token generated in Node is stored in `token`)
-    const getTokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const getTokenData = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
     const nodeToken = getTokenData?.token;
 
     // Validate the token
-    if (!nodeToken) {
-      return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 }
+    //   );
+    // }
 
     const response = await axios.get(
       `${BACKEND_URL}/purchases/customer/${customerId}/purchase/${purchaseId}`,
@@ -35,7 +41,7 @@ export async function GET(req: NextRequest) {
           Authorization: `Bearer ${nodeToken}`,
         },
         withCredentials: true,
-      },
+      }
     );
     return NextResponse.json(response.data);
   } catch (error: unknown) {
@@ -49,7 +55,10 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       // Handle unexpected errors
-      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unexpected error occurred" },
+        { status: 500 }
+      );
     }
   }
 }

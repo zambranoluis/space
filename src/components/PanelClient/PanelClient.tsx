@@ -140,7 +140,7 @@ const PanelClient: React.FC = () => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setLoading(false);
-    }, 2500);
+    }, 3500);
 
     return () => clearTimeout(timeoutId); // Limpia el timeout si el componente se desmonta
   }, []);

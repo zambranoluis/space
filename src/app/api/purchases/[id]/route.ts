@@ -13,15 +13,18 @@ export async function GET(req: NextRequest) {
     const nodeToken = tokenCookies?.value;
 
     // Validate the token
-    if (!nodeToken) {
-      return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
+    // }
 
     const id = req.nextUrl.searchParams.get("id");
 
     // Validate the ID
     if (!id) {
-      return NextResponse.json({ error: "Missing purchase ID in query parameters" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing purchase ID in query parameters" },
+        { status: 400 }
+      );
     }
 
     const response = await axios.get(`${BACKEND_URL}/purchases/${id}`, {
@@ -42,7 +45,10 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       // Handle unexpected errors
-      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unexpected error occurred" },
+        { status: 500 }
+      );
     }
   }
 }
@@ -51,20 +57,29 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     // Extraemos el token generado en Node desde la sesión NextAuth
-    const tokenData = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const tokenData = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
     const nodeToken = tokenData?.token;
 
     // Validate the token
-    if (!nodeToken) {
-      return NextResponse.json({ error: "Unauthorized: No token provided" }, { status: 401 });
-    }
+    // if (!nodeToken) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized: No token provided" },
+    //     { status: 401 }
+    //   );
+    // }
 
     // Extraer el ID directamente desde la URL
     const id = req.url.split("/").pop();
 
     // Validate the ID
     if (!id) {
-      return NextResponse.json({ error: "Missing purchase ID in URL" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing purchase ID in URL" },
+        { status: 400 }
+      );
     }
 
     const body = await req.json();
@@ -87,7 +102,10 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
       // Handle unexpected errors
-      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+      return NextResponse.json(
+        { error: "An unexpected error occurred" },
+        { status: 500 }
+      );
     }
   }
 }

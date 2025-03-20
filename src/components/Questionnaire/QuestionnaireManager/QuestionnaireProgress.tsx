@@ -5,8 +5,10 @@ import { MdOutlineExpandLess } from "react-icons/md";
 import { question } from "@/utils/dataInterfaces";
 
 import { questionnaire } from "../questionnaireFile";
+import { RiCollapseDiagonal2Line } from "react-icons/ri";
 
 interface QuestionnaireProgressProps {
+  isQuesionnaireOpen: boolean;
   categories: string[];
   answersGeneral: question[];
   isAnsweredGeneral: boolean[];
@@ -22,6 +24,7 @@ interface QuestionnaireProgressProps {
 }
 
 const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
+  isQuesionnaireOpen,
   categories,
   answersGeneral,
   isAnsweredGeneral,
@@ -166,8 +169,12 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
   }, [mediaCounter]);
 
   return (
-    <div className="maxw-[600px] bgred-300 flex flex-col w-full p-2 select-none">
-      <div className="flex flex-col gap-2 w-full bgblue-300">
+    <div
+      className={`maxw-[600px] bgred-300 flex flex-col w-full  select-none p-2 `}
+    >
+      <div
+        className={` flex flex-col gap-2 w-full bgblue-300 overflow-y-hidden transition-all duration-1000`}
+      >
         <div className="w-full">
           <div
             className="flex justify-center items-center gap-1 bgred-200 place-self-start cursor-pointer"

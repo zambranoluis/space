@@ -7,6 +7,8 @@ import { useSession } from "next-auth/react";
 
 import { Product, Extra } from "@/utils/dataInterfaces";
 
+import { Image } from "@heroui/image";
+
 export default function ShoppingCart() {
   const [products, setProducts] = useState<Product[] | null>(null);
   const [extras, setExtras] = useState<Extra[] | null>(null);
@@ -82,17 +84,33 @@ export default function ShoppingCart() {
   }, []);
 
   return (
-    <section className="">
+    <section className=" w-full">
       {loadingShoppingCart ? (
-        <div className="w-full h-full flex justify-center items-center bgred-300">
-          <video
-            autoPlay
-            muted
-            className="w-full min-h-[400px]  object-cover max-sm:object-[20%] "
-            src="https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/shoppingCartLoaderClean.mp4"
-          >
-            Your browser does not support the video tag.
-          </video>
+        <div className="w-full h-full min-h-[50vh] md:min-h-[calc(100vh-100px)] flex justify-center items-center bgred-300">
+          <div className="bg-ed-300 justify-center items-center rounded-full p-16 relative">
+            <div className="absolute w-full h-full top-0 left-0 flex justify-center items-center animate-spin-slow  bgyellow-200">
+              <div className="relative w-full h-full flex justify-center items-center bgblue-200">
+                {/* Borde parcial */}
+                <div
+                  className="absolute w-full h-full border-[8px] border-transparent rounded-full bgred-300"
+                  style={{
+                    borderTopColor: "#848d5a",
+                    borderLeftColor: "#848d5a",
+                    clipPath: "polygon(0% 0%, 100% 0%, 50% 50%)",
+                  }}
+                />
+              </div>
+            </div>
+            <div>
+              <Image
+                className="max-w-[100px]"
+                src="https://github.com/BPM94/SCCTMD/raw/main/shopping-cart/shoppingCartLoaderSpaceGreen.gif"
+                alt="Cargando carrito"
+                width={100}
+                height={100}
+              />
+            </div>
+          </div>
         </div>
       ) : (
         <Section

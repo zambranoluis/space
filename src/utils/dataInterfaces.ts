@@ -83,7 +83,7 @@ export interface CreatePurchase {
     {
       nameArea: string;
       isActive: boolean;
-    },
+    }
   ];
   extras: SelectedExtra[];
   total: number;
@@ -93,6 +93,7 @@ export interface CreatePurchase {
 }
 
 export interface Purchase {
+  name: string;
   customer: string;
   product: string;
   selectedAreas: [
@@ -103,7 +104,7 @@ export interface Purchase {
     {
       nameArea: string;
       isActive: boolean;
-    },
+    }
   ];
   extras: SelectedExtra[];
   total: number;
@@ -113,6 +114,7 @@ export interface Purchase {
 }
 
 export interface DetailedPurchase {
+  name: string;
   _id: string;
   customer: Customer;
   product: Product;
@@ -124,7 +126,7 @@ export interface DetailedPurchase {
     {
       nameArea: string;
       isActive: boolean;
-    },
+    }
   ];
   extras: Extra[];
   total: number;
