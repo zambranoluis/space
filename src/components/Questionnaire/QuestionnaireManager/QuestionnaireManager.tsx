@@ -385,7 +385,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
   const [imagesRaw, setImagesRaw] = useState<ViewFiles[]>([]);
   const [imagesData, setImagesData] = useState({
     rawArea: [] as string[],
-    sketchs: [] as string[],
+    sketches: [] as string[],
     extras: [] as string[],
   });
 
@@ -395,14 +395,14 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
 
   const [isMediaUploaded, setIsMediaUploaded] = useState({
     rawArea: false,
-    sketchs: false,
+    sketches: false,
     extras: false,
   });
 
   useEffect(() => {
     setIsMediaUploaded((prev) => ({
       rawArea: imagesData.rawArea.length > 0 ? true : prev.rawArea,
-      sketchs: imagesData.sketchs.length > 0 ? true : prev.sketchs,
+      sketches: imagesData.sketches.length > 0 ? true : prev.sketches,
       extras: imagesData.extras.length > 0 ? true : prev.extras,
     }));
   }, [imagesData]);
@@ -426,8 +426,8 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         rawArea: imagesRaw
           .filter((image) => image.category === "rawArea")
           .map((image) => image.path),
-        sketchs: imagesRaw
-          .filter((image) => image.category === "sketchs")
+        sketches: imagesRaw
+          .filter((image) => image.category === "sketches")
           .map((image) => image.path),
         extras: imagesRaw
           .filter((image) => image.category === "extras")
@@ -467,6 +467,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswer: question = {
           quest: question,
           category: categoryQuestion,
+          type: typeQuestion,
           notes: [{ note: inputNoteText }],
           selecteds: selectedsArray,
           select: false,
@@ -521,6 +522,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswerYesOrNo: question = {
           quest: question,
           category: categoryQuestion,
+          type: typeQuestion,
           notes: [{ note: selectedText }],
           selecteds: [{ selected: "" }],
           select: selectedText === "Yes" ? true : false,
@@ -580,6 +582,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswerYesOrNoWithNote: question = {
           quest: question,
           category: categoryQuestion,
+          type: typeQuestion,
           notes: [{ note: selectedTextWithNote }, { note: noteText }],
           selecteds: [{ selected: "" }],
           select:
@@ -642,6 +645,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
           const newAnswerHowManyPlants: question = {
             quest: question,
             category: categoryQuestion,
+            type: typeQuestion,
             notes: [{ note: "" }],
             selecteds: [{ selected: selectedTextPlants }],
             select: false,
@@ -757,6 +761,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswerThingsKeepRemove: question = {
           quest: question,
           category: categoryQuestion,
+          type: typeQuestion,
           notes: [
             { note: `${thingsBoxesText[0]}` },
             { note: `${thingsBoxesText[1]}` },
@@ -838,6 +843,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswerWaterFeature: question = {
           quest: question,
           category: categoryQuestion,
+          type: typeQuestion,
           notes: [{ note: waterSelectText }, { note: waterNoteText }],
           selecteds: formatSelectedWaterFeatures,
           select: waterSelectText === "Yes" ? true : false,
@@ -917,6 +923,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswerFireFeature: question = {
           quest: question,
           category: categoryQuestion,
+          type: typeQuestion,
           notes: [{ note: fireSelectText }, { note: fireNoteText }],
           selecteds: formatSelectedFireFeatures,
           select: fireSelectText === "Yes" ? true : false,
@@ -971,6 +978,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         const newAnswerOnlyNote: question = {
           quest: question,
           category: categoryQuestion,
+          type: typeQuestion,
           notes: [{ note: noteContain }],
           selecteds: [{ selected: "" }],
           select: false,

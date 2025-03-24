@@ -5,6 +5,7 @@ import { ProjectInformation, question } from "../../../utils/dataInterfaces";
 
 import { questionnaire } from "../questionnaireFile";
 import { RiContactsBookLine } from "react-icons/ri";
+import { FaLocationDot } from "react-icons/fa6";
 
 interface QuestionnaireGeneralProps {
   project: ProjectInformation | null;
@@ -206,6 +207,45 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
             </div>
           </div>
         </div>
+        <div className="w-[90%] place-self-center flex flex-col gap-1 pb-6">
+          <div className="flex flex-col items-center gap1 text-black text-sm">
+            <div className="w-full flex gap-1 items-center font-bold text-base ">
+              <FaLocationDot />
+              <h1>Location:</h1>
+            </div>
+            <div className="w-full flex gap1 items-center">
+              <p className="p-2">
+                Please find your location on the following map and open it with
+                the top left corner{" "}
+                <span className=" font-bold">View larger map</span> button to
+                find the coordinates in the form of latitude and longitude and
+                paste it down below
+              </p>
+            </div>
+          </div>
+          <div className="rounded-lg p border-2 border-[#858e5b]">
+            <iframe
+              className="rounded-md"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed"
+            ></iframe>
+          </div>
+          <div className="text-black flex flex-col gap-2 mt-4 w-full">
+            <p>Paste coordinates here: </p>
+            <div className="w-full">
+              <input
+                className="bg-white w-full max-w-[350px] pl-2  border border-black rounded-md "
+                placeholder="i.e: 34.578134993305305, -40.58331449925346"
+                type="text"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       {answersGeneral[0] && isAnsweredGeneral[1] === true ? (
@@ -270,6 +310,7 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
                 />
               </div>
             </div>
+
             <div className="flex bgred-300 justify-end pr-4 py-4 w-full">
               <button
                 className="bg-[#858e5b] px-4 py-2 rounded-lg"

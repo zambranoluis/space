@@ -122,16 +122,11 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
         formDataSketches.append("project", projectId || "");
         formDataSketches.append("category", category);
 
-        for (const [index, imageBlob] of images2.entries()) {
-          const response = await fetch(imageBlob); // Descargar el blob
-          const blob = await response.blob(); // Convertirlo a Blob
-          const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
-          const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
-          const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
-          formDataSketches.append("files", file);
+        for (const { file } of images2) {
+          formDataSketches.append("files", file); // Se usa `file` directamente con su nombre original
         }
 
-        console.log("FormDataSketches content:");
+        console.log("FormData content:");
         for (const pair of formDataSketches.entries()) {
           console.log(pair[0], pair[1]); // Muestra cada clave y su valor
         }
@@ -167,16 +162,11 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
         formDataExtras.append("project", projectId || "");
         formDataExtras.append("category", category);
 
-        for (const [index, imageBlob] of images3.entries()) {
-          const response = await fetch(imageBlob); // Descargar el blob
-          const blob = await response.blob(); // Convertirlo a Blob
-          const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
-          const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
-          const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
-          formDataExtras.append("files", file);
+        for (const { file } of images3) {
+          formDataExtras.append("files", file); // Se usa `file` directamente con su nombre original
         }
 
-        console.log("FormDataExtras content:");
+        console.log("FormData content:");
         for (const pair of formDataExtras.entries()) {
           console.log(pair[0], pair[1]); // Muestra cada clave y su valor
         }
@@ -280,7 +270,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   <Image
                     key={index}
                     className="roundednone shadow-black shadow-sm min-w-[150px] max-w-[150px] aspect-square object-cover"
-                    src={src}
+                    src={src.url}
                     alt={`Uploaded preview ${index + 1}`}
                   />
                 ))
@@ -380,7 +370,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   <Image
                     key={index}
                     className="roundednone shadow-black shadow-sm min-w-[150px] max-w-[150px] aspect-square object-cover"
-                    src={src}
+                    src={src.url}
                     alt={`Uploaded preview ${index + 1}`}
                   />
                 ))
@@ -481,7 +471,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   <Image
                     key={index}
                     className="roundednone shadow-black shadow-sm min-w-[150px] max-w-[150px] aspect-square object-cover"
-                    src={src}
+                    src={src.url}
                     alt={`Uploaded preview ${index + 1}`}
                   />
                 ))
