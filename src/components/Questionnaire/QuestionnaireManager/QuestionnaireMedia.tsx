@@ -20,7 +20,7 @@ interface QuestionnaireMediaProps {
   setIsMediaUploaded: React.Dispatch<
     React.SetStateAction<{
       rawArea: boolean;
-      sketchs: boolean;
+      sketches: boolean;
       extras: boolean;
     }>
   >;
@@ -32,173 +32,36 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
   imagesData,
   setIsMediaUploaded,
 }) => {
-  const [images1, setImages1] = useState<string[]>([]);
-  const [images2, setImages2] = useState<string[]>([]);
-  const [images3, setImages3] = useState<string[]>([]);
+  const [images1, setImages1] = useState<{ file: File; url: string }[]>([]);
+  const [images2, setImages2] = useState<{ file: File; url: string }[]>([]);
+  const [images3, setImages3] = useState<{ file: File; url: string }[]>([]);
 
-  const handleFileChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const files = event.target.files;
+
     if (!files) return;
 
-    const newImages = Array.from(files).map((file) =>
-      URL.createObjectURL(file)
-    );
+    console.log("files del input: ", index, " - files: ", files);
+    const newImages = Array.from(files).map((file) => ({
+      file, // Guarda el archivo original
+      url: URL.createObjectURL(file), // Genera la URL temporal para previsualización
+    }));
 
-    setImages1((prevImages) => [...prevImages, ...newImages]);
-  };
-
-  const handleSubmitFiles1 = async (category: string) => {
-    console.log("preparing to upload images1: ", images1);
-
-    if (images1.length === 0) {
-      console.error("No images selected");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("project", projectId || "");
-    formData.append("category", category);
-
-    for (const [index, imageBlob] of images1.entries()) {
-      const response = await fetch(imageBlob); // Descargar el blob
-      const blob = await response.blob(); // Convertirlo a Blob
-      const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
-      const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
-      const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
-      formData.append("files", file);
-    }
-
-    console.log("FormData content:");
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]); // Muestra cada clave y su valor
-    }
-
-    try {
-      const response = await apiService.uploadFiles(formData);
-      console.log("Images uploaded successfully");
-      console.log("response: ", response);
-      setIsMediaUploaded((prev) => ({
-        ...prev,
-        [category]: true,
-      }));
-      Swal.fire({
-        icon: "success",
-        title: "Images from Area to be worked on uploaded successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      console.error("Error uploading images:", error);
-    }
-  };
-
-  const handleFileChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files) return;
-
-    const newImages = Array.from(files).map((file) =>
-      URL.createObjectURL(file)
-    );
-
-    setImages2((prevImages) => [...prevImages, ...newImages]);
-  };
-
-  const handleSubmitFiles2 = async (category: string) => {
-    console.log("preparing to upload images2: ", images2);
-
-    if (images2.length === 0) {
-      console.error("No images selected");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("project", projectId || "");
-    formData.append("category", category);
-
-    for (const [index, imageBlob] of images2.entries()) {
-      const response = await fetch(imageBlob); // Descargar el blob
-      const blob = await response.blob(); // Convertirlo a Blob
-      const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
-      const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
-      const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
-      formData.append("files", file);
-    }
-
-    console.log("FormData content:");
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]); // Muestra cada clave y su valor
-    }
-
-    try {
-      await apiService.uploadFiles(formData);
-      console.log("Images uploaded successfully");
-      setIsMediaUploaded((prev) => ({
-        ...prev,
-        [category]: true,
-      }));
-      Swal.fire({
-        icon: "success",
-        title: "Images from Sketches uploaded successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      console.error("Error uploading images:", error);
-    }
-  };
-
-  const handleFileChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (!files) return;
-
-    const newImages = Array.from(files).map((file) =>
-      URL.createObjectURL(file)
-    );
-
-    setImages3((prevImages) => [...prevImages, ...newImages]);
-  };
-
-  const handleSubmitFiles3 = async (category: string) => {
-    console.log("preparing to upload images3: ", images3);
-
-    if (images3.length === 0) {
-      console.error("No images selected");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("project", projectId || "");
-    formData.append("category", category);
-
-    for (const [index, imageBlob] of images3.entries()) {
-      const response = await fetch(imageBlob); // Descargar el blob
-      const blob = await response.blob(); // Convertirlo a Blob
-      const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
-      const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
-      const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
-      formData.append("files", file);
-    }
-
-    console.log("FormData content:");
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]); // Muestra cada clave y su valor
-    }
-
-    try {
-      await apiService.uploadFiles(formData);
-      console.log("Images uploaded successfully");
-      setIsMediaUploaded((prev) => ({
-        ...prev,
-        [category]: true,
-      }));
-      Swal.fire({
-        icon: "success",
-        title: "Images from Extras uploaded successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      console.error("Error uploading images:", error);
+    switch (index) {
+      case 0:
+        setImages1((prevImages) => [...prevImages, ...newImages]);
+        break;
+      case 1:
+        setImages2((prevImages) => [...prevImages, ...newImages]);
+        break;
+      case 2:
+        setImages3((prevImages) => [...prevImages, ...newImages]);
+        break;
+      default:
+        break;
     }
   };
 
@@ -219,13 +82,8 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
         formDataRaw.append("project", projectId || "");
         formDataRaw.append("category", category);
 
-        for (const [index, imageBlob] of images1.entries()) {
-          const response = await fetch(imageBlob); // Descargar el blob
-          const blob = await response.blob(); // Convertirlo a Blob
-          const extension = blob.type.split("/")[1]; // Obtener la extensión basada en el tipo MIME
-          const fileName = `image_${index}.${extension}`; // Crear un nombre de archivo dinámico
-          const file = new File([blob], fileName, { type: blob.type }); // Convertirlo a File
-          formDataRaw.append("files", file);
+        for (const { file } of images1) {
+          formDataRaw.append("files", file); // Se usa `file` directamente con su nombre original
         }
 
         console.log("FormData content:");
@@ -251,7 +109,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
         }
         break;
 
-      case "sketchs":
+      case "sketches":
         if (images2.length === 0) {
           Swal.fire({
             icon: "error",
@@ -332,7 +190,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
           }));
           Swal.fire({
             icon: "success",
-            title: "Images for uploaded successfully",
+            title: "Images for Extras uploaded successfully",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -399,7 +257,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   type="file"
                   multiple
                   accept="image/*"
-                  onChange={(event) => handleFileChange1(event)}
+                  onChange={(event) => handleFileChange(0, event)}
                 />
               </div>
             </div>
@@ -500,15 +358,15 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   type="file"
                   multiple
                   accept="image/*"
-                  onChange={(event) => handleFileChange2(event)}
+                  onChange={(event) => handleFileChange(1, event)}
                 />
               </div>
             </div>
             <div
               className={`flex max-sm:w-[60%] sm:w-[80%] bgred-300 gap-6 items-center p-2 overflow-x-auto whitespace-nowrap flex-nowrap`}
             >
-              {imagesData.sketchs.length > 0 ? (
-                imagesData.sketchs.map((image, index) => (
+              {imagesData.sketches.length > 0 ? (
+                imagesData.sketches.map((image, index) => (
                   <div key={index}>
                     <Image
                       src={`${BACK_URL}${image}`}
@@ -562,7 +420,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
             <button
               className="bg-[#858e5b] px-4 py-2 rounded-lg cursor-pointer shadow-black shadow-sm"
               onClick={() => {
-                handleSubmitFiles("sketchs");
+                handleSubmitFiles("sketches");
               }}
             >
               Submit files
@@ -601,7 +459,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
                   type="file"
                   multiple
                   accept="image/*"
-                  onChange={(event) => handleFileChange3(event)}
+                  onChange={(event) => handleFileChange(2, event)}
                 />
               </div>
             </div>
@@ -609,9 +467,9 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
               className={`flex max-sm:w-[60%] sm:w-[80%] bgred-300 gap-6 items-center p-2 overflow-x-auto whitespace-nowrap flex-nowrap`}
             >
               {imagesData.extras.length > 0 ? (
-                imagesData.sketchs.map((image, index) => (
+                imagesData.extras.map((image, index) => (
                   <div key={index}>
-                    <img
+                    <Image
                       src={`${BACK_URL}${image}`}
                       alt={`Image ${index}`}
                       className="roundednone shadow-black shadow-sm min-w-[150px] max-w-[150px] aspect-square object-cover"

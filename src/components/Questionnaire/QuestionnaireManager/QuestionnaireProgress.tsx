@@ -597,7 +597,7 @@ const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
               2. Sketches Images{" "}
               <FaCheck
                 className={`text-base ${
-                  isMediaUploaded.sketchs
+                  isMediaUploaded.sketches
                     ? "text-green-500"
                     : "text-gray-200/50"
                 }`}

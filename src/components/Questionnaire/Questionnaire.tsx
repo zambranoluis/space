@@ -9,7 +9,9 @@ const Questionnaire = () => {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const [project, setProject] = useState<Project | null>(null);
-  const [projectInfo, setProjectInfo] = useState<ProjectInformation | null>(null);
+  const [projectInfo, setProjectInfo] = useState<ProjectInformation | null>(
+    null
+  );
 
   // Función para obtener los datos del proyecto
   const fetchProjectData = useCallback(async () => {
@@ -46,7 +48,7 @@ const Questionnaire = () => {
   }, [project]);
 
   return (
-    <section>
+    <section className=" ">
       <Section project={projectInfo} />
     </section>
   );

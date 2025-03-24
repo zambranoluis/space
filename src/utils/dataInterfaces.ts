@@ -284,6 +284,7 @@ export interface GetProjectsByPurchasesId {
 export interface question {
   quest: string; // Pregunta
   category: string; // Categoría (Frontyard, Backyard, etc.)
+  type: string; // Tipo de pregunta (General, Styles, etc.)
   notes?: { note: string }[]; // Nota adicional
   selecteds?: { selected: string }[]; // Si es una pregunta con selección
   select?: boolean;
