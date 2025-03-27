@@ -451,6 +451,8 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
       return;
     }
 
+    console.log("typeQuestion: ", typeQuestion);
+
     switch (typeQuestion) {
       case "Styles General Question":
         const styles = document.getElementsByClassName(`${htmlElements}Styles`);
@@ -636,6 +638,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
         submitNewAnswerYesOrNoWithNote();
         break;
       case "How Many Plants Question":
+        console.log("entered plants");
         const optionsPlants = document.getElementsByClassName(
           `${htmlElements}Plants`
         );
@@ -653,6 +656,8 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
             files: [],
             questionnaireId: project?.questionnaire._id,
           };
+
+          console.log("newAnswerHowManyPlants: ", newAnswerHowManyPlants);
 
           const submitNewAnswerHowManyPlants = async () => {
             try {
@@ -699,6 +704,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
           const newAnswerHowManyPlants: question = {
             quest: question,
             category: categoryQuestion,
+            type: typeQuestion,
             notes: [{ note: "" }],
             selecteds: [{ selected: selectedTextPlants }],
             select: false,

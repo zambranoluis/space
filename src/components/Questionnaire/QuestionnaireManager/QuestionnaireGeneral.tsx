@@ -218,8 +218,9 @@ const QuestionnaireGeneral: React.FC<QuestionnaireGeneralProps> = ({
                 Please find your location on the following map and open it with
                 the top left corner{" "}
                 <span className=" font-bold">View larger map</span> button to
-                find the coordinates in the form of latitude and longitude and
-                paste it down below
+                find the location, press the mouse right click on top of the
+                exact location to copy it in the form of latitude and longitude
+                and paste it down below
               </p>
             </div>
           </div>
