@@ -62,7 +62,7 @@ interface PurchasesProps {
   setProjects: React.Dispatch<React.SetStateAction<GetProjectsByPurchasesId[]>>;
 }
 
-export const Purchases: React.FC<PurchasesProps> = ({
+const Purchases: React.FC<PurchasesProps> = ({
   purchases,
   purchasesWithProject,
   projects,
@@ -116,16 +116,16 @@ export const Purchases: React.FC<PurchasesProps> = ({
       });
 
       if (response.message === "Project created successfully.") {
+        console.log("response de createProject: ", response);
         setProjects((prevProjects) => {
-          const updatedProjects = [...prevProjects, response.projectPopulated];
+          const updatedProjects = [...prevProjects, response.project];
           return updatedProjects;
         });
-
         // Redirige a la URL con el panel correcto
         setTimeout(() => {
           const newUrl = "/panel-client?panel=projects";
           router.push(newUrl);
-        }, 200);
+        }, 300);
       } else {
         Swal.fire({
           title: "Error to create the project",
@@ -156,3 +156,5 @@ export const Purchases: React.FC<PurchasesProps> = ({
     </section>
   );
 };
+
+export default Purchases;

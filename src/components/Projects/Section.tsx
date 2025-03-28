@@ -29,6 +29,10 @@ const Section: React.FC<SectionProps> = ({
     window.open(`/questionnaire/?projectId=${projectId}`, "_blank");
   };
 
+  useEffect(() => {
+    console.log("Projects: ", projects);
+  }, [projects]);
+
   return (
     <div>
       <section className="w-[90%] py-8 flex flex-col  bgred-300 px-2 gap-8 sm:w-[80%] place-self-center">
@@ -100,7 +104,8 @@ const Section: React.FC<SectionProps> = ({
                     }}
                   >
                     <div className="flex text-sm w-full md:w-[35%] max-md:justify-center md:justify-start pl-2 items-center">
-                      Project - {project.name}
+                      Project -{" "}
+                      {project.name ? project.name : "name not retireved"}
                     </div>
                     <div className="flex  bgred-200  w-full md:w-[35%]  text-white sm:font-bold text-xs justify-center items-center gap-2">
                       <div className="px-2 rounded-lg py-1 bg-[#6d786f] ">
@@ -110,10 +115,12 @@ const Section: React.FC<SectionProps> = ({
                         {project.isActive === true ? "Pending" : "Completed"}
                       </div>
                     </div>
-                    <div className="flex w-full text-xs md:w-[30%] justify-center items-center">
-                      <p>
-                        {project.team.designer
-                          ? project.team.designer
+                    <div className="flex w-full text-xs md:w-[30%] justify-center items-center ">
+                      <p className="overflow-x-auto noScrollBar text-nowrap">
+                        {project.team.ds !== null
+                          ? project.team.ds.name +
+                            " " +
+                            project.team.ds.lastname
                           : "No Designer Assigned"}
                       </p>
                     </div>
