@@ -76,10 +76,16 @@ const Navbar: React.FC<NavbarProps> = ({ geolocation, clientName }) => {
           <p className="textcenter text-sm min-[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
             {clientName}
           </p>
-          <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
-            You current Location is: <br className="sm:hidden" />{" "}
-            {currentLocation}
-          </p>
+          {currentLocation !== "" ? (
+            <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
+              You current Location is: <br className="sm:hidden" />{" "}
+              {currentLocation}
+            </p>
+          ) : (
+            <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
+              Current location not aquired
+            </p>
+          )}
         </div>
       </div>
     </nav>
