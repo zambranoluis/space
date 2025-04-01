@@ -1719,7 +1719,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
     }
   };
 
-  const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false);
+  const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(true);
 
   const toggleQuestionnaireShow = () => {
     setIsQuestionnaireOpen((prev) => !prev);
@@ -1742,7 +1742,6 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
             } transition-all duration-1000`}
           >
             <QuestionnaireProgress
-              isQuestionnaireOpen={isQuestionnaireOpen}
               categories={categories}
               answersGeneral={answersGeneral}
               isAnsweredGeneral={isAnsweredGeneral}

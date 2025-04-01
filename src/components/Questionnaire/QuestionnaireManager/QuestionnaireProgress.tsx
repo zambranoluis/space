@@ -8,7 +8,6 @@ import { questionnaire } from "../questionnaireFile";
 import { RiCollapseDiagonal2Line } from "react-icons/ri";
 
 interface QuestionnaireProgressProps {
-  isQuesionnaireOpen: boolean;
   categories: string[];
   answersGeneral: question[];
   isAnsweredGeneral: boolean[];
@@ -24,7 +23,6 @@ interface QuestionnaireProgressProps {
 }
 
 const QuestionnaireProgress: React.FC<QuestionnaireProgressProps> = ({
-  isQuesionnaireOpen,
   categories,
   answersGeneral,
   isAnsweredGeneral,
