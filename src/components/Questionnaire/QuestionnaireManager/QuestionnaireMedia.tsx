@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { apiService } from "@/services/apiService";
 
 import { ViewFiles } from "@/utils/dataInterfaces";
-import { de } from "date-fns/locale";
 
 const BACK_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace("/space", "");
 
