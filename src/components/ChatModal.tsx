@@ -79,7 +79,7 @@ const ChatModal = () => {
       </div>
       <div
         id="chatButton"
-        className="bgwhite bg[#6c786e] select-none p-2 rounded-full cursor-pointer flex place-self-end"
+        className="bgwhite bg[#6c786e] select-none p-2 rounded-full cursor-pointer flex place-self-end drop-shadow-[0_1.3px_1.3px_rgba(0,0,0,1)]"
         onClick={() => {
           handleShowChat();
         }}
