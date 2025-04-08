@@ -5,6 +5,8 @@ import apiClient from "./apiClient";
 const NEXT_URL_API = process.env.NEXT_PUBLIC_NEXT_API_URL;
 
 import {
+  ApiResponse,
+  ApiError,
   CreateCustomer,
   Customer,
   Extra,
@@ -21,23 +23,6 @@ import {
   files,
   ViewFiles,
 } from "@/utils/dataInterfaces.js";
-
-interface ApiResponse<T = unknown> {
-  data: T;
-  message?: string; // Agregamos 'message' como opcional
-  sessionUrl?: string;
-}
-
-interface ApiError {
-  response?: {
-    data: {
-      message?: string;
-      error?: string;
-      statusCode?: number;
-    };
-  };
-  message: string;
-}
 
 export const apiService = {
   createCustomer: async (
@@ -444,7 +429,9 @@ export const apiService = {
     }
   },
 
-  getFilesByProjectId: async (projectId: string): Promise<ViewFiles[]> => {
+  getFilesByProjectId: async (
+    projectId: string
+  ): Promise<ApiResponse<ViewFiles[]>> => {
     try {
       const response = await apiClient.get(
         `${NEXT_URL_API}/files/${projectId}`

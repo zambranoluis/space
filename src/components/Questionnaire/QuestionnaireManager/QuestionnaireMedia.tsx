@@ -76,6 +76,7 @@ const QuestionnaireMedia: React.FC<QuestionnaireMediaProps> = ({
             showConfirmButton: false,
             timer: 1500,
           });
+          return;
         }
         const formDataRaw = new FormData();
         formDataRaw.append("project", projectId || "");

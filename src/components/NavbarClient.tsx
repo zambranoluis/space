@@ -60,32 +60,35 @@ const Navbar: React.FC<NavbarProps> = ({ geolocation, clientName }) => {
   }, [latitude, longitude]);
 
   return (
-    <nav className=" flex max-h-[100px]  top-0 bg-black/50 w-full z-[1500] py-4 bgred-300 justify-between items-center  px-4 ">
+    <nav className=" flex max-md:flex-col max-h-[100px]  top-0 bg-black/50 w-full z-[1500] bgred-300 justify-between items-center  p-4 ">
       <Link id="logoNavbar" className="flex bgred-200" href="/">
         <Image
-          className=" place-self-center max-h-[80px]  drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
-          src="https://github.com/BPM94/SCCTMD/raw/main/logos/logoSpaceCreations.png"
+          className=" place-self-center w-[90%] max-w-[200px] md:max-w-[300px]  drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]"
+          src="https://github.com/BPM94/SCCTMD/raw/main/logos/RedezignitLogoWeb.png"
           alt=""
         />
       </Link>
       <div
+        className="flex  cursorpointer justify-center items-center  gap-2 text[#6b776d] text-white h-full bgred-300 w-full"
         id="profileNavbar"
-        className="flex cursorpointer justify-center items-center  gap-2 text[#6b776d] text-white h-full bgred-300"
       >
-        <div className="flex flex-col max-[350px]:hidden justify-center items-end bggreen-300 ">
-          <p className="textcenter text-sm min-[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
-            {clientName}
-          </p>
-          {currentLocation !== "" ? (
-            <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
-              You current Location is: <br className="sm:hidden" />{" "}
-              {currentLocation}
+        <div className="flex bgred-400 w-full flex-col justify-center itemsend bggreen-300 ">
+          <div className="w-full">
+            <p className="textcenter text-end text-sm min-[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
+              {clientName}
             </p>
-          ) : (
-            <p className="textcenter text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
-              Current location not aquired
-            </p>
-          )}
+          </div>
+          <div className="w-full">
+            {currentLocation !== "" ? (
+              <p className="text-end text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
+                Current Location: {currentLocation}
+              </p>
+            ) : (
+              <p className="text-end text-xs min[500px]:text-base drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,0.8)]">
+                Current location not aquired
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </nav>

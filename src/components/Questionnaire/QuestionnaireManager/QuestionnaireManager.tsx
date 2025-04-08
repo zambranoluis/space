@@ -16,10 +16,10 @@ import {
   ProjectInformation,
   question,
   createQuestionnaires,
+  ViewFiles,
 } from "@/utils/dataInterfaces";
 
 import { apiService } from "@/services/apiService";
-import { set } from "date-fns";
 
 interface QuestionnaireManagerProps {
   showProgress: boolean;
@@ -408,7 +408,7 @@ const QuestionnaireManager: React.FC<QuestionnaireManagerProps> = ({
   }, [imagesData]);
 
   useEffect(() => {
-    if (project?._id) {
+    if (project && project._id) {
       apiService
         .getFilesByProjectId(project?._id)
         .then((response) => {

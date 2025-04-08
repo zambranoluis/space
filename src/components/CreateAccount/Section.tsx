@@ -516,7 +516,7 @@ const Section: React.FC<SectionProps> = ({
               <div className="w-full h-[15%] flex justify-center items-center bggreen-500">
                 <Link className="h-[50%] bgrose-400" href="/">
                   <Image
-                    src="https://github.com/BPM94/SCCTMD/raw/main/logos/logoGreen.png"
+                    src="https://github.com/BPM94/SCCTMD/raw/main/logos/RedezignitLogoWeb.png"
                     alt="logo"
                     className=" h-full max-h-[90px]"
                   />

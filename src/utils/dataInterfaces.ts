@@ -1,3 +1,25 @@
+export interface ApiResponse<T = unknown> {
+  data?: T;
+  message?: string;
+  sessionUrl?: string;
+  projects?: Project[] | undefined;
+  files?: File[] | null;
+  questionnaire?: {
+    questions?: question[] | null;
+  };
+}
+
+export interface ApiError {
+  response?: {
+    data?: {
+      message?: string;
+      error?: string;
+      statusCode?: number;
+    };
+  };
+  message?: string;
+}
+
 export interface CreateCustomer {
   name: string;
   lastname: string;
@@ -282,9 +304,9 @@ export interface GetProjectsByPurchasesId {
 }
 
 export interface question {
-  quest: string; // Pregunta
-  category: string; // Categoría (Frontyard, Backyard, etc.)
-  type: string; // Tipo de pregunta (General, Styles, etc.)
+  quest?: string; // Pregunta
+  category?: string; // Categoría (Frontyard, Backyard, etc.)
+  type?: string; // Tipo de pregunta (General, Styles, etc.)
   notes?: { note: string }[]; // Nota adicional
   selecteds?: { selected: string }[]; // Si es una pregunta con selección
   select?: boolean;
@@ -309,4 +331,5 @@ export interface ViewFiles {
   deleteAt: Date | null;
   createAt: Date;
   updateAt: Date;
+  files?: string;
 }
